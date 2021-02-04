@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Lof_All::lib/bootstrap/css/bootstrap-tiny.css" />
+        <css src="Lof_All::lib/owl.carousel/assets/owl.carousel.css" />
+        <css src="Lof_All::lib/fancybox/jquery.fancybox.css" />
+        <css src="Lof_All::lib/fancybox/helpers/jquery.fancybox-thumbs.css" />
+        <css src="Lof_ProductReviews::css/styles.css" />
+    </head>
+</page>

@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Landofcoder
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/license
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2017 Landofcoder (https://landofcoder.com/)
+ * @license    https://landofcoder.com/LICENSE-1.0.html
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">lof_product_reviews_gallery_form.lof_product_reviews_gallery_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Lof\ProductReviews\Block\Adminhtml\Gallery\Edit\SaveButton"/>
+            <button name="delete" class="Lof\ProductReviews\Block\Adminhtml\Gallery\Edit\DeleteButton"/>
+            <button name="back" class="Lof\ProductReviews\Block\Adminhtml\Gallery\Edit\BackButton"/>
+        </buttons>
+        <namespace>lof_product_reviews_gallery_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>lof_product_reviews_gallery_form.lof_product_reviews_gallery_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="lof_product_reviews_gallery_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="lof_product_reviews/gallery/save"/>
+        </settings>
+        <dataProvider class="Lof\ProductReviews\Model\Gallery\DataProvider" name="lof_product_reviews_gallery_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">lof_product_reviews_gallery</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>id</dataScope>
+            </settings>
+        </field>
+        <field name="status" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">lof_product_reviews_gallery</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Gallery</label>
+                <dataScope>status</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">2</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="label" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">lof_product_reviews_gallery</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Label</label>
+                <dataScope>label</dataScope>
+            </settings>
+        </field>
+        <field name="review_id" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">lof_product_reviews_gallery</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Review Id</label>
+                <visible>false</visible>
+                <dataScope>review_id</dataScope>
+            </settings>
+        </field>
+
+        <htmlContent name="gallery" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="wrapper" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Images</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="opened" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <settings>
+                <wrapper>
+                    <canShow>true</canShow>
+                    <componentType>fieldset</componentType>
+                </wrapper>
+            </settings>
+            <block name="gallery" class="Lof\ProductReviews\Block\Adminhtml\Gallery\Helper\Form\Gallery">
+                <block class="Lof\ProductReviews\Block\Adminhtml\Gallery\Helper\Form\Gallery\Content" as="content">
+                    <arguments>
+                        <argument name="config" xsi:type="array">
+                            <item name="parentComponent" xsi:type="string">lof_product_reviews_gallery_form.lof_product_reviews_gallery_form.block_gallery.block_gallery</item>
+                        </argument>
+                    </arguments>
+                </block>
+            </block>
+        </htmlContent>
+    </fieldset>
+</form>

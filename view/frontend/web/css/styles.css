@@ -1,0 +1,257 @@
+.lof-review-gallery {
+	/*height: 300px;*/
+	min-height: 200px;
+	position: relative;
+}
+.lof-review-gallery .owl-carousel ul,
+.lof-review-gallery .owl-carousel li
+{
+	list-style: none;
+}
+.lof-review-gallery .gallery-listing li {
+    display: inline-block;
+}
+.lof-review-gallery .owl-carousel {
+	width: auto !important;
+	/*height: 300px;*/
+	min-height: 200px;
+	margin-left: -90px;
+	margin-right: -10px;
+}
+
+.lof-review-gallery .owl-stage-outer {
+	/*height: 300px !important;*/
+	min-height: 200px;
+}
+.lof-review-gallery .owl-carousel .owl-item {
+	float: left;
+	-webkit-transform: translate3d(0px, 0px, 0px);
+	transform: translate3d(0px, 0px, 0px);
+}
+.lof-review-gallery .owl-carousel .owl-wrapper {
+	-webkit-transform: translate3d(0px, 0px, 0px);
+	transform: translate3d(0px, 0px, 0px);
+	float: left;
+}
+
+.lof-review-gallery .carousel-controls .carousel-control {
+	background: #fff;
+	color: #8e8e8e;
+	font-size: 13px;
+	text-shadow: none;
+	width: 24px;
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+	top: 50%;
+	margin-top: -12px;
+}
+.lof-review-gallery .carousel-controls .carousel-control{
+	color:#1979c3 !important;
+}
+.lof-review-gallery .carousel-controls .carousel-control.left {
+	left: -10px;
+	background-image: none;
+}
+.rtl .carousel-controls .carousel-control.left {
+	right: -10px;
+	left: auto;
+	background-image: none;
+}
+.lof-review-gallery .carousel-controls .carousel-control.right {
+	right: -10px;
+	background-image: none;
+}
+.rtl .carousel-controls .carousel-control.right {
+	left: -10px;
+	right: auto;
+	background-image: none;
+}
+
+.lof-review-gallery .carousel-controls a{
+	display: none;
+}
+
+.lof-review-gallery:hover .carousel-controls a{
+	display: block;
+}
+
+.panel {
+	margin: 0;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.sort-order-reviews > select {
+	width: 30%;
+	margin: 15px 0 15px 0;
+}
+
+.filter-reviews > input[type="text"] {
+	width: 30%;
+}
+
+.sort-order-reviews .filter-reviews > label {
+	margin-right: 20px;
+}
+
+.verify-content .control > input[type="text"] {
+	width: 50%;
+}
+
+.verify-content .control > select {
+	width: 30%;
+}
+
+.lof-verify-purchased .verify-error {
+	font-size: 13px;
+	color: #cc1912;
+	font-weight: bold;
+}
+.review-author-img {
+    display: inline-block;
+    width: 30px!important;
+}
+.review-author-img img {
+    margin-bottom: 5px!important;
+    overflow: hidden;
+    border-radius: 50%;
+}
+/* 
+ * 	Default theme - Owl Carousel CSS File
+ */
+.lof-review-gallery .owl-theme-default .owl-nav {
+  margin-top: 10px;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent; }
+  .lof-review-gallery .owl-theme-default .owl-nav [class*='owl-'] {
+    color: #FFF;
+    font-size: 14px;
+    margin: 5px;
+    padding: 4px 7px;
+    background: #D6D6D6;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px; }
+    .lof-review-gallery .owl-theme-default .owl-nav [class*='owl-']:hover {
+      background: #869791;
+      color: #FFF;
+      text-decoration: none; }
+  .lof-review-gallery .owl-theme-default .owl-nav .disabled {
+    opacity: 0.5;
+    cursor: default; }
+.lof-review-gallery .owl-theme-default .owl-nav.disabled + .owl-dots {
+  margin-top: 10px; }
+.lof-review-gallery .owl-theme-default .owl-dots {
+  text-align: center;
+  -webkit-tap-highlight-color: transparent; }
+.report-abuse {
+    padding-left: 10px;
+    font-size: 0.85em;
+}
+.lof-review-customize .good-exp span svg {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    fill: #3e7505;
+}
+.lof-review-customize .bad-exp span svg {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    fill: #d0021b;
+}
+.lof-review-gallery .owl-theme-default .owl-dots .owl-dot {
+display: inline-block;
+zoom: 1;
+*display: inline; }
+.lof-review-gallery .owl-theme-default .owl-dots .owl-dot span {
+	width: 10px;
+	height: 10px;
+	margin: 5px 7px;
+	background: #D6D6D6;
+	display: block;
+	-webkit-backface-visibility: visible;
+	-webkit-transition: opacity 200ms ease;
+	-moz-transition: opacity 200ms ease;
+	-ms-transition: opacity 200ms ease;
+	-o-transition: opacity 200ms ease;
+	transition: opacity 200ms ease;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px; }
+.lof-review-gallery .owl-theme-default .owl-dots .owl-dot.active span, .lof-review-gallery .owl-theme-default .owl-dots .owl-dot:hover span {
+	background: #869791; }
+
+	.block.review-list .block-title .sort-order-reviews * {
+	font-size: inherit!important;
+	font-weight: 400!important;
+	text-transform: inherit!important;
+}
+.sort-order-reviews {
+	width: 50%;
+	float: left;
+}
+.filter-reviews {
+	float: left;
+	width: 50%;
+}
+.block.review-list .block-title:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.review-list .block-title strong {
+	float: left;
+	width: 100%;
+}
+.block.review-list .block-title {
+	padding-left: 0px;
+}
+.review-title {
+	margin: 0 0 10px;
+}
+.lof-helpful {
+	margin-bottom: 0px!important;
+}
+@media (min-width: 640px){
+.review-title {
+	margin: 0 0 10px;
+}
+.review-ratings~.review-content, .review-ratings~.review-details {
+	margin-left: 0px;
+}
+}
+.lof-review-gallery .owl-stage-outer {
+	min-height: 60px;
+}
+.lof-review-gallery .owl-carousel {
+	min-height: 50px;
+}
+.lof-review-gallery {
+	min-height: 50px;
+}
+.lof-review-customize {
+	padding-top: 10px;
+}
+.review-author .review-details-value {
+	font-weight: 700;
+}
+@media (min-width: 640px){
+.review-ratings~.review-content, .review-ratings~.review-details {
+	margin-left: 0px;
+}
+.review-ratings~.review-content, .review-ratings~.review-details {
+    float: left;
+    margin-left: 0px;
+}
+.review-item .review-infor {
+    width: 90%;
+    float: left;
+}
+}

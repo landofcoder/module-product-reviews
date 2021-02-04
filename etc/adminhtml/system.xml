@@ -1,0 +1,263 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Landofcoder
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/license
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2017 Landofcoder (https://landofcoder.com/)
+ * @license    https://landofcoder.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="lof_product_reviews" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Lof Product Reviews And Rating</label>
+            <tab>landofcoder</tab>
+            <resource>Lof_ProductReviews::config_lof_product_reviews</resource>
+            <group id="lof_general_settings" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="show_on_customer_dashboard" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Available Products Reviews on Dashboard</label>
+                    <comment>Enable / disable available products reviews on logged in customer dashboard.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="email_sender" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="email_templates" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Email Templates</label>
+                    <comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="reply_email_templates" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Reply Email Templates</label>
+                    <comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="send_emails_automatically" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Send Emails Automatically</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="lof_review_settings" translate="label" type="text" sortOrder="1050" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Review Settings</label>
+                <field id="enable_auto_verify" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Auto Verify Order</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_sorting" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Sorting</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sort_type" type="select" translate="label comment" showInDefault="6" showInWebsite="1" showInStore="1" sortOrder="5" >
+                    <label>Sort Review By</label>
+                    <source_model>Lof\ProductReviews\Model\Gallery\Source\ReviewSortType</source_model>
+                    <depends>
+                        <field id="enable_sorting">1</field>
+                    </depends>
+                </field>
+                <field id="enable_search" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Searching</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="verify_purchased_code" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Verify Purchased Code</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                
+                <field id="enable_pros_cons" translate="label" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Pros and Cons options</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allow_upload" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Allow Upload Images</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                 <field id="limit_upload_image" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Number images files can upload on frontend form</label>
+                    <depends><field id="allow_upload">1</field></depends>
+                </field>
+                <field id="default_status" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="26" >
+                    <label>Gallery Default Status</label>
+                    <source_model>Lof\ProductReviews\Model\Gallery\Source\DefaultStatus</source_model>
+                    <depends><field id="allow_upload">1</field></depends>
+                </field>
+                <field id="image_width" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Uploaded Image Width</label>
+                    <comment>Pixel.</comment>
+                    <depends><field id="allow_upload">1</field></depends>
+                </field>
+                <field id="image_height" translate="label" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Uploaded Image Height</label>
+                    <comment>Pixel.</comment>
+                    <depends><field id="allow_upload">1</field></depends>
+                </field>
+            </group>
+
+            <group id="gallery_carousel_settings" translate="label" type="text" sortOrder="1100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Gallery Owl Carousel Settings</label>
+                <field id="carousel_layout" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="60" >
+                    <label>Carousel Layout</label>
+                    <source_model>Lof\ProductReviews\Model\Gallery\Source\CarouselLayout</source_model>
+                </field>
+                <field id="number_item_per_column" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="65">
+                    <label>Number Item per Column</label>
+                    <comment >Default is 1</comment>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="mobile_items" type="text"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="80">
+                    <label>Number Columns On Page (Phones)</label>
+                    <comment >Show number items when screen size bellow 480px</comment>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="tablet_small_items" type="text"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="90">
+                    <label>Number Columns On Page (Phones to Small tablets)</label>
+                    <comment >Show number items when screen size between 641px and 480px</comment>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="tablet_items" type="text"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="100">
+                    <label>Number Columns On Page (Phones to tablets)</label>
+                    <comment >Show number items when screen size between 768px and 641px</comment>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="portrait_items" type="text"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="110">
+                    <label>Number Columns On Page (Portrait tablets)</label>
+                    <comment >Show number items when screen size between 979px and 769px</comment>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="default_items" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="112">
+                    <label>Number Columns On Page (Default)</label>
+                    <comment >Show number items when screen size between 1199px and 980px</comment>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="large_items" type="text"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="120">
+                    <label>Number Columns On Page (Large display)</label>
+                    <comment >Show number items when screen size 1200px and up</comment>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="autoplay" type="select"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="122">
+                    <label>Autoplay</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="autoplay_timeout" type="text"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="124">
+                    <label>Autoplay Timeout</label>
+                    <comment>Autoplay interval timeout.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="autoplay_pauseonhover" type="select"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="126">
+                    <label>Pause on Hover</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+
+                <field id="loop" type="select"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="185">
+                    <label>Loop</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="rtl" type="select"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="187">
+                    <label>RTL</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="dots" type="select"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="190">
+                    <label>Show dots navigations</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="nav" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="200">
+                    <label>Show next/prev buttons.</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="carousel_layout">owl_carousel</field>
+                    </depends>
+                </field>
+                <field id="nav_prev" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="210">
+                    <label>Nav Prev</label>
+                    <depends>
+                        <field id="nav">1</field>
+                    </depends>
+                </field>
+                <field id="nav_next" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="220">
+                    <label>Nav Next</label>
+                    <depends>
+                        <field id="nav">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="gallery_fancybox_settings" translate="label" type="text" sortOrder="1150" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Gallery Fancybox Settings</label>
+                <field id="auto_size" type="select"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="1">
+                    <label>Enabled Auto Popup Size</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="fancybox_width" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Fancybox Width</label>
+                    <comment>Pixel.</comment>
+                    <depends>
+                        <field id="auto_size">0</field>
+                    </depends>
+                </field>
+                <field id="fancybox_height" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Fancybox Height</label>
+                    <comment>Pixel.</comment>
+                    <depends>
+                        <field id="auto_size">0</field>
+                    </depends>
+                </field>
+                <field id="fancybox_padding" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Fancybox Padding</label>
+                    <comment>Pixel.</comment>
+                </field>
+                <field id="fancybox_margin" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Fancybox Margin</label>
+                    <comment>Pixel.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Landofcoder
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/license
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2017 Landofcoder (https://landofcoder.com/)
+ * @license    https://landofcoder.com/LICENSE-1.0.html
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Lof_ProductReviews::lof_product_reviews" title="Lof Product Reviews" translate="title" module="Lof_ProductReviews" sortOrder="30" resource="Lof_ProductReviews::lof_product_reviews"/>
+
+        <add id="Lof_ProductReviews::all_reviews" title="All Reviews" translate="title" module="Lof_ProductReviews" sortOrder="10" resource="Magento_Review::reviews_all" parent="Lof_ProductReviews::lof_product_reviews" action="review/product/index"/>
+
+        <add id="Lof_ProductReviews::lof_product_reviews_reminders" title="Reviews Reminders List" translate="title" module="Lof_ProductReviews" sortOrder="30" resource="Lof_ProductReviews::lof_product_reviews_reminders" parent="Lof_ProductReviews::lof_product_reviews" action="lof_product_reviews/reminders/index"/>
+
+        <add id="Lof_ProductReviews::lof_product_reviews_config" title="Reviews Configuration" translate="title" module="Lof_ProductReviews" sortOrder="40" resource="Magento_Review::reviews_all" parent="Lof_ProductReviews::lof_product_reviews" action="adminhtml/system_config/edit/section/lof_product_reviews"/>
+    </menu>
+</config>

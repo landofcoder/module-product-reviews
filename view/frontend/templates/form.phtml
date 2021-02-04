@@ -1,0 +1,336 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Review\Block\Form $block 1*/
+/** @var \Lof\ProductReviews\Block\Form $block 2*/
+$limit_image = $this->getReviewConfig("limit_upload_image", 1);
+$enable_pros_cons = $this->getReviewConfig("enable_pros_cons", 0);
+$verify_purchased = $block->getVerifyConfig();
+$auto_verify_purchased = $block->getAutoVerifyConfig();
+$verify_link = $block->getVerifyAction();
+$check_login = $block->checkCustomerLogin();
+$_orderIds = $block->listOrderIds();
+$is_verified = false;
+if($verify_purchased && $auto_verify_purchased){
+    $is_verified = $block->getAutoVerified();
+    if($is_verified){
+        $verify_purchased = false;
+    }
+}
+if($verify_purchased && $auto_verify_purchased && !$is_verified){
+   ?>
+<div class="lof-verify-purchased">
+    <div class="verify-title">
+        <h3><?= $block->escapeHtml(__('Please complete order for the product to write review.')) ?></h3>
+    </div>
+</div>
+   <?php
+}else {
+?>
+<?php if ($verify_purchased) :?>
+<div class="lof-verify-purchased">
+    <div class="verify-title">
+        <h3><?= $block->escapeHtml(__('You need to enter info before adding a new review.')) ?></h3>
+    </div>
+    <div class="verify-content">
+        <fieldset class="fieldset lof-verify-fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+
+            <?php if ($check_login == false) { ?>
+                <div class="field verify-field-order required">
+                    <label for="verify_order_field" class="label"><span><?= $block->escapeHtml(__('Order Id')) ?></span></label>
+                    <div class="control">
+                        <input type="text" name="verify_order" id="verify_order_field" class="input-text" data-validate="{required:true}"  placeholder="<?=__('Enter your order id without zero number') ?>"/>
+                    </div>
+                </div>
+                <div class="field verify-field-email required">
+                    <label for="verify_email_field" class="label"><span><?= $block->escapeHtml(__('Order Email')) ?></span></label>
+                    <div class="control">
+                        <input type="text" name="verify_email" id="verify_email_field" class="input-text" data-validate="{required:true}"  placeholder="<?=__('Your order email ') ?>"/>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <?php if (count($_orderIds) > 0) { ?>
+                    <div class="field verify-field-order required">
+                        <label for="verify_order_field" class="label"><span><?= $block->escapeHtml(__('Order Id')) ?></span></label>
+                        <div class="control">
+                            <select name="verify_order" id="verify_order_field" class="list-orders">
+                                <option value="default"><?= $block->escapeHtml(__('Please select your order...')) ?></option>
+                                <?php foreach ($_orderIds as $_orderId) { ?>
+                                    <option value="<?= $_orderId->getIncrementId(); ?>"><?= $_orderId->getIncrementId(); ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                <?php } else { ?>
+                    <div class="field verify-field-order required">
+                        <label for="verify_order_field" class="label"><span><?= $block->escapeHtml(__('You need to make an order.')) ?></span></label>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+        </fieldset>
+        <div class="actions-toolbar lof-verify-form-actions">
+            <div class="primary actions-primary">
+                <button type="submit" id="verify_summit" data-link="<?= $verify_link; ?>" class="action submit primary" onclick="verifyInfo()"><span><?= $block->escapeHtml(__('Submit')) ?></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
+<div id="main-review-form" class="block review-add">
+    <div class="block-title"><strong><?= $block->escapeHtml(__('Write Your Own Review')) ?></strong></div>
+<div class="block-content">
+<?php if ($block->getAllowWriteReviewFlag()) : ?>
+<form action="<?= $block->escapeUrl($block->getAction()) ?>" class="review-form" method="post" id="review-form" data-role="product-review-form" data-bind="scope: 'review-form'"  enctype="multipart/form-data" >
+    <?= $block->getBlockHtml('formkey') ?>
+    <?= $block->getChildHtml('form_fields_before') ?>
+    <fieldset class="fieldset review-fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+        <legend class="legend review-legend"><span><?= $block->escapeHtml(__("You're reviewing:")) ?></span><strong><?= $block->escapeHtml($block->getProductInfo()->getName()) ?></strong></legend><br />
+        <?php if ($block->getRatings() && $block->getRatings()->getSize()) : ?>
+        <span id="input-message-box"></span>
+        <fieldset class="field required review-field-ratings">
+            <legend class="label"><span><?= $block->escapeHtml(__('Your Rating')) ?></span></legend><br/>
+            <div class="control">
+                <div class="nested" id="product-review-table">
+                    <?php foreach ($block->getRatings() as $_rating) : ?>
+                        <div class="field choice review-field-rating">
+                            <label class="label" id="<?= $block->escapeHtml(str_replace(' ', '_', $_rating->getRatingCode())) ?>_rating_label"><span><?= $block->escapeHtml($_rating->getRatingCode()) ?></span></label>
+                            <div class="control review-control-vote">
+                            <?php $options = $_rating->getOptions(); ?>
+                            <?php $iterator = 1;
+                            foreach ($options as $_option) : ?>
+                                <input
+                                    type="radio"
+                                    name="ratings[<?= $block->escapeHtmlAttr($_rating->getId()) ?>]"
+                                    id="<?= $block->escapeHtmlAttr(str_replace(' ', '_', $_rating->getRatingCode())) ?>_<?= $block->escapeHtmlAttr($_option->getValue()) ?>"
+                                    value="<?= $block->escapeHtmlAttr($_option->getId()) ?>"
+                                    class="radio"
+                                    data-validate="{ 'rating-required':true}"
+                                    aria-labelledby="<?= $block->escapeHtmlAttr(str_replace(' ', '_', $_rating->getRatingCode())) ?>_rating_label <?= $block->escapeHtmlAttr(str_replace(' ', '_', $_rating->getRatingCode())) ?>_<?= $block->escapeHtmlAttr($_option->getValue()) ?>_label" />
+                                <label
+                                    class="rating-<?= $block->escapeHtmlAttr($iterator) ?>"
+                                    for="<?= $block->escapeHtmlAttr(str_replace(' ', '_', $_rating->getRatingCode())) ?>_<?= $block->escapeHtmlAttr($_option->getValue()) ?>"
+                                    title="<?= $block->escapeHtmlAttr(__('%1 %2', $iterator, $iterator > 1 ? __('stars') : __('star'))) ?>"
+                                    id="<?= $block->escapeHtmlAttr(str_replace(' ', '_', $_rating->getRatingCode())) ?>_<?= $block->escapeHtmlAttr($_option->getValue()) ?>_label">
+                                    <span><?= $block->escapeHtml(__('%1 %2', $iterator, $iterator > 1 ? __('stars') : __('star'))) ?></span>
+                                </label>
+                            <?php $iterator++; ?>
+                            <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <input type="hidden" name="validate_rating" class="validate-rating" value="" />
+            </div>
+        </fieldset>
+    <?php endif ?>
+        <div class="field review-field-nickname required">
+            <label for="nickname_field" class="label"><span><?= $block->escapeHtml(__('Nickname')) ?></span></label>
+            <div class="control">
+                <input type="text" name="nickname" id="nickname_field" class="input-text" data-validate="{required:true}" data-bind="value: nickname()" />
+            </div>
+        </div>
+        <div class="field review-field-summary required">
+            <label for="summary_field" class="label"><span><?= $block->escapeHtml(__('Summary')) ?></span></label>
+            <div class="control">
+                <input type="text" name="title" id="summary_field" class="input-text" data-validate="{required:true}" data-bind="value: review().title" />
+            </div>
+        </div>
+        <div class="field review-field-text required">
+            <label for="review_field" class="label"><span><?= $block->escapeHtml(__('Review')) ?></span></label>
+            <div class="control">
+                <textarea name="detail" id="review_field" cols="5" rows="3" data-validate="{required:true}" data-bind="value: review().detail"></textarea>
+            </div>
+        </div>
+        <?php if($enable_pros_cons){ ?>
+        <div class="field review-field-advantages">
+            <label for="advantages_field" class="label"><span><?= $block->escapeHtml(__('What I like about this product')) ?></span></label>
+            <div class="control">
+                <input type="text" name="advantages" id="advantages_field" class="input-text" data-validate="{required:false}" data-bind="value: review().advantages" />
+            </div>
+        </div>
+        <div class="field review-field-disadvantages">
+            <label for="disadvantages_field" class="label"><span><?= $block->escapeHtml(__('What I do not like about this product ')) ?></span></label>
+            <div class="control">
+                <input type="text" name="disadvantages" id="disadvantages_field" class="input-text" data-validate="{required:false}" data-bind="value: review().disadvantages" />
+            </div>
+        </div>
+        <?php } ?>
+        <?php if ($block->getImageConfig()): ?>
+        <div class="field review-field-images">
+            <label for="review_images" class="label"><span><?= $block->escapeHtml(__('Review Images')) ?></span></label>
+            <div class="control" id="control_image">
+                <input type="file" id="review_images_0" name="review_images_0" class="input-text lof-review-images">
+                <br id="br_0">
+            </div>
+            <div style="padding-left: 127px;">
+                <input type="button" value="<?= $block->escapeHtml(__('Add')) ?>" class="action submit primary" id="add_image" onclick="addReviewImage(this)" data-limit="<?php echo (int)$limit_image; ?>">
+                <input type="button" value="<?= $block->escapeHtml(__('Delete')) ?>" class="action submit primary" id="del_image" onclick="deleteReviewImage()">
+            </div>
+        </div>
+        <?php endif; ?>
+    </fieldset>
+    <div class="actions-toolbar review-form-actions">
+        <div class="primary actions-primary">
+            <button type="submit" class="action submit primary"><span><?= $block->escapeHtml(__('Submit Review')) ?></span></button>
+        </div>
+    </div>
+</form>
+<script type="text/x-magento-init">
+{
+    "[data-role=product-review-form]": {
+        "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+    },
+    "#review-form": {
+        "Magento_Review/js/error-placement": {},
+        "Magento_Review/js/validate-review": {}
+    }
+}
+</script>
+<?php else : ?>
+    <div class="message info notlogged" id="review-form">
+        <div>
+            <?= $block->escapeHtml(__('Only registered users can write reviews. Please <a href="%1">Sign in</a> or <a href="%2">create an account</a>', $block->getLoginLink(), $block->getRegisterUrl()), ['a']) ?>
+        </div>
+    </div>
+<?php endif ?>
+</div>
+</div>
+<script type="text/javascript">
+    var i = 0;
+    require([
+        'jquery'
+        ], function($){
+
+            //Verify order information before adding new review
+            var customerLogin = '<?= $check_login; ?>';
+            var verifyType = '<?= $verify_purchased ?>';
+            
+            if (verifyType) {
+                $('#main-review-form').addClass('hidden');
+            }
+            function checkCustomerEmail(email) {
+                var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,6})+$/;
+                if (email.length == 0 ) {
+                    $('#verify_email_field').after('<br><span class="verify-error"><?= __('Enter a valid email!') ?></span>');
+                } else if (email.length > 0 && emailRegex.test(email) == false) {
+                    $('#verify_email_field').after('<br><span class="verify-error"> <?= __('Email is not format!') ?></span>');
+                } else {
+                    return true;
+                }
+            }
+
+            function checkCustomerOrder(value) {
+                var regex = /^[+\-]?\d+$/;
+                if (value.length == 0 ) {
+                    $('#verify_order_field').after('<br><span class="verify-error"><?= __('Order Id is empty!') ?></span>');
+                } else if (value.length > 0 && regex.test(value) == false) {
+                    $('#verify_order_field').after('<br><span class="verify-error"><?= __('Order Id is not format!') ?></span>');
+                } else {
+                    return true;
+                }
+            }
+
+            window.verifyInfo = function(){
+                var verify_button_html = $("#verify_summit").html();
+                $(".verify-error").remove();
+                var order = $('#verify_order_field').val();
+                var checkOrder = checkCustomerOrder(order);
+                if(customerLogin == false){
+                    var email = $('#verify_email_field').val();
+                    var checkEmail = checkCustomerEmail(email);
+                }
+                var url = $('#verify_summit').data('link');
+                if (checkOrder == true && customerLogin == true) {
+                    $.ajax({
+                        method: "POST",
+                        url: url,
+                        dataType: 'html',
+                        data: {
+                            'order_id': order
+                        },
+                        success: function(data){
+                            value = $.parseJSON(data);
+                            if (value.message == 'correct') {
+                                $('#main-review-form').removeClass('hidden');
+                                $('.lof-verify-purchased').addClass('hidden');
+                            } else if (value.message == 'incorrect') {
+                                $(".verify-error").remove();
+                                $('#verify_order_field').after('<br><span class="verify-error"><?= __('This order was not made for this product') ?></span>');
+                            } else if (value.message == 'invalid_order') {
+                                $(".verify-error").remove();
+                                $('#verify_order_field').after('<br><span class="verify-error"><?= __('Order id is not correct') ?></span>');
+                            }
+                        }
+                    });
+                } else if (checkEmail == true && checkOrder == true && customerLogin == false) {
+
+                    $("#verify_summit").html('<?php echo __('<span>Loading</span>');?>');
+                    $.ajax({
+                        method: "POST",
+                        url: url,
+                        dataType: 'html',
+                        data: {
+                            'customer_email' : email,
+                            'order_id': order
+                        },
+                        success: function(data){
+                            $("#verify_submit").html(verify_button_html);
+                            value = $.parseJSON(data);
+                            if (value.message == 'correct') {
+                                $('#main-review-form').removeClass('hidden');
+                                $('.lof-verify-purchased').addClass('hidden');
+                            } else if (value.message == 'incorrect') {
+                                $(".verify-error").remove();
+                                $('#verify_order_field').after('<br><span class="verify-error"><?= __('This order was not made for this product') ?></span>');
+                            } else if (value.message == 'incorrect_email') {
+                                $(".verify-error").remove();
+                                $('#verify_email_field').after('<br><span class="verify-error"><?= __('Email was not made this order.') ?></span>');
+                            } else if (value.message == 'invalid_order') {
+                                $(".verify-error").remove();
+                                $('#verify_order_field').after('<br><span class="verify-error"><?= __('Order id is not correct') ?></span>');
+                            }
+                        }
+                    });
+                }
+            }
+
+            window.addReviewImage = function(img) {
+                var data_limit = $(img).data("limit");
+                data_limit = parseInt(data_limit);
+                if(data_limit <= 1) {
+                    data_limit = 1;
+                }
+                var number_image_tags = $(".lof-review-images").length;
+                if(parseInt(number_image_tags) < data_limit){
+                    i++;
+                    img = document.getElementById('control_image');
+                    var br = document.createElement('br');
+                    br.id = "br_" + i;
+                    var input = document.createElement("input");
+                    input.type = "file";
+                    input.id = "review_images_" + i;
+                    input.name = "review_images_" + i;
+                    input.className = "input-text lof-review-images";
+                    img.appendChild(input);
+                    img.appendChild(br);
+                }
+            }
+            window.deleteReviewImage = function() {
+                if (document.getElementById("review_images_1") == null) {
+                    document.getElementById("review_images_0").value = "";
+                }
+                if (i > 0) {
+                    document.getElementById("review_images_" + i).remove();
+                    document.getElementById("br_" + i).remove();
+                    i--;
+                }
+            }
+        });
+</script>
+<?php } ?>

@@ -1,0 +1,27 @@
+{
+    "name": "landofcoder/module-product-reviews",
+    "description": "Knowing the importance of boosting the customers trust to stores via reviews, we developed Magento 2 Product Reviews Extension to boost your business to the new level. The extension gives customers an allowance to post images, rate the review helpful or not, and filter needed reviews to meet their demands.",
+    "type": "magento2-module",
+    "license": "MIT",
+    "version": "1.0.2",
+    "authors": [
+        {
+            "name": "Landofcoder",
+            "email": "landofcoder@gmail.com",
+            "homepage": "https://landofcoder.com",
+            "role": "Magento 2 Extension Provider"
+        }
+    ],
+    "require": {
+        "landofcoder/module-all" : "1.*",
+        "magento/module-review" : "100.*"
+      },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Lof\\ProductReviews\\": ""
+        }
+    }
+}

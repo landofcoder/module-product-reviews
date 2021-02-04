@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Landofcoder
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/license
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2017 Landofcoder (https://landofcoder.com/)
+ * @license    https://landofcoder.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--frontend override-->
+    <preference for="Magento\Review\Block\Form" type="Lof\ProductReviews\Block\Form" />
+    <preference for="Magento\Review\Block\Product\View\ListView" type="Lof\ProductReviews\Block\Product\View\ListView" />
+    <!--End frontend override-->
+    <preference for="Lof\ProductReviews\Api\GalleryRepositoryInterface" type="Lof\ProductReviews\Model\GalleryRepository" />
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Lof\ProductReviews\Api\Data\GalleryInterface" xsi:type="string">Lof\ProductReviews\Api\GalleryRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Lof\ProductReviews\Model\Api\SearchCriteria\CollectionProcessor\GalleryFilterProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="customFilters" xsi:type="array">
+                <item name="store_id" xsi:type="object">Lof\ProductReviews\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\GalleryStoreFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Lof\ProductReviews\Model\Api\SearchCriteria\GalleryCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Lof\ProductReviews\Model\Api\SearchCriteria\CollectionProcessor\GalleryFilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Review\Block\Adminhtml\Add\Form">
+       <plugin name="review_add_form_custom" type="Lof\ProductReviews\Plugin\Adminhtml\Add\Form" />
+    </type>
+    <type name="Magento\Review\Block\Adminhtml\Edit\Form">
+       <plugin name="review_edit_form_custom" type="Lof\ProductReviews\Plugin\Adminhtml\Edit\Form" />
+    </type>
+    <type name="Magento\Review\Controller\Adminhtml\Product\Post">
+        <plugin name="save_review_custom" type="Lof\ProductReviews\Plugin\Adminhtml\Post" />
+    </type>
+    <type name="Magento\Review\Controller\Adminhtml\Product\Save">
+       <plugin name="save_review_custom" type="Lof\ProductReviews\Plugin\Adminhtml\Save" />
+    </type>
+    <type name="Magento\Customer\Controller\Account\EditPost">
+        <plugin name="update_customer_to_reminder" type="Lof\ProductReviews\Plugin\Frontend\Customer\EditPost" />
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="lof_product_reviews_gallery_listing_data_source" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\Gallery\Grid\Collection</item>
+            </argument>
+
+            <argument name="collections" xsi:type="array">
+                <item name="lof_product_reviews_reminders_listing_data_source" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\Reminders\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Lof\ProductReviews\Model\ResourceModel\Gallery\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">lof_product_reviews_gallery</argument>
+            <argument name="eventPrefix" xsi:type="string">lof_product_reviews_gallery_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">lof_product_reviews_gallery_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\Gallery</argument>
+        </arguments>
+    </type>
+
+    <type name="Lof\ProductReviews\Model\ResourceModel\Reminders\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">lof_product_reviews_reminders</argument>
+            <argument name="eventPrefix" xsi:type="string">lof_product_reviews_reminders_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">lof_product_reviews_reminders_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\Reminders</argument>
+        </arguments>
+    </type>
+</config>

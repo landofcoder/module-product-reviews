@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Landofcoder
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2017 Landofcoder (https://landofcoder.com/)
+ * @license    https://landofcoder.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <lof_product_reviews>
+            <lof_general_settings>
+                <email_sender>sales</email_sender>
+                <email_templates>lof_product_reviews_lof_general_settings_email_templates</email_templates>
+                <reply_email_templates>lof_product_reviews_lof_general_settings_reply_email_templates</reply_email_templates>
+                <send_emails_automatically>1</send_emails_automatically>
+            </lof_general_settings>
+            <lof_review_settings>
+                <enable_sorting>1</enable_sorting>
+                <sort_type>helpful</sort_type>
+                <enable_search>1</enable_search>
+                <verify_purchased_code>1</verify_purchased_code>
+                <allow_list_order>1</allow_list_order>
+                <allow_upload>0</allow_upload>
+                <default_status>2</default_status>
+                <limit_upload_image>5</limit_upload_image>
+                <image_width>300</image_width>
+                <image_height>300</image_height>
+                <enable_pros_cons>1</enable_pros_cons>
+            </lof_review_settings>
+            <gallery_carousel_settings>
+                <carousel_layout>owl_carousel</carousel_layout>
+                <number_item_per_column>1</number_item_per_column>
+                <mobile_items>1</mobile_items>
+                <tablet_small_items>2</tablet_small_items>
+                <tablet_items>3</tablet_items>
+                <portrait_items>4</portrait_items>
+                <default_items>4</default_items>
+                <large_items>5</large_items>
+                <autoplay>0</autoplay>
+                <autoplay_timeout>3000</autoplay_timeout>
+                <autoplay_pauseonhover>1</autoplay_pauseonhover>
+                <item_per_page>4</item_per_page>
+                <lg_column_item>3</lg_column_item>
+                <md_column_item>2</md_column_item>
+                <sm_column_item>1</sm_column_item>
+                <xs_column_item>1</xs_column_item>
+                <interval>3000</interval>
+                <loop>0</loop>
+                <rtl>0</rtl>
+                <dots>1</dots>
+                <nav>1</nav>
+                <nav_prev>Prev</nav_prev>
+                <nav_next>Next</nav_next>
+            </gallery_carousel_settings>
+            <gallery_fancybox_settings>
+                <auto_size>0</auto_size>
+                <fancybox_width>500</fancybox_width>
+                <fancybox_height>500</fancybox_height>
+                <fancybox_padding>10</fancybox_padding>
+                <fancybox_margin>20</fancybox_margin>
+            </gallery_fancybox_settings>
+        </lof_product_reviews>
+    </default>
+</config>
