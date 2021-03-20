@@ -27,14 +27,22 @@
             <label>Lof Product Reviews And Rating</label>
             <tab>landofcoder</tab>
             <resource>Lof_ProductReviews::config_lof_product_reviews</resource>
-            <group id="lof_general_settings" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="lof_general_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General Settings</label>
-                <field id="show_on_customer_dashboard" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="enabled_module" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled/Disabled Advanved Reviews</label>
+                    <comment>Enable / disable advanced reviews features on frontend.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_on_customer_dashboard" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Show Available Products Reviews on Dashboard</label>
                     <comment>Enable / disable available products reviews on logged in customer dashboard.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="email_sender" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+            </group>
+            <group id="email_settings" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Reminder Email Settings</label>
+                <field id="email_sender" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Email Sender</label>
                     <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
                 </field>
@@ -49,67 +57,88 @@
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                 </field>
                 <field id="send_emails_automatically" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Send Emails Automatically</label>
+                    <label>Send Reminder Emails Automatically</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
-
-            <group id="lof_review_settings" translate="label" type="text" sortOrder="1050" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="lof_review_settings" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Review Settings</label>
-                <field id="enable_auto_verify" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Enable Auto Verify Order</label>
+                <field id="verify_purchased_code" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Verify Purchased Code</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="enable_sorting" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="required_verify_purchased" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Required Verify Purchased Code (New)</label>
+                    <comment>Enable the option will require purchase code before submit review.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="verify_purchased_code">1</field>
+                    </depends>
+                </field>
+                <field id="enable_auto_verify" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Auto Verify Order</label>
+                    <comment>Enable the option customer will not need to input verify purchase code.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_customer_avatar" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Customer Avatar (New)</label>
+                    <comment>Require setup module: https://github.com/landofcoder/module-customer-avatar.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_customer_location" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Customer Location (New)</label>
+                    <comment>Location from customer billing address.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_sorting" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable Sorting</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="sort_type" type="select" translate="label comment" showInDefault="6" showInWebsite="1" showInStore="1" sortOrder="5" >
+                <field id="sort_type" type="select" translate="label comment" showInDefault="26" showInWebsite="1" showInStore="1" sortOrder="5" >
                     <label>Sort Review By</label>
                     <source_model>Lof\ProductReviews\Model\Gallery\Source\ReviewSortType</source_model>
                     <depends>
                         <field id="enable_sorting">1</field>
                     </depends>
                 </field>
-                <field id="enable_search" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="enable_search" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable Searching</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="verify_purchased_code" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Verify Purchased Code</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                
-                <field id="enable_pros_cons" translate="label" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <field id="enable_pros_cons" translate="label" type="select" sortOrder="36" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Show Pros and Cons options</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="allow_upload" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Allow Upload Images</label>
+                <field id="enable_admin_reply" translate="label" type="select" sortOrder="38" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Admin Review Reply (New)</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                 <field id="limit_upload_image" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Set Number images files can upload on frontend form</label>
+                <field id="allow_upload" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Allow Upload Images/Videos</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                 <field id="limit_upload_image" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Set Number images/videos files can upload on frontend form</label>
                     <depends><field id="allow_upload">1</field></depends>
                 </field>
-                <field id="default_status" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="26" >
+                <field id="default_status" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="56" >
                     <label>Gallery Default Status</label>
                     <source_model>Lof\ProductReviews\Model\Gallery\Source\DefaultStatus</source_model>
                     <depends><field id="allow_upload">1</field></depends>
                 </field>
-                <field id="image_width" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="image_width" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Set Uploaded Image Width</label>
                     <comment>Pixel.</comment>
                     <depends><field id="allow_upload">1</field></depends>
                 </field>
-                <field id="image_height" translate="label" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="image_height" translate="label" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Set Uploaded Image Height</label>
                     <comment>Pixel.</comment>
                     <depends><field id="allow_upload">1</field></depends>
                 </field>
             </group>
 
-            <group id="gallery_carousel_settings" translate="label" type="text" sortOrder="1100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="gallery_carousel_settings" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Gallery Owl Carousel Settings</label>
                 <field id="carousel_layout" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="60" >
                     <label>Carousel Layout</label>
@@ -229,8 +258,8 @@
                 </field>
             </group>
 
-            <group id="gallery_fancybox_settings" translate="label" type="text" sortOrder="1150" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Gallery Fancybox Settings</label>
+            <group id="gallery_fancybox_settings" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Gallery Fancybox Settings</label>
                 <field id="auto_size" type="select"  translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="1">
                     <label>Enabled Auto Popup Size</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
