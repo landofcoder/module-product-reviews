@@ -26,6 +26,7 @@
         <add id="Lof_ProductReviews::lof_product_reviews" title="Lof Product Reviews" translate="title" module="Lof_ProductReviews" sortOrder="30" resource="Lof_ProductReviews::lof_product_reviews"/>
 
         <add id="Lof_ProductReviews::all_reviews" title="All Reviews" translate="title" module="Lof_ProductReviews" sortOrder="10" resource="Magento_Review::reviews_all" parent="Lof_ProductReviews::lof_product_reviews" action="review/product/index"/>
+        <add id="Lof_ProductReviews::importreviews" title="Import Reviews" translate="title" module="Lof_ProductReviews" sortOrder="10" resource="Magento_Review::importreviews" parent="Lof_ProductReviews::lof_product_reviews" action="lof_product_reviews/import/upload"/>
 
         <add id="Lof_ProductReviews::lof_product_reviews_reminders" title="Reviews Reminders List" translate="title" module="Lof_ProductReviews" sortOrder="30" resource="Lof_ProductReviews::lof_product_reviews_reminders" parent="Lof_ProductReviews::lof_product_reviews" action="lof_product_reviews/reminders/index"/>
 

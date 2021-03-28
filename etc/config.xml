@@ -2,18 +2,18 @@
 <!--
 /**
  * Landofcoder
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
  * https://landofcoder.com/license-agreement.html
- * 
+ *
  * DISCLAIMER
- * 
+ *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
- * 
+ *
  * @category   Landofcoder
  * @package    Lof_ProductReviews
  * @copyright  Copyright (c) 2017 Landofcoder (https://landofcoder.com/)
@@ -24,11 +24,15 @@
     <default>
         <lof_product_reviews>
             <lof_general_settings>
+                <enabled_module>1</enabled_module>
+                <show_on_customer_dashboard>1</show_on_customer_dashboard>
+            </lof_general_settings>
+            <email_settings>
                 <email_sender>sales</email_sender>
                 <email_templates>lof_product_reviews_lof_general_settings_email_templates</email_templates>
                 <reply_email_templates>lof_product_reviews_lof_general_settings_reply_email_templates</reply_email_templates>
                 <send_emails_automatically>1</send_emails_automatically>
-            </lof_general_settings>
+            </email_settings>
             <lof_review_settings>
                 <enable_sorting>1</enable_sorting>
                 <sort_type>helpful</sort_type>
