@@ -62,7 +62,7 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
             [
                 'label' => __('Save Upload'),
                 'class' => 'save primary',
-                'onclick' => 'setLocation(\'' . $this->getUrl('lof_productreviews/*/save_upload') . '\')'
+                'onclick' => 'setLocation(\'' . $this->getUrl('lof_product_reviews/import/save_upload') . '\')'
             ]
 
         );
@@ -108,7 +108,7 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
      */
     protected function _getSaveAndContinueUrl()
     {
-        return $this->getUrl('lof_productreviews/*/save', ['_current' => true, 'back' => 'edit', 'active_tab' => '{{tab_id}}']);
+        return $this->getUrl('lof_product_reviews/import/save', ['_current' => true, 'back' => 'edit', 'active_tab' => '{{tab_id}}']);
     }
 
     /**

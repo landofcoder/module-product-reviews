@@ -84,8 +84,6 @@ class Save extends ProductController
 
                     $reviewId = $review->getId();
                     try {
-
-
                         // Save customize review
                         $data2['average'] = $customReview->addCountRating($reviewId);
                         $data2['count_helpful'] = 0;
@@ -143,7 +141,7 @@ class Save extends ProductController
         $limit_images = $limit_images?(int)$limit_images:1;
         $default_status = $moduleHelper->getConfig("lof_review_settings/default_status", 2);
         $default_status = $default_status?(int)$default_status:2;
-        
+
         try {
             $names = [];
             if(isset($_FILES)) {
