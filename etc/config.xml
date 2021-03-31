@@ -30,6 +30,7 @@
             <email_settings>
                 <email_sender>sales</email_sender>
                 <email_templates>lof_product_reviews_lof_general_settings_email_templates</email_templates>
+                <review_product_templates>lof_product_reviews_email_settings_review_product_templates</review_product_templates>
                 <reply_email_templates>lof_product_reviews_lof_general_settings_reply_email_templates</reply_email_templates>
                 <send_emails_automatically>1</send_emails_automatically>
             </email_settings>

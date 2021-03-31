@@ -162,7 +162,7 @@ namespace Lof\ProductReviews\Model;
                   $products[] = $tmp;
                 }
              }
-             
+
              $products_html = $this->getProductsListHtml($products);
 
              $dataObj = $this->_dataObjectFactory->create()->setData(
@@ -192,7 +192,7 @@ namespace Lof\ProductReviews\Model;
                  $recipient['email'],
                  $recipient['name']
              );
-             
+
              $transport = $transportBuilder->getTransport();
              try  {
                 $transport->sendMessage();
@@ -200,10 +200,10 @@ namespace Lof\ProductReviews\Model;
                 $reminderId = $data['id'];
                 $this->load($reminderId)->setStatus('3')->save();
               } catch(\Exception $e) {
-                  throw $e->getMessage(); 
+                  return $e->getMessage();
               }
          }
-         
+
          return $this;
      }
 

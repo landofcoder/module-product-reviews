@@ -6,8 +6,8 @@
  */
 -->
 <layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
-    <referenceContainer name="product.info.product_additional_data">
-        <block class="Lof\ProductReviews\Block\Product\View\ListView" name="product.infos.product_additional_data" as="product_additional_data" template="Lof_ProductReviews::product/view/list.phtml" />
+    <referenceContainer name="root">
+        <block class="Lof\ProductReviews\Block\Product\View\ListView" name="product.info.product_additional_data" as="product_additional_data" template="Lof_ProductReviews::product/view/list.phtml" />
         <block class="Magento\Theme\Block\Html\Pager" name="product_review_list.toolbar">
             <arguments>
                 <argument name="show_per_page" xsi:type="boolean">false</argument>

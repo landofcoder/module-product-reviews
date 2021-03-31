@@ -300,9 +300,7 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
 
     public function getReviewsCollectionByType($type = 'helpful') {
         if ($type == 'helpful') {
-            $collection = $this->_reviewsColFactory->create()->addStoreFilter(
-                $this->_storeManager->getStore()->getId()
-            )->addStatusFilter(
+            $collection = $this->_reviewsColFactory->create()->addStatusFilter(
                 \Magento\Review\Model\Review::STATUS_APPROVED
             )->addEntityFilter(
                 'product',
@@ -321,10 +319,7 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
             return $items;
 
         } else if ($type == 'rating') {
-
-            $collection = $this->_reviewsColFactory->create()->addStoreFilter(
-                $this->_storeManager->getStore()->getId()
-            )->addStatusFilter(
+            $collection = $this->_reviewsColFactory->create()->addStatusFilter(
                 \Magento\Review\Model\Review::STATUS_APPROVED
             )->addEntityFilter(
                 'product',

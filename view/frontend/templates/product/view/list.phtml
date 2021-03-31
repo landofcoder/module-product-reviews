@@ -5,7 +5,6 @@
  */
 
 // @codingStandardsIgnoreFile
-
 /** @var Lof\ProductReviews\Block\Product\View\ListView $block */
 $format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
 $rateAjaxLink = $block->getFrontendUrl() .'lof_productreviews/reviews/rateAjax';
@@ -116,7 +115,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                     <div class="rating-summary item" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
                         <span class="label rating-label"><span><?= $block->escapeHtml($_vote->getRatingCode()) ?></span></span>
                         <div class="rating-result" title="<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
-	                        <meta itemprop="worstRating" content = "1"/>
+	                        <meta itemprop="worstRating" content = "1"/>at
 	                        <meta itemprop="bestRating" content = "100"/>
                             <span style="width:<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
                                 <span itemprop="ratingValue"><?= $block->escapeHtml($_vote->getPercent()) ?>%</span>

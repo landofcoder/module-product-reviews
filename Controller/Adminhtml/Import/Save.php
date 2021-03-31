@@ -21,9 +21,8 @@
 
 namespace Lof\ProductReviews\Controller\Adminhtml\Import;
 
+use Lof\ProductReviews\Model\CustomReview;
 use Magento\Backend\App\Action;
-use Lof\FlatRateShipping\Model\ShippingmethodFactory;
-use Lof\FlatRateShipping\Model\ShippingFactory;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Magento\Review\Model\Review;
 use Magento\Review\Model\ReviewFactory;
@@ -52,6 +51,10 @@ class Save extends \Magento\Backend\App\Action {
      * @var ReviewFactory
      */
     protected $reviewFactory;
+     /**
+      * @var ReviewFactory
+      */
+     protected $_ratingFactory;
 
     /**
      * @param Action\Context                             $context
@@ -63,7 +66,8 @@ class Save extends \Magento\Backend\App\Action {
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         ReviewFactory $reviewFactory,
         UploaderFactory $fileUploader,
-        \Magento\Framework\File\Csv $csvReader
+        \Magento\Framework\File\Csv $csvReader,
+        \Magento\Review\Model\RatingFactory $ratingFactory
     )
     {
         parent::__construct($context);
@@ -71,6 +75,7 @@ class Save extends \Magento\Backend\App\Action {
         $this->_fileUploader      = $fileUploader;
         $this->reviewFactory      = $reviewFactory;
         $this->_csvReader         = $csvReader;
+        $this->_ratingFactory         = $ratingFactory;
     }
 
     /**
@@ -108,7 +113,7 @@ class Save extends \Magento\Backend\App\Action {
                         $count       = 0;
                         foreach ($csvFileData as $key => $rowData) {
 
-                            if (count($rowData) < 5 && $count == 0) {
+                            if (count($rowData) < 11 && $count == 0) {
                                 $this->messageManager->addError(__('Csv file is not a valid file!'));
 
                                 return $this->resultRedirectFactory->create()->setPath('*/*/index');
@@ -128,6 +133,12 @@ class Save extends \Magento\Backend\App\Action {
                             $temp['status_id'] = $rowData[2];
                             $temp['created_at']    = $rowData[3];
                             $temp['customer_id']         = $rowData[4];
+                            $temp['title']         = $rowData[5];
+                            $temp['detail']         = $rowData[6];
+                            $temp['nickname']         = $rowData[7];
+                            $temp['store_id']         = $rowData[8];
+                            $temp['rating_id']         = $rowData[9];
+                            $temp['option_id']         = $rowData[10];
 
                             $this->addDataToCollection($temp, $rowData);
                         }
@@ -141,7 +152,7 @@ class Save extends \Magento\Backend\App\Action {
                                 );
                         }
 
-                        return $this->resultRedirectFactory->create()->setPath('*/*/index');
+                        return $this->resultRedirectFactory->create()->setPath('review/product/index');
                     } else {
                         $this->messageManager->addError(__('Please upload Csv file'));
                     }
@@ -157,10 +168,6 @@ class Save extends \Magento\Backend\App\Action {
                         }
                     }
                     $reviewModel->setData($params);
-                    //                    $stores         = array();
-                    //                    $stores[]       = $params['store_id'];
-                    //                    $storeId = serialize($params['store_id']);
-                    //                    $shippingModel->setStoreId(0);
                     $reviewModel->save();
 
                     $this->messageManager->addSuccess(__('Your review detail has been successfully Saved'));
@@ -174,43 +181,27 @@ class Save extends \Magento\Backend\App\Action {
 
         return $this->resultRedirectFactory->create()->setPath('*/*/index');
     }
-
-//    protected function _isAllowed()
-//    {
-//        return $this->_authorization->isAllowed('Lof_FlatRateShipping::mpshipping');
-//    }
-
-//    public function getShippingNameById($shippingMethodName)
-//    {
-//        $entityId            = 0;
-//        $shippingMethodModel = $this->_mpshippingMethod->create()
-//            ->getCollection()
-//            ->addFieldToFilter('method_name', $shippingMethodName);
-//        foreach ($shippingMethodModel as $shippingMethod) {
-//            $entityId = $shippingMethod->getEntityId();
-//        }
-//
-//        return $entityId;
-//    }
-
     public function addDataToCollection($temp, $rowData)
     {
-//        $collection = $this->reviewFactory->create()
-//            ->getCollection()
-//            ->addFieldToFilter('entity_id', $rowData[0])
-//            ->addFieldToFilter('customer_id', $rowData[4]);
-//
-//        if ($collection->getSize() > 0) {
-//            foreach ($collection as $data) {
-//                $rowId         = $data->getReviewId();
-//                $dataArray     = ['customer_id' => $rowData[4]];
-//                $model         = $this->reviewFactory->create();
-//                $reviewModel = $model->load($rowId)->addData($dataArray);
-//                $reviewModel->setReviewId($rowId)->save();
-//            }
-//        } else {
+            /** @var \Lof\ProductReviews\Model\CustomReview $customReview */
+            /** @var \Lof\ProductReviews\Model\Gallery $reviewGallery */
+            $customReview = $this->_objectManager->create(CustomReview::class);
             $reviewModel = $this->reviewFactory->create();
             $reviewModel->setData($temp)->save();
-//        }
+            $reviewId = $reviewModel->getId();
+            // Save customize review
+            $data =[];
+            $data['average'] = $customReview->addCountRating($reviewId);
+            $data['count_helpful'] = 0;
+            $data['total_helpful'] = 0;
+            $data['report_abuse'] = 0;
+            $data['review_id'] = $reviewId;
+            $customReview->setData($data);
+            $customReview->save();
+                $this->_ratingFactory->create()
+                    ->setRatingId($temp['rating_id'])
+                    ->setReviewId($reviewId)
+                    ->setCustomerId($reviewModel->getData()['customer_id'])
+                    ->addOptionVote($temp['option_id'], $temp['entity_pk_value']);
     }
 }
