@@ -23,10 +23,15 @@ namespace Lof\ProductReviews\Controller\Adminhtml\Import;
 
 use Lof\ProductReviews\Model\CustomReview;
 use Magento\Backend\App\Action;
+use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory as CustomerCollectionFactory;
 use Magento\MediaStorage\Model\File\UploaderFactory;
 use Magento\Review\Model\Review;
 use Magento\Review\Model\ReviewFactory;
 
+/**
+ * Class Save
+ * @package Lof\ProductReviews\Controller\Adminhtml\Import
+ */
 class Save extends \Magento\Backend\App\Action {
     /**
      * Core registry.
@@ -55,6 +60,10 @@ class Save extends \Magento\Backend\App\Action {
       * @var ReviewFactory
       */
      protected $_ratingFactory;
+     /**
+      * @var CustomerCollectionFactory
+      */
+     protected $customerCollectionFactory;
 
     /**
      * @param Action\Context                             $context
@@ -66,12 +75,14 @@ class Save extends \Magento\Backend\App\Action {
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         ReviewFactory $reviewFactory,
         UploaderFactory $fileUploader,
+        CustomerCollectionFactory $customerCollectionFactory,
         \Magento\Framework\File\Csv $csvReader,
         \Magento\Review\Model\RatingFactory $ratingFactory
     )
     {
         parent::__construct($context);
         $this->_resultPageFactory = $resultPageFactory;
+        $this->customerCollectionFactory = $customerCollectionFactory;
         $this->_fileUploader      = $fileUploader;
         $this->reviewFactory      = $reviewFactory;
         $this->_csvReader         = $csvReader;
@@ -113,7 +124,7 @@ class Save extends \Magento\Backend\App\Action {
                         $count       = 0;
                         foreach ($csvFileData as $key => $rowData) {
 
-                            if (count($rowData) < 11 && $count == 0) {
+                            if (count($rowData) < 12 && $count == 0) {
                                 $this->messageManager->addError(__('Csv file is not a valid file!'));
 
                                 return $this->resultRedirectFactory->create()->setPath('*/*/index');
@@ -139,6 +150,7 @@ class Save extends \Magento\Backend\App\Action {
                             $temp['store_id']         = $rowData[8];
                             $temp['rating_id']         = $rowData[9];
                             $temp['option_id']         = $rowData[10];
+                            $temp['email']             = $rowData[11];
 
                             $this->addDataToCollection($temp, $rowData);
                         }
@@ -187,8 +199,26 @@ class Save extends \Magento\Backend\App\Action {
             /** @var \Lof\ProductReviews\Model\Gallery $reviewGallery */
             $customReview = $this->_objectManager->create(CustomReview::class);
             $reviewModel = $this->reviewFactory->create();
-            $reviewModel->setData($temp)->save();
-            $reviewId = $reviewModel->getId();
+            $customer = $this->customerCollectionFactory->create()->addFieldToFilter('email', $temp['email']);
+            foreach ($customer as $ctm)
+            {
+                $customerId = $ctm->getData()['entity_id'];
+                $temp['customer_id'] = $customerId;
+                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                $_review = $objectManager->get("Magento\Review\Model\Review")
+                    ->setEntityPkValue($temp['entity_pk_value'])    //product Id
+                    ->setStatusId(\Magento\Review\Model\Review::STATUS_APPROVED)// pending/approved
+                    ->setTitle($temp['title'] )
+                    ->setDetail($temp['detail'] )
+                    ->setEntityId(1)
+                    ->setStoreId(1)
+                    ->setStores(1)
+                    ->setCustomerId($customerId)//get dynamically here
+                    ->setNickname($temp['nickname'] )
+                    ->save();
+            }
+
+            $reviewId = $_review->getId();
             // Save customize review
             $data =[];
             $data['average'] = $customReview->addCountRating($reviewId);
@@ -198,10 +228,18 @@ class Save extends \Magento\Backend\App\Action {
             $data['review_id'] = $reviewId;
             $customReview->setData($data);
             $customReview->save();
-                $this->_ratingFactory->create()
-                    ->setRatingId($temp['rating_id'])
-                    ->setReviewId($reviewId)
-                    ->setCustomerId($reviewModel->getData()['customer_id'])
-                    ->addOptionVote($temp['option_id'], $temp['entity_pk_value']);
+            $ratingOptions = array(
+                '4' => $temp['option_id'],
+
+            );
+        foreach ($ratingOptions as $ratingId => $optionIds)
+        {
+            $objectManager->get("Magento\Review\Model\Rating")
+                ->setRatingId($ratingId)
+                ->setReviewId($reviewId)
+                ->addOptionVote($optionIds, $temp['entity_pk_value']);
+
+        }
+            $reviewModel->aggregate();
     }
 }

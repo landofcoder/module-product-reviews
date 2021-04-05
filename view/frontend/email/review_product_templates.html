@@ -23,7 +23,5 @@
     {{trans
     'We send you a coupon code for 10% discount:  '}} <strong>{{var data.couponcode}}</strong>
 </p>
-<p>{{trans 'Here is the product which you purchased '}}</p>
-<p>{{var data.products|raw}}</p>
-<p>{{var data.products_description|raw}}</p>
+<p>{{trans " %store_name." store_name=$store.getFrontendName()}} {{trans ",Thank you"}}</p>
 {{template config_path="design/email/footer_template"}}

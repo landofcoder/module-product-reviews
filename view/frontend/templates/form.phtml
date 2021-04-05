@@ -147,6 +147,12 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                 <textarea name="detail" id="review_field" cols="5" rows="3" data-validate="{required:true}" data-bind="value: review().detail"></textarea>
             </div>
         </div>
+        <div class="field review-field-text ">
+            <label for="review_field" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+            <div class="control">
+                <input type="text" name="email" id="email_field" class="input-text"  data-bind="value: email()" />
+            </div>
+        </div>
         <?php if($enable_pros_cons){ ?>
         <div class="field review-field-advantages">
             <label for="advantages_field" class="label"><span><?= $block->escapeHtml(__('What I like about this product')) ?></span></label>

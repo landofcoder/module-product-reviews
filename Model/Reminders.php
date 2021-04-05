@@ -178,7 +178,7 @@ namespace Lof\ProductReviews\Model;
              );
 
              $transportBuilder = $this->_transportBuilder->setTemplateIdentifier(
-                 $this->_dataHelper->getEmailTemplate()
+                'lof_product_reviews_email_settings_email_templates'
              )->setTemplateOptions(
                  [
                      'area' => \Magento\Framework\App\Area::AREA_FRONTEND,

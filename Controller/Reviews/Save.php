@@ -21,6 +21,8 @@
 
 namespace Lof\ProductReviews\Controller\Reviews;
 
+use Lof\ProductReviews\Model\Sender;
+use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory;
 use Magento\Review\Controller\Product as ProductController;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Review\Model\Review;
@@ -28,8 +30,34 @@ use Lof\ProductReviews\Model\CustomReview;
 use Lof\ProductReviews\Model\Gallery;
 use Magento\Framework\App\Filesystem\DirectoryList;
 
+/**
+ * Class Save
+ * @package Lof\ProductReviews\Controller\Reviews
+ */
 class Save extends ProductController
 {
+     protected $cutomerCollectionFactory;
+     protected $sender;
+    public function __construct(\Magento\Framework\App\Action\Context $context,
+                                \Magento\Framework\Registry $coreRegistry,
+                                CollectionFactory $cutomerCollectionFactory,
+                                \Magento\Customer\Model\Session $customerSession,
+                                \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
+                                \Psr\Log\LoggerInterface $logger,
+                                Sender $sender,
+                                \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
+                                \Magento\Review\Model\ReviewFactory $reviewFactory,
+                                \Magento\Review\Model\RatingFactory $ratingFactory,
+                                \Magento\Catalog\Model\Design $catalogDesign,
+                                \Magento\Framework\Session\Generic $reviewSession,
+                                \Magento\Store\Model\StoreManagerInterface $storeManager,
+                                \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator)
+    {
+         $this->cutomerCollectionFactory = $cutomerCollectionFactory;
+         $this->sender = $sender;
+        parent::__construct($context, $coreRegistry, $customerSession, $categoryRepository, $logger, $productRepository, $reviewFactory, $ratingFactory, $catalogDesign, $reviewSession, $storeManager, $formKeyValidator);
+    }
+
     /**
      * Submit new review action
      *
@@ -109,6 +137,23 @@ class Save extends ProductController
                     }
 
                     $review->aggregate();
+                    $customer =$this->cutomerCollectionFactory->create()->addFieldToFilter('entity_id',$this->customerSession->getCustomerId())->getData();
+                    $dataEmail = [];
+                    $dataEmail['name'] = $customer[0]['firstname'] .' '. $customer[0]['lastname'];
+                    $dataEmail['product_name'] = $product->getName();
+                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                    $couponGenerator = $objectManager->create('Magento\SalesRule\Model\CouponGenerator');
+                    $data = array(
+                        'rule_id' =>5,
+                        'qty' => '1',
+                        'length' => '8',
+                        'format' => 'alphanum',
+                        'prefix' => 'YSX',
+                        'suffix' => 'CXK',
+                    );
+                    $codes = $couponGenerator->generateCodes($data);
+                    $dataEmail['couponcode'] = $codes[0];
+                    $this->sender->sendCouponCodeEmail($dataEmail);
                     $this->messageManager->addSuccess(__('You submitted your review for moderation.'));
                 } catch (\Exception $e) {
                     $this->reviewSession->setFormData($data);
@@ -141,8 +186,6 @@ class Save extends ProductController
         $limit_images = $limit_images?(int)$limit_images:1;
         $default_status = $moduleHelper->getConfig("lof_review_settings/default_status", 2);
         $default_status = $default_status?(int)$default_status:2;
-
-        try {
             $names = [];
             if(isset($_FILES)) {
                 for($i = 0; $i < count($_FILES); $i++) {
@@ -178,9 +221,5 @@ class Save extends ProductController
                 $reviewGallery->setData($data);
                 $reviewGallery->save();
             }
-
-        } catch (\Exception $e) {
-            $this->messageManager->addExceptionMessage($e, __('Please check the image(s) uploading.'));
-        }
     }
 }
