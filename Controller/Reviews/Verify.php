@@ -6,7 +6,7 @@
  *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/license
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -15,8 +15,8 @@
  *
  * @category   Landofcoder
  * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/LICENSE-1.0.html
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Controller\Reviews;
