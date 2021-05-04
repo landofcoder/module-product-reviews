@@ -22,9 +22,9 @@
     <system>
         <section id="lof_product_reviews" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
-            <label>Lof Product Reviews And Rating</label>
+            <label>Product Reviews And Ratings</label>
             <tab>landofcoder</tab>
-            <resource>Lof_ProductReviews::config_lof_product_reviews</resource>
+            <resource>Lof_ProductReviews::lof_product_reviews_config</resource>
             <group id="lof_general_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General Settings</label>
                 <field id="enabled_module" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
