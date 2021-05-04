@@ -147,7 +147,7 @@ class Save extends ProductController
             $customReview = $this->_objectManager->create(CustomReview::class);
 
             $validate = $review->validate();
-            if ($validate === false) {
+            if ($validate === true) {
                 try {
                     $review->setEntityId($review->getEntityIdByCode(Review::ENTITY_PRODUCT_CODE))
                         ->setEntityPkValue($product->getId())
