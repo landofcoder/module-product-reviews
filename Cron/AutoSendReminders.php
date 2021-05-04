@@ -103,7 +103,8 @@ class AutoSendReminders
                     }
                     $currentDate = new \DateTime();
                     $diff = (array)date_diff($orderCreatedAt, $currentDate);
-                    if ($diff['days'] == 10) {
+                    $numberDays = $this->_dataHelper->getDaysToSendReminderEmail();
+                    if ($diff['days'] == $numberDays) {
                         //Send reminder to customers
                         $this->_reminders->send($customers);
                     }

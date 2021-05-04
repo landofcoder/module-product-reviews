@@ -25,6 +25,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     //Lof Product Reviews frontend configs
     const REVIEW_ENABLE_SORTING = 'lof_product_reviews/lof_review_settings/enable_sorting';
+    const REVIEW_COUPON = 'lof_product_reviews/lof_general_settings/choose_coupon';
+    const REVIEW_AFTER_DAY = 'lof_product_reviews/lof_general_settings/after_day';
     const REVIEW_VERIFY_PURCHASED = 'lof_product_reviews/lof_review_settings/verify_purchased_code';
     const REVIEW_AUTO_VERIFY_PURCHASED = 'lof_product_reviews/lof_review_settings/enable_auto_verify';
     const REVIEW_ALLOW_UPLOAD_IMAGE = 'lof_product_reviews/lof_review_settings/allow_upload';
@@ -73,6 +75,27 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->scopeConfig->isSetFlag(
             self::REVIEW_ENABLE_SORTING,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+    /**
+     * @return int
+     */
+    public function getCouponCode()
+    {
+        return $this->scopeConfig->getValue(
+            self::REVIEW_COUPON,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * @return int
+     */
+    public function getDaysToSendReminderEmail()
+    {
+        return $this->scopeConfig->getValue(
+            self::REVIEW_AFTER_DAY,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }

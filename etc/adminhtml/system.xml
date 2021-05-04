@@ -41,6 +41,10 @@
                     <label>Choose Coupon For Customer Review</label>
                     <source_model>Lof\ProductReviews\Model\Config\Source\ChooseCoupon</source_model>
                 </field>
+                <field id="after_day" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Number Of Days To Send Reminder Email</label>
+                    <comment>Enter the number of days to send reminder emails after the customer orders successfully</comment>
+                </field>
             </group>
             <group id="email_settings" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Reminder Email Settings</label>
