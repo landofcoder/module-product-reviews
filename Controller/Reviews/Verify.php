@@ -6,7 +6,7 @@
  *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/license
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -15,8 +15,8 @@
  *
  * @category   Landofcoder
  * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/LICENSE-1.0.html
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Controller\Reviews;
@@ -38,6 +38,13 @@ class Verify extends \Magento\Framework\App\Action\Action
      */
     protected $_resultJsonFactory;
 
+    /**
+     * Verify constructor.
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Sales\Model\Order $order
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
+     */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Sales\Model\Order $order,
@@ -50,6 +57,13 @@ class Verify extends \Magento\Framework\App\Action\Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Json|\Magento\Framework\Controller\ResultInterface
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     public function execute()
     {
         $result = [];
@@ -65,10 +79,11 @@ class Verify extends \Magento\Framework\App\Action\Action
                 foreach ($allItems as $item) {
                     $productIds[] = $item->getProductId();
                 }
-                if (in_array($data['id'], $productIds))
+                if (in_array($data['id'], $productIds)) {
                     $result = ['error' => false, 'message' => 'correct'];
-                else
+                } else {
                     $result = ['error' => true, 'message' => 'incorrect'];
+                }
             } else {
                 $result = ['error' => true, 'message' => 'invalid_order'];
             }
@@ -77,16 +92,17 @@ class Verify extends \Magento\Framework\App\Action\Action
             $order = $this->_order->loadByIncrementId($data['order_id']);
             if (!empty($order)) {
                 $email = $order->getCustomerEmail();
-                if($email == $data['customer_email']) {
+                if ($email == $data['customer_email']) {
                     $allItems = $order->getAllVisibleItems();
                     $productIds = [];
                     foreach ($allItems as $item) {
                         $productIds[] = $item->getProductId();
                     }
-                    if (in_array($data['id'], $productIds))
+                    if (in_array($data['id'], $productIds)) {
                         $result = ['error' => false, 'message' => 'correct'];
-                    else
+                    } else {
                         $result = ['error' => true, 'message' => 'incorrect'];
+                    }
                 } else {
                     $result = ['error' => true, 'message' => 'incorrect_email'];
                 }

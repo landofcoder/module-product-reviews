@@ -1,25 +1,24 @@
 <?php
 /**
- * *
- *  * Landofcoder
- *  *
- *  * NOTICE OF LICENSE
- *  *
- *  * This source file is subject to the Landofcoder.com license that is
- *  * available through the world-wide-web at this URL:
- *  * https://landofcoder.com/license
- *  *
- *  * DISCLAIMER
- *  *
- *  * Do not edit or add to this file if you wish to upgrade this extension to newer
- *  * version in the future.
- *  *
- *  * @category   Landofcoder
- *  * @package    Lof_ProductReviews
- *  * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- *  * @license    https://landofcoder.com/LICENSE-1.0.html
+ * Landofcoder
  *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
+
 namespace Lof\ProductReviews\Controller\Reviews;
 
 class ReportAjax extends \Magento\Framework\App\Action\Action
@@ -49,6 +48,15 @@ class ReportAjax extends \Magento\Framework\App\Action\Action
      */
     protected $customerSession;
 
+    /**
+     * ReportAjax constructor.
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Framework\HTTP\Header $httpHeader
+     * @param \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Lof\ProductReviews\Model\CustomReviewFactory $customReviewFactory
+     * @param \Lof\ProductReviews\Model\RateReportFactory $rateReportFactory
+     */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\HTTP\Header $httpHeader,
@@ -65,6 +73,9 @@ class ReportAjax extends \Magento\Framework\App\Action\Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
+     */
     public function execute()
     {
         $reportType = $this->getRequest()->getPost('type');
@@ -83,14 +94,14 @@ class ReportAjax extends \Magento\Framework\App\Action\Action
         );
 
         $info = [];
-        foreach($collection as $data){
+        foreach ($collection as $data) {
             $info['id'] = $data->getReviewCustomizeId();
             $info['report'] = $data->getReportAbuse();
         }
-        if($modelCustom->getCollection()->getItemByColumnValue('review_id', $reviewId)) {
+        if ($modelCustom->getCollection()->getItemByColumnValue('review_id', $reviewId)) {
             $custom = $modelCustom->load($info['id']);
             $custom->setReportAbuse($info['report'] + 1)
-                    ->save();
+                ->save();
         } else {
             $modelCustom->setReportAbuse(1)
                 ->setReviewId($reviewId)
@@ -106,12 +117,12 @@ class ReportAjax extends \Magento\Framework\App\Action\Action
         );
 
         $value = [];
-        foreach($rateData as $data){
+        foreach ($rateData as $data) {
             $value['id'] = $data->getId();
             $value['ip_address'] = $data->getIpAddress();
         }
 
-        if(!empty($value['id'])){
+        if (!empty($value['id'])) {
             $model = $rateReportModel->load($value['id']);
             $model->setReportType($reportType);
             $model->save();

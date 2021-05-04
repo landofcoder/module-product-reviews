@@ -1,41 +1,31 @@
 <?php
 /**
- * *
- *  * Landofcoder
- *  *
- *  * NOTICE OF LICENSE
- *  *
- *  * This source file is subject to the Landofcoder.com license that is
- *  * available through the world-wide-web at this URL:
- *  * https://landofcoder.com/license
- *  *
- *  * DISCLAIMER
- *  *
- *  * Do not edit or add to this file if you wish to upgrade this extension to newer
- *  * version in the future.
- *  *
- *  * @category   Landofcoder
- *  * @package    Lof_ProductReviews
- *  * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- *  * @license    https://landofcoder.com/LICENSE-1.0.html
+ * Landofcoder
  *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Controller\Adminhtml\Reminders;
-
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Controller\ResultFactory;
 
 class SendReminder extends \Magento\Backend\App\Action
 {
-    /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
-     */
-    const ADMIN_RESOURCE = 'Lof_ProductReviews::send_reminder';
-
     /**
      * @var \Lof\ProductReviews\Model\Reminders
      */
@@ -51,33 +41,45 @@ class SendReminder extends \Magento\Backend\App\Action
      */
     protected $orderRepository;
 
+    /**
+     * @var null
+     */
     protected $_orderData = null;
 
+    /**
+     * SendReminder constructor.
+     * @param Action\Context $context
+     * @param \Lof\ProductReviews\Model\Reminders $reminders
+     * @param \Lof\ProductReviews\Model\ResourceModel\Reminders\CollectionFactory $reminderCollection
+     * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
+     */
     public function __construct(
         Action\Context $context,
         \Lof\ProductReviews\Model\Reminders $reminders,
         \Lof\ProductReviews\Model\ResourceModel\Reminders\CollectionFactory $reminderCollection,
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->_reminders = $reminders;
         $this->_reminderCollection = $reminderCollection;
         $this->orderRepository = $orderRepository;
     }
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         $customers = [];
 
         $data = $this->getRequest()->getParams();
-        if(!empty($data) && isset($data['selected'])) {
+        if (!empty($data) && isset($data['selected'])) {
             foreach ($data['selected'] as $reminderId) {
                 $reminderObj = $this->_reminders->load($reminderId);
                 $orderId = $reminderObj->getOrderId();
                 $status = $this->getOrderStatus($orderId);
                 $order_increment_id = $this->getOrderIncrementId($orderId);
-                if($status == 'complete') {
+                if ($status == 'complete') {
                     $customers[] = [
                         'id' => $reminderId,
                         'name' => $reminderObj->getName(),
@@ -98,17 +100,16 @@ class SendReminder extends \Magento\Backend\App\Action
                 'created_at',
                 'asc'
             );
-            foreach($collection as $data){
+            foreach ($collection as $data) {
                 $orderId = $data->getOrderId();
                 $status = $this->getOrderStatus($orderId);
-                if($status == 'complete') {
+                if ($status == 'complete') {
                     $customers[] = $data->getData();
                 }
             }
         }
 
-        if(!empty($customers))
-        {
+        if (!empty($customers)) {
             try {
                 $this->_reminders->send($customers);
                 $this->messageManager->addSuccessMessage(
@@ -129,21 +130,39 @@ class SendReminder extends \Magento\Backend\App\Action
         return $resultRedirect->setPath('*/*/');
     }
 
-    protected function getOrderData($orderId) {
-        if(!$this->_orderData){
+    /**
+     * @param $orderId
+     * @return \Magento\Sales\Api\Data\OrderInterface
+     */
+    protected function getOrderData($orderId)
+    {
+        if (!$this->_orderData) {
             $this->_orderData = $this->orderRepository->get((int)$orderId);
         }
         return $this->_orderData;
     }
-    protected function getOrderStatus($orderId){
+
+    /**
+     * @param $orderId
+     * @return string|null
+     */
+    protected function getOrderStatus($orderId)
+    {
         $order = $this->getOrderData($orderId);
         $status = $order->getStatus();
         return $status;
     }
-    protected function getOrderIncrementId($orderId){
+
+    /**
+     * @param $orderId
+     * @return string|null
+     */
+    protected function getOrderIncrementId($orderId)
+    {
         $order = $this->getOrderData($orderId);
         return $order->getIncrementId();
     }
+
     /**
      * {@inheritdoc}
      */

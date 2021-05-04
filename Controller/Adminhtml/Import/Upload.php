@@ -6,7 +6,7 @@
  *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * http://landofcoder.com/license
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -14,26 +14,30 @@
  * version in the future.
  *
  * @category   Landofcoder
- * @package    Lof_FlatRateShipping
- * @copyright  Copyright (c) 2017 Landofcoder (http://www.landofcoder.com/)
- * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Controller\Adminhtml\Import;
 
-class Upload extends \Lof\ProductReviews\Controller\Adminhtml\Import {
+class Upload extends \Lof\ProductReviews\Controller\Adminhtml\Import
+{
     /**
      * @var \Magento\Backend\Model\View\Result\ForwardFactory
      */
     protected $resultForwardFactory;
+
     /**
      * @var \Magento\Framework\View\Result\LayoutFactory
      */
     protected $resultPageFactory;
 
     /**
-     * @param \Magento\Backend\App\Action\Context               $context
-     * @param \Magento\Framework\Registry                       $coreRegistry
+     * Upload constructor.
+     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Framework\Registry $coreRegistry
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
      */
     public function __construct(
@@ -41,10 +45,9 @@ class Upload extends \Lof\ProductReviews\Controller\Adminhtml\Import {
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
-    )
-    {
+    ) {
         $this->resultForwardFactory = $resultForwardFactory;
-        $this->resultPageFactory    = $resultPageFactory;
+        $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context, $coreRegistry);
     }
 

@@ -6,7 +6,7 @@
  *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * http://landofcoder.com/license
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -14,19 +14,15 @@
  * version in the future.
  *
  * @category   Landofcoder
- * @package    Lof_FlatRateShipping
- * @copyright  Copyright (c) 2017 Landofcoder (http://www.landofcoder.com/)
- * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Controller\Adminhtml;
 
-/**
- * Cms manage blocks controller
- *
- * @author      Magento Core Team <core@magentocommerce.com>
- */
-abstract class Import extends \Magento\Backend\App\Action {
+abstract class Import extends \Magento\Backend\App\Action
+{
     /**
      * Core registry
      *
@@ -35,18 +31,16 @@ abstract class Import extends \Magento\Backend\App\Action {
     protected $_coreRegistry = null;
 
     /**
+     * Import constructor.
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry         $coreRegistry
+     * @param \Magento\Framework\Registry $coreRegistry
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Registry $coreRegistry
-    )
-    {
+    ) {
         $this->_coreRegistry = $coreRegistry;
         parent::__construct($context);
-
-
     }
 
     /**
@@ -63,10 +57,11 @@ abstract class Import extends \Magento\Backend\App\Action {
         return $resultPage;
     }
 
+    /**
+     * @return mixed
+     */
     public function setDefaultOrderStatuses()
     {
         return $this->_getResource()->setDefaultOrderStatuses($this);
-
     }
-
 }

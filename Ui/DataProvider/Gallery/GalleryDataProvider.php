@@ -1,8 +1,24 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Landofcoder
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
+
 namespace Lof\ProductReviews\Ui\DataProvider\Gallery;
 
 use Magento\Framework\Api\Filter;
@@ -16,12 +32,12 @@ use Magento\Framework\View\Element\UiComponent\DataProvider\Reporting;
 class GalleryDataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
 {
     /**
-     * @var AuthorizationInterface
+     * @var
      */
     private $authorization;
 
     /**
-     * @var AddFilterInterface[]
+     * @var array
      */
     private $additionalFilterPool;
 
@@ -67,7 +83,6 @@ class GalleryDataProvider extends \Magento\Framework\View\Element\UiComponent\Da
     }
 
     /**
-     * @deprecated 101.0.7
      * @return AuthorizationInterface|mixed
      */
     private function getAuthorizationInstance()

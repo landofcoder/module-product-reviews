@@ -1,33 +1,32 @@
 <?php
 /**
  * Landofcoder
- * 
+ *
  * NOTICE OF LICENSE
- * 
+ *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/license
- * 
+ * https://landofcoder.com/terms
+ *
  * DISCLAIMER
- * 
+ *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
- * 
+ *
  * @category   Landofcoder
  * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/LICENSE-1.0.html
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Plugin\Adminhtml;
 
 use Lof\ProductReviews\Model\CustomReviewFactory;
 use Lof\ProductReviews\Model\ReviewReplyFactory;
-use Magento\Framework\Controller\ResultFactory;
 
 class Save
 {
-    
+
     /**
      * @var CustomReviewFactory
      */
@@ -68,6 +67,9 @@ class Save
      */
     protected $resultFactory;
 
+    /**
+     * @var \Magento\Backend\Model\Auth\Session
+     */
     protected $authSession;
 
     /**
@@ -75,6 +77,26 @@ class Save
      */
     protected $_dataObjectFactory;
 
+    /**
+     * Save constructor.
+     * @param CustomReviewFactory $customReviewFactory
+     * @param ReviewReplyFactory $reviewReplyFactory
+     * @param \Lof\ProductReviews\Model\GalleryFactory $galleryFactory
+     * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
+     * @param \Magento\Framework\Escaper $escaper
+     * @param \Lof\ProductReviews\Helper\Data $dataHelper
+     * @param \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation
+     * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Framework\Controller\ResultFactory $resultFactory
+     * @param \Magento\Framework\DataObjectFactory $dataObjectFactory
+     * @param \Magento\Backend\Model\Auth\Session $authSession
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     */
     public function __construct(
         CustomReviewFactory $customReviewFactory,
         ReviewReplyFactory $reviewReplyFactory,
@@ -88,8 +110,7 @@ class Save
         \Magento\Framework\Controller\ResultFactory $resultFactory,
         \Magento\Framework\DataObjectFactory $dataObjectFactory,
         \Magento\Backend\Model\Auth\Session $authSession
-    )
-    {
+    ) {
 
         $this->customReviewFactory = $customReviewFactory;
         $this->reviewReplyFactory = $reviewReplyFactory;
@@ -104,11 +125,22 @@ class Save
         $this->_dataObjectFactory = $dataObjectFactory;
         $this->authSession = $authSession;
     }
+
+    /**
+     * @return \Magento\User\Model\User|null
+     */
     public function getCurrentUser()
     {
         return $this->authSession->getUser();
     }
 
+    /**
+     * @param \Magento\Review\Controller\Adminhtml\Product\Save $object
+     * @param \Closure $proceed
+     * @return mixed
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function aroundExecute(\Magento\Review\Controller\Adminhtml\Product\Save $object, \Closure $proceed)
     {
         $reviewId = $object->getRequest()->getParam('id');
@@ -118,13 +150,13 @@ class Save
         $email_address = "";
         $website = "";
         $user_name = "";
-        if($current_admin_user){
+        if ($current_admin_user) {
             $admin_user_id = $current_admin_user->getId();
             $email_address = $current_admin_user->getEmail();
             $user_name = $current_admin_user->getUsername();
         }
 
-        if(isset($data['send_to']) && $data['send_to'] == true && !empty($data['reply_title']) && !empty($data['reply_comment'])) {
+        if (isset($data['send_to']) && $data['send_to'] == true && !empty($data['reply_title']) && !empty($data['reply_comment'])) {
             $user = $this->_dataHelper->getSenderValue($this->_dataHelper->getSenderConfig());
             $sender = [
                 'name' => $this->_escaper->escapeHtml($user['name']),
@@ -133,7 +165,7 @@ class Save
 
             $customer = $this->customerRepository->getById($data['customer_id']);
             $recipient = [
-                'name' => $this->_escaper->escapeHtml($customer->getFirstname() .$customer->getLastname()),
+                'name' => $this->_escaper->escapeHtml($customer->getFirstname() . $customer->getLastname()),
                 'email' => $this->_escaper->escapeHtml($customer->getEmail()),
             ];
 
@@ -142,30 +174,30 @@ class Save
 
             $this->sendReplyToCustomer($sender, $recipient, $title, $message);
         }
-        $email_address = isset($data['email_address'])?$data['email_address']:'';
-        $avatar_url = isset($data['avatar_url'])?$data['avatar_url']:'';
+        $email_address = isset($data['email_address']) ? $data['email_address'] : '';
+        $avatar_url = isset($data['avatar_url']) ? $data['avatar_url'] : '';
         /** @var \Lof\ProductReviews\Model\CustomReview $customReview */
         $modelCustom = $this->customReviewFactory->create();
-        if($modelCustom->getCollection()->getItemByColumnValue('review_customize_id', $data['review_customize_id'])) {
+        if ($modelCustom->getCollection()->getItemByColumnValue('review_customize_id', $data['review_customize_id'])) {
 
             $custom = $modelCustom->load($data['review_customize_id']);
             $custom->setReviewId($reviewId)
-                   ->setAdvantages($data['advantages'])
-                   ->setDisadvantages($data['disadvantages'])
-                   ->setEmailAddress($email_address)
-                   ->setAvatarUrl($avatar_url)
-                   ->save();
+                ->setAdvantages($data['advantages'])
+                ->setDisadvantages($data['disadvantages'])
+                ->setEmailAddress($email_address)
+                ->setAvatarUrl($avatar_url)
+                ->save();
         } else {
             $modelCustom->setReviewId($reviewId)
-                        ->setAdvantages($data['advantages'])
-                        ->setDisadvantages($data['disadvantages'])
-                        ->setEmailAddress($email_address)
-                        ->setAvatarUrl($avatar_url)
-                        ->save();
+                ->setAdvantages($data['advantages'])
+                ->setDisadvantages($data['disadvantages'])
+                ->setEmailAddress($email_address)
+                ->setAvatarUrl($avatar_url)
+                ->save();
         }
 
         /** @var \Lof\ProductReviews\Model\ReviewReply $reviewReply */
-        if(isset($data['reply_id'])) {
+        if (isset($data['reply_id'])) {
             $modelReply = $this->reviewReplyFactory->create();
             if ($modelReply->getCollection()->getItemByColumnValue('reply_id', $data['reply_id'])) {
                 $reply = $modelReply->load($data['reply_id']);
@@ -192,9 +224,9 @@ class Save
         }
 
         $modelGallery = $this->galleryFactory->create();
-        if($modelGallery->getCollection()->getItemByColumnValue('review_id', $reviewId) != true) {
+        if ($modelGallery->getCollection()->getItemByColumnValue('review_id', $reviewId) != true) {
             $modelGallery->setReviewId($reviewId)
-                ->setLabel('Gallery of Review '.$reviewId)
+                ->setLabel('Gallery of Review ' . $reviewId)
                 ->setStatus(2)
                 ->setValue(json_encode([]))
                 ->save();
@@ -203,7 +235,18 @@ class Save
         return $proceed();
     }
 
-    public function sendReplyToCustomer($sender, $recipient, $title, $message){
+    /**
+     * @param $sender
+     * @param $recipient
+     * @param $title
+     * @param $message
+     * @return $this
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\MailException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function sendReplyToCustomer($sender, $recipient, $title, $message)
+    {
         $this->inlineTranslation->suspend();
 
         $dataObj = $this->_dataObjectFactory->create()->setData(
@@ -239,5 +282,4 @@ class Save
 
         return $this;
     }
-
 }

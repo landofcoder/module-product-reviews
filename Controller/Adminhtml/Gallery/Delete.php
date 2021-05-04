@@ -1,28 +1,25 @@
 <?php
 /**
- * *
- *  * Landofcoder
- *  *
- *  * NOTICE OF LICENSE
- *  *
- *  * This source file is subject to the Landofcoder.com license that is
- *  * available through the world-wide-web at this URL:
- *  * https://landofcoder.com/license
- *  *
- *  * DISCLAIMER
- *  *
- *  * Do not edit or add to this file if you wish to upgrade this extension to newer
- *  * version in the future.
- *  *
- *  * @category   Landofcoder
- *  * @package    Lof_ProductReviews
- *  * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- *  * @license    https://landofcoder.com/LICENSE-1.0.html
+ * Landofcoder
  *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Controller\Adminhtml\Gallery;
-
 
 use Magento\Backend\App\Action;
 
@@ -70,6 +67,10 @@ class Delete extends \Magento\Backend\App\Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\FileSystemException
+     */
     public function execute()
     {
         // check if we know what should be deleted
@@ -88,8 +89,9 @@ class Delete extends \Magento\Backend\App\Action
                 $mediaDirectory = $this->_fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
                 $mediaRootDir = $mediaDirectory->getAbsolutePath('lof/product_reviews/');
 
-                if( $this->_file->isExists($mediaRootDir .$name) )
+                if ($this->_file->isExists($mediaRootDir .$name)) {
                     $this->_file->deleteFile($mediaRootDir .$name);
+                }
             }
 
             $model->setValue($this->_jsonEncoder->encode([]))->save();
@@ -99,6 +101,7 @@ class Delete extends \Magento\Backend\App\Action
             return $resultRedirect->setPath('review/product/edit', ['id' => $reviewId, '_current' => true]);
         }
     }
+
     /**
      * {@inheritdoc}
      */

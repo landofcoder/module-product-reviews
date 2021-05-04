@@ -4,9 +4,9 @@
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the landofcoder.com license that is
+ * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/license
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -14,9 +14,9 @@
  * version in the future.
  *
  * @category   Landofcoder
- * @package    Lof_BannerSliders
- * @copyright  Copyright (c) 2017 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/LICENSE-1.0.html
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Ui\Component\Listing\Columns;
@@ -28,9 +28,6 @@ use Magento\Ui\Component\Listing\Columns\Column;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Escaper;
 
-/**
- * Class BannerActions
- */
 class ReviewGalleryActions extends Column
 {
     /** Url path */

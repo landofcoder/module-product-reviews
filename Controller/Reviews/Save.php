@@ -6,7 +6,7 @@
  *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/license
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -14,9 +14,9 @@
  * version in the future.
  *
  * @category   Landofcoder
- * @package    Lof_Formbuilder
- * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/LICENSE-1.0.html
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Controller\Reviews;
@@ -36,26 +36,65 @@ use Magento\Framework\App\Filesystem\DirectoryList;
  */
 class Save extends ProductController
 {
-     protected $cutomerCollectionFactory;
-     protected $sender;
-    public function __construct(\Magento\Framework\App\Action\Context $context,
-                                \Magento\Framework\Registry $coreRegistry,
-                                CollectionFactory $cutomerCollectionFactory,
-                                \Magento\Customer\Model\Session $customerSession,
-                                \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
-                                \Psr\Log\LoggerInterface $logger,
-                                Sender $sender,
-                                \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
-                                \Magento\Review\Model\ReviewFactory $reviewFactory,
-                                \Magento\Review\Model\RatingFactory $ratingFactory,
-                                \Magento\Catalog\Model\Design $catalogDesign,
-                                \Magento\Framework\Session\Generic $reviewSession,
-                                \Magento\Store\Model\StoreManagerInterface $storeManager,
-                                \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator)
-    {
-         $this->cutomerCollectionFactory = $cutomerCollectionFactory;
-         $this->sender = $sender;
-        parent::__construct($context, $coreRegistry, $customerSession, $categoryRepository, $logger, $productRepository, $reviewFactory, $ratingFactory, $catalogDesign, $reviewSession, $storeManager, $formKeyValidator);
+    /**
+     * @var CollectionFactory
+     */
+    protected $cutomerCollectionFactory;
+
+    /**
+     * @var Sender
+     */
+    protected $sender;
+
+    /**
+     * Save constructor.
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Framework\Registry $coreRegistry
+     * @param CollectionFactory $cutomerCollectionFactory
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository
+     * @param \Psr\Log\LoggerInterface $logger
+     * @param Sender $sender
+     * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+     * @param \Magento\Review\Model\ReviewFactory $reviewFactory
+     * @param \Magento\Review\Model\RatingFactory $ratingFactory
+     * @param \Magento\Catalog\Model\Design $catalogDesign
+     * @param \Magento\Framework\Session\Generic $reviewSession
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+     */
+    public function __construct(
+        \Magento\Framework\App\Action\Context $context,
+        \Magento\Framework\Registry $coreRegistry,
+        CollectionFactory $cutomerCollectionFactory,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository,
+        \Psr\Log\LoggerInterface $logger,
+        Sender $sender,
+        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
+        \Magento\Review\Model\ReviewFactory $reviewFactory,
+        \Magento\Review\Model\RatingFactory $ratingFactory,
+        \Magento\Catalog\Model\Design $catalogDesign,
+        \Magento\Framework\Session\Generic $reviewSession,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+    ) {
+        $this->cutomerCollectionFactory = $cutomerCollectionFactory;
+        $this->sender = $sender;
+        parent::__construct(
+            $context,
+            $coreRegistry,
+            $customerSession,
+            $categoryRepository,
+            $logger,
+            $productRepository,
+            $reviewFactory,
+            $ratingFactory,
+            $catalogDesign,
+            $reviewSession,
+            $storeManager,
+            $formKeyValidator
+        );
     }
 
     /**
@@ -64,6 +103,7 @@ class Save extends ProductController
      * @return \Magento\Framework\Controller\Result\Redirect
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function execute()
     {
@@ -125,7 +165,10 @@ class Save extends ProductController
                         $this->uploadMultipleImages('review_images', $reviewId);
 
                     } catch (\Exception $e) {
-                        $this->messageManager->addExceptionMessage($e, __('Something went wrong while making the review.'));
+                        $this->messageManager->addExceptionMessage(
+                            $e,
+                            __('Something went wrong while making the review.')
+                        );
                     }
 
                     foreach ($rating as $ratingId => $optionId) {
@@ -137,20 +180,23 @@ class Save extends ProductController
                     }
 
                     $review->aggregate();
-                    $customer =$this->cutomerCollectionFactory->create()->addFieldToFilter('entity_id',$this->customerSession->getCustomerId())->getData();
+                    $customer = $this->cutomerCollectionFactory->create()->addFieldToFilter(
+                        'entity_id',
+                        $this->customerSession->getCustomerId()
+                    )->getData();
                     $dataEmail = [];
-                    $dataEmail['name'] = $customer[0]['firstname'] .' '. $customer[0]['lastname'];
+                    $dataEmail['name'] = $customer[0]['firstname'] . ' ' . $customer[0]['lastname'];
                     $dataEmail['product_name'] = $product->getName();
                     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                     $couponGenerator = $objectManager->create('Magento\SalesRule\Model\CouponGenerator');
-                    $data = array(
-                        'rule_id' =>5,
+                    $data = [
+                        'rule_id' => 5,
                         'qty' => '1',
                         'length' => '8',
                         'format' => 'alphanum',
                         'prefix' => 'YSX',
                         'suffix' => 'CXK',
-                    );
+                    ];
                     $codes = $couponGenerator->generateCodes($data);
                     $dataEmail['couponcode'] = $codes[0];
                     $this->sender->sendCouponCodeEmail($dataEmail);
@@ -176,50 +222,54 @@ class Save extends ProductController
         return $resultRedirect;
     }
 
-    public function uploadMultipleImages($imageField, $reviewId){
+    public function uploadMultipleImages($imageField, $reviewId)
+    {
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $jsonEncode = $this->_objectManager->get(\Magento\Framework\Json\EncoderInterface::class);
         $reviewGallery = $this->_objectManager->create(Gallery::class);
         $moduleHelper = $this->_objectManager->create(\Lof\ProductReviews\Helper\Data::class);
         $limit_images = $moduleHelper->getConfig("lof_review_settings/limit_upload_image", 1);
-        $limit_images = $limit_images?(int)$limit_images:1;
+        $limit_images = $limit_images ? (int)$limit_images : 1;
         $default_status = $moduleHelper->getConfig("lof_review_settings/default_status", 2);
-        $default_status = $default_status?(int)$default_status:2;
-            $names = [];
-            if(isset($_FILES)) {
-                for($i = 0; $i < count($_FILES); $i++) {
-                    if($i <= $limit_images){
-                        $fileId = $imageField.'_'.$i;
-                        $image = $this->getRequest()->getFiles($fileId);
-                        $names[] = $image['name'];
+        $default_status = $default_status ? (int)$default_status : 2;
+        $names = [];
+        if (isset($_FILES)) {
+            for ($i = 0; $i < count($_FILES); $i++) {
+                if ($i <= $limit_images) {
+                    $fileId = $imageField . '_' . $i;
+                    $image = $this->getRequest()->getFiles($fileId);
+                    $names[] = $image['name'];
 
-                        $uploader = $objectManager->create(\Magento\MediaStorage\Model\File\Uploader::class, ['fileId' => $fileId]);
-                        $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
-                        $uploader->setAllowRenameFiles(true);
-                        $uploader->setFilesDispersion(false);
-                        $uploader->setAllowCreateFolders(true);
-                        $mediaDirectory = $objectManager->get(\Magento\Framework\Filesystem::class)->getDirectoryRead(DirectoryList::MEDIA);
-                        $uploader->save($mediaDirectory->getAbsolutePath('lof/product_reviews'));
-                    }
+                    $uploader = $objectManager->create(
+                        \Magento\MediaStorage\Model\File\Uploader::class,
+                        ['fileId' => $fileId]
+                    );
+                    $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
+                    $uploader->setAllowRenameFiles(true);
+                    $uploader->setFilesDispersion(false);
+                    $uploader->setAllowCreateFolders(true);
+                    $mediaDirectory = $objectManager->get(\Magento\Framework\Filesystem::class)->getDirectoryRead(DirectoryList::MEDIA);
+                    $uploader->save($mediaDirectory->getAbsolutePath('lof/product_reviews'));
                 }
             }
-            if($names) {
-                if(count(array_filter($names)) == count($names)) {
-                    $imageName = $jsonEncode->encode($names);
-                } else {
-                    $imageName = '';
-                }
-
-                $data = [
-                    'review_id' => $reviewId,
-                    'label'     => __('Gallery of Review ') . $reviewId,
-                    'value'     => $imageName,
-                    'status'    => $default_status
-                ];
-
-                $reviewGallery->setData($data);
-                $reviewGallery->save();
+        }
+        if ($names) {
+            if (count(array_filter($names)) == count($names)) {
+                $imageName = $jsonEncode->encode($names);
+            } else {
+                $imageName = '';
             }
+
+            $data = [
+                'review_id' => $reviewId,
+                'label' => __('Gallery of Review ') . $reviewId,
+                'value' => $imageName,
+                'status' => $default_status
+            ];
+
+            $reviewGallery->setData($data);
+            $reviewGallery->save();
+        }
     }
 }

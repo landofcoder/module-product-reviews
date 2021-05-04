@@ -6,7 +6,7 @@
  *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * http://landofcoder.com/license
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -14,10 +14,9 @@
  * version in the future.
  *
  * @category   Landofcoder
- * @package    Lof_FlatRateShipping
- *
- * @copyright  Copyright (c) 2016 Landofcoder (http://www.landofcoder.com/)
- * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 namespace Lof\ProductReviews\Block\Adminhtml\Shipping\Edit;
 
@@ -29,7 +28,5 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
         $this->setId('import_tab');
         $this->setDestElementId('edit_form');
         $this->setTitle(__('Information'));
-
     }
-
 }

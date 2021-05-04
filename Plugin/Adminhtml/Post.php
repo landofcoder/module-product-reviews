@@ -1,28 +1,25 @@
 <?php
 /**
- * *
- *  * Landofcoder
- *  *
- *  * NOTICE OF LICENSE
- *  *
- *  * This source file is subject to the Landofcoder.com license that is
- *  * available through the world-wide-web at this URL:
- *  * https://landofcoder.com/license
- *  *
- *  * DISCLAIMER
- *  *
- *  * Do not edit or add to this file if you wish to upgrade this extension to newer
- *  * version in the future.
- *  *
- *  * @category   Landofcoder
- *  * @package    Lof_ProductReviews
- *  * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- *  * @license    https://landofcoder.com/LICENSE-1.0.html
+ * Landofcoder
  *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Plugin\Adminhtml;
-
 
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
@@ -33,6 +30,15 @@ use Lof\ProductReviews\Model\GalleryFactory;
 
 class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
 {
+    /**
+     * Post constructor.
+     * @param Context $context
+     * @param Registry $coreRegistry
+     * @param ReviewFactory $reviewFactory
+     * @param RatingFactory $ratingFactory
+     * @param CustomReviewFactory $customReviewFactory
+     * @param GalleryFactory $galleryFactory
+     */
     public function __construct(
         Context $context,
         Registry $coreRegistry,
@@ -46,6 +52,11 @@ class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
         $this->galleryFactory = $galleryFactory;
     }
 
+    /**
+     * @param \Magento\Review\Controller\Adminhtml\Product\Post $object
+     * @param $resultRedirect
+     * @return mixed
+     */
     public function afterExecute(\Magento\Review\Controller\Adminhtml\Product\Post $object, $resultRedirect)
     {
         $review = $this->reviewFactory->create()->getCollection();
@@ -55,8 +66,8 @@ class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
         $dataCustomReview = [
             'advantages' => $data['advantages'],
             'disadvantages' => $data['disadvantages'],
-            'email_address' => isset($data['email_address'])?$data['email_address']:'',
-            'avatar_url' => isset($data['avatar_url'])?$data['avatar_url']:'',
+            'email_address' => isset($data['email_address']) ? $data['email_address'] : '',
+            'avatar_url' => isset($data['avatar_url']) ? $data['avatar_url'] : '',
             'review_id' => $latestItem['review_id']
         ];
 
@@ -66,7 +77,7 @@ class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
 
         $modelGallery = $this->galleryFactory->create();
         $modelGallery->setReviewId($latestItem['review_id'])
-            ->setLabel('Gallery of Review '.$latestItem['review_id'])
+            ->setLabel('Gallery of Review ' . $latestItem['review_id'])
             ->setStatus(2)
             ->setValue(json_encode([]))
             ->save();

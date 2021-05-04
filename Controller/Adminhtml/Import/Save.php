@@ -6,7 +6,7 @@
  *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * http://landofcoder.com/license
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -14,9 +14,9 @@
  * version in the future.
  *
  * @category   Landofcoder
- * @package    Lof_FlatRateShipping
- * @copyright  Copyright (c) 2017 Landofcoder (http://www.landofcoder.com/)
- * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Controller\Adminhtml\Import;
@@ -29,11 +29,8 @@ use Magento\MediaStorage\Model\File\UploaderFactory;
 use Magento\Review\Model\Review;
 use Magento\Review\Model\ReviewFactory;
 
-/**
- * Class Save
- * @package Lof\ProductReviews\Controller\Adminhtml\Import
- */
-class Save extends \Magento\Backend\App\Action {
+class Save extends \Magento\Backend\App\Action
+{
     /**
      * Core registry.
      *
@@ -45,31 +42,41 @@ class Save extends \Magento\Backend\App\Action {
      * @var \Magento\Framework\View\Result\PageFactory
      */
     protected $_resultPageFactory;
+
     /**
      * @var Magento\MediaStorage\Model\File\UploaderFactory
      */
     protected $_fileUploader;
+
     /**
      * @var \Magento\Framework\File\Csv
      */
     protected $_csvReader;
+
     /**
      * @var ReviewFactory
      */
     protected $reviewFactory;
-     /**
-      * @var ReviewFactory
-      */
-     protected $_ratingFactory;
-     /**
-      * @var CustomerCollectionFactory
-      */
-     protected $customerCollectionFactory;
 
     /**
-     * @param Action\Context                             $context
+     * @var ReviewFactory
+     */
+    protected $_ratingFactory;
+
+    /**
+     * @var CustomerCollectionFactory
+     */
+    protected $customerCollectionFactory;
+
+    /**
+     * Save constructor.
+     * @param Action\Context $context
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-     * @param \Magento\Framework\Registry                $registry
+     * @param ReviewFactory $reviewFactory
+     * @param UploaderFactory $fileUploader
+     * @param CustomerCollectionFactory $customerCollectionFactory
+     * @param \Magento\Framework\File\Csv $csvReader
+     * @param \Magento\Review\Model\RatingFactory $ratingFactory
      */
     public function __construct(
         Action\Context $context,
@@ -79,31 +86,28 @@ class Save extends \Magento\Backend\App\Action {
         CustomerCollectionFactory $customerCollectionFactory,
         \Magento\Framework\File\Csv $csvReader,
         \Magento\Review\Model\RatingFactory $ratingFactory
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->_resultPageFactory = $resultPageFactory;
         $this->customerCollectionFactory = $customerCollectionFactory;
-        $this->_fileUploader      = $fileUploader;
-        $this->reviewFactory      = $reviewFactory;
-        $this->_csvReader         = $csvReader;
-        $this->_ratingFactory         = $ratingFactory;
+        $this->_fileUploader = $fileUploader;
+        $this->reviewFactory = $reviewFactory;
+        $this->_csvReader = $csvReader;
+        $this->_ratingFactory = $ratingFactory;
     }
 
     /**
-     * Check for is allowed.
-     *
-     * @return bool
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
-        $data           = $this->getRequest()->getPostValue();
+        $data = $this->getRequest()->getPostValue();
         if ($this->getRequest()->isPost()) {
             try {
                 $reviewModel = $this->reviewFactory->create();
                 if (isset($_FILES['import_file'])) {
 
-                    if ( ! $this->_formKeyValidator->validate($this->getRequest())) {
+                    if (!$this->_formKeyValidator->validate($this->getRequest())) {
                         return $this->resultRedirectFactory->create()->setPath('*/*/index');
                     }
 
@@ -113,20 +117,20 @@ class Save extends \Magento\Backend\App\Action {
 
                     $result = $uploader->validateFile();
 
-                    $file          = $result['tmp_name'];
+                    $file = $result['tmp_name'];
                     $fileNameArray = explode('.', $result['name']);
 
                     $ext = end($fileNameArray);
                     if ($file != '' && $ext == 'csv') {
                         $csvFileData = $this->_csvReader->getData($file);
-                        $count       = 0;
-                        foreach ($csvFileData as $key => $rowData) {
-
+                        $count = 0;
+                        foreach ($csvFileData as $rowData) {
                             if (count($rowData) < 12 && $count == 0) {
                                 $this->messageManager->addError(__('Csv file is not a valid file!'));
 
                                 return $this->resultRedirectFactory->create()->setPath('*/*/index');
                             }
+
                             if ($rowData[0] == '' ||
                                 $rowData[1] == '' ||
                                 $rowData[2] == '' ||
@@ -136,25 +140,28 @@ class Save extends \Magento\Backend\App\Action {
                                 ++$count;
                                 continue;
                             }
-                            $temp                  = [];
-                            $temp['entity_id']         = $rowData[0];
-                            $temp['entity_pk_value']          = $rowData[1];
+
+                            $temp = [];
+                            $temp['entity_id'] = $rowData[0];
+                            $temp['entity_pk_value'] = $rowData[1];
                             $temp['status_id'] = $rowData[2];
-                            $temp['created_at']    = $rowData[3];
-                            $temp['customer_id']         = $rowData[4];
-                            $temp['title']         = $rowData[5];
-                            $temp['detail']         = $rowData[6];
-                            $temp['nickname']         = $rowData[7];
-                            $temp['store_id']         = $rowData[8];
-                            $temp['rating_id']         = $rowData[9];
-                            $temp['option_id']         = $rowData[10];
-                            $temp['email']             = $rowData[11];
+                            $temp['created_at'] = $rowData[3];
+                            $temp['customer_id'] = $rowData[4];
+                            $temp['title'] = $rowData[5];
+                            $temp['detail'] = $rowData[6];
+                            $temp['nickname'] = $rowData[7];
+                            $temp['store_id'] = $rowData[8];
+                            $temp['rating_id'] = $rowData[9];
+                            $temp['option_id'] = $rowData[10];
+                            $temp['email'] = $rowData[11];
 
                             $this->addDataToCollection($temp);
                         }
+
                         if (($count - 1) > 1) {
                             $this->messageManager->addNotice(__('Some rows are not valid!'));
                         }
+
                         if (($count - 1) <= 1) {
                             $this->messageManager
                                 ->addSuccess(
@@ -167,8 +174,8 @@ class Save extends \Magento\Backend\App\Action {
                         $this->messageManager->addError(__('Please upload Csv file'));
                     }
                 } else {
-                    $params    = $data;
-                    $id        = $this->getRequest()->getParam('review_id');
+                    $params = $data;
+                    $id = $this->getRequest()->getParam('review_id');
                     if ($id) {
                         $reviewModel->load($id);
 
@@ -176,6 +183,7 @@ class Save extends \Magento\Backend\App\Action {
                             throw new \Magento\Framework\Exception\LocalizedException(__('The wrong review is specified.'));
                         }
                     }
+
                     $reviewModel->setData($params);
                     $reviewModel->save();
 
@@ -190,6 +198,11 @@ class Save extends \Magento\Backend\App\Action {
 
         return $this->resultRedirectFactory->create()->setPath('*/*/index');
     }
+
+    /**
+     * @param $temp
+     * @throws \Exception
+     */
     public function addDataToCollection($temp)
     {
         $collection = $this->reviewFactory->create()
@@ -199,8 +212,10 @@ class Save extends \Magento\Backend\App\Action {
 
         if ($collection->getSize() > 0) {
             foreach ($collection as $data) {
-                $dataArray = ['title' => $temp['title'],
-                    'detail' => $temp['detail']];
+                $dataArray = [
+                    'title' => $temp['title'],
+                    'detail' => $temp['detail']
+                ];
                 $data->addData($dataArray)->save();
             }
         } else {
@@ -211,7 +226,7 @@ class Save extends \Magento\Backend\App\Action {
             $customer = $this->customerCollectionFactory->create()
                 ->addFieldToFilter('email', $temp['email'])
                 ->getFirstItem();
-            if($customer->getData()) {
+            if ($customer->getData()) {
                 $customerId = $customer->getData()['entity_id'];
                 $temp['customer_id'] = $customerId;
             }
@@ -233,10 +248,10 @@ class Save extends \Magento\Backend\App\Action {
             $data['review_id'] = $reviewId;
             $customReview->setData($data);
             $customReview->save();
-            $ratingOptions = array(
+            $ratingOptions = [
                 '4' => $temp['option_id'],
 
-            );
+            ];
             foreach ($ratingOptions as $ratingId => $optionIds) {
                 $this->_ratingFactory->create()
                     ->setRatingId($ratingId)

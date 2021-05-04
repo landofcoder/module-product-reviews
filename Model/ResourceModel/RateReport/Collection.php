@@ -6,7 +6,7 @@
  *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/license
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -15,18 +15,24 @@
  *
  * @category   Landofcoder
  * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/LICENSE-1.0.html
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Model\ResourceModel\RateReport;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
+    /**
+     * @var string
+     */
     protected $_idFieldName = 'id';
 
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         $this->_init(\Lof\ProductReviews\Model\RateReport::class, \Lof\ProductReviews\Model\ResourceModel\RateReport::class);
     }
-}   
+}

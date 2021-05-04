@@ -1,41 +1,31 @@
 <?php
 /**
- * *
- *  * Landofcoder
- *  *
- *  * NOTICE OF LICENSE
- *  *
- *  * This source file is subject to the Landofcoder.com license that is
- *  * available through the world-wide-web at this URL:
- *  * https://landofcoder.com/license
- *  *
- *  * DISCLAIMER
- *  *
- *  * Do not edit or add to this file if you wish to upgrade this extension to newer
- *  * version in the future.
- *  *
- *  * @category   Landofcoder
- *  * @package    Lof_ProductReviews
- *  * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- *  * @license    https://landofcoder.com/LICENSE-1.0.html
+ * Landofcoder
  *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Controller\Adminhtml\Gallery;
-
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Exception\LocalizedException;
 
 class Save extends \Magento\Backend\App\Action
 {
-    /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
-     */
-    const ADMIN_RESOURCE = 'Lof_ProductReviews::save';
-
     /**
      * @var \Lof\ProductReviews\Model\Gallery
      */
@@ -51,19 +41,29 @@ class Save extends \Magento\Backend\App\Action
      */
     protected $_jsonEncoder;
 
+    /**
+     * Save constructor.
+     * @param Action\Context $context
+     * @param \Lof\ProductReviews\Model\GalleryFactory $galleryFactory
+     * @param \Lof\ProductReviews\Api\GalleryRepositoryInterface $galleryRepository
+     * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
+     */
     public function __construct(
         Action\Context $context,
         \Lof\ProductReviews\Model\GalleryFactory $galleryFactory,
         \Lof\ProductReviews\Api\GalleryRepositoryInterface $galleryRepository,
         \Magento\Framework\Json\EncoderInterface $jsonEncoder
-    )
-    {
+    ) {
         $this->_jsonEncoder = $jsonEncoder;
         $this->galleryFactory = $galleryFactory;
         $this->galleryRepository = $galleryRepository;
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @throws \Exception
+     */
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
@@ -103,6 +103,7 @@ class Save extends \Magento\Backend\App\Action
             return $resultRedirect->setPath('review/product/edit', ['id' => $data['review_id'], '_current' => true]);
         }
     }
+
     /**
      * {@inheritdoc}
      */

@@ -1,24 +1,22 @@
 <?php
 /**
- * *
- *  * Landofcoder
- *  *
- *  * NOTICE OF LICENSE
- *  *
- *  * This source file is subject to the Landofcoder.com license that is
- *  * available through the world-wide-web at this URL:
- *  * https://landofcoder.com/license
- *  *
- *  * DISCLAIMER
- *  *
- *  * Do not edit or add to this file if you wish to upgrade this extension to newer
- *  * version in the future.
- *  *
- *  * @category   Landofcoder
- *  * @package    Lof_ProductReviews
- *  * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- *  * @license    https://landofcoder.com/LICENSE-1.0.html
+ * Landofcoder
  *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Observer;
@@ -37,11 +35,15 @@ class UpdateCustomerObserver implements ObserverInterface
      */
     protected $_customerSession;
 
+    /**
+     * UpdateCustomerObserver constructor.
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Lof\ProductReviews\Model\Reminders $reminders
+     */
     public function __construct(
         \Magento\Customer\Model\Session $customerSession,
         \Lof\ProductReviews\Model\Reminders $reminders
-    )
-    {
+    ) {
         $this->_customerSession = $customerSession;
         $this->_reminders = $reminders;
     }

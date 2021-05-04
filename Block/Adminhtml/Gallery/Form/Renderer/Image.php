@@ -1,24 +1,22 @@
 <?php
 /**
- * *
- *  * Landofcoder
- *  *
- *  * NOTICE OF LICENSE
- *  *
- *  * This source file is subject to the Landofcoder.com license that is
- *  * available through the world-wide-web at this URL:
- *  * https://landofcoder.com/license
- *  *
- *  * DISCLAIMER
- *  *
- *  * Do not edit or add to this file if you wish to upgrade this extension to newer
- *  * version in the future.
- *  *
- *  * @category   Landofcoder
- *  * @package    Lof_ProductReviews
- *  * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- *  * @license    https://landofcoder.com/LICENSE-1.0.html
+ * Landofcoder
  *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer;
@@ -72,6 +70,8 @@ class Image extends ImageField
      * @param Escaper $escaper
      * @param UrlInterface $urlBuilder
      * @param array $data
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         \Magento\Backend\Model\UrlInterface $backendUrl,
@@ -93,11 +93,13 @@ class Image extends ImageField
         parent::__construct($factoryElement, $factoryCollection, $escaper, $urlBuilder, $data);
     }
 
+    /**
+     * @return string
+     */
     public function getElementHtml()
     {
         $galleryLink = 'Information will be shown after saving.';
-        if($this->_getGallery() && is_array($this->_getGallery()))
-        {
+        if ($this->_getGallery() && is_array($this->_getGallery())) {
             $gallery = $this->_getGallery();
 
             $imageName = $this->_jsonDecoder->decode($gallery['value']);
@@ -133,8 +135,8 @@ class Image extends ImageField
                 $i++;
             }
 
-            $editLink =  $this->_backendUrl->getUrl('lof_product_reviews/gallery/edit', array('id' => $gallery['id']));
-            $deleteLink = $this->_backendUrl->getUrl('lof_product_reviews/gallery/delete', array('id' => $gallery['id']));
+            $editLink =  $this->_backendUrl->getUrl('lof_product_reviews/gallery/edit', ['id' => $gallery['id']]);
+            $deleteLink = $this->_backendUrl->getUrl('lof_product_reviews/gallery/delete', ['id' => $gallery['id']]);
 
             $galleryLink = '<a href="' . $editLink . '">' . __('Add/Edit Gallery') .'</a> ';
             $galleryLink .= !empty($imageName[0]) ? '<a href="' . $deleteLink . '">' . __('Delete Gallery') .'</a> ' : '';
@@ -142,6 +144,9 @@ class Image extends ImageField
         return $galleryLink;
     }
 
+    /**
+     * @return array
+     */
     protected function _getGallery()
     {
         $gallery = [];
@@ -153,7 +158,7 @@ class Image extends ImageField
             ['in' => $this->_request->getParam('id')]
         );
 
-        foreach($collection as $data){
+        foreach ($collection as $data) {
             $gallery = $data->getData();
         }
 

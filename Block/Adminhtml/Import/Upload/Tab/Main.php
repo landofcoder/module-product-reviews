@@ -6,7 +6,7 @@
  *
  * This source file is subject to the Landofcoder.com license that is
  * available through the world-wide-web at this URL:
- * http://landofcoder.com/license
+ * https://landofcoder.com/terms
  *
  * DISCLAIMER
  *
@@ -14,9 +14,9 @@
  * version in the future.
  *
  * @category   Landofcoder
- * @package    Lof_FlatRateShipping
- * @copyright  Copyright (c) 2017 Landofcoder (http://www.landofcoder.com/)
- * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Block\Adminhtml\Import\Upload\Tab;
@@ -100,6 +100,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
         $this->setForm($form);
         return parent::_prepareForm();
     }
+
     /**
      * Prepare label for tab
      *
@@ -109,6 +110,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
     {
         return __('Import Data');
     }
+
     /**
      * Prepare title for tab
      *
@@ -118,6 +120,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
     {
         return __('Import Data');
     }
+
     /**
      * {@inheritdoc}
      */
@@ -125,6 +128,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
     {
         return true;
     }
+
     /**
      * {@inheritdoc}
      */
@@ -132,6 +136,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
     {
         return false;
     }
+
     /**
      * Check permission for passed action
      *

@@ -1,24 +1,22 @@
 <?php
 /**
- * *
- *  * Landofcoder
- *  *
- *  * NOTICE OF LICENSE
- *  *
- *  * This source file is subject to the Landofcoder.com license that is
- *  * available through the world-wide-web at this URL:
- *  * https://landofcoder.com/license
- *  *
- *  * DISCLAIMER
- *  *
- *  * Do not edit or add to this file if you wish to upgrade this extension to newer
- *  * version in the future.
- *  *
- *  * @category   Landofcoder
- *  * @package    Lof_ProductReviews
- *  * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- *  * @license    https://landofcoder.com/LICENSE-1.0.html
+ * Landofcoder
  *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Observer;
@@ -31,16 +29,29 @@ class GetOrderDataObserver implements ObserverInterface
      * @var \Magento\Sales\Model\Order
      */
     protected $_order;
+
     /**
      * @var \Magento\Framework\Message\ManagerInterface
      */
     protected $messageManager;
+
     /**
      * @var \Magento\Customer\Model\Session
      */
     protected $_customerSession;
+
+    /**
+     * @var \Lof\ProductReviews\Model\Reminders
+     */
     protected $_reminders;
 
+    /**
+     * GetOrderDataObserver constructor.
+     * @param \Magento\Sales\Model\Order $order
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Magento\Framework\Message\ManagerInterface $messageManager
+     * @param \Lof\ProductReviews\Model\Reminders $reminders
+     */
     public function __construct(
         \Magento\Sales\Model\Order $order,
         \Magento\Customer\Model\Session $customerSession,
@@ -61,45 +72,44 @@ class GetOrderDataObserver implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         try {
-            $order_ids  = $observer->getEvent()->getOrderIds();
-            $order_id   = $order_ids[0];
+            $order_ids = $observer->getEvent()->getOrderIds();
+            $order_id = $order_ids[0];
             // get order info
             $order = $this->_order->load($order_id);
 
 
             $orderAllItems = $order->getAllVisibleItems();
             $productIds = [];
-            foreach($orderAllItems as $item)
-            {
+            foreach ($orderAllItems as $item) {
                 $storeId = $item->getStoreId();
-                $productIds[]= $item->getProductId();
+                $productIds[] = $item->getProductId();
             }
 
             //get customer info
             if ($this->_customerSession->isLoggedIn()) {
                 $customer = [
                     'customer_id' => $order->getCustomerId(),
-                    'email'       => $order->getCustomerEmail(),
-                    'name'        => $order->getCustomerName(),
+                    'email' => $order->getCustomerEmail(),
+                    'name' => $order->getCustomerName(),
                 ];
             } elseif ($order->getCustomerIsGuest()) {
                 $customer = [
                     'customer_id' => null,
-                    'email'       => $order->getCustomerEmail(),
-                    'name'        => $order->getCustomerName()
+                    'email' => $order->getCustomerEmail(),
+                    'name' => $order->getCustomerName()
                 ];
             }
 
             $model = $this->_reminders;
-            foreach($productIds as $productId){
+            foreach ($productIds as $productId) {
                 $data = [
-                    'order_id'    => $order_id,
+                    'order_id' => $order_id,
                     'customer_id' => $customer['customer_id'],
-                    'name'        => $customer['name'],
-                    'email'       => $customer['email'],
-                    'status'      => '1',
-                    'store_id'    => $storeId,
-                    'product_id'  => $productId
+                    'name' => $customer['name'],
+                    'email' => $customer['email'],
+                    'status' => '1',
+                    'store_id' => $storeId,
+                    'product_id' => $productId
                 ];
                 $model->setData($data);
                 $model->save();

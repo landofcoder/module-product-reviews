@@ -1,28 +1,25 @@
 <?php
 /**
- * *
- *  * Landofcoder
- *  *
- *  * NOTICE OF LICENSE
- *  *
- *  * This source file is subject to the Landofcoder.com license that is
- *  * available through the world-wide-web at this URL:
- *  * https://landofcoder.com/license
- *  *
- *  * DISCLAIMER
- *  *
- *  * Do not edit or add to this file if you wish to upgrade this extension to newer
- *  * version in the future.
- *  *
- *  * @category   Landofcoder
- *  * @package    Lof_ProductReview
- *  * @copyright  Copyright (c) 2020 Landofcoder (https://www.landofcoder.com/)
- *  * @license    https://landofcoder.com/LICENSE-1.0.html
+ * Landofcoder
  *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 
 namespace Lof\ProductReviews\Block\Adminhtml\Gallery\Helper\Form\Gallery;
-
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Backend\Block\Media\Uploader;
@@ -65,15 +62,15 @@ class Content extends \Magento\Backend\Block\Widget
     private $imageUploadConfigDataProvider;
 
     /**
+     * Content constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
      * @param \Lof\ProductReviews\Model\Gallery\Config $mediaConfig
      * @param \Magento\Framework\Registry $coreRegister
      * @param \Magento\Framework\ObjectManagerInterface $objectManager
      * @param array $data
-     * @param ImageUploadConfigDataProvider $imageUploadConfigDataProvider
-     * @param Database $fileStorageDatabase
-     * 
+     * @param ImageUploadConfigDataProvider|null $imageUploadConfigDataProvider
+     * @param Database|null $fileStorageDatabase
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
@@ -235,7 +232,7 @@ class Content extends \Magento\Backend\Block\Widget
         $imageTypes = [];
         $value = $this->getElement()->getImages();
         foreach ($value as $images) {
-            foreach($images as $attribute) {
+            foreach ($images as $attribute) {
                 $imageTypes['image'] = [
                     'code' => 'image',
                     'value' => $attribute['file'],
