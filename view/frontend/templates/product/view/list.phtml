@@ -22,9 +22,9 @@
 // @codingStandardsIgnoreFile
 /** @var Lof\ProductReviews\Block\Product\View\ListView $block */
 $format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
-$rateAjaxLink = $block->getFrontendUrl() .'lof_productreviews/reviews/rateAjax';
-$reportAjaxLink = $block->getFrontendUrl() .'lof_productreviews/reviews/reportAjax';
-$loadBlock = $block->getFrontendUrl() .'lof_productreviews/reviews/loadBlock';
+$rateAjaxLink = $block->getFrontendUrl() . 'lof_productreviews/reviews/rateAjax';
+$reportAjaxLink = $block->getFrontendUrl() . 'lof_productreviews/reviews/reportAjax';
+$loadBlock = $block->getFrontendUrl() . 'lof_productreviews/reviews/loadBlock';
 
 //CUSTOM CONFIGURATIONS
 $enableSorting = $block->getIsSetFlagConfig('lof_product_reviews/lof_review_settings/enable_sorting');
@@ -35,28 +35,29 @@ $type = $block->getRequest()->getParam('type');
 !empty($type) ? $_items = $block->getReviewsCollectionByType($type) : $_items = $block->getReviewsCollectionByType($sortType);
 
 //Owl configurations
-$blockId                   = rand() . time() . uniqid();
-$number_item_per_column    = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/number_item_per_column');
-if($number_item_per_column == '' || $number_item_per_column == 0)
+$blockId = rand() . time() . uniqid();
+$number_item_per_column = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/number_item_per_column');
+if ($number_item_per_column == '' || $number_item_per_column == 0) {
     $number_item_per_column = 1;
+}
 
-$carousel_layout             = $block->getValueConfig('lof_product_reviews/gallery_carousel_settings/carousel_layout');
-$default_items             = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/default_items');
-$mobile_items              = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/mobile_items');
-$tablet_small_items        = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/tablet_small_items');
-$tablet_items              = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/tablet_items');
-$portrait_items            = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/portrait_items');
-$large_items               = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/large_items');
-$autoplay_timeout          = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/autoplay_timeout');
-$nav                       = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/nav');
-$nav_prev                  = $block->getValueConfig('lof_product_reviews/gallery_carousel_settings/nav_prev');
-$nav_next                  = $block->getValueConfig('lof_product_reviews/gallery_carousel_settings/nav_next');
-$dots                      = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/dots');
-$loop                      = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/loop');
-$autoplay                  = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/autoplay');
-$autoplay_pauseonhover     = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/autoplay_pauseonhover');
-$auto_play                 = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/auto_play');
-$rtl                       = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/rtl');
+$carousel_layout = $block->getValueConfig('lof_product_reviews/gallery_carousel_settings/carousel_layout');
+$default_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/default_items');
+$mobile_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/mobile_items');
+$tablet_small_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/tablet_small_items');
+$tablet_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/tablet_items');
+$portrait_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/portrait_items');
+$large_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/large_items');
+$autoplay_timeout = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/autoplay_timeout');
+$nav = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/nav');
+$nav_prev = $block->getValueConfig('lof_product_reviews/gallery_carousel_settings/nav_prev');
+$nav_next = $block->getValueConfig('lof_product_reviews/gallery_carousel_settings/nav_next');
+$dots = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/dots');
+$loop = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/loop');
+$autoplay = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/autoplay');
+$autoplay_pauseonhover = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/autoplay_pauseonhover');
+$auto_play = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/auto_play');
+$rtl = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/rtl');
 
 //Fancybox configurations
 $fancybox_type = 'iframe';
@@ -67,243 +68,294 @@ $image_popup_margin = $block->getValueConfig('lof_product_reviews/gallery_fancyb
 $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settings/auto_size');
 ?>
 
-<?php if (count($_items)):?>
-<div class="block review-list" id="customer-reviews">
-    <div class="block-title">
-        <strong><?= $block->escapeHtml(__('Customer Reviews')) ?></strong>
-        <?php if ($enableSorting) :?>
-        <div class="sort-order-reviews">
-            <label><?= $block->escapeHtml(__('Sort review by: ')) ?></label>
-            <select id="sort-order" name="sort-order" class="lof-sort-order">
-                <option value="default"><?= $block->escapeHtml(__('Default')) ?></option>
-                <option value="helpful"><?= $block->escapeHtml(__('Helpful')) ?></option>
-                <option value="rating"><?= $block->escapeHtml(__('Average Rating Percent')) ?></option>
-            </select>
+<?php if (count($_items)): ?>
+    <div class="block review-list" id="customer-reviews">
+        <div class="block-title">
+            <strong><?= $block->escapeHtml(__('Customer Reviews')) ?></strong>
+            <?php if ($enableSorting) : ?>
+                <div class="sort-order-reviews">
+                    <label><?= $block->escapeHtml(__('Sort review by: ')) ?></label>
+                    <select id="sort-order" name="sort-order" class="lof-sort-order">
+                        <option value="default"><?= $block->escapeHtml(__('Default')) ?></option>
+                        <option value="helpful"><?= $block->escapeHtml(__('Helpful')) ?></option>
+                        <option value="rating"><?= $block->escapeHtml(__('Average Rating Percent')) ?></option>
+                    </select>
 
-            <img class="lof-sort-loading" src="<?= $this->getViewFileUrl('images/loader-1.gif'); ?>" style="display: none;"/>
+                    <img class="lof-sort-loading" src="<?= $this->getViewFileUrl('images/loader-1.gif'); ?>"
+                         style="display: none;"/>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($enableSearch) : ?>
+                <div class="filter-reviews">
+                    <label><?= $block->escapeHtml(__('Search review: ')) ?></label>
+                    <input id="review-keyword" name="review-keyword" type="text" class="lof-keyword"
+                           placeholder="<?= $block->escapeHtml(__('enter keyword...')) ?>"/>
+                </div>
+            <?php endif; ?>
         </div>
-        <?php endif; ?>
-
-        <?php if ($enableSearch) :?>
-            <div class="filter-reviews">
-                <label><?= $block->escapeHtml(__('Search review: ')) ?></label>
-                <input id="review-keyword" name="review-keyword" type="text" class="lof-keyword" placeholder="<?= $block->escapeHtml(__('enter keyword...')) ?>"/>
+        <div class="block-content">
+            <div class="toolbar review-toolbar">
+                <?= $block->getChildHtml('toolbar') ?>
             </div>
-        <?php endif; ?>
-    </div>
-    <div class="block-content">
-        <div class="toolbar review-toolbar">
-            <?= $block->getChildHtml('toolbar') ?>
-        </div>
-        <ol class="items review-items">
-        <?php foreach ($_items as $_review):?>
-            <?php $customReview = $block->getReviewsCustom($_review->getId());?>
-            <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
-                <?php
-                $avatarImg = "";
-                $avatarBlock = $block->getLayout()->createBlock('\Lof\CustomerAvatar\Block\Attributes\Avatar');
-                if($avatarBlock){
-                $avatarImg = $avatarBlock->getCustomerAvatarById($_review->getData('customer_id'));
-                ?>
-                <div class="review-image">
-                    <img src="<?php echo $avatarImg; ?>" width="150px" height="150px" alt="<?= __("avatar ").$block->escapeHtml($_review->getNickname()) ?>" />
-                </div>
-                <div class="review-infor">
-                <?php } ?>
-                <div class="review-title" itemprop="name"><?= $block->escapeHtml($_review->getTitle()) ?></div>
-                <?php
-                $customize = $block->escapeHtml($block->getHelpful($_review->getId()));
-                if($customize){
-                    $helpful = '<b id="helpful-' .$_review->getId(). '" data="'.$customize[0].'">'. $customize[0] .'</b>';
-                    $total = '<b id="total-' .$_review->getId(). '" data="'.$customize[1].'">'. $customize[1] .'</b>';
-                ?>
-                <div class="lof-helpful" style="margin-bottom: 30px;">
-                    <p><?= __('There are %1 of %2 people found this helpful.', $helpful, $total) ?></p>
-                </div>
-                <?php
-                }
-                ?>
+            <ol class="items review-items">
+                <?php foreach ($_items as $_review): ?>
+                    <?php $customReview = $block->getReviewsCustom($_review->getId()); ?>
+                    <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
+                        <?php
+                        $avatarImg = "";
+                        $avatarBlock = $block->getLayout()->createBlock('\Lof\CustomerAvatar\Block\Attributes\Avatar');
+                        if ($avatarBlock){
+                        $avatarImg = $avatarBlock->getCustomerAvatarById($_review->getData('customer_id'));
+                        ?>
+                        <div class="review-image">
+                            <img src="<?= $avatarImg; ?>" width="150px" height="150px"
+                                 alt="<?= __("avatar ") . $block->escapeHtml($_review->getNickname()) ?>"/>
+                        </div>
+                        <div class="review-infor">
+                            <?php } ?>
+                            <div class="review-title"
+                                 itemprop="name"><?= $block->escapeHtml($_review->getTitle()) ?></div>
+                            <?php
+                            $customize = $block->escapeHtml($block->getHelpful($_review->getId()));
+                            if ($customize) {
+                                $helpful = '<b id="helpful-' . $_review->getId() . '" data="' . $customize[0] . '">' . $customize[0] . '</b>';
+                                $total = '<b id="total-' . $_review->getId() . '" data="' . $customize[1] . '">' . $customize[1] . '</b>';
+                                ?>
+                                <div class="lof-helpful" style="margin-bottom: 30px;">
+                                    <p><?= __('There are %1 of %2 people found this helpful.', $helpful, $total) ?></p>
+                                </div>
+                                <?php
+                            }
+                            ?>
 
-                <?php if (count($_review->getRatingVotes())): ?>
-                    <div class="review-ratings">
-                    <?php foreach ($_review->getRatingVotes() as $_vote): ?>
-                    <div class="rating-summary item" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-                        <span class="label rating-label"><span><?= $block->escapeHtml($_vote->getRatingCode()) ?></span></span>
-                        <div class="rating-result" title="<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
-	                        <meta itemprop="worstRating" content = "1"/>at
-	                        <meta itemprop="bestRating" content = "100"/>
-                            <span style="width:<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
+                            <?php if (count($_review->getRatingVotes())): ?>
+                                <div class="review-ratings">
+                                    <?php foreach ($_review->getRatingVotes() as $_vote): ?>
+                                        <div class="rating-summary item" itemprop="reviewRating" itemscope
+                                             itemtype="http://schema.org/Rating">
+                                            <span
+                                                class="label rating-label"><span><?= $block->escapeHtml($_vote->getRatingCode()) ?></span></span>
+                                            <div class="rating-result"
+                                                 title="<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
+                                                <meta itemprop="worstRating" content="1"/>
+                                                at
+                                                <meta itemprop="bestRating" content="100"/>
+                                                <span
+                                                    style="width:<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
                                 <span itemprop="ratingValue"><?= $block->escapeHtml($_vote->getPercent()) ?>%</span>
                             </span>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
 
-                <div class="review-content" itemprop="description">
-                    <?= nl2br($block->escapeHtml($_review->getDetail())) ?>
+                            <div class="review-content" itemprop="description">
+                                <?= nl2br($block->escapeHtml($_review->getDetail())) ?>
 
-                    <!--review gallery-->
-                    <?php if($block->getGalleryStatus($_review->getId()) == 1):?>
-                        <div class="lof-review-gallery <?php if($carousel_layout && $carousel_layout == "owl_carousel"){ ?>gallery-play<?php } ?>" data-lcarousel="<?php echo $carousel_layout; ?>">
-                            <ul id="lof-carousel-<?php echo $blockId .'-'. $_review->getId()?>" class="<?php if($carousel_layout && $carousel_layout == "owl_carousel"){ ?>owl-carousel owl-theme-default<?php } else {?>gallery-listing<?php }?>" data-rtl="<?php echo $rtl?"1":"0" ?>" data-loop="<?php echo $loop?"1":"0" ?>" data-nav="<?php echo $nav?"1":"0" ?>" data-dot="<?php echo $dots?"1":"0" ?>" data-autoplay="<?php echo $autoplay?"1":"0" ?>" data-autoplay-timeout="<?php echo $autoplay_timeout ?>" data-autoplay-pauonhover="<?php echo $autoplay_pauseonhover?"1":"0" ?>" data-mobile-items="<?php echo (int)$mobile_items ?>" data-tablet-small-items="<?php echo (int)$tablet_small_items ?>" data-tablet-items="<?php echo (int)$tablet_items ?>" data-portrait-items="<?php echo (int)$portrait_items ?>" data-large-items="<?php echo (int)$default_items ?>" data-large-max-items="<?php echo (int)$large_items ?>" data-fancybox-auto-size="<?php echo (int)$auto_size; ?>">
-                                <?php
-                                    $images = $block->getReviewsGallery($_review->getId());
-                                    $_collection = [];
-                                    $total  = count($images);
-                                    $column = 4;
-                                    if($total%$number_item_per_column == 0){
-                                        $column = $total/$number_item_per_column;
-                                    }else{
-                                        $column = floor($total/$number_item_per_column)+1;
-                                    }
-                                    if($column<$default_items) $column = $default_items;
-                                    $i = $x = 0;
-                                    foreach ($images as $_brand) {
-                                        if($i<$column){
-                                            $i++;
-                                        }else{
-                                            $i = 1;
-                                            $x++;
-                                        }
-                                        $_collection[$i][$x] = $_brand;
-                                    }
-                                ?>
-                                <?php foreach ($_collection as $_gallery) { ?>
-                                    <li class="item">
-                                        <?php foreach ($_gallery as $_image) { ?>
-                                            <?php $imageURl = $block->resizeImage($_image, $block->getImgWidth(), $block->getImgHeight()); ?>
-                                            <div class="gallery-item">
-                                                <div class="gallery-image">
-                                                    <a href="<?= $block->getMediaUrl($_image) ?>" class="lofreview-gallery-fancybox" data-fancybox-type="<?php echo $fancybox_type ?>" onclick="return false;" data-fancybox-height="<?php echo $image_popup_height ?>" data-fancybox-width="<?php echo $image_popup_width ?>" data-fancybox-padding="<?php echo $image_popup_padding ?>" data-fancybox-margin="<?php echo $image_popup_margin ?>" data-fancybox-auto-size="<?php echo (int)$auto_size; ?>">
-                                                        <img src="<?= $imageURl ?>" alt="<?= $_image ?>">
-                                                    </a>
-                                                </div>
+                                <!--review gallery-->
+                                <?php if ($block->getGalleryStatus($_review->getId()) == 1): ?>
+                                    <div
+                                        class="lof-review-gallery <?php if ($carousel_layout && $carousel_layout == "owl_carousel") { ?>gallery-play<?php } ?>"
+                                        data-lcarousel="<?= $carousel_layout; ?>">
+                                        <ul id="lof-carousel-<?= $blockId . '-' . $_review->getId() ?>"
+                                            class="<?php if ($carousel_layout && $carousel_layout == "owl_carousel") { ?>owl-carousel owl-theme-default<?php } else { ?>gallery-listing<?php } ?>"
+                                            data-rtl="<?= $rtl ? "1" : "0" ?>" data-loop="<?= $loop ? "1" : "0" ?>"
+                                            data-nav="<?= $nav ? "1" : "0" ?>" data-dot="<?= $dots ? "1" : "0" ?>"
+                                            data-autoplay="<?= $autoplay ? "1" : "0" ?>"
+                                            data-autoplay-timeout="<?= $autoplay_timeout ?>"
+                                            data-autoplay-pauonhover="<?= $autoplay_pauseonhover ? "1" : "0" ?>"
+                                            data-mobile-items="<?= (int)$mobile_items ?>"
+                                            data-tablet-small-items="<?= (int)$tablet_small_items ?>"
+                                            data-tablet-items="<?= (int)$tablet_items ?>"
+                                            data-portrait-items="<?= (int)$portrait_items ?>"
+                                            data-large-items="<?= (int)$default_items ?>"
+                                            data-large-max-items="<?= (int)$large_items ?>"
+                                            data-fancybox-auto-size="<?= (int)$auto_size; ?>">
+                                            <?php
+                                            $images = $block->getReviewsGallery($_review->getId());
+                                            $_collection = [];
+                                            $total = count($images);
+                                            $column = 4;
+                                            if ($total % $number_item_per_column == 0) {
+                                                $column = $total / $number_item_per_column;
+                                            } else {
+                                                $column = floor($total / $number_item_per_column) + 1;
+                                            }
+                                            if ($column < $default_items) {
+                                                $column = $default_items;
+                                            }
+                                            $i = $x = 0;
+                                            foreach ($images as $_brand) {
+                                                if ($i < $column) {
+                                                    $i++;
+                                                } else {
+                                                    $i = 1;
+                                                    $x++;
+                                                }
+                                                $_collection[$i][$x] = $_brand;
+                                            }
+                                            ?>
+                                            <?php foreach ($_collection as $_gallery) { ?>
+                                                <li class="item">
+                                                    <?php foreach ($_gallery as $_image) { ?>
+                                                        <?php $imageURl = $block->resizeImage($_image,
+                                                            $block->getImgWidth(), $block->getImgHeight()); ?>
+                                                        <div class="gallery-item">
+                                                            <div class="gallery-image">
+                                                                <a href="<?= $block->getMediaUrl($_image) ?>"
+                                                                   class="lofreview-gallery-fancybox"
+                                                                   data-fancybox-type="<?= $fancybox_type ?>"
+                                                                   onclick="return false;"
+                                                                   data-fancybox-height="<?= $image_popup_height ?>"
+                                                                   data-fancybox-width="<?= $image_popup_width ?>"
+                                                                   data-fancybox-padding="<?= $image_popup_padding ?>"
+                                                                   data-fancybox-margin="<?= $image_popup_margin ?>"
+                                                                   data-fancybox-auto-size="<?= (int)$auto_size; ?>">
+                                                                    <img src="<?= $imageURl ?>" alt="<?= $_image ?>">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    <?php } ?>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
+
+                                <!--review advantages and disadvantages-->
+                                <div class="lof-review-customize">
+
+                                    <?php foreach ($customReview as $cItem): ?>
+                                        <?php if ($cItem->getAdvantages()) { ?>
+                                            <div class="good-exp" style="color:green">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                        <path d="M0 0h18v18h-18z" fill="none"></path>
+                                        <path
+                                            d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm5 11h-4v4h-2v-4h-4v-2h4v-4h2v4h4v2z"></path>
+                                    </svg>
+                                </span>
+                                                <span><?= $block->escapeHtml($cItem->getAdvantages()) ?></span>
                                             </div>
                                         <?php } ?>
-                                    </li>
-                                <?php } ?>
-                            </ul>
+                                        <?php if ($cItem->getDisadvantages()) { ?>
+                                            <div class="bad-exp" style="color:red">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                        <path d="M0 0h18v18h-18z" fill="none"></path>
+                                        <path
+                                            d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm5 11h-10v-2h10v2z"></path>
+                                    </svg>
+                                </span>
+                                                <span><?= $block->escapeHtml($cItem->getDisadvantages()) ?></span>
+                                            </div>
+                                        <?php } ?>
+                                    <?php endforeach; ?>
+                                </div>
+                                <!--content comment-->
+                                <div class="lof-comment_content" itemprop="description"
+                                     style="padding-left: 40px; color:#777; font-size: 0.9em; font-style: italic;">
+                                    <?php $reviewComment = $block->getReviewsReply($_review->getId()); ?>
+                                    <?php foreach ($reviewComment as $comment): ?>
+                                        <b><?= $block->escapeHtml($comment->getReply_title()) ?></b><br>
+                                        <p><?= $block->escapeHtml($comment->getReply_comment()) ?></p>
+                                    <?php endforeach; ?>
+                                </div>
+
+                                <!--rate and report review-->
+                                <div class="actions-toolbar review-form-actions">
+                                    <?php $rate = $block->_compareUserData($_review->getId()); ?>
+                                    <?php if (!empty($rate['rate_type']) && $rate['rate_type'] == 'helpful') { ?>
+                                        <div class="primary actions-primary" id="review-rate-<?= $_review->getId() ?>">
+                                            <?= $block->escapeHtml(__('You have found this helpful.')) ?>
+                                        </div>
+                                    <?php } elseif (!empty($rate['rate_type']) && $rate['rate_type'] == 'unhelpful') { ?>
+                                        <div class="primary actions-primary" id="review-rate-<?= $_review->getId() ?>">
+                                            <?= $block->escapeHtml(__('You have found this unhelpful.')) ?>
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="primary actions-primary" id="review-rate-<?= $_review->getId() ?>">
+                                            <p><?= $block->escapeHtml(__('Was this review helpful?')) ?></p>
+                                            <button type="submit" data="<?= $rateAjaxLink; ?>" class="action submit"
+                                                    id="action-helpful-<?= $_review->getId() ?>"
+                                                    value="<?= $_review->getId() ?>">
+                                                <span><?= $block->escapeHtml(__('Yes')) ?></span>
+                                            </button>
+                                            <button type="submit" class="action submit" data="<?= $rateAjaxLink; ?>"
+                                                    id="action-unhelpful-<?= $_review->getId() ?>"
+                                                    value="<?= $_review->getId() ?>">
+                                                <span><?= $block->escapeHtml(__('No')) ?></span>
+                                            </button>
+                                        </div>
+                                    <?php } ?>
+
+                                    <?php if (!empty($rate['report_type']) && $rate['report_type'] == 'report') { ?>
+                                        <div class="primary actions-primary"
+                                             id="review-report-<?= $_review->getId() ?>">
+                                            <?= $block->escapeHtml(__('You reported this review.')) ?>
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="primary actions-primary report-abuse"
+                                             id="review-report-<?= $_review->getId() ?>">
+                                            <a href="javascript:void(0)" data="<?= $reportAjaxLink; ?>"
+                                               id="action-report-<?= $_review->getId() ?>"><?= $block->escapeHtml(__('Report Abuse')) ?></a>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+
+                            <div class="review-details">
+                                <p class="review-author">
+                                    <span class="review-details-label"><?= $block->escapeHtml(__('Review by')) ?></span>
+                                    <?php
+                                    $avatar = "";
+                                    if (!$avatar && $customReview) {
+                                        $email_address = $customReview->getFirstItem()->getEmailAddress();
+                                        if ($email_address) {
+                                            $avatar = "//www.gravatar.com/avatar/" . md5($email_address) . "?s=80";
+                                        }
+                                    }
+                                    if ($avatar) {
+                                        ?>
+                                        <span class="review-image review-author-img"><img class="author-avatar-img"
+                                                                                          src="<?= $avatar; ?>"
+                                                                                          alt="<?= $block->escapeHtml($_review->getNickname()) ?>"/></span>
+                                        <?php
+                                    }
+                                    ?>
+                                    <strong class="review-details-value review-by-author"
+                                            itemprop="author"><?= $block->escapeHtml($_review->getNickname()) ?></strong>
+                                </p>
+                                <p class="review-date">
+                                    <span class="review-details-label"><?= $block->escapeHtml(__('Posted on')) ?></span>
+                                    <time class="review-details-value review-on-date" itemprop="datePublished"
+                                          datetime="<?= $block->escapeHtmlAttr($block->formatDate($_review->getCreatedAt(),
+                                              $format)) ?>"><?= $block->escapeHtml($block->formatDate($_review->getCreatedAt(),
+                                            $format)) ?></time>
+                                </p>
+                            </div>
+                            <?php if ($avatarImg){ ?>
                         </div>
-                    <?php endif; ?>
-
-                    <!--review advantages and disadvantages-->
-                    <div class="lof-review-customize">
-
-                        <?php foreach ($customReview as $cItem):?>
-                            <?php if($cItem->getAdvantages()){ ?>
-                            <div class="good-exp" style="color:green">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                        <path d="M0 0h18v18h-18z" fill="none"></path>
-                                        <path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm5 11h-4v4h-2v-4h-4v-2h4v-4h2v4h4v2z"></path>
-                                    </svg>
-                                </span>
-                                <span><?= $block->escapeHtml($cItem->getAdvantages()) ?></span>
-                            </div>
-                            <?php } ?>
-                            <?php if($cItem->getDisadvantages()) { ?>
-                            <div class="bad-exp" style="color:red">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                        <path d="M0 0h18v18h-18z" fill="none"></path>
-                                        <path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm5 11h-10v-2h10v2z"></path>
-                                    </svg>
-                                </span>
-                                <span><?= $block->escapeHtml($cItem->getDisadvantages()) ?></span>
-                            </div>
-                            <?php } ?>
-                        <?php endforeach; ?>
-                    </div>
-                    <!--content comment-->
-                    <div class="lof-comment_content" itemprop="description" style="padding-left: 40px; color:#777; font-size: 0.9em; font-style: italic;">
-                        <?php $reviewComment = $block->getReviewsReply($_review->getId());?>
-                        <?php foreach ($reviewComment as $comment):?>
-                            <b><?= $block->escapeHtml($comment->getReply_title()) ?></b><br>
-                            <p><?= $block->escapeHtml($comment->getReply_comment()) ?></p>
-                        <?php endforeach; ?>
-                    </div>
-
-                    <!--rate and report review-->
-                    <div class="actions-toolbar review-form-actions">
-                        <?php $rate = $block->_compareUserData($_review->getId());?>
-                        <?php if (!empty($rate['rate_type']) && $rate['rate_type'] == 'helpful'){ ?>
-                            <div class="primary actions-primary" id="review-rate-<?= $_review->getId() ?>">
-                                <?= $block->escapeHtml(__('You have found this helpful.')) ?>
-                            </div>
-                        <?php } elseif (!empty($rate['rate_type']) && $rate['rate_type'] == 'unhelpful') { ?>
-                            <div class="primary actions-primary" id="review-rate-<?= $_review->getId() ?>">
-                                <?= $block->escapeHtml(__('You have found this unhelpful.')) ?>
-                            </div>
-                        <?php } else { ?>
-                            <div class="primary actions-primary" id="review-rate-<?= $_review->getId() ?>">
-                                <p><?= $block->escapeHtml(__('Was this review helpful?')) ?></p>
-                                <button type="submit" data="<?= $rateAjaxLink; ?>" class="action submit" id="action-helpful-<?= $_review->getId() ?>" value="<?= $_review->getId() ?>">
-                                    <span><?= $block->escapeHtml(__('Yes')) ?></span>
-                                </button>
-                                <button type="submit" class="action submit" data="<?= $rateAjaxLink; ?>" id="action-unhelpful-<?= $_review->getId() ?>" value="<?= $_review->getId() ?>">
-                                    <span><?= $block->escapeHtml(__('No')) ?></span>
-                                </button>
-                            </div>
-                        <?php } ?>
-
-                        <?php if (!empty($rate['report_type']) && $rate['report_type'] == 'report'){ ?>
-                            <div class="primary actions-primary" id="review-report-<?= $_review->getId() ?>">
-                                <?= $block->escapeHtml(__('You reported this review.')) ?>
-                            </div>
-                        <?php } else { ?>
-                            <div class="primary actions-primary report-abuse" id="review-report-<?= $_review->getId() ?>">
-                                <a href="javascript:void(0)" data="<?= $reportAjaxLink; ?>" id="action-report-<?= $_review->getId() ?>"><?= $block->escapeHtml(__('Report Abuse')) ?></a>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-
-                <div class="review-details">
-                    <p class="review-author">
-                        <span class="review-details-label"><?= $block->escapeHtml(__('Review by')) ?></span>
-                        <?php
-                        $avatar = "";
-                        if(!$avatar && $customReview) {
-                            $email_address = $customReview->getFirstItem()->getEmailAddress();
-                            if($email_address){
-                                $avatar = "//www.gravatar.com/avatar/".md5($email_address)."?s=80";
-                            }
-                        }
-                        if($avatar){
-                        ?>
-                        <span class="review-image review-author-img"><img class="author-avatar-img" src="<?php echo $avatar; ?>" alt="<?= $block->escapeHtml($_review->getNickname()) ?>"/></span>
-                            <?php
-                        }
-                        ?>
-                        <strong class="review-details-value review-by-author" itemprop="author"><?= $block->escapeHtml($_review->getNickname()) ?></strong>
-                    </p>
-                    <p class="review-date">
-                        <span class="review-details-label"><?= $block->escapeHtml(__('Posted on')) ?></span>
-                        <time class="review-details-value review-on-date" itemprop="datePublished" datetime="<?= $block->escapeHtmlAttr($block->formatDate($_review->getCreatedAt(), $format)) ?>"><?= $block->escapeHtml($block->formatDate($_review->getCreatedAt(), $format)) ?></time>
-                    </p>
-                </div>
-                <?php if($avatarImg){ ?>
-                </div>
-                <?php } ?>
-            </li>
-        <?php endforeach; ?>
-        </ol>
-        <div class="toolbar review-toolbar">
-            <?= $block->getChildHtml('toolbar') ?>
+                    <?php } ?>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+            <div class="toolbar review-toolbar">
+                <?= $block->getChildHtml('toolbar') ?>
+            </div>
         </div>
     </div>
-</div>
-<?php endif;?>
+<?php endif; ?>
 
 <script>
-    require(['jquery', 'metaCounter', <?php if($carousel_layout == "owl_carousel"){ ?> 'owlGallery', <?php } ?> 'fancyGallery'], function ($){
+    require(['jquery', 'metaCounter', <?php if($carousel_layout == "owl_carousel"){ ?> 'owlGallery', <?php } ?> 'fancyGallery'], function ($) {
         'use strict';
 
         function setSelected(value) {
             var sortReview = $('select#sort-order option');
-            sortReview.each(function(index, element){
+            sortReview.each(function (index, element) {
                 if (element.value == value) {
                     $(this).attr('selected', 'selected');
                 }
@@ -319,7 +371,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
             });
         });
 
-        $('select#sort-order').on('change', function() {
+        $('select#sort-order').on('change', function () {
             $('.lof-sort-loading').show();
             var value = $(this).val();
             var url = "<?= $block->escapeUrl($block->getProductReviewUrl()) ?>?type=" + value;
@@ -327,56 +379,56 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                 url: url,
                 cache: true,
                 dataType: 'html',
-                success:function (data) {
+                success: function (data) {
                     $('#product-review-container').html(data);
                     var owlCarousel = $('.gallery-play').find('.owl-carousel');
                     <?php if($carousel_layout == "owl_carousel"){ ?>
                     var config = [];
-                    config['nav'] = '<?= $nav?(int)$nav:0 ?>';
-                    config['navText'] = [ 'prev', 'next' ];
-                    config['dots'] = '<?= $dots?(int)$dots:0; ?>';
-                    config['autoplay'] = '<?= $auto_play?(int)$auto_play:0 ?>';
+                    config['nav'] = '<?= $nav ? (int)$nav : 0 ?>';
+                    config['navText'] = ['prev', 'next'];
+                    config['dots'] = '<?= $dots ? (int)$dots : 0; ?>';
+                    config['autoplay'] = '<?= $auto_play ? (int)$auto_play : 0 ?>';
                     config['autoplayTimeout'] = '<?= $autoplay_timeout ?>';
-                    config['autoplayHoverPause'] = '<?= $autoplay_pauseonhover?(int)$autoplay_pauseonhover:0 ?>';
-                    config['rtl'] = '<?= $rtl?(int)$rtl:0 ?>';
-                    config['loop'] = '<?= $loop?(int)$loop:0 ?>';
+                    config['autoplayHoverPause'] = '<?= $autoplay_pauseonhover ? (int)$autoplay_pauseonhover : 0 ?>';
+                    config['rtl'] = '<?= $rtl ? (int)$rtl : 0 ?>';
+                    config['loop'] = '<?= $loop ? (int)$loop : 0 ?>';
 
-                    if(config['nav'] == 0){
+                    if (config['nav'] == 0) {
                         config['nav'] = false;
                     } else {
                         config['nav'] = true;
                     }
-                    if(config['dots'] == 0){
+                    if (config['dots'] == 0) {
                         config['dots'] = false;
                     } else {
                         config['dots'] = true;
                     }
-                    if(config['autoplay'] == 0){
+                    if (config['autoplay'] == 0) {
                         config['autoplay'] = false;
                     } else {
                         config['autoplay'] = true;
                     }
-                    if(config['autoplayHoverPause'] == 0){
+                    if (config['autoplayHoverPause'] == 0) {
                         config['autoplayHoverPause'] = false;
                     } else {
                         config['autoplayHoverPause'] = true;
                     }
-                    if(config['rtl'] == 0){
+                    if (config['rtl'] == 0) {
                         config['rtl'] = false;
                     } else {
                         config['rtl'] = true;
                     }
-                    if(config['loop'] == 0){
+                    if (config['loop'] == 0) {
                         config['loop'] = false;
                     } else {
                         config['loop'] = true;
                     }
                     var mobile_items = '<?= $mobile_items ?>';
-                    mobile_items = mobile_items? mobile_items : 1 ;
+                    mobile_items = mobile_items ? mobile_items : 1;
                     var tablet_small_items = '<?= $tablet_small_items ?>';
-                    tablet_small_items = tablet_small_items? tablet_small_items : 3;
+                    tablet_small_items = tablet_small_items ? tablet_small_items : 3;
                     var tablet_items = '<?= $tablet_items?>';
-                    tablet_items = tablet_items? tablet_items : 3;
+                    tablet_items = tablet_items ? tablet_items : 3;
                     var portrait_items = '<?= $portrait_items?>';
                     tablet_items = tablet_items ? tablet_items : 4;
                     var large_items = '<?= $default_items?>';
@@ -385,29 +437,30 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                     large_max_items = large_max_items ? large_max_items : 6;
 
                     config['responsive'] = {
-                        0 : {items: mobile_items},
-                        480 : {items: tablet_small_items},
-                        640 : {items: tablet_items},
-                        768 : {items: portrait_items},
-                        980 : {items: large_items},
-                        1200 : {items: large_max_items}
+                        0: {items: mobile_items},
+                        480: {items: tablet_small_items},
+                        640: {items: tablet_items},
+                        768: {items: portrait_items},
+                        980: {items: large_items},
+                        1200: {items: large_max_items}
                     };
 
                     owlCarousel.owlCarousel(config);
                     <?php } ?>
 
                     var id = owlCarousel.attr('id');
-                    if($("#" + id + " .gallery-item").height){
+                    if ($("#" + id + " .gallery-item").height) {
                         var height = 0;
-                        $("#" + id + " .gallery-item").each(function(){
-                            if(jQuery(this).height()>height){
+                        $("#" + id + " .gallery-item").each(function () {
+                            if (jQuery(this).height() > height) {
                                 height = jQuery(this).height();
                             }
                         });
-                        if(height>0){
-                            $("#" + id + " .gallery-item").css({"height":height+"px"});
+                        if (height > 0) {
+                            $("#" + id + " .gallery-item").css({"height": height + "px"});
                         }
-                    };
+                    }
+                    ;
 
                     $('.lof-sort-loading').hide();
                 }
@@ -416,7 +469,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
 
         var sortType = '<?= $sortType ?>';
         var typeAjax = '<?= $type ?>';
-        if ( typeAjax == '' ){
+        if (typeAjax == '') {
             setSelected(sortType);
         } else {
             setSelected(typeAjax);

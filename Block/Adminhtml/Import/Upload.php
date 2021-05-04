@@ -18,6 +18,7 @@
  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
  * @license    https://landofcoder.com/terms
  */
+
 namespace Lof\ProductReviews\Block\Adminhtml\Import;
 
 class Upload extends \Magento\Backend\Block\Widget\Form\Container
@@ -31,8 +32,8 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
 
     /**
      * @param \Magento\Backend\Block\Widget\Context $context
-     * @param \Magento\Framework\Registry           $registry
-     * @param array                                 $data
+     * @param \Magento\Framework\Registry $registry
+     * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Widget\Context $context,
@@ -50,7 +51,6 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
      */
     protected function _construct()
     {
-
         $this->_objectId = 'review_id';
         $this->_blockGroup = 'Lof_ProductReviews';
         $this->_controller = 'adminhtml_import';
@@ -64,8 +64,8 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
                 'class' => 'save primary',
                 'onclick' => 'setLocation(\'' . $this->getUrl('lof_product_reviews/import/save_upload') . '\')'
             ]
-
         );
+
         $this->buttonList->remove('save');
         $this->buttonList->remove('reset');
         if ($this->_isAllowedAction('Lof_ProductReviews::import_delete')) {
@@ -83,7 +83,10 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
     public function getHeaderText()
     {
         if ($this->_coreRegistry->registry('lofproductreviews_import')->getId()) {
-            return __("Edit Message '%1'", $this->escapeHtml($this->_coreRegistry->registry('lofproductreviews_import')->getTitle()));
+            return __(
+                "Edit Message '%1'",
+                $this->escapeHtml($this->_coreRegistry->registry('lofproductreviews_import')->getTitle())
+            );
         } else {
             return __('New Message');
         }
@@ -108,7 +111,10 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
      */
     protected function _getSaveAndContinueUrl()
     {
-        return $this->getUrl('lof_product_reviews/import/save', ['_current' => true, 'back' => 'edit', 'active_tab' => '{{tab_id}}']);
+        return $this->getUrl(
+            'lof_product_reviews/import/save',
+            ['_current' => true, 'back' => 'edit', 'active_tab' => '{{tab_id}}']
+        );
     }
 
     /**

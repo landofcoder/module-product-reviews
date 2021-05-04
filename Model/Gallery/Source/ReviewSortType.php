@@ -21,7 +21,6 @@
 
 namespace Lof\ProductReviews\Model\Gallery\Source;
 
-
 class ReviewSortType implements \Magento\Framework\Option\ArrayInterface
 {
     /**
@@ -31,22 +30,22 @@ class ReviewSortType implements \Magento\Framework\Option\ArrayInterface
      */
     public function toOptionArray()
     {
-        $groupList = array();
+        $groupList = [];
 
-        $groupList[] = array(
+        $groupList[] = [
             'label' => __('Default'),
             'value' => 'default'
-        );
+        ];
 
-        $groupList[] = array(
+        $groupList[] = [
             'label' => __('Helpful'),
             'value' => 'helpful'
-        );
+        ];
 
-        $groupList[] = array(
+        $groupList[] = [
             'label' => __('Average Rating Percent'),
             'value' => 'rating'
-        );
+        ];
 
         return $groupList;
     }

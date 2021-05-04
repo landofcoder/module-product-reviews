@@ -21,7 +21,6 @@
 
 namespace Lof\ProductReviews\Model\Gallery;
 
-
 class Config implements ConfigInterface
 {
     /**
@@ -94,8 +93,8 @@ class Config implements ConfigInterface
     public function getBaseTmpMediaUrl()
     {
         return $this->storeManager->getStore()->getBaseUrl(
-                \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-            )  . $this->getBaseMediaUrlAddition();
+            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+        )  . $this->getBaseMediaUrlAddition();
     }
 
     /**

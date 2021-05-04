@@ -35,15 +35,25 @@ class Sender
     /**
      * Sender email
      */
-    const SENDER_EMAIL='trans_email/ident_general/email';
+    const SENDER_EMAIL = 'trans_email/ident_general/email';
     /**
      * @var string|null
      */
     protected $messageBody = null;
 
+    /**
+     * @var
+     */
     public $_storeManager;
 
+    /**
+     * @var \Magento\Framework\Mail\Template\TransportBuilder
+     */
     protected $_transportBuilder;
+
+    /**
+     * @var ScopeConfigInterface
+     */
     protected $scopeConfig;
 
     /**
@@ -51,10 +61,30 @@ class Sender
      */
     protected $inlineTranslation;
 
+    /**
+     * @var \Magento\Framework\Message\ManagerInterface
+     */
     protected $messageManager;
+
+    /**
+     * @var Session
+     */
     protected $customerSession;
+
+    /**
+     * @var CollectionFactory
+     */
     protected $customerCollectionFactory;
 
+    /**
+     * Sender constructor.
+     * @param \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation
+     * @param \Magento\Framework\Mail\Template\TransportBuilder $_transportBuilder
+     * @param \Magento\Framework\Message\ManagerInterface $messageManager
+     * @param CollectionFactory $customerCollectionFactory
+     * @param Session $customerSession
+     * @param ScopeConfigInterface $scopeConfig
+     */
     public function __construct(
         \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
         \Magento\Framework\Mail\Template\TransportBuilder $_transportBuilder,
@@ -67,11 +97,13 @@ class Sender
         $this->customerCollectionFactory = $customerCollectionFactory;
         $this->customerSession = $customerSession;
         $this->scopeConfig = $scopeConfig;
-        $this->inlineTranslation    = $inlineTranslation;
+        $this->inlineTranslation = $inlineTranslation;
         $this->_transportBuilder = $_transportBuilder;
     }
 
-
+    /**
+     * @param $data
+     */
     public function sendCouponCodeEmail($data)
     {
         $sender ['email'] = $this->scopeConfig->getValue(
@@ -84,12 +116,14 @@ class Sender
             $postObject->setData($data);
 
             $customerId = $this->customerSession->getCustomerId();
-            if($customerId) {
-                $customer = $this->customerCollectionFactory->create()->addFieldToFilter('entity_id', $customerId)->getData();
+            if ($customerId) {
+                $customer = $this->customerCollectionFactory->create()->addFieldToFilter(
+                    'entity_id',
+                    $customerId
+                )->getData();
                 $customerEmail = $customer[0]['email'];
                 $transport = $this->_transportBuilder
                     ->setTemplateIdentifier('lof_product_reviews_email_settings_review_product_templates')
-
                     ->setTemplateOptions(
                         [
                             'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
@@ -99,10 +133,9 @@ class Sender
                     ->setTemplateVars(['data' => $postObject])
                     ->setFrom($sender)->addTo($customerEmail)->getTransport();
 
-            }else{
+            } else {
                 $transport = $this->_transportBuilder
                     ->setTemplateIdentifier('lof_product_reviews_email_settings_review_product_templates')
-
                     ->setTemplateOptions(
                         [
                             'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
@@ -122,5 +155,4 @@ class Sender
             return;
         }
     }
-
 }

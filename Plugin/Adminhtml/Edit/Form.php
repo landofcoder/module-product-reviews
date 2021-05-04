@@ -26,10 +26,29 @@ use Lof\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as Revi
 
 class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
 {
-
+    /**
+     * @var CustomReviewCollection
+     */
     protected $_customReviewFactory;
+
+    /**
+     * @var ReviewReplyCollection
+     */
     protected $_reviewReplyFactory;
 
+    /**
+     * Form constructor.
+     * @param \Magento\Backend\Block\Template\Context $context
+     * @param \Magento\Framework\Registry $registry
+     * @param \Magento\Framework\Data\FormFactory $formFactory
+     * @param \Magento\Store\Model\System\Store $systemStore
+     * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
+     * @param \Magento\Catalog\Model\ProductFactory $productFactory
+     * @param \Magento\Review\Helper\Data $reviewData
+     * @param CustomReviewCollection $customReviewFactory
+     * @param ReviewReplyCollection $reviewReplyFactory
+     * @param array $data
+     */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
@@ -40,28 +59,47 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
         \Magento\Review\Helper\Data $reviewData,
         CustomReviewCollection $customReviewFactory,
         ReviewReplyCollection $reviewReplyFactory,
-        array $data = [])
-    {
-        parent::__construct($context, $registry, $formFactory, $systemStore, $customerRepository, $productFactory, $reviewData, $data);
+        array $data = []
+    ) {
+        parent::__construct(
+            $context,
+            $registry,
+            $formFactory,
+            $systemStore,
+            $customerRepository,
+            $productFactory,
+            $reviewData,
+            $data
+        );
         $this->_customReviewFactory = $customReviewFactory;
         $this->_reviewReplyFactory = $reviewReplyFactory;
     }
 
+    /**
+     * @param \Magento\Review\Block\Adminhtml\Edit\Form $object
+     * @param $form
+     * @return array
+     */
     public function beforeSetForm(\Magento\Review\Block\Adminhtml\Edit\Form $object, $form)
     {
         $review = $object->_coreRegistry->registry('review_data');
         $reviewId = $this->_request->getParam('id');
 
-        $customReview = $this->_customReviewFactory->create()->addFieldToSelect('*')->addFieldToFilter('review_id', ['in' => $reviewId]);
-        if(!empty($customReview))
-        {
-            foreach($customReview as $data){
+        $customReview = $this->_customReviewFactory->create()->addFieldToSelect('*')->addFieldToFilter(
+            'review_id',
+            ['in' => $reviewId]
+        );
+        if (!empty($customReview)) {
+            foreach ($customReview as $data) {
                 $custom = $data->getData();
             }
         }
 
-        $reviewReply = $this->_reviewReplyFactory->create()->addFieldToSelect('*')->addFieldToFilter('review_id', ['in' => $reviewId]);
-        if(!empty($customReview)) {
+        $reviewReply = $this->_reviewReplyFactory->create()->addFieldToSelect('*')->addFieldToFilter(
+            'review_id',
+            ['in' => $reviewId]
+        );
+        if (!empty($customReview)) {
             foreach ($reviewReply as $data) {
                 $reply = $data->getData();
             }
@@ -160,7 +198,7 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
             ]
         );
 
-        if(!empty($review->getCustomerId())) {
+        if (!empty($review->getCustomerId())) {
 
             $fieldset2 = $form->addFieldset(
                 'add_review_comment',
@@ -221,13 +259,13 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
             );
         }
 
-        if(!empty($custom) && !empty($reply)) {
+        if (!empty($custom) && !empty($reply)) {
             $reviews = array_merge($review->getData(), $custom, $reply);
-        }elseif(!empty($custom) && empty($reply)) {
+        } elseif (!empty($custom) && empty($reply)) {
             $reviews = array_merge($review->getData(), $custom);
-        }elseif(empty($custom) && !empty($reply)) {
+        } elseif (empty($custom) && !empty($reply)) {
             $reviews = array_merge($review->getData(), $reply);
-        } else{
+        } else {
             $reviews = $review->getData();
         }
 

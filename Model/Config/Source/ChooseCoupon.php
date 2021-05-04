@@ -18,9 +18,8 @@
  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
  * @license    https://landofcoder.com/terms
  */
-namespace Lof\ProductReviews\Model\Config\Source;
 
-use Magento\Customer\Model\ResourceModel\Group\CollectionFactory;
+namespace Lof\ProductReviews\Model\Config\Source;
 
 /**
  * Config category source
@@ -29,13 +28,18 @@ use Magento\Customer\Model\ResourceModel\Group\CollectionFactory;
  */
 class ChooseCoupon implements \Magento\Framework\Option\ArrayInterface
 {
-
+    /**
+     * @var \Magento\SalesRule\Model\RuleFactory
+     */
     protected $ruleFactory;
 
-
-
+    /**
+     * ChooseCoupon constructor.
+     * @param \Magento\SalesRule\Model\RuleFactory $ruleFactory
+     */
     public function __construct(
-        \Magento\SalesRule\Model\RuleFactory $ruleFactory) {
+        \Magento\SalesRule\Model\RuleFactory $ruleFactory
+    ) {
         $this->ruleFactory = $ruleFactory;
     }
 

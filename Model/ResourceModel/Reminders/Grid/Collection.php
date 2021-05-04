@@ -24,9 +24,6 @@ namespace Lof\ProductReviews\Model\ResourceModel\Reminders\Grid;
 use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Api\Search\AggregationInterface;
 use Lof\ProductReviews\Model\ResourceModel\Reminders\Collection as RemindersCollection;
-/**
- * Collection for displaying grid of Reminders customers
- */
 
 class Collection extends RemindersCollection implements SearchResultInterface
 {
@@ -34,6 +31,7 @@ class Collection extends RemindersCollection implements SearchResultInterface
      * @var AggregationInterface
      */
     protected $aggregations;
+
     /**
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
@@ -77,6 +75,7 @@ class Collection extends RemindersCollection implements SearchResultInterface
         $this->_init($model, $resourceModel);
         $this->setMainTable($mainTable);
     }
+
     /**
      * @return AggregationInterface
      */
@@ -84,6 +83,7 @@ class Collection extends RemindersCollection implements SearchResultInterface
     {
         return $this->aggregations;
     }
+
     /**
      * @param AggregationInterface $aggregations
      * @return $this
@@ -113,6 +113,7 @@ class Collection extends RemindersCollection implements SearchResultInterface
         $idsSelect->limit($limit, $offset);
         return $idsSelect;
     }
+
     /**
      * Retrieve all ids for collection
      * Backward compatibility with EAV collection
@@ -125,6 +126,7 @@ class Collection extends RemindersCollection implements SearchResultInterface
     {
         return $this->getConnection()->fetchCol($this->_getAllIdsSelect($limit, $offset), $this->_bindParams);
     }
+
     /**
      * Get search criteria.
      *
@@ -134,6 +136,7 @@ class Collection extends RemindersCollection implements SearchResultInterface
     {
         return null;
     }
+
     /**
      * Set search criteria.
      *
@@ -145,6 +148,7 @@ class Collection extends RemindersCollection implements SearchResultInterface
     {
         return $this;
     }
+
     /**
      * Get total count.
      *
@@ -154,6 +158,7 @@ class Collection extends RemindersCollection implements SearchResultInterface
     {
         return $this->getSize();
     }
+
     /**
      * Set total count.
      *
@@ -165,6 +170,7 @@ class Collection extends RemindersCollection implements SearchResultInterface
     {
         return $this;
     }
+
     /**
      * Set items list.
      *
@@ -177,6 +183,9 @@ class Collection extends RemindersCollection implements SearchResultInterface
         return $this;
     }
 
+    /**
+     * @return Collection
+     */
     protected function _afterLoad()
     {
         foreach ($this as $item) {
@@ -194,5 +203,4 @@ class Collection extends RemindersCollection implements SearchResultInterface
         }
         return parent::_afterLoad();
     }
-
 }

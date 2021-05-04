@@ -21,12 +21,8 @@
 
 namespace Lof\ProductReviews\Controller\Adminhtml;
 
-/**
- * Cms manage blocks controller
- *
- * @author      Magento Core Team <core@magentocommerce.com>
- */
-abstract class Import extends \Magento\Backend\App\Action {
+abstract class Import extends \Magento\Backend\App\Action
+{
     /**
      * Core registry
      *
@@ -35,18 +31,16 @@ abstract class Import extends \Magento\Backend\App\Action {
     protected $_coreRegistry = null;
 
     /**
+     * Import constructor.
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry         $coreRegistry
+     * @param \Magento\Framework\Registry $coreRegistry
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Registry $coreRegistry
-    )
-    {
+    ) {
         $this->_coreRegistry = $coreRegistry;
         parent::__construct($context);
-
-
     }
 
     /**
@@ -63,10 +57,11 @@ abstract class Import extends \Magento\Backend\App\Action {
         return $resultPage;
     }
 
+    /**
+     * @return mixed
+     */
     public function setDefaultOrderStatuses()
     {
         return $this->_getResource()->setDefaultOrderStatuses($this);
-
     }
-
 }

@@ -23,6 +23,9 @@ namespace Lof\ProductReviews\Model\ResourceModel;
 
 class CustomReview extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         $this->_init('lof_review_customize', 'review_customize_id');

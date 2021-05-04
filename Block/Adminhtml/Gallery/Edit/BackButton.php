@@ -22,9 +22,6 @@ namespace Lof\ProductReviews\Block\Adminhtml\Gallery\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
-/**
- * Class BackButton
- */
 class BackButton extends GenericButton implements ButtonProviderInterface
 {
     /**
@@ -51,6 +48,6 @@ class BackButton extends GenericButton implements ButtonProviderInterface
         $galleryModel = $objectManager->create(\Lof\ProductReviews\Model\Gallery::class);
         $reviewId = $galleryModel->load($this->getGalleryId())->getReviewId();
 
-        return $this->getUrl('review/product/edit', array('id' => $reviewId));
+        return $this->getUrl('review/product/edit', ['id' => $reviewId]);
     }
 }

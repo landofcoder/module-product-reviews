@@ -24,9 +24,6 @@ use Magento\Backend\Block\Widget\Context;
 use Lof\ProductReviews\Api\GalleryRepositoryInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 
-/**
- * Class GenericButton
- */
 class GenericButton
 {
     /**

@@ -21,19 +21,11 @@
 
 namespace Lof\ProductReviews\Controller\Adminhtml\Gallery;
 
-
 use Magento\Backend\App\Action;
 use Magento\Framework\Exception\LocalizedException;
 
 class Save extends \Magento\Backend\App\Action
 {
-    /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
-     */
-    const ADMIN_RESOURCE = 'Lof_ProductReviews::save';
-
     /**
      * @var \Lof\ProductReviews\Model\Gallery
      */
@@ -49,19 +41,29 @@ class Save extends \Magento\Backend\App\Action
      */
     protected $_jsonEncoder;
 
+    /**
+     * Save constructor.
+     * @param Action\Context $context
+     * @param \Lof\ProductReviews\Model\GalleryFactory $galleryFactory
+     * @param \Lof\ProductReviews\Api\GalleryRepositoryInterface $galleryRepository
+     * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
+     */
     public function __construct(
         Action\Context $context,
         \Lof\ProductReviews\Model\GalleryFactory $galleryFactory,
         \Lof\ProductReviews\Api\GalleryRepositoryInterface $galleryRepository,
         \Magento\Framework\Json\EncoderInterface $jsonEncoder
-    )
-    {
+    ) {
         $this->_jsonEncoder = $jsonEncoder;
         $this->galleryFactory = $galleryFactory;
         $this->galleryRepository = $galleryRepository;
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @throws \Exception
+     */
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
@@ -101,6 +103,7 @@ class Save extends \Magento\Backend\App\Action
             return $resultRedirect->setPath('review/product/edit', ['id' => $data['review_id'], '_current' => true]);
         }
     }
+
     /**
      * {@inheritdoc}
      */

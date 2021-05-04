@@ -23,6 +23,9 @@ namespace Lof\ProductReviews\Model;
 
 class ReviewReply extends \Magento\Framework\Model\AbstractModel
 {
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         $this->_init('Lof\ProductReviews\Model\ResourceModel\ReviewReply');

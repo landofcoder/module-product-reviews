@@ -23,19 +23,19 @@
 
  use Magento\Framework\App\Filesystem\DirectoryList;
 
- class Upload extends \Magento\Backend\App\Action
- {
-     /**
-      * @var \Magento\Framework\Controller\Result\RawFactory
-      */
-     protected $resultRawFactory;
+class Upload extends \Magento\Backend\App\Action
+{
+    /**
+     * @var \Magento\Framework\Controller\Result\RawFactory
+     */
+    protected $resultRawFactory;
 
-     /**
-      * @var \Magento\Framework\Json\EncoderInterface
-      */
-     protected $_jsonEncoder;
+    /**
+     * @var \Magento\Framework\Json\EncoderInterface
+     */
+    protected $_jsonEncoder;
 
-     /**
+    /**
      * Upload constructor.
      *
      * @param \Magento\Backend\App\Action\Context $context
@@ -96,6 +96,7 @@
         $response->setContents($results);
         return $response;
     }
+
     /**
      * {@inheritdoc}
      */
@@ -103,4 +104,4 @@
     {
         return $this->_authorization->isAllowed('Lof_ProductReviews::lof_product_gallery');
     }
- }
+}

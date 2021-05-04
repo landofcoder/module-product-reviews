@@ -22,10 +22,6 @@ namespace Lof\ProductReviews\Block\Adminhtml\Gallery\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
-/**
- * Class SaveButton
- * @package Magento\Customer\Block\Adminhtml\Edit
- */
 class SaveButton extends GenericButton implements ButtonProviderInterface
 {
     /**

@@ -21,7 +21,6 @@
 
 namespace Lof\ProductReviews\Controller\Adminhtml\Gallery;
 
-
 use Magento\Backend\App\Action;
 
 class Delete extends \Magento\Backend\App\Action
@@ -68,6 +67,10 @@ class Delete extends \Magento\Backend\App\Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\FileSystemException
+     */
     public function execute()
     {
         // check if we know what should be deleted
@@ -86,8 +89,9 @@ class Delete extends \Magento\Backend\App\Action
                 $mediaDirectory = $this->_fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
                 $mediaRootDir = $mediaDirectory->getAbsolutePath('lof/product_reviews/');
 
-                if( $this->_file->isExists($mediaRootDir .$name) )
+                if ($this->_file->isExists($mediaRootDir .$name)) {
                     $this->_file->deleteFile($mediaRootDir .$name);
+                }
             }
 
             $model->setValue($this->_jsonEncoder->encode([]))->save();
@@ -97,6 +101,7 @@ class Delete extends \Magento\Backend\App\Action
             return $resultRedirect->setPath('review/product/edit', ['id' => $reviewId, '_current' => true]);
         }
     }
+
     /**
      * {@inheritdoc}
      */

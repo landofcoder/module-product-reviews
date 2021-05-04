@@ -28,9 +28,6 @@ use Magento\Ui\Component\Listing\Columns\Column;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Escaper;
 
-/**
- * Class BannerActions
- */
 class ReviewGalleryActions extends Column
 {
     /** Url path */

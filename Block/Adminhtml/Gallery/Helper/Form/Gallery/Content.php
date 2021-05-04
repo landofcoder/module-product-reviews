@@ -21,7 +21,6 @@
 
 namespace Lof\ProductReviews\Block\Adminhtml\Gallery\Helper\Form\Gallery;
 
-
 use Magento\Framework\App\ObjectManager;
 use Magento\Backend\Block\Media\Uploader;
 use Magento\Framework\View\Element\AbstractBlock;
@@ -63,15 +62,15 @@ class Content extends \Magento\Backend\Block\Widget
     private $imageUploadConfigDataProvider;
 
     /**
+     * Content constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
      * @param \Lof\ProductReviews\Model\Gallery\Config $mediaConfig
      * @param \Magento\Framework\Registry $coreRegister
      * @param \Magento\Framework\ObjectManagerInterface $objectManager
      * @param array $data
-     * @param ImageUploadConfigDataProvider $imageUploadConfigDataProvider
-     * @param Database $fileStorageDatabase
-     *
+     * @param ImageUploadConfigDataProvider|null $imageUploadConfigDataProvider
+     * @param Database|null $fileStorageDatabase
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
@@ -233,7 +232,7 @@ class Content extends \Magento\Backend\Block\Widget
         $imageTypes = [];
         $value = $this->getElement()->getImages();
         foreach ($value as $images) {
-            foreach($images as $attribute) {
+            foreach ($images as $attribute) {
                 $imageTypes['image'] = [
                     'code' => 'image',
                     'value' => $attribute['file'],

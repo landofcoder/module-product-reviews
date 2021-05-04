@@ -29,13 +29,6 @@ use Lof\ProductReviews\Model\ResourceModel\Reminders\CollectionFactory;
 class MassDelete extends \Magento\Backend\App\Action
 {
     /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
-     */
-    const ADMIN_RESOURCE = 'Lof_ProductReviews::reminders';
-
-    /**
      * @var Filter
      */
     protected $filter;
@@ -46,6 +39,7 @@ class MassDelete extends \Magento\Backend\App\Action
     protected $collectionFactory;
 
     /**
+     * MassDelete constructor.
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
@@ -76,6 +70,7 @@ class MassDelete extends \Magento\Backend\App\Action
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         return $resultRedirect->setPath('*/*/');
     }
+
     /**
      * {@inheritdoc}
      */

@@ -20,13 +20,6 @@
  */
 namespace Lof\ProductReviews\Api\Data;
 
-//use Lof\ProductReviews\Model\Gallery;
-
-/**
- * Product Reviews Gallery interface.
- * @api
- * @since 100.0.2
- */
 interface GalleryInterface
 {
     /**#@+

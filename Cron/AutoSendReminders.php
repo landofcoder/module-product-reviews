@@ -37,14 +37,23 @@ class AutoSendReminders
      * @var \Lof\ProductReviews\Helper\Data
      */
     protected $_dataHelper;
+
+    /**
+     * @var \Magento\Framework\Stdlib\DateTime\DateTime
+     */
     protected $date;
 
+    /**
+     * @var null
+     */
     protected $_orderData = null;
 
     /**
+     * AutoSendReminders constructor.
      * @param \Lof\ProductReviews\Model\Reminders $reminders
      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
      * @param \Lof\ProductReviews\Helper\Data $dataHelper
+     * @param \Magento\Framework\Stdlib\DateTime\DateTime $date
      */
     public function __construct(
         \Lof\ProductReviews\Model\Reminders $reminders,
@@ -76,14 +85,14 @@ class AutoSendReminders
                 'created_at',
                 'asc'
             );
-            if( !empty($reminderCollection) ) {
+            if (!empty($reminderCollection)) {
                 $customers = [];
                 foreach ($reminderCollection as $data) {
                     $orderId = $data->getOrderId();
                     $orderStatus = $this->getOrderStatus($orderId);
                     $order_increment_id = $this->getOrderIncrementId($orderId);
-                    $orderCreatedAt =new \DateTime($this->getOrderCreated($orderId));
-                    if( $orderStatus == 'complete' ) {
+                    $orderCreatedAt = new \DateTime($this->getOrderCreated($orderId));
+                    if ($orderStatus == 'complete') {
                         $customers[] = [
                             'name' => $data->getName(),
                             'email' => $data->getEmail(),
@@ -93,34 +102,57 @@ class AutoSendReminders
                         ];
                     }
                     $currentDate = new \DateTime();
-                    $diff = (array)date_diff($orderCreatedAt,$currentDate);
-                if($diff['days'] == 10)
-                {
-                    //Send reminder to customers
-                    $this->_reminders->send($customers);
-                }
+                    $diff = (array)date_diff($orderCreatedAt, $currentDate);
+                    if ($diff['days'] == 10) {
+                        //Send reminder to customers
+                        $this->_reminders->send($customers);
+                    }
                 }
 
 
             }
         }
     }
-    protected function getOrderData($orderId) {
-        if(!$this->_orderData){
+
+    /**
+     * @param $orderId
+     * @return \Magento\Sales\Api\Data\OrderInterface|null
+     */
+    protected function getOrderData($orderId)
+    {
+        if (!$this->_orderData) {
             $this->_orderData = $this->_orderRepository->get((int)$orderId);
         }
         return $this->_orderData;
     }
-    protected function getOrderStatus($orderId){
+
+    /**
+     * @param $orderId
+     * @return string|null
+     */
+    protected function getOrderStatus($orderId)
+    {
         $order = $this->getOrderData($orderId);
         $status = $order->getStatus();
         return $status;
     }
-    protected function getOrderIncrementId($orderId){
+
+    /**
+     * @param $orderId
+     * @return string|null
+     */
+    protected function getOrderIncrementId($orderId)
+    {
         $order = $this->getOrderData($orderId);
         return $order->getIncrementId();
     }
-    protected function getOrderCreated($orderId){
+
+    /**
+     * @param $orderId
+     * @return string|null
+     */
+    protected function getOrderCreated($orderId)
+    {
         $order = $this->getOrderData($orderId);
         return $order->getCreatedAt();
     }

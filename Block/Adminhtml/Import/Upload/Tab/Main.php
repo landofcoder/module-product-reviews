@@ -100,6 +100,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
         $this->setForm($form);
         return parent::_prepareForm();
     }
+
     /**
      * Prepare label for tab
      *
@@ -109,6 +110,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
     {
         return __('Import Data');
     }
+
     /**
      * Prepare title for tab
      *
@@ -118,6 +120,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
     {
         return __('Import Data');
     }
+
     /**
      * {@inheritdoc}
      */
@@ -125,6 +128,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
     {
         return true;
     }
+
     /**
      * {@inheritdoc}
      */
@@ -132,6 +136,7 @@ class Main extends \Magento\Backend\Block\Widget\Form\Generic implements TabInte
     {
         return false;
     }
+
     /**
      * Check permission for passed action
      *

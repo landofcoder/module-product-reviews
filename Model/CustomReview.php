@@ -24,18 +24,26 @@ namespace Lof\ProductReviews\Model;
 class CustomReview extends \Magento\Framework\Model\AbstractModel
 {
 
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         $this->_init('Lof\ProductReviews\Model\ResourceModel\CustomReview');
     }
 
-    public function addCountRating($reviewId) {
+    /**
+     * @param $reviewId
+     * @return mixed
+     */
+    public function addCountRating($reviewId)
+    {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $getConnection = $objectManager->get(\Magento\Framework\App\ResourceConnection::class);
 
         $query = 'SELECT *, SUM(rate_vote.percent) AS sum, COUNT(*) AS count, SUM(rate_vote.percent)/COUNT(*) AS average';
         $query .= ' FROM rating_option_vote as rate_vote';
-        $query .= ' WHERE review_id = '.(int)$reviewId;
+        $query .= ' WHERE review_id = ' . (int)$reviewId;
 
         $item = $getConnection->getConnection()->fetchAll($query);
         return $item[0]['average'];

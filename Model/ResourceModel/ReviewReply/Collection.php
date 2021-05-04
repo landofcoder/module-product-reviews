@@ -23,8 +23,14 @@ namespace Lof\ProductReviews\Model\ResourceModel\ReviewReply;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
+    /**
+     * @var string
+     */
     protected $_idFieldName = 'reply_id';
 
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         $this->_init('Lof\ProductReviews\Model\ReviewReply', 'Lof\ProductReviews\Model\ResourceModel\ReviewReply');

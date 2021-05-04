@@ -21,7 +21,6 @@
 
 namespace Lof\ProductReviews\Controller\Adminhtml\Reminders;
 
-
 class Index extends \Magento\Backend\App\Action
 {
     /**
@@ -30,28 +29,33 @@ class Index extends \Magento\Backend\App\Action
     protected $_resultPageFactory;
 
     /**
+     * Index constructor.
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Backend\Model\View\Result\PageFactory $resultFactory
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
-    )
-    {
+    ) {
         $this->_resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Page|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
         $resultPage->setActiveMenu('Lof_ProductReviews::lof_product_reviews_reminders')
             ->addBreadcrumb(
-                __('Reviews Reminders List'), __('Reviews Reminders List')
+                __('Reviews Reminders List'),
+                __('Reviews Reminders List')
             )->getConfig()->getTitle()->prepend(__('Reviews Reminders List'));
         return $resultPage;
     }
+
     /**
      * {@inheritdoc}
      */

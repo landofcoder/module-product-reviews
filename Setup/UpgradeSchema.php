@@ -35,10 +35,11 @@ class UpgradeSchema implements UpgradeSchemaInterface
      * {@inheritdoc}
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context) {
+    public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    {
         $installer = $setup;
         $installer->startSetup();
-         //Update for version 1.0.5
+        //Update for version 1.0.5
         if (version_compare($context->getVersion(), '1.0.2', '<')) {
             $table = $installer->getTable('lof_review_customize');
             $replyTable = $installer->getTable('lof_review_reply');
@@ -47,10 +48,10 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $table,
                 'email_address',
                 [
-                    'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    'length'   => 255,
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
                     'nullable' => true,
-                    'comment'  => 'Email Address'
+                    'comment' => 'Email Address'
                 ]
             );
 
@@ -58,10 +59,10 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $table,
                 'avatar_image',
                 [
-                    'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    'length'   => 150,
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 150,
                     'nullable' => true,
-                    'comment'  => 'Avatar Image'
+                    'comment' => 'Avatar Image'
                 ]
             );
 
@@ -69,10 +70,10 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $table,
                 'avatar_url',
                 [
-                    'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    'length'   => 200,
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 200,
                     'nullable' => true,
-                    'comment'  => 'Avatar Image From Web Url'
+                    'comment' => 'Avatar Image From Web Url'
                 ]
             );
 
@@ -80,30 +81,30 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $replyTable,
                 'user_name',
                 [
-                    'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    'length'   => 255,
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
                     'nullable' => true,
-                    'comment'  => 'User Name'
+                    'comment' => 'User Name'
                 ]
             );
             $installer->getConnection()->addColumn(
                 $replyTable,
                 'website',
                 [
-                    'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    'length'   => 255,
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
                     'nullable' => true,
-                    'comment'  => 'Website Url'
+                    'comment' => 'Website Url'
                 ]
             );
             $installer->getConnection()->addColumn(
                 $replyTable,
                 'email_address',
                 [
-                    'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    'length'   => 255,
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
                     'nullable' => true,
-                    'comment'  => 'Email Address'
+                    'comment' => 'Email Address'
                 ]
             );
 
@@ -111,10 +112,10 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $replyTable,
                 'avatar_url',
                 [
-                    'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    'length'   => 255,
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
                     'nullable' => true,
-                    'comment'  => 'Email Address'
+                    'comment' => 'Email Address'
                 ]
             );
 
@@ -122,10 +123,10 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 $replyTable,
                 'admin_user_id',
                 [
-                    'type'     => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-                    'length'   => 12,
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 12,
                     'nullable' => true,
-                    'comment'  => 'Admin User Id'
+                    'comment' => 'Admin User Id'
                 ]
             );
         }

@@ -74,7 +74,7 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
     /**
      * @var \Magento\Framework\Filesystem
      */
-    protected $_fileSystem ;
+    protected $_fileSystem;
 
     /**
      * @var \Magento\Framework\Image\AdapterFactory
@@ -99,6 +99,8 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
      * @param \Lof\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory $replyColFactory
      * @param \Lof\ProductReviews\Model\ResourceModel\RateReport\CollectionFactory $rateColFactory
      * @param array $data
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         \Magento\Catalog\Block\Product\Context $context,
@@ -134,10 +136,27 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
         $this->_fileSystem = $fileSystem;
         $this->_imageFactory = $imageFactory;
         $this->scopeConfig = $context->getScopeConfig();
-        parent::__construct($context, $urlEncoder, $jsonEncoder, $string, $productHelper, $productTypeConfig, $localeFormat, $customerSession, $productRepository, $priceCurrency, $collectionFactory, $data);
+        parent::__construct(
+            $context,
+            $urlEncoder,
+            $jsonEncoder,
+            $string,
+            $productHelper,
+            $productTypeConfig,
+            $localeFormat,
+            $customerSession,
+            $productRepository,
+            $priceCurrency,
+            $collectionFactory,
+            $data
+        );
     }
 
-    public function getCustomCollection(){
+    /**
+     * @return mixed
+     */
+    public function getCustomCollection()
+    {
         return $this->_customFactory->create();
     }
 
@@ -145,7 +164,8 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
      * @param $reviewId
      * @return \Lof\ProductReviews\Model\ResourceModel\CustomReview\Collection
      */
-    public function getReviewsCustom($reviewId){
+    public function getReviewsCustom($reviewId)
+    {
         $customCollection = $this->getCustomCollection();
         $customize = $customCollection->addFieldToFilter('review_id', $reviewId);
         return $customize;
@@ -155,12 +175,13 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
      * @param $reviewId
      * @return \Lof\ProductReviews\Model\ResourceModel\CustomReview\Collection
      */
-    public function getHelpful($reviewId) {
+    public function getHelpful($reviewId)
+    {
         $result = [];
 
         $customCollection = $this->getCustomCollection();
         $customize = $customCollection->addFieldToFilter('review_id', $reviewId);
-        foreach ($customize as $data){
+        foreach ($customize as $data) {
             $result['helpful'] = $data->getCountHelpful();
             $result['total'] = $data->getTotalHelpful();
         }
@@ -172,11 +193,12 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
      * @param $reviewId
      * @return array|mixed
      */
-    public function getReviewsGallery($reviewId){
+    public function getReviewsGallery($reviewId)
+    {
         $reviewGalleries = $this->_galleryFactory->create();
         $gallery = $reviewGalleries->addFieldToFilter('review_id', $reviewId);
         $imageName = [];
-        foreach($gallery as $value){
+        foreach ($gallery as $value) {
             $imageName = json_decode($value->getValue());
         }
         return $imageName;
@@ -197,13 +219,16 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
     }
 
     /**
-     * @param $image, $width, $height
+     * @param $image , $width, $height
      * @return $imageLink
-    */
-    public function resizeImage($image, $width, $height) {
-        $absolutePath = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('lof/product_reviews/').$image;
-        if (!file_exists($absolutePath)) return false;
-        $imageResized = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('resized/'.$width.'/').$image;
+     */
+    public function resizeImage($image, $width, $height)
+    {
+        $absolutePath = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('lof/product_reviews/') . $image;
+        if (!file_exists($absolutePath)) {
+            return false;
+        }
+        $imageResized = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('resized/' . $width . '/') . $image;
         if (!file_exists($imageResized)) {
             //create image factory...
             $imageResize = $this->_imageFactory->create();
@@ -218,7 +243,7 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
             //save image
             $imageResize->save($destination);
         }
-        $resizedURL = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'resized/'.$width.'/'.$image;
+        $resizedURL = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'resized/' . $width . '/' . $image;
         return $resizedURL;
     }
 
@@ -226,7 +251,8 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
      * @param $reviewId
      * @return \Lof\ProductReviews\Model\ResourceModel\ReviewReply\Collection
      */
-    public function getReviewsReply($reviewId){
+    public function getReviewsReply($reviewId)
+    {
         $reviewReply = $this->_replyFactory->create();
         $reply = $reviewReply->addFieldToFilter('review_id', $reviewId);
         return $reply;
@@ -254,49 +280,75 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
      * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getFrontendUrl(){
+    public function getFrontendUrl()
+    {
         $frontendUrl = $this->_storeManager->getStore()->getBaseUrl();
         return $frontendUrl;
     }
 
-    public function _compareUserData($reviewId) {
+    /**
+     * @param $reviewId
+     * @return array
+     */
+    public function _compareUserData($reviewId)
+    {
         $result = [];
         $userIp = $this->remoteAddress->getRemoteAddress();
         $rateReport = $this->_rateReportFactory->create();
         $data = $rateReport->addFieldToFilter('review_id', $reviewId)->getData();
-        if(!empty($data)){
-            foreach($data as $userData) {
-                if($userData['ip_address'] == $userIp){
-                    $result['rate_type'] = isset($userData['rate_type'])?$userData['rate_type']:'';
-                    $result['report_type'] = isset($userData['report_type'])?$userData['report_type']:'';
+        if (!empty($data)) {
+            foreach ($data as $userData) {
+                if ($userData['ip_address'] == $userIp) {
+                    $result['rate_type'] = isset($userData['rate_type']) ? $userData['rate_type'] : '';
+                    $result['report_type'] = isset($userData['report_type']) ? $userData['report_type'] : '';
                 }
             }
         }
         return $result;
     }
 
-    public function getGalleryStatus($reviewId) {
+    /**
+     * @param $reviewId
+     * @return string
+     */
+    public function getGalleryStatus($reviewId)
+    {
         $status = '';
         $modelGallery = $this->_galleryFactory->create();
         $data = $modelGallery->addFieldToFilter('review_id', $reviewId)->getData();
 
-        if(!empty($data)){
-            foreach($data as $value) {
+        if (!empty($data)) {
+            foreach ($data as $value) {
                 $status = $value['status'];
             }
         }
         return $status;
     }
 
-    public function getIsSetFlagConfig($path) {
+    /**
+     * @param $path
+     * @return bool
+     */
+    public function getIsSetFlagConfig($path)
+    {
         return $this->scopeConfig->isSetFlag($path, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
-    public function getValueConfig($path) {
+    /**
+     * @param $path
+     * @return mixed
+     */
+    public function getValueConfig($path)
+    {
         return $this->scopeConfig->getValue($path, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
-    public function getReviewsCollectionByType($type = 'helpful') {
+    /**
+     * @param string $type
+     * @return bool|\Magento\Framework\DataObject[]
+     */
+    public function getReviewsCollectionByType($type = 'helpful')
+    {
         if ($type == 'helpful') {
             $collection = $this->_reviewsColFactory->create()->addStatusFilter(
                 \Magento\Review\Model\Review::STATUS_APPROVED
@@ -305,7 +357,7 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
                 $this->getProduct()->getId()
             );
             $collection->getSelect()->joinLeft(
-                ['lof_customize'=>$this->_reviewsCollection->getTable('lof_review_customize')],
+                ['lof_customize' => $this->_reviewsCollection->getTable('lof_review_customize')],
                 'main_table.review_id = lof_customize.review_id',
                 ['count_helpful']
             );
@@ -316,7 +368,7 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
 
             return $items;
 
-        } else if ($type == 'rating') {
+        } elseif ($type == 'rating') {
             $collection = $this->_reviewsColFactory->create()->addStatusFilter(
                 \Magento\Review\Model\Review::STATUS_APPROVED
             )->addEntityFilter(
@@ -324,7 +376,7 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
                 $this->getProduct()->getId()
             );
             $collection->getSelect()->joinLeft(
-                ['lof_customize'=>$this->_reviewsCollection->getTable('lof_review_customize')],
+                ['lof_customize' => $this->_reviewsCollection->getTable('lof_review_customize')],
                 'main_table.review_id = lof_customize.review_id',
                 ['average']
             );
@@ -335,7 +387,7 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
 
             return $items;
 
-        } else if ($type == 'default') {
+        } elseif ($type == 'default') {
             return $this->_reviewsCollection->getItems();
         } else {
             return false;
@@ -357,5 +409,4 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
             ]
         );
     }
-
 }

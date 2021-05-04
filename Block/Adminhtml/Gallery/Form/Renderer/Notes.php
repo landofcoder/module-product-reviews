@@ -21,7 +21,6 @@
 
 namespace Lof\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer;
 
-
 use Magento\Framework\Data\Form\Element\CollectionFactory;
 use Magento\Framework\Data\Form\Element\Factory;
 use Magento\Framework\Escaper;
@@ -40,6 +39,15 @@ class Notes extends \Magento\Framework\Data\Form\Element\AbstractElement
      */
     protected $_request;
 
+    /**
+     * Notes constructor.
+     * @param Factory $factoryElement
+     * @param CollectionFactory $factoryCollection
+     * @param Escaper $escaper
+     * @param CustomReviewCollection $customReviewCollection
+     * @param RequestInterface $request
+     * @param array $data
+     */
     public function __construct(
         Factory $factoryElement,
         CollectionFactory $factoryCollection,
@@ -63,7 +71,7 @@ class Notes extends \Magento\Framework\Data\Form\Element\AbstractElement
     {
         $html = 'Information will be shown after saving.';
         $customReview = $this->_getCustomReview();
-        if(!empty($customReview)) {
+        if (!empty($customReview)) {
             $html = '<div id="lof_review_report"><b>' . $customReview['report_abuse'] . '</b>' . __(' abuse reports submitted.') . '</div>';
             $html .= '<div id="lof_review_helpful"><b>' . $customReview['count_helpful'] . '</b>' . __(' people found this helpful.') . '</div>';
             $html .= '<div id="lof_review_unhelpful"><b>' . $customReview['count_unhelpful'] . '</b>' . __(' people found this unhelpful.') . '</div>';
@@ -71,6 +79,9 @@ class Notes extends \Magento\Framework\Data\Form\Element\AbstractElement
         return $html;
     }
 
+    /**
+     * @return array
+     */
     protected function _getCustomReview()
     {
         $custom = [];
@@ -82,7 +93,7 @@ class Notes extends \Magento\Framework\Data\Form\Element\AbstractElement
             ['in' => $this->_request->getParam('id')]
         );
 
-        foreach($collection as $data){
+        foreach ($collection as $data) {
             $custom = $data->getData();
         }
 

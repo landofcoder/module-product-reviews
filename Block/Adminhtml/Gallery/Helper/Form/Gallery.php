@@ -227,11 +227,7 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
     }
 
     /**
-     * Retrieve label of attribute scope
-     *
-     * GLOBAL | WEBSITE | STORE
-     *
-     * @param Attribute $attribute
+     * @param $attribute
      * @return string
      */
     public function getScopeLabel($attribute)

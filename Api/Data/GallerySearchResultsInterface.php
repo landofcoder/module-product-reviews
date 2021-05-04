@@ -22,11 +22,6 @@ namespace Lof\ProductReviews\Api\Data;
 
 use Magento\Framework\Api\SearchResultsInterface;
 
-/**
- * Interface for review gallery search results.
- * @api
- * @since 100.0.2
- */
 interface GallerySearchResultsInterface extends SearchResultsInterface
 {
     /**

@@ -23,8 +23,14 @@ namespace Lof\ProductReviews\Model\ResourceModel\RateReport;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
+    /**
+     * @var string
+     */
     protected $_idFieldName = 'id';
 
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         $this->_init(\Lof\ProductReviews\Model\RateReport::class, \Lof\ProductReviews\Model\ResourceModel\RateReport::class);

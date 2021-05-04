@@ -190,7 +190,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                 <br id="br_0">
             </div>
             <div style="padding-left: 127px;">
-                <input type="button" value="<?= $block->escapeHtml(__('Add')) ?>" class="action submit primary" id="add_image" onclick="addReviewImage(this)" data-limit="<?php echo (int)$limit_image; ?>">
+                <input type="button" value="<?= $block->escapeHtml(__('Add')) ?>" class="action submit primary" id="add_image" onclick="addReviewImage(this)" data-limit="<?= (int)$limit_image; ?>">
                 <input type="button" value="<?= $block->escapeHtml(__('Delete')) ?>" class="action submit primary" id="del_image" onclick="deleteReviewImage()">
             </div>
         </div>
@@ -291,7 +291,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                     });
                 } else if (checkEmail == true && checkOrder == true && customerLogin == false) {
 
-                    $("#verify_summit").html('<?php echo __('<span>Loading</span>');?>');
+                    $("#verify_summit").html('<?= __('<span>Loading</span>');?>');
                     $.ajax({
                         method: "POST",
                         url: url,

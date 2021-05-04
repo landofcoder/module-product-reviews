@@ -18,6 +18,7 @@
  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
  * @license    https://landofcoder.com/terms
  */
+
 namespace Lof\ProductReviews\Model;
 
 use Lof\ProductReviews\Api\GalleryRepositoryInterface;
@@ -69,21 +70,22 @@ class GalleryRepository implements GalleryRepositoryInterface
     protected $dataObjectProcessor;
 
     /**
-     * @var \Lof\ProductReviews\Api\Data\GalleryInterfaceFactory
+     * @var Data\GalleryInterfaceFactory
      */
     protected $dataGalleryFactory;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     private $storeManager;
 
     /**
-     * @var CollectionProcessorInterface
+     * @var CollectionProcessorInterface|null
      */
     private $collectionProcessor;
 
     /**
+     * GalleryRepository constructor.
      * @param ResourceGallery $resource
      * @param GalleryFactory $galleryFactory
      * @param Data\GalleryInterfaceFactory $dataGalleryFactory
@@ -92,7 +94,7 @@ class GalleryRepository implements GalleryRepositoryInterface
      * @param DataObjectHelper $dataObjectHelper
      * @param DataObjectProcessor $dataObjectProcessor
      * @param StoreManagerInterface $storeManager
-     * @param CollectionProcessorInterface $collectionProcessor
+     * @param CollectionProcessorInterface|null $collectionProcessor
      */
     public function __construct(
         ResourceGallery $resource,
@@ -206,8 +208,8 @@ class GalleryRepository implements GalleryRepositoryInterface
     /**
      * Retrieve collection processor
      *
-     * @deprecated 101.1.0
      * @return CollectionProcessorInterface
+     * @deprecated 101.1.0
      */
     private function getCollectionProcessor()
     {

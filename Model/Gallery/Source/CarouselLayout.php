@@ -30,16 +30,16 @@ class CarouselLayout implements \Magento\Framework\Option\ArrayInterface
      */
     public function toOptionArray()
     {
-        $groupList = array();
-        $groupList[] = array(
+        $groupList = [];
+        $groupList[] = [
             'label' => __('Owl Carousel'),
             'value' => 'owl_carousel'
-            );
+            ];
 
-        $groupList[] = array(
+        $groupList[] = [
             'label' => __('Disabled Carousel - use listing'),
             'value' => 'disabled'
-            );
+            ];
         return $groupList;
     }
 }

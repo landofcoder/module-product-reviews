@@ -24,9 +24,15 @@ use Magento\Framework\Data\OptionSourceInterface;
 
 class Status implements OptionSourceInterface
 {
-
+    /**
+     * @var \Lof\ProductReviews\Model\Gallery
+     */
     protected $_reviewGallery;
 
+    /**
+     * Status constructor.
+     * @param \Lof\ProductReviews\Model\Gallery $reviewGallery
+     */
     public function __construct(\Lof\ProductReviews\Model\Gallery $reviewGallery)
     {
         $this->_reviewGallery = $reviewGallery;

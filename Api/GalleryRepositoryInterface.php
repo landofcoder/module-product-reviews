@@ -20,13 +20,6 @@
  */
 namespace Lof\ProductReviews\Api;
 
-//use Magento\Framework\Api\SearchCriteriaInterface;
-
-/**
- * Product Review Gallery CRUD interface.
- * @api
- * @since 100.0.2
- */
 interface GalleryRepositoryInterface
 {
     /**

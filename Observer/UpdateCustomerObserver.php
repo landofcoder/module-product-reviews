@@ -35,11 +35,15 @@ class UpdateCustomerObserver implements ObserverInterface
      */
     protected $_customerSession;
 
+    /**
+     * UpdateCustomerObserver constructor.
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Lof\ProductReviews\Model\Reminders $reminders
+     */
     public function __construct(
         \Magento\Customer\Model\Session $customerSession,
         \Lof\ProductReviews\Model\Reminders $reminders
-    )
-    {
+    ) {
         $this->_customerSession = $customerSession;
         $this->_reminders = $reminders;
     }

@@ -23,8 +23,14 @@ namespace Lof\ProductReviews\Model\ResourceModel\CustomReview;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
+    /**
+     * @var string
+     */
     protected $_idFieldName = 'review_customize_id';
 
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         $this->_init('Lof\ProductReviews\Model\CustomReview', 'Lof\ProductReviews\Model\ResourceModel\CustomReview');

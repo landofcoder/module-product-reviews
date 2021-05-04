@@ -21,11 +21,13 @@
 
 namespace Lof\ProductReviews\Model\ResourceModel;
 
-
 class RateReport extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     const LOF_RATE_REPORT_TABLE = 'lof_review_report_history';
 
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         $this->_init(self::LOF_RATE_REPORT_TABLE, 'id');

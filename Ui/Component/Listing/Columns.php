@@ -20,10 +20,6 @@
  */
 namespace Lof\ProductReviews\Ui\Component\Listing;
 
-/**
- * @api
- * @since 100.0.2
- */
 class Columns extends \Magento\Ui\Component\Listing\Columns
 {
     /**

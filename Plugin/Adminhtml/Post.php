@@ -21,7 +21,6 @@
 
 namespace Lof\ProductReviews\Plugin\Adminhtml;
 
-
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
 use Magento\Review\Model\RatingFactory;
@@ -31,6 +30,15 @@ use Lof\ProductReviews\Model\GalleryFactory;
 
 class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
 {
+    /**
+     * Post constructor.
+     * @param Context $context
+     * @param Registry $coreRegistry
+     * @param ReviewFactory $reviewFactory
+     * @param RatingFactory $ratingFactory
+     * @param CustomReviewFactory $customReviewFactory
+     * @param GalleryFactory $galleryFactory
+     */
     public function __construct(
         Context $context,
         Registry $coreRegistry,
@@ -44,6 +52,11 @@ class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
         $this->galleryFactory = $galleryFactory;
     }
 
+    /**
+     * @param \Magento\Review\Controller\Adminhtml\Product\Post $object
+     * @param $resultRedirect
+     * @return mixed
+     */
     public function afterExecute(\Magento\Review\Controller\Adminhtml\Product\Post $object, $resultRedirect)
     {
         $review = $this->reviewFactory->create()->getCollection();
@@ -53,8 +66,8 @@ class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
         $dataCustomReview = [
             'advantages' => $data['advantages'],
             'disadvantages' => $data['disadvantages'],
-            'email_address' => isset($data['email_address'])?$data['email_address']:'',
-            'avatar_url' => isset($data['avatar_url'])?$data['avatar_url']:'',
+            'email_address' => isset($data['email_address']) ? $data['email_address'] : '',
+            'avatar_url' => isset($data['avatar_url']) ? $data['avatar_url'] : '',
             'review_id' => $latestItem['review_id']
         ];
 
@@ -64,7 +77,7 @@ class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
 
         $modelGallery = $this->galleryFactory->create();
         $modelGallery->setReviewId($latestItem['review_id'])
-            ->setLabel('Gallery of Review '.$latestItem['review_id'])
+            ->setLabel('Gallery of Review ' . $latestItem['review_id'])
             ->setStatus(2)
             ->setValue(json_encode([]))
             ->save();

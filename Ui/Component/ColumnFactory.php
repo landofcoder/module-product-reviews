@@ -18,12 +18,9 @@
  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
  * @license    https://landofcoder.com/terms
  */
+
 namespace Lof\ProductReviews\Ui\Component;
 
-/**
- * @api
- * @since 100.0.2
- */
 class ColumnFactory
 {
     /**

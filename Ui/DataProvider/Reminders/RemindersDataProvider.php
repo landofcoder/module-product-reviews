@@ -18,6 +18,7 @@
  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
  * @license    https://landofcoder.com/terms
  */
+
 namespace Lof\ProductReviews\Ui\DataProvider\Reminders;
 
 use Magento\Framework\Api\Filter;
@@ -31,12 +32,12 @@ use Magento\Framework\View\Element\UiComponent\DataProvider\Reporting;
 class RemindersDataProvider extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
 {
     /**
-     * @var AuthorizationInterface
+     * @var
      */
     private $authorization;
 
     /**
-     * @var AddFilterInterface[]
+     * @var array
      */
     private $additionalFilterPool;
 
@@ -82,7 +83,6 @@ class RemindersDataProvider extends \Magento\Framework\View\Element\UiComponent\
     }
 
     /**
-     * @deprecated 101.0.7
      * @return AuthorizationInterface|mixed
      */
     private function getAuthorizationInstance()

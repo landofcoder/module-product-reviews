@@ -37,5 +37,4 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
             ]
         );
     }
-
 }

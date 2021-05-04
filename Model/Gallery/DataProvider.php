@@ -23,9 +23,6 @@ namespace Lof\ProductReviews\Model\Gallery;
 use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
 
-/**
- * Class DataProvider
- */
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
     /**

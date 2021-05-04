@@ -19,12 +19,6 @@
  * @license    https://landofcoder.com/terms
  */
 
-/**
- * Created by PhpStorm.
- * User: neverland
- * Date: 2018-11-27
- * Time: 09:50
- */
 declare(strict_types=1);
 
 namespace Lof\ProductReviews\Ui\Component\Reminders;
@@ -34,9 +28,6 @@ use Magento\Framework\View\Element\UiComponentInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Ui\Component\AbstractComponent;
 
-/**
- * Provide validation of allowed massaction for user.
- */
 class MassAction extends AbstractComponent
 {
     const NAME = 'massaction';

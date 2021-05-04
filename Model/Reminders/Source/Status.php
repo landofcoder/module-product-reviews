@@ -18,17 +18,12 @@
  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
  * @license    https://landofcoder.com/terms
  */
+
 namespace Lof\ProductReviews\Model\Reminders\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 use Lof\ProductReviews\Model\Reminders;
 
-/**
- * Product status functionality model
- *
- * @api
- * @since 100.0.2
- */
 class Status implements OptionSourceInterface
 {
     /**#@+
@@ -37,8 +32,15 @@ class Status implements OptionSourceInterface
     const STATUS_PENDING = 1;
     const STATUS_ON_HOLD = 2;
 
+    /**
+     * @var Reminders
+     */
     protected $_reviewReminder;
 
+    /**
+     * Status constructor.
+     * @param Reminders $reviewReminder
+     */
     public function __construct(Reminders $reviewReminder)
     {
         $this->_reviewReminder = $reviewReminder;
@@ -123,5 +125,4 @@ class Status implements OptionSourceInterface
         }
         return $options;
     }
-
 }

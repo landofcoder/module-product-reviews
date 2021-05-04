@@ -23,10 +23,22 @@ namespace Lof\ProductReviews\Controller\Adminhtml\Gallery;
 
 class Edit extends \Magento\Backend\App\Action
 {
+    /**
+     * @var \Magento\Framework\View\Result\PageFactory
+     */
     protected $resultPageFactory;
 
+    /**
+     * @var \Magento\Framework\Registry
+     */
     protected $_coreRegistry;
 
+    /**
+     * Edit constructor.
+     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param \Magento\Framework\Registry $coreRegistry
+     */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
@@ -80,6 +92,7 @@ class Edit extends \Magento\Backend\App\Action
 
         return $resultPage;
     }
+
     /**
      * {@inheritdoc}
      */

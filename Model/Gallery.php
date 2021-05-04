@@ -30,6 +30,9 @@ class Gallery extends \Magento\Framework\Model\AbstractModel
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 2;
 
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         $this->_init(\Lof\ProductReviews\Model\ResourceModel\Gallery::class);

@@ -21,8 +21,6 @@
 
 namespace Lof\ProductReviews\Controller\Reviews;
 
-use Magento\Framework\Controller\ResultFactory;
-
 class RateAjax extends \Magento\Framework\App\Action\Action
 {
     /**
@@ -50,6 +48,15 @@ class RateAjax extends \Magento\Framework\App\Action\Action
      */
     protected $customerSession;
 
+    /**
+     * RateAjax constructor.
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Framework\HTTP\Header $httpHeader
+     * @param \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Lof\ProductReviews\Model\CustomReviewFactory $customReviewFactory
+     * @param \Lof\ProductReviews\Model\RateReportFactory $rateReportFactory
+     */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\HTTP\Header $httpHeader,
@@ -66,6 +73,9 @@ class RateAjax extends \Magento\Framework\App\Action\Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
+     */
     public function execute()
     {
         $choice = $this->getRequest()->getPost('choice');
@@ -84,13 +94,13 @@ class RateAjax extends \Magento\Framework\App\Action\Action
         );
 
         $info = [];
-        foreach($collection as $data){
+        foreach ($collection as $data) {
             $info['id'] = $data->getReviewCustomizeId();
             $info['helpful'] = $data->getCountHelpful();
             $info['unhelpful'] = $data->getCountUnhelpful();
             $info['total'] = $data->getTotalHelpful();
         }
-        if($modelCustom->getCollection()->getItemByColumnValue('review_id', $reviewId)) {
+        if ($modelCustom->getCollection()->getItemByColumnValue('review_id', $reviewId)) {
             $custom = $modelCustom->load($info['id']);
             if ($choice == 'helpful') {
                 $custom->setCountHelpful($info['helpful'] + 1)
@@ -107,7 +117,7 @@ class RateAjax extends \Magento\Framework\App\Action\Action
                     ->setTotalHelpful(1)
                     ->setReviewId($reviewId)
                     ->save();
-            } else{
+            } else {
                 $modelCustom->setCountUnhelpful(1)
                     ->setTotalHelpful(1)
                     ->setReviewId($reviewId)
@@ -124,11 +134,11 @@ class RateAjax extends \Magento\Framework\App\Action\Action
         );
 
         $value = [];
-        foreach($rateData as $data){
+        foreach ($rateData as $data) {
             $value['id'] = $data->getId();
             $value['ip_address'] = $data->getIpAddress();
         }
-        if(!empty($value['id'])){
+        if (!empty($value['id'])) {
             $model = $rateReportModel->load($value['id']);
             $model->setRateType($choice);
             $model->save();

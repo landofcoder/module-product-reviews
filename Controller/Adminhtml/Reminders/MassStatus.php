@@ -43,9 +43,8 @@ class MassStatus extends \Magento\Backend\App\Action
     protected $collectionFactory;
 
     /**
-     * @param Action\Context $context
-     * @param Builder $productBuilder
-     * @param \Magento\Catalog\Model\Indexer\Product\Price\Processor $productPriceIndexerProcessor
+     * MassStatus constructor.
+     * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
      */
@@ -86,6 +85,7 @@ class MassStatus extends \Magento\Backend\App\Action
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         return $resultRedirect->setPath('*/*/');
     }
+
     /**
      * {@inheritdoc}
      */

@@ -21,19 +21,23 @@
 
 namespace Lof\ProductReviews\Controller\Adminhtml\Import;
 
-class Upload extends \Lof\ProductReviews\Controller\Adminhtml\Import {
+class Upload extends \Lof\ProductReviews\Controller\Adminhtml\Import
+{
     /**
      * @var \Magento\Backend\Model\View\Result\ForwardFactory
      */
     protected $resultForwardFactory;
+
     /**
      * @var \Magento\Framework\View\Result\LayoutFactory
      */
     protected $resultPageFactory;
 
     /**
-     * @param \Magento\Backend\App\Action\Context               $context
-     * @param \Magento\Framework\Registry                       $coreRegistry
+     * Upload constructor.
+     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Framework\Registry $coreRegistry
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
      */
     public function __construct(
@@ -41,10 +45,9 @@ class Upload extends \Lof\ProductReviews\Controller\Adminhtml\Import {
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
-    )
-    {
+    ) {
         $this->resultForwardFactory = $resultForwardFactory;
-        $this->resultPageFactory    = $resultPageFactory;
+        $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context, $coreRegistry);
     }
 

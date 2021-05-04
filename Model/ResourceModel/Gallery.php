@@ -20,14 +20,6 @@
  */
 namespace Lof\ProductReviews\Model\ResourceModel;
 
-use Magento\Store\Model\Store;
-
-/**
- * Catalog product media gallery resource model.
- *
- * @api
- * @since 101.0.0
- */
 class Gallery extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     /**#@+
@@ -37,12 +29,9 @@ class Gallery extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     /**
      * {@inheritdoc}
-     * @since 101.0.0
      */
     protected function _construct()
     {
         $this->_init(self::GALLERY_TABLE, 'id');
     }
-
-
 }

@@ -23,9 +23,13 @@ namespace Lof\ProductReviews\Plugin\Adminhtml\Add;
 
 class Form extends \Magento\Review\Block\Adminhtml\Add\Form
 {
+    /**
+     * @param \Magento\Review\Block\Adminhtml\Add\Form $object
+     * @param $form
+     * @return array
+     */
     public function beforeSetForm(\Magento\Review\Block\Adminhtml\Add\Form $object, $form)
     {
-
         $fieldset1 = $form->addFieldset(
             'add_lof_custom_review',
             ['legend' => __('Lof Custom Review')]

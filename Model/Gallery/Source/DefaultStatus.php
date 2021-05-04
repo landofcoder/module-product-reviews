@@ -30,16 +30,16 @@ class DefaultStatus implements \Magento\Framework\Option\ArrayInterface
      */
     public function toOptionArray()
     {
-        $groupList = array();
-        $groupList[] = array(
+        $groupList = [];
+        $groupList[] = [
             'label' => __('Disabled'),
             'value' => 2
-            );
+            ];
 
-        $groupList[] = array(
+        $groupList[] = [
             'label' => __('Enabled'),
             'value' => 1
-            );
+            ];
         return $groupList;
     }
 }

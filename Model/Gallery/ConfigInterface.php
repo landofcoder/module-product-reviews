@@ -19,15 +19,8 @@
  * @license    https://landofcoder.com/terms
  */
 
-/**
- * Media library image config interface
- */
 namespace Lof\ProductReviews\Model\Gallery;
 
-/**
- * Interface \Lof\ProductReviews\Model\Gallery\ConfigInterface
- *
- */
 interface ConfigInterface
 {
     /**

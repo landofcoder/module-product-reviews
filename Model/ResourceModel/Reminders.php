@@ -25,6 +25,9 @@ class Reminders extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     const LOF_REMINDERS_TABLE = 'lof_product_reviews_reminders';
 
+    /**
+     * @inheritDoc
+     */
     protected function _construct()
     {
         $this->_init(self::LOF_REMINDERS_TABLE, 'id');

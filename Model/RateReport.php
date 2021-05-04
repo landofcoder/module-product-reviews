@@ -21,7 +21,6 @@
 
 namespace Lof\ProductReviews\Model;
 
-
 class RateReport extends \Magento\Framework\Model\AbstractModel
 {
     /**

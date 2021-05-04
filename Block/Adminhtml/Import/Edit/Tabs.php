@@ -28,7 +28,5 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
         $this->setId('import_tab');
         $this->setDestElementId('edit_form');
         $this->setTitle(__('Information'));
-
     }
-
 }
