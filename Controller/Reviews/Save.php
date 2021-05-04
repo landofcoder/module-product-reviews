@@ -21,6 +21,7 @@
 
 namespace Lof\ProductReviews\Controller\Reviews;
 
+use Lof\ProductReviews\Helper\Data;
 use Lof\ProductReviews\Model\Sender;
 use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory;
 use Magento\Review\Controller\Product as ProductController;
@@ -45,6 +46,11 @@ class Save extends ProductController
      * @var Sender
      */
     protected $sender;
+
+    /**
+     * @var Data
+     */
+    protected $helper;
 
     /**
      * Save constructor.
@@ -75,12 +81,14 @@ class Save extends ProductController
         \Magento\Review\Model\ReviewFactory $reviewFactory,
         \Magento\Review\Model\RatingFactory $ratingFactory,
         \Magento\Catalog\Model\Design $catalogDesign,
+        Data $helper,
         \Magento\Framework\Session\Generic $reviewSession,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
     ) {
         $this->cutomerCollectionFactory = $cutomerCollectionFactory;
         $this->sender = $sender;
+        $this->helper = $helper;
         parent::__construct(
             $context,
             $coreRegistry,
@@ -139,7 +147,7 @@ class Save extends ProductController
             $customReview = $this->_objectManager->create(CustomReview::class);
 
             $validate = $review->validate();
-            if ($validate === true) {
+            if ($validate === false) {
                 try {
                     $review->setEntityId($review->getEntityIdByCode(Review::ENTITY_PRODUCT_CODE))
                         ->setEntityPkValue($product->getId())
@@ -187,17 +195,18 @@ class Save extends ProductController
                     $dataEmail = [];
                     $dataEmail['name'] = $customer[0]['firstname'] . ' ' . $customer[0]['lastname'];
                     $dataEmail['product_name'] = $product->getName();
+                    $couponConfig = $this->helper->getCouponCode();
                     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                     $couponGenerator = $objectManager->create('Magento\SalesRule\Model\CouponGenerator');
-                    $data = [
-                        'rule_id' => 5,
+                    $coupon= [
+                        'rule_id' => $couponConfig,
                         'qty' => '1',
                         'length' => '8',
                         'format' => 'alphanum',
                         'prefix' => 'YSX',
                         'suffix' => 'CXK',
                     ];
-                    $codes = $couponGenerator->generateCodes($data);
+                    $codes = $couponGenerator->generateCodes($coupon);
                     $dataEmail['couponcode'] = $codes[0];
                     $this->sender->sendCouponCodeEmail($dataEmail);
                     $this->messageManager->addSuccess(__('You submitted your review for moderation.'));

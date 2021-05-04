@@ -24,6 +24,7 @@
             <lof_general_settings>
                 <enabled_module>1</enabled_module>
                 <show_on_customer_dashboard>1</show_on_customer_dashboard>
+                <after_day>10</after_day>
             </lof_general_settings>
             <email_settings>
                 <email_sender>sales</email_sender>
