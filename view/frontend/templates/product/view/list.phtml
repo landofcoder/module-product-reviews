@@ -5,9 +5,7 @@
  */
 
 // @codingStandardsIgnoreFile
-
 /** @var Lof\ProductReviews\Block\Product\View\ListView $block */
-
 $format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
 $rateAjaxLink = $block->getFrontendUrl() .'lof_productreviews/reviews/rateAjax';
 $reportAjaxLink = $block->getFrontendUrl() .'lof_productreviews/reviews/reportAjax';
@@ -86,7 +84,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
         <?php foreach ($_items as $_review):?>
             <?php $customReview = $block->getReviewsCustom($_review->getId());?>
             <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
-                <?php 
+                <?php
                 $avatarImg = "";
                 $avatarBlock = $block->getLayout()->createBlock('\Lof\CustomerAvatar\Block\Attributes\Avatar');
                 if($avatarBlock){
@@ -98,7 +96,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                 <div class="review-infor">
                 <?php } ?>
                 <div class="review-title" itemprop="name"><?= $block->escapeHtml($_review->getTitle()) ?></div>
-                <?php 
+                <?php
                 $customize = $block->escapeHtml($block->getHelpful($_review->getId()));
                 if($customize){
                     $helpful = '<b id="helpful-' .$_review->getId(). '" data="'.$customize[0].'">'. $customize[0] .'</b>';
@@ -117,7 +115,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                     <div class="rating-summary item" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
                         <span class="label rating-label"><span><?= $block->escapeHtml($_vote->getRatingCode()) ?></span></span>
                         <div class="rating-result" title="<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
-	                        <meta itemprop="worstRating" content = "1"/>
+	                        <meta itemprop="worstRating" content = "1"/>at
 	                        <meta itemprop="bestRating" content = "100"/>
                             <span style="width:<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
                                 <span itemprop="ratingValue"><?= $block->escapeHtml($_vote->getPercent()) ?>%</span>
@@ -177,7 +175,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
 
                     <!--review advantages and disadvantages-->
                     <div class="lof-review-customize">
-                        
+
                         <?php foreach ($customReview as $cItem):?>
                             <?php if($cItem->getAdvantages()){ ?>
                             <div class="good-exp" style="color:green">
@@ -200,7 +198,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                 </span>
                                 <span><?= $block->escapeHtml($cItem->getDisadvantages()) ?></span>
                             </div>
-                            <?php } ?>      
+                            <?php } ?>
                         <?php endforeach; ?>
                     </div>
                     <!--content comment-->

@@ -39,6 +39,7 @@ class AutoSendReminders
      * @var \Lof\ProductReviews\Helper\Data
      */
     protected $_dataHelper;
+    protected $date;
 
     protected $_orderData = null;
 
@@ -50,11 +51,13 @@ class AutoSendReminders
     public function __construct(
         \Lof\ProductReviews\Model\Reminders $reminders,
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
-        \Lof\ProductReviews\Helper\Data $dataHelper
+        \Lof\ProductReviews\Helper\Data $dataHelper,
+        \Magento\Framework\Stdlib\DateTime\DateTime $date
     ) {
         $this->_reminders = $reminders;
         $this->_orderRepository = $orderRepository;
         $this->_dataHelper = $dataHelper;
+        $this->date = $date;
     }
 
     /**
@@ -81,6 +84,7 @@ class AutoSendReminders
                     $orderId = $data->getOrderId();
                     $orderStatus = $this->getOrderStatus($orderId);
                     $order_increment_id = $this->getOrderIncrementId($orderId);
+                    $orderCreatedAt =new \DateTime($this->getOrderCreated($orderId));
                     if( $orderStatus == 'complete' ) {
                         $customers[] = [
                             'name' => $data->getName(),
@@ -90,14 +94,19 @@ class AutoSendReminders
                             'order_id' => $orderId
                         ];
                     }
+                    $currentDate = new \DateTime();
+                    $diff = (array)date_diff($orderCreatedAt,$currentDate);
+                if($diff['days'] == 10)
+                {
+                    //Send reminder to customers
+                    $this->_reminders->send($customers);
                 }
-                
-                //Send reminder to customers
-                $this->_reminders->send($customers);
+                }
+
+
             }
         }
     }
-
     protected function getOrderData($orderId) {
         if(!$this->_orderData){
             $this->_orderData = $this->_orderRepository->get((int)$orderId);
@@ -112,5 +121,9 @@ class AutoSendReminders
     protected function getOrderIncrementId($orderId){
         $order = $this->getOrderData($orderId);
         return $order->getIncrementId();
+    }
+    protected function getOrderCreated($orderId){
+        $order = $this->getOrderData($orderId);
+        return $order->getCreatedAt();
     }
 }

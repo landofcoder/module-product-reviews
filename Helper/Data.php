@@ -35,10 +35,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const REVIEW_IMAGE_HEIGHT       = 'lof_product_reviews/lof_review_settings/image_height';
 
     //Lof Product Reviews backend configs
-    const XML_SENDER_EMAIL              = 'lof_product_reviews/lof_general_settings/email_sender';
-    const XML_PATH_EMAIL_TEMPLATE       = 'lof_product_reviews/lof_general_settings/email_templates';
-    const XML_PATH_REPLY_EMAIL_TEMPLATE = 'lof_product_reviews/lof_general_settings/reply_email_templates';
-    const XML_SEND_REMINDER_AUTO        = 'lof_product_reviews/lof_general_settings/send_emails_automatically';
+    const XML_SENDER_EMAIL              = 'lof_product_reviews/email_settings/email_sender';
+    const XML_PATH_EMAIL_TEMPLATE       = 'lof_product_reviews/email_settings/email_templates';
+    const XML_PATH_REPLY_EMAIL_TEMPLATE = 'lof_product_reviews/email_settings/reply_email_templates';
+    const XML_SEND_REMINDER_AUTO        = 'lof_product_reviews/email_settings/send_emails_automatically';
 
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
@@ -205,7 +205,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 'created_at',
                 'desc'
             );
-            
+
             if($order_collection->count()){
                 foreach ($order_collection as $_order) {
                     $order_increment = $_order->getIncrementId();
@@ -223,7 +223,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                     }
                 }
             }
-            
+
         }
         return $is_verified;
     }

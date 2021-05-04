@@ -41,13 +41,13 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
         <fieldset class="fieldset lof-verify-fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
 
             <?php if ($check_login == false) { ?>
-                <div class="field verify-field-order required">
+                <div class="field verify-field-order">
                     <label for="verify_order_field" class="label"><span><?= $block->escapeHtml(__('Order Id')) ?></span></label>
                     <div class="control">
                         <input type="text" name="verify_order" id="verify_order_field" class="input-text" data-validate="{required:true}"  placeholder="<?=__('Enter your order id without zero number') ?>"/>
                     </div>
                 </div>
-                <div class="field verify-field-email required">
+                <div class="field verify-field-email ">
                     <label for="verify_email_field" class="label"><span><?= $block->escapeHtml(__('Order Email')) ?></span></label>
                     <div class="control">
                         <input type="text" name="verify_email" id="verify_email_field" class="input-text" data-validate="{required:true}"  placeholder="<?=__('Your order email ') ?>"/>
@@ -55,7 +55,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                 </div>
             <?php } else { ?>
                 <?php if (count($_orderIds) > 0) { ?>
-                    <div class="field verify-field-order required">
+                    <div class="field verify-field-order ">
                         <label for="verify_order_field" class="label"><span><?= $block->escapeHtml(__('Order Id')) ?></span></label>
                         <div class="control">
                             <select name="verify_order" id="verify_order_field" class="list-orders">
@@ -67,7 +67,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                         </div>
                     </div>
                 <?php } else { ?>
-                    <div class="field verify-field-order required">
+                    <div class="field verify-field-order ">
                         <label for="verify_order_field" class="label"><span><?= $block->escapeHtml(__('You need to make an order.')) ?></span></label>
                     </div>
                 <?php } ?>
@@ -147,6 +147,12 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                 <textarea name="detail" id="review_field" cols="5" rows="3" data-validate="{required:true}" data-bind="value: review().detail"></textarea>
             </div>
         </div>
+        <div class="field review-field-text ">
+            <label for="review_field" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+            <div class="control">
+                <input type="text" name="email" id="email_field" class="input-text"  data-bind="value: email()" />
+            </div>
+        </div>
         <?php if($enable_pros_cons){ ?>
         <div class="field review-field-advantages">
             <label for="advantages_field" class="label"><span><?= $block->escapeHtml(__('What I like about this product')) ?></span></label>
@@ -210,7 +216,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
             //Verify order information before adding new review
             var customerLogin = '<?= $check_login; ?>';
             var verifyType = '<?= $verify_purchased ?>';
-            
+
             if (verifyType) {
                 $('#main-review-form').addClass('hidden');
             }
