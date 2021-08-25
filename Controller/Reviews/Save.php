@@ -210,8 +210,9 @@ class Save extends ProductController
                         $couponGenerator = $objectManager->create('Magento\SalesRule\Model\CouponGenerator');
                         $coupon= [
                             'rule_id' => $couponConfig,
-                            'qty' => '1',
-                            'length' => '8',
+                            'qty' => 1,
+                            'quantity' => 1,
+                            'length' => 8,
                             'format' => 'alphanum',
                             'prefix' => 'YSX',
                             'suffix' => 'CXK',
