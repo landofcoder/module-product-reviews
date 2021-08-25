@@ -201,15 +201,17 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                                 $_collection[$i][$x] = $_brand;
                                             }
                                             ?>
-                                            <?php foreach ($_collection as $_gallery) { ?>
+                                            <?php $_index = 0; ?>
+                                            <?php foreach ($_collection as $_gallery) : ?>
                                                 <li class="item">
-                                                    <?php foreach ($_gallery as $_image) { ?>
+                                                    <?php foreach ($_gallery as $_index2 => $_image) : ?>
                                                         <?php $imageURl = $block->resizeImage($_image,
                                                             $block->getImgWidth(), $block->getImgHeight()); ?>
                                                         <div class="gallery-item">
                                                             <div class="gallery-image">
                                                                 <a href="<?= $block->getMediaUrl($_image) ?>"
                                                                    class="lofreview-gallery-fancybox"
+                                                                   rel="review-gallery<?= $_index.$_index2; ?>"
                                                                    data-fancybox-type="<?= $fancybox_type ?>"
                                                                    onclick="return false;"
                                                                    data-fancybox-height="<?= $image_popup_height ?>"
@@ -221,9 +223,9 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                    <?php } ?>
+                                                    <?php endforeach; ?>
                                                 </li>
-                                            <?php } ?>
+                                            <?php $_index++; endforeach; ?>
                                         </ul>
                                     </div>
                                 <?php endif; ?>

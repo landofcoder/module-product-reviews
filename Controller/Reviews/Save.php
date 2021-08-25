@@ -198,26 +198,27 @@ class Save extends ProductController
                     }
 
                     $review->aggregate();
-                    $customer = $this->cutomerCollectionFactory->create()->addFieldToFilter(
-                        'entity_id',
-                        $this->customerSession->getCustomerId()
-                    )->getData();
+                    $customer = $this->customerSession->getCustomer();
                     $dataEmail = [];
-                    $dataEmail['name'] = $customer[0]['firstname'] . ' ' . $customer[0]['lastname'];
+                    $dataEmail['name'] = $customer->getFirstname() . ' ' . $customer->getLastname();
                     $dataEmail['product_name'] = $product->getName();
+                    $dataEmail['couponcode'] = '';
+
                     $couponConfig = $this->helper->getCouponCode();
-                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                    $couponGenerator = $objectManager->create('Magento\SalesRule\Model\CouponGenerator');
-                    $coupon= [
-                        'rule_id' => $couponConfig,
-                        'qty' => '1',
-                        'length' => '8',
-                        'format' => 'alphanum',
-                        'prefix' => 'YSX',
-                        'suffix' => 'CXK',
-                    ];
-                    $codes = $couponGenerator->generateCodes($coupon);
-                    $dataEmail['couponcode'] = $codes[0];
+                    if ($couponConfig) {
+                        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                        $couponGenerator = $objectManager->create('Magento\SalesRule\Model\CouponGenerator');
+                        $coupon= [
+                            'rule_id' => $couponConfig,
+                            'qty' => '1',
+                            'length' => '8',
+                            'format' => 'alphanum',
+                            'prefix' => 'YSX',
+                            'suffix' => 'CXK',
+                        ];
+                        $codes = $couponGenerator->generateCodes($coupon);
+                        $dataEmail['couponcode'] = $codes?$codes[0]:"";
+                    }
                     $this->sender->sendCouponCodeEmail($dataEmail);
                     $this->messageManager->addSuccess(__('You submitted your review for moderation.'));
                 } catch (\Exception $e) {
@@ -255,12 +256,14 @@ class Save extends ProductController
             $default_status = $default_status ? (int)$default_status : 2;
             $names = [];
             if (isset($_FILES)) {
-                for ($i = 0; $i < count($_FILES); $i++) {
-                    if ($i <= $limit_images) {
-                        $fileId = $imageField . '_' . $i;
+                $count = 0;
+                foreach ($_FILES as $fileId => $fileInfo) {
+                    if ($count <= $limit_images) {
+                        //$fileId = $imageField . '_' . $i;
                         $image = $this->getRequest()->getFiles($fileId);
                         if ((!$image && !isset($image['name'])) || (isset($image['name']) && !$image['name']))
                             continue;
+                        $count++;
                         $names[] = $image['name'];
 
                         $uploader = $objectManager->create(
@@ -295,6 +298,7 @@ class Save extends ProductController
             }
         } catch (\Exception $e) {
             $this->messageManager->addError($e->getMessage());
+
         }
     }
 }

@@ -72,7 +72,7 @@
                 <nav_next>Next</nav_next>
             </gallery_carousel_settings>
             <gallery_fancybox_settings>
-                <auto_size>0</auto_size>
+                <auto_size>1</auto_size>
                 <fancybox_width>500</fancybox_width>
                 <fancybox_height>500</fancybox_height>
                 <fancybox_padding>10</fancybox_padding>
