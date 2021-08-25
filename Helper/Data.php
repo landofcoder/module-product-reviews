@@ -40,6 +40,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_SEND_REMINDER_AUTO = 'lof_product_reviews/email_settings/send_emails_automatically';
 
     /**
+     * @var \Magento\Framework\Module\ModuleListInterface
+     */
+    protected $moduleList;
+
+    /**
      * Data constructor.
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -48,6 +53,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @param \Magento\Sales\Model\OrderFactory $orderFactory
      * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
      * @param \Magento\Sales\Model\Order\Config $orderConfig
+     * @param \Magento\Framework\Module\ModuleListInterface $moduleList
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
@@ -56,7 +62,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Sales\Model\OrderFactory $orderFactory,
         \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory,
-        \Magento\Sales\Model\Order\Config $orderConfig
+        \Magento\Sales\Model\Order\Config $orderConfig,
+        \Magento\Framework\Module\ModuleListInterface $moduleList
     ) {
         parent::__construct($context);
         $this->_filterProvider = $filterProvider;
@@ -65,6 +72,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $this->_orderFactory = $orderFactory;
         $this->_orderCollectionFactory = $orderCollectionFactory;
         $this->_orderConfig = $orderConfig;
+        $this->_moduleList = $moduleList;
         $this->_request = $context->getRequest();
     }
 
@@ -323,5 +331,15 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         return $is_verified;
+    }
+
+    /**
+     * Check module is installed or not
+     * 
+     * @param string $moduleName
+     * @return bool|int
+     */
+    public function checkModuleInstalled($moduleName){
+        return $this->_moduleList->has($moduleName);
     }
 }

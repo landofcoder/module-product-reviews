@@ -21,6 +21,7 @@
 
 // @codingStandardsIgnoreFile
 /** @var Lof\ProductReviews\Block\Product\View\ListView $block */
+$helper         = $this->helper('Lof\ProductReviews\Helper\Data');
 $format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
 $rateAjaxLink = $block->getFrontendUrl() . 'lof_productreviews/reviews/rateAjax';
 $reportAjaxLink = $block->getFrontendUrl() . 'lof_productreviews/reviews/reportAjax';
@@ -101,24 +102,28 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
             <ol class="items review-items">
                 <?php foreach ($_items as $_review): ?>
                     <?php $customReview = $block->getReviewsCustom($_review->getId()); ?>
+                    <?php $avatarImg = ""; ?>
                     <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
-                        <?php
-                        $avatarImg = "";
-                        $avatarBlock = $block->getLayout()->createBlock('\Lof\CustomerAvatar\Block\Attributes\Avatar');
-                        if ($avatarBlock){
-                        $avatarImg = $avatarBlock->getCustomerAvatarById($_review->getData('customer_id'));
-                        ?>
-                        <div class="review-image">
-                            <img src="<?= $avatarImg; ?>" width="150px" height="150px"
-                                 alt="<?= __("avatar ") . $block->escapeHtml($_review->getNickname()) ?>"/>
-                        </div>
+                        <?php if ($helper->checkModuleInstalled("Lof_CustomerAvatar")) : ?>
+                            <?php
+                            $avatarBlock = $block->getLayout()->createBlock('\Lof\CustomerAvatar\Block\Attributes\Avatar');
+                            if ($avatarBlock) :
+                            $avatarImg = $avatarBlock->getCustomerAvatarById($_review->getData('customer_id'));
+                            ?>
+                            <div class="review-image">
+                                <img src="<?= $avatarImg; ?>" width="150px" height="150px"
+                                    alt="<?= $block->escapeHtml(__("avatar ")) . $block->escapeHtml($_review->getNickname()) ?>"/>
+                            </div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php if ($avatarImg) : ?>
                         <div class="review-infor">
-                            <?php } ?>
+                        <?php endif; ?>
                             <div class="review-title"
                                  itemprop="name"><?= $block->escapeHtml($_review->getTitle()) ?></div>
                             <?php
                             $customize = $block->escapeHtml($block->getHelpful($_review->getId()));
-                            if ($customize) {
+                            if ($customize) :
                                 $helpful = '<b id="helpful-' . $_review->getId() . '" data="' . $customize[0] . '">' . $customize[0] . '</b>';
                                 $total = '<b id="total-' . $_review->getId() . '" data="' . $customize[1] . '">' . $customize[1] . '</b>';
                                 ?>
@@ -126,7 +131,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                     <p><?= __('There are %1 of %2 people found this helpful.', $helpful, $total) ?></p>
                                 </div>
                                 <?php
-                            }
+                            endif;
                             ?>
 
                             <?php if (count($_review->getRatingVotes())): ?>
@@ -336,9 +341,9 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                             $format)) ?></time>
                                 </p>
                             </div>
-                            <?php if ($avatarImg){ ?>
+                            <?php if ($avatarImg) : ?>
                         </div>
-                    <?php } ?>
+                    <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
             </ol>
