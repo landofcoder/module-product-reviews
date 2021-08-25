@@ -105,7 +105,7 @@ class Content extends \Magento\Backend\Block\Widget
         );
 
         $this->getUploader()->getConfig()->setUrl(
-            $this->_urlBuilder->addSessionParam()->getUrl('lof_product_reviews/gallery/upload')
+            $this->_urlBuilder->getUrl('lof_product_reviews/gallery/upload')
         )->setFileField(
             'image'
         )->setFilters(

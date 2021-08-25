@@ -135,11 +135,22 @@ class Save extends ProductController
 
         if (($product = $this->initProduct()) && !empty($data)) {
 
-            $data1 = array_slice($data, 0, 6);
-            $data2 = array_slice($data, 6, 8);
-
+            //$data1 = array_slice($data, 0, 6);
+            //$data2 = array_slice($data, 6, 8);
+            //$data1 = $data2 = $data;
+            $reviewData = [
+                "email" => isset($data['email'])?$data['email']:"",
+                "nickname" => isset($data['nickname'])?$this->helper->xss_clean($data['nickname']):"",
+                "title" => isset($data['title'])?$this->helper->xss_clean($data['title']):"",
+                "detail" => isset($data['detail'])?$this->helper->xss_clean($data['detail']):""
+            ];
+            $data2 = [
+                "ratings" => isset($data['ratings'])?$data['ratings']:[],
+                "advantages" => isset($data['advantages'])?$this->helper->xss_clean($data['advantages']):"",
+                "disadvantages" => isset($data['disadvantages'])?$this->helper->xss_clean($data['disadvantages']):""
+            ];
             /** @var \Magento\Review\Model\Review $review */
-            $review = $this->reviewFactory->create()->setData($data1);
+            $review = $this->reviewFactory->create()->setData($reviewData);
             $review->unsetData('review_id');
 
             /** @var \Lof\ProductReviews\Model\CustomReview $customReview */
@@ -168,7 +179,6 @@ class Save extends ProductController
                         $data2['review_id'] = $reviewId;
                         $customReview->setData($data2);
                         $customReview->save();
-
                         //Upload review image
                         $this->uploadMultipleImages('review_images', $reviewId);
 
@@ -188,30 +198,33 @@ class Save extends ProductController
                     }
 
                     $review->aggregate();
-                    $customer = $this->cutomerCollectionFactory->create()->addFieldToFilter(
-                        'entity_id',
-                        $this->customerSession->getCustomerId()
-                    )->getData();
+                    $customer = $this->customerSession->getCustomer();
                     $dataEmail = [];
-                    $dataEmail['name'] = $customer[0]['firstname'] . ' ' . $customer[0]['lastname'];
+                    $dataEmail['name'] = $customer->getFirstname() . ' ' . $customer->getLastname();
                     $dataEmail['product_name'] = $product->getName();
+                    $dataEmail['couponcode'] = '';
+
                     $couponConfig = $this->helper->getCouponCode();
-                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                    $couponGenerator = $objectManager->create('Magento\SalesRule\Model\CouponGenerator');
-                    $coupon= [
-                        'rule_id' => $couponConfig,
-                        'qty' => '1',
-                        'length' => '8',
-                        'format' => 'alphanum',
-                        'prefix' => 'YSX',
-                        'suffix' => 'CXK',
-                    ];
-                    $codes = $couponGenerator->generateCodes($coupon);
-                    $dataEmail['couponcode'] = $codes[0];
+                    if ($couponConfig) {
+                        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                        $couponGenerator = $objectManager->create('Magento\SalesRule\Model\CouponGenerator');
+                        $coupon= [
+                            'rule_id' => $couponConfig,
+                            'qty' => 1,
+                            'quantity' => 1,
+                            'length' => 8,
+                            'format' => 'alphanum',
+                            'prefix' => 'YSX',
+                            'suffix' => 'CXK',
+                        ];
+                        $codes = $couponGenerator->generateCodes($coupon);
+                        $dataEmail['couponcode'] = $codes?$codes[0]:"";
+                    }
                     $this->sender->sendCouponCodeEmail($dataEmail);
                     $this->messageManager->addSuccess(__('You submitted your review for moderation.'));
                 } catch (\Exception $e) {
                     $this->reviewSession->setFormData($data);
+                    $this->messageManager->addError($e->getMessage());
                     $this->messageManager->addError(__('We can\'t post your review right now.'));
                 }
             } else {
@@ -233,52 +246,60 @@ class Save extends ProductController
 
     public function uploadMultipleImages($imageField, $reviewId)
     {
+        try {
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $jsonEncode = $this->_objectManager->get(\Magento\Framework\Json\EncoderInterface::class);
+            $reviewGallery = $this->_objectManager->create(Gallery::class);
+            $moduleHelper = $this->_objectManager->create(\Lof\ProductReviews\Helper\Data::class);
+            $limit_images = $moduleHelper->getConfig("lof_review_settings/limit_upload_image", 1);
+            $limit_images = $limit_images ? (int)$limit_images : 1;
+            $default_status = $moduleHelper->getConfig("lof_review_settings/default_status", 2);
+            $default_status = $default_status ? (int)$default_status : 2;
+            $names = [];
+            if (isset($_FILES)) {
+                $count = 0;
+                foreach ($_FILES as $fileId => $fileInfo) {
+                    if ($count <= $limit_images) {
+                        //$fileId = $imageField . '_' . $i;
+                        $image = $this->getRequest()->getFiles($fileId);
+                        if ((!$image && !isset($image['name'])) || (isset($image['name']) && !$image['name']))
+                            continue;
+                        $count++;
+                        $names[] = $image['name'];
 
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $jsonEncode = $this->_objectManager->get(\Magento\Framework\Json\EncoderInterface::class);
-        $reviewGallery = $this->_objectManager->create(Gallery::class);
-        $moduleHelper = $this->_objectManager->create(\Lof\ProductReviews\Helper\Data::class);
-        $limit_images = $moduleHelper->getConfig("lof_review_settings/limit_upload_image", 1);
-        $limit_images = $limit_images ? (int)$limit_images : 1;
-        $default_status = $moduleHelper->getConfig("lof_review_settings/default_status", 2);
-        $default_status = $default_status ? (int)$default_status : 2;
-        $names = [];
-        if (isset($_FILES)) {
-            for ($i = 0; $i < count($_FILES); $i++) {
-                if ($i <= $limit_images) {
-                    $fileId = $imageField . '_' . $i;
-                    $image = $this->getRequest()->getFiles($fileId);
-                    $names[] = $image['name'];
-
-                    $uploader = $objectManager->create(
-                        \Magento\MediaStorage\Model\File\Uploader::class,
-                        ['fileId' => $fileId]
-                    );
-                    $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
-                    $uploader->setAllowRenameFiles(true);
-                    $uploader->setFilesDispersion(false);
-                    $uploader->setAllowCreateFolders(true);
-                    $mediaDirectory = $objectManager->get(\Magento\Framework\Filesystem::class)->getDirectoryRead(DirectoryList::MEDIA);
-                    $uploader->save($mediaDirectory->getAbsolutePath('lof/product_reviews'));
+                        $uploader = $objectManager->create(
+                            \Magento\MediaStorage\Model\File\Uploader::class,
+                            ['fileId' => $fileId]
+                        );
+                        $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
+                        $uploader->setAllowRenameFiles(true);
+                        $uploader->setFilesDispersion(false);
+                        $uploader->setAllowCreateFolders(true);
+                        $mediaDirectory = $objectManager->get(\Magento\Framework\Filesystem::class)->getDirectoryRead(DirectoryList::MEDIA);
+                        $uploader->save($mediaDirectory->getAbsolutePath('lof/product_reviews'));
+                    }
                 }
             }
-        }
-        if ($names) {
-            if (count(array_filter($names)) == count($names)) {
-                $imageName = $jsonEncode->encode($names);
-            } else {
-                $imageName = '';
+            if ($names) {
+                if (count(array_filter($names)) == count($names)) {
+                    $imageName = $jsonEncode->encode($names);
+                } else {
+                    $imageName = '';
+                }
+
+                $data = [
+                    'review_id' => $reviewId,
+                    'label' => __('Gallery of Review ') . $reviewId,
+                    'value' => $imageName,
+                    'status' => $default_status
+                ];
+
+                $reviewGallery->setData($data);
+                $reviewGallery->save();
             }
+        } catch (\Exception $e) {
+            $this->messageManager->addError($e->getMessage());
 
-            $data = [
-                'review_id' => $reviewId,
-                'label' => __('Gallery of Review ') . $reviewId,
-                'value' => $imageName,
-                'status' => $default_status
-            ];
-
-            $reviewGallery->setData($data);
-            $reviewGallery->save();
         }
     }
 }

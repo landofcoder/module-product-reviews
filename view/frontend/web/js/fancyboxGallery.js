@@ -22,13 +22,24 @@ define(['jquery', 'Lof_All/lib/fancybox/jquery.fancybox.pack'], function() {
     jQuery(document).ready(function($) {
         jQuery(document).on("click", ".lofreview-gallery-fancybox", function(){
             var config = {};
-            if(jQuery(this).data('fancybox-height')){
-                config['minHeight'] = jQuery(this).data('fancybox-height');
-                config['height'] = jQuery(this).data('fancybox-height');
+            config['autoSize']  = false;
+            if(jQuery(this).data('fancybox-auto-size')){
+                config['autoSize'] = jQuery(this).data('fancybox-auto-size');
+                if(config['autoSize'] == 0){
+                    config['autoSize'] = false;
+                } else {
+                    config['autoSize'] = true;
+                }
             }
-            if(jQuery(this).data('fancybox-width')){
-                config['minWidth'] = jQuery(this).data('fancybox-width');
-                config['width'] = jQuery(this).data('fancybox-width');
+            if (!config['autoSize']) {
+                if(jQuery(this).data('fancybox-height')){
+                    config['minHeight'] = jQuery(this).data('fancybox-height');
+                    config['height'] = jQuery(this).data('fancybox-height');
+                }
+                if(jQuery(this).data('fancybox-width')){
+                    config['minWidth'] = jQuery(this).data('fancybox-width');
+                    config['width'] = jQuery(this).data('fancybox-width');
+                }
             }
             if(jQuery(this).data('fancybox-type')){
                 config['type'] = jQuery(this).data('fancybox-type');
@@ -51,14 +62,7 @@ define(['jquery', 'Lof_All/lib/fancybox/jquery.fancybox.pack'], function() {
             if(jQuery(this).data('fancybox-easing-out')){
                 config['easingOut'] = jQuery(this).data('fancybox-easing-out');
             }
-            if(jQuery(this).data('fancybox-auto-size')){
-                config['autoSize'] = jQuery(this).data('fancybox-auto-size');
-                if(config['autoSize'] == 0){
-                    config['autoSize'] = false;
-                } else {
-                    config['autoSize'] = true;
-                }
-            }
+            
             if(jQuery(this).attr('href')){
                 config['href'] = jQuery(this).attr('href');
             }

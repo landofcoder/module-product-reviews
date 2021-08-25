@@ -274,4 +274,16 @@ zoom: 1;
     width: 90%;
     float: left;
 }
+.review-ratings {
+    padding-right: 5px;
+}
+span.review-details-label {
+    clip: initial;
+    position: initial!important;
+    width: initial!important;
+    height: initial!important;
+}
+.actions-toolbar>.primary, .actions-toolbar>.secondary {
+    color: #6d6d6d;
+}
 }
