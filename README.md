@@ -19,7 +19,6 @@ Knowing the importance of boosting the customer’s trust to stores via reviews,
 - Send reminder emails with ease
 - Review Summary included for Admin
 - Multiple languages - RTL supports
-- 24/7 professional support
 - Fast Speed with Magento Block Caching
 - Attractive Custom Work service
 
