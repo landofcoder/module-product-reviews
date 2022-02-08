@@ -46,7 +46,7 @@ class GetProductReviews implements GetProductReviewsInterface
      *
      * @param string $sku
      *
-     * @return array|\Lof\ProductReviews\Api\Data\ReviewInterface[]
+     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface[]
      */
     public function execute(string $sku)
     {

@@ -191,7 +191,7 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
 
     /**
      * @param $reviewId
-     * @return array|mixed
+     * @return mixed|array|mixed
      */
     public function getReviewsGallery($reviewId)
     {
@@ -288,7 +288,7 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
 
     /**
      * @param $reviewId
-     * @return array
+     * @return mixed|array
      */
     public function _compareUserData($reviewId)
     {

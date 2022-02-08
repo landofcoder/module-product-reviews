@@ -260,7 +260,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @return array
+     * @return mixed|array
      */
     public function getStores()
     {

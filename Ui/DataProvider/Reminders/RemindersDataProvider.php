@@ -96,7 +96,7 @@ class RemindersDataProvider extends \Magento\Framework\View\Element\UiComponent\
     /**
      * Prepares Meta
      *
-     * @return array
+     * @return mixed|array
      */
     public function prepareMetadata()
     {

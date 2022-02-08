@@ -80,7 +80,7 @@ class Notes extends \Magento\Framework\Data\Form\Element\AbstractElement
     }
 
     /**
-     * @return array
+     * @return mixed|array
      */
     protected function _getCustomReview()
     {

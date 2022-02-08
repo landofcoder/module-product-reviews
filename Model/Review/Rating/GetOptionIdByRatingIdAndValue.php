@@ -79,7 +79,7 @@ class GetOptionIdByRatingIdAndValue
      * @param RatingOptionCollection $collection
      * @param string $labelField
      *
-     * @return array
+     * @return mixed|array
      */
     private function toOptionHash(RatingOptionCollection $collection, string $labelField): array
     {

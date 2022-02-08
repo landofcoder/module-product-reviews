@@ -102,7 +102,7 @@ class Collection extends GalleryCollection implements SearchResultInterface
      *
      * @param int $limit
      * @param int $offset
-     * @return array
+     * @return mixed|array
      */
     public function getAllIds($limit = null, $offset = null)
     {

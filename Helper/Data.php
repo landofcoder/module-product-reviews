@@ -216,7 +216,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * Get Sender Name and Email
      *
      * @param $config
-     * @return array
+     * @return mixed|array
      */
     public function getSenderValue($config)
     {
@@ -335,7 +335,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * Check module is installed or not
-     * 
+     *
      * @param string $moduleName
      * @return bool|int
      */
@@ -345,7 +345,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     /**
      * @param $data_array
-     * @return array
+     * @return mixed|array
      */
     public function xss_clean_array($data_array)
     {

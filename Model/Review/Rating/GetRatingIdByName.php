@@ -81,7 +81,7 @@ class GetRatingIdByName
      * @param RatingCollection $collection
      * @param string $labelField
      *
-     * @return array
+     * @return mixed|array
      */
     private function toOptionHash(RatingCollection $collection, string $labelField): array
     {

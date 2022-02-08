@@ -64,7 +64,7 @@ interface GalleryInterface
     /**
      * Get value
      *
-     * @return array|null
+     * @return mixed|null
      */
     public function getValue();
 

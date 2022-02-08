@@ -79,7 +79,7 @@ class ToModel
      * @param Review $reviewModel
      * @param ReviewData $reviewData
      *
-     * @return array
+     * @return mixed|array
      */
     private function mergeReviewData(Review $reviewModel, ReviewData $reviewData): array
     {

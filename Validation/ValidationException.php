@@ -48,7 +48,7 @@ class ValidationException extends LocalizedException implements AggregateExcepti
     /**
      * Retrieve errors list
      *
-     * @return array
+     * @return mixed|array
      */
     public function getErrors(): array
     {

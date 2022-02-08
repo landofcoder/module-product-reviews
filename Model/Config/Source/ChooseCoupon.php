@@ -47,7 +47,7 @@ class ChooseCoupon implements \Magento\Framework\Option\ArrayInterface
      * Return option array
      *
      * @param bool $addEmpty
-     * @return array
+     * @return mixed|array
      */
     public function toOptionArray($addEmpty = true)
     {

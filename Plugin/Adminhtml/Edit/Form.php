@@ -78,7 +78,7 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
     /**
      * @param \Magento\Review\Block\Adminhtml\Edit\Form $object
      * @param $form
-     * @return array
+     * @return mixed|array
      */
     public function beforeSetForm(\Magento\Review\Block\Adminhtml\Edit\Form $object, $form)
     {

@@ -96,7 +96,7 @@ class GalleryDataProvider extends \Magento\Framework\View\Element\UiComponent\Da
     /**
      * Prepares Meta
      *
-     * @return array
+     * @return mixed|array
      */
     public function prepareMetadata()
     {

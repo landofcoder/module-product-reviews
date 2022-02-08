@@ -83,7 +83,7 @@ class LoadHandler
      *
      * @param Product|Review $productReview
      *
-     * @return array
+     * @return mixed|array
      */
     public function execute($productReview): array
     {
@@ -131,7 +131,7 @@ class LoadHandler
      *
      * @param Review|Product $productReview
      *
-     * @return array|DataObject[]
+     * @return mixed|array|DataObject[]
      */
     private function getReviewRatingVotes($productReview)
     {

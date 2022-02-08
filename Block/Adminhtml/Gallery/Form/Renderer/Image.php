@@ -145,7 +145,7 @@ class Image extends ImageField
     }
 
     /**
-     * @return array
+     * @return mixed|array
      */
     protected function _getGallery()
     {

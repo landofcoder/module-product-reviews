@@ -216,7 +216,7 @@ class Reminders extends \Magento\Framework\Model\AbstractModel
     /**
      * @param $senderEmail
      * @param array $recipientsEmail
-     * @return array|bool
+     * @return mixed|array|bool
      * @throws \Zend_Validate_Exception
      */
     public function validateEmail($email)
@@ -236,7 +236,7 @@ class Reminders extends \Magento\Framework\Model\AbstractModel
     /**
      * Prepare reminder's statuses.
      *
-     * @return array
+     * @return mixed|array
      */
     public function getAvailableStatuses()
     {

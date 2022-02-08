@@ -130,7 +130,7 @@ class GetList implements GetListInterface
      *
      * @param array $items
      *
-     * @return array
+     * @return mixed|array
      */
     private function convertItemsToDataModel(array $items): array
     {

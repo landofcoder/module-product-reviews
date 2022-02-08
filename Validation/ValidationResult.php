@@ -45,7 +45,7 @@ class ValidationResult
     /**
      * Get Errors
      *
-     * @return array
+     * @return mixed|array
      */
     public function getErrors(): array
     {

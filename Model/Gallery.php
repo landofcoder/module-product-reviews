@@ -41,7 +41,7 @@ class Gallery extends \Magento\Framework\Model\AbstractModel
     /**
      * Prepare gallery's statuses.
      *
-     * @return array
+     * @return mixed|array
      */
     public function getAvailableStatuses()
     {
