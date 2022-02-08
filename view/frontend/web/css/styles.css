@@ -262,28 +262,32 @@ zoom: 1;
 .review-author .review-details-value {
 	font-weight: 700;
 }
+.review-item .review-image img {
+    width: 60px;
+    height: 60px;
+}
 @media (min-width: 640px){
-.review-ratings~.review-content, .review-ratings~.review-details {
-	margin-left: 0px;
-}
-.review-ratings~.review-content, .review-ratings~.review-details {
-    float: left;
-    margin-left: 0px;
-}
-.review-item .review-infor {
-    width: 90%;
-    float: left;
-}
-.review-ratings {
-    padding-right: 5px;
-}
-span.review-details-label {
-    clip: initial;
-    position: initial!important;
-    width: initial!important;
-    height: initial!important;
-}
-.actions-toolbar>.primary, .actions-toolbar>.secondary {
-    color: #6d6d6d;
-}
+    .review-ratings~.review-content, .review-ratings~.review-details {
+        margin-left: 0px;
+    }
+    .review-ratings~.review-content, .review-ratings~.review-details {
+        float: left;
+        margin-left: 0px;
+    }
+    .review-item .review-infor {
+        width: 90%;
+        float: left;
+    }
+    .review-ratings {
+        padding-right: 5px;
+    }
+    span.review-details-label {
+        clip: initial;
+        position: initial!important;
+        width: initial!important;
+        height: initial!important;
+    }
+    .actions-toolbar>.primary, .actions-toolbar>.secondary {
+        color: #6d6d6d;
+    }
 }

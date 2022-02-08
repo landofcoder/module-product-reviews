@@ -89,20 +89,20 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
             'review_id',
             ['in' => $reviewId]
         );
-        if (!empty($customReview)) {
-            foreach ($customReview as $data) {
-                $custom = $data->getData();
-            }
+        $custom = [];
+        if ($customReview->count()) {
+            $foundItem = $customReview->getFirstItem();
+            $custom = $foundItem->getData();
         }
 
         $reviewReply = $this->_reviewReplyFactory->create()->addFieldToSelect('*')->addFieldToFilter(
             'review_id',
             ['in' => $reviewId]
         );
-        if (!empty($customReview)) {
-            foreach ($reviewReply as $data) {
-                $reply = $data->getData();
-            }
+        $reply = [];
+        if ($reviewReply->count()) {
+            $foundItem = $reviewReply->getFirstItem();
+            $reply = $foundItem->getData();
         }
 
         $fieldset1 = $form->addFieldset(
@@ -259,16 +259,9 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
             );
         }
 
-        if (!empty($custom) && !empty($reply)) {
-            $reviews = array_merge($review->getData(), $custom, $reply);
-        } elseif (!empty($custom) && empty($reply)) {
-            $reviews = array_merge($review->getData(), $custom);
-        } elseif (empty($custom) && !empty($reply)) {
-            $reviews = array_merge($review->getData(), $reply);
-        } else {
-            $reviews = $review->getData();
-        }
-
+        $reviews = $review->getData();
+        $reviews = array_merge($reviews, $custom);
+        $reviews = array_merge($reviews, $reply);
         $form->setValues($reviews);
         return [$form];
     }

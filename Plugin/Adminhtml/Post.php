@@ -78,7 +78,7 @@ class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
         $modelGallery = $this->galleryFactory->create();
         $modelGallery->setReviewId($latestItem['review_id'])
             ->setLabel('Gallery of Review ' . $latestItem['review_id'])
-            ->setStatus(2)
+            ->setStatus(\Lof\ProductReviews\Model\Gallery::STATUS_DISABLED)
             ->setValue(json_encode([]))
             ->save();
 
