@@ -176,6 +176,26 @@ class GalleryRepository implements GalleryRepositoryInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function getListByReview($reviewId, \Magento\Framework\Api\SearchCriteriaInterface $criteria)
+    {
+        /** @var \Lof\ProductReviews\Model\ResourceModel\Gallery\Collection $collection */
+        $collection = $this->galleryCollectionFactory->create();
+
+        $this->collectionProcessor->process($criteria, $collection);
+
+        $collection->addFieldToFilter("review_id", $reviewId);
+
+        /** @var Data\GallerySearchResultsInterface $searchResults */
+        $searchResults = $this->searchResultsFactory->create();
+        $searchResults->setSearchCriteria($criteria);
+        $searchResults->setItems($collection->getItems());
+        $searchResults->setTotalCount($collection->getSize());
+        return $searchResults;
+    }
+
+    /**
      * Delete Gallery
      *
      * @param \Lof\ProductReviews\Api\Data\GalleryInterface $gallery

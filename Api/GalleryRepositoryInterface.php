@@ -50,6 +50,16 @@ interface GalleryRepositoryInterface
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 
     /**
+     * Retrieve galleries matching the specified criteria.
+     *
+     * @param int $reviewId
+     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @return \Lof\ProductReviews\Api\Data\GallerySearchResultsInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getListByReview($reviewId, \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
+
+    /**
      * Delete gallery.
      *
      * @param \Lof\ProductReviews\Api\Data\GalleryInterface $gallery

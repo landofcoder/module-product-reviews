@@ -26,11 +26,12 @@ interface GalleryInterface
      * Constants for keys of data array. Identical to the name of the getter in snake case
      */
     const GALLERY_ID    = 'id';
-    const IDENTIFIER    = 'identifier';
     const REVIEW_ID     = 'review_id';
     const LABEL         = 'label';
     const VALUE         = 'value';
     const STATUS        = 'status';
+    const IMAGES        = 'images';
+
     /**#@-*/
 
     /**
@@ -40,19 +41,13 @@ interface GalleryInterface
      */
     public function getId();
 
-    /**
-     * Get identifier
-     *
-     * @return string
-     */
-    public function getIdentifier();
 
     /**
      * Get Review Id
      *
      * @return int|null
      */
-    public function getReviewID();
+    public function getReviewId();
 
     /**
      * Get label
@@ -69,6 +64,13 @@ interface GalleryInterface
     public function getValue();
 
     /**
+     * Get images
+     *
+     * @return mixed|null
+     */
+    public function getImages();
+
+    /**
      * Status
      *
      * @return bool|null
@@ -82,14 +84,6 @@ interface GalleryInterface
      * @return GalleryInterface
      */
     public function setId($id);
-
-    /**
-     * Set identifier
-     *
-     * @param string $identifier
-     * @return GalleryInterface
-     */
-    public function setIdentifier($identifier);
 
     /**
      * Set review id
@@ -110,10 +104,18 @@ interface GalleryInterface
     /**
      * Set value
      *
-     * @param array $value
+     * @param array|string $value
      * @return GalleryInterface
      */
     public function setValue($value);
+
+    /**
+     * Set images
+     *
+     * @param array|mixed $images
+     * @return GalleryInterface
+     */
+    public function setImages($images);
 
     /**
      * Set Status

@@ -55,6 +55,13 @@
         </resources>
     </route>
 
+    <route method="GET" url="/V1/lof-productreviews/galleries/:reviewId">
+        <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getListByReview"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
+
     <route url="/V1/products/:sku/reviews" method="GET">
         <service class="Lof\ProductReviews\Api\GetProductReviewsInterface" method="execute"/>
         <resources>
