@@ -18,24 +18,19 @@
  * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
  * @license    https://landofcoder.com/terms
  */
-namespace Lof\ProductReviews\Api\Data;
+namespace Lof\ProductReviews\Model\Review;
 
-use Magento\Framework\Api\SearchResultsInterface;
-
-interface GallerySearchResultsInterface extends SearchResultsInterface
+/**
+ * Interface ReviewTypeResolverInterface
+ */
+interface ReviewTypeResolverInterface
 {
     /**
-     * Get blocks list.
+     * Resolver Review Type
      *
-     * @return \Lof\ProductReviews\Api\Data\GalleryInterface[]
-     */
-    public function getItems();
-
-    /**
-     * Set blocks list.
+     * @param \Magento\Review\Model\Review $productReview
      *
-     * @param \Lof\ProductReviews\Api\Data\GalleryInterface[] $items
-     * @return $this
+     * @return int
      */
-    public function setItems(array $items);
+    public function getReviewType($productReview): int;
 }

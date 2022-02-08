@@ -18,23 +18,32 @@
  * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
  * @license    https://landofcoder.com/terms
  */
+declare(strict_types=1);
+
 namespace Lof\ProductReviews\Api\Data;
 
 use Magento\Framework\Api\SearchResultsInterface;
 
-interface GallerySearchResultsInterface extends SearchResultsInterface
+/**
+ * Search results of Repository::getList method
+ *
+ * Used fully qualified namespaces in annotations for proper work of WebApi request parser
+ *
+ * @api
+ */
+interface ReviewSearchResultInterface extends SearchResultsInterface
 {
     /**
-     * Get blocks list.
+     * Get attributes list.
      *
-     * @return \Lof\ProductReviews\Api\Data\GalleryInterface[]
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface[]
      */
     public function getItems();
 
     /**
-     * Set blocks list.
+     * Set attributes list.
      *
-     * @param \Lof\ProductReviews\Api\Data\GalleryInterface[] $items
+     * @param \Lof\ProductReviews\Api\Data\ReviewInterface[] $items
      * @return $this
      */
     public function setItems(array $items);

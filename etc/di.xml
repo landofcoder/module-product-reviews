@@ -92,4 +92,30 @@
             <argument name="resourceModel" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\Reminders</argument>
         </arguments>
     </type>
+
+    <preference for="Lof\ProductReviews\Api\Data\ReviewInterface" type="Lof\ProductReviews\Model\Data\Review"/>
+    <preference for="Lof\ProductReviews\Api\Data\RatingVoteInterface" type="Lof\ProductReviews\Model\Data\RatingVote"/>
+    <preference for="Lof\ProductReviews\Api\GetProductReviewsInterface" type="Lof\ProductReviews\Model\GetProductReviews"/>
+    <preference for="Lof\ProductReviews\Api\ReviewRepositoryInterface" type="Lof\ProductReviews\Model\ReviewRepository"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\DeleteByIdInterface" type="Lof\ProductReviews\Model\Review\Command\DeleteById"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\SaveInterface" type="Lof\ProductReviews\Model\Review\Command\Save"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\GetInterface" type="Lof\ProductReviews\Model\Review\Command\Get"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\GetListInterface" type="Lof\ProductReviews\Model\Review\Command\GetList"/>
+    <preference for="Lof\ProductReviews\Model\ReviewValidatorInterface" type="Lof\ProductReviews\Model\ReviewValidationChain"/>
+
+    <preference for="Lof\ProductReviews\Api\Data\ReviewSearchResultInterface" type="Lof\ProductReviews\Model\ReviewSearchResult"/>
+    <preference for="Lof\ProductReviews\Model\Review\ReviewTypeResolverInterface" type="Lof\ProductReviews\Model\Review\ReviewTypeResolver"/>
+
+    <type name="Lof\ProductReviews\Model\ReviewValidationChain">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="title" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\TitleValidator</item>
+                <item name="detail" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\DetailValidator</item>
+                <item name="nickname" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\NicknameValidator</item>
+                <item name="review_entity" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\ReviewEntityValidator</item>
+                <item name="entity_pk_value" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\EntityPkValueValidator</item>
+                <item name="stores" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\StoresValidator</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

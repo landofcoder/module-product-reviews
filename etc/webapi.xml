@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<!--
+  * Landofcoder
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the Landofcoder.com license that is
+  * available through the world-wide-web at this URL:
+  * https://landofcoder.com/terms
+  *
+  * DISCLAIMER
+  *
+  * Do not edit or add to this file if you wish to upgrade this extension to newer
+  * version in the future.
+  *
+  * @category   Landofcoder
+  * @package    Lof_ProductReviews
+  * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
+  * @license    https://landofcoder.com/terms
+  -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/lof-productreviews/gallery" method="POST">
+		<service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::gallery_save"/>
+		</resources>
+	</route>
+
+    <route url="/V1/lof-productreviews/gallery/:galleryId" method="PUT">
+		<service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::gallery_save"/>
+		</resources>
+	</route>
+
+	<route url="/V1/lof-productreviews/gallery/:galleryId" method="DELETE">
+		<service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::gallery_delete"/>
+		</resources>
+	</route>
+
+        <route method="GET" url="/V1/lof-productreviews/gallery/:galleryId">
+        <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
+
+    <route method="GET" url="/V1/lof-productreviews/galleries">
+        <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
+
+    <route url="/V1/products/:sku/reviews" method="GET">
+        <service class="Lof\ProductReviews\Api\GetProductReviewsInterface" method="execute"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
+    <route url="/V1/reviews/:reviewId" method="GET">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
+    <route url="/V1/reviews/:id" method="PUT">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
+    <route url="/V1/reviews" method="POST">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
+    <route url="/V1/reviews/:reviewId" method="DELETE">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
+    <route url="/V1/reviews" method="GET">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
+
+</routes>
