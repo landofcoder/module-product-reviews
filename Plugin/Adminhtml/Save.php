@@ -209,6 +209,7 @@ class Save
                     ->setEmailAddress($email_address)
                     ->setUserName($user_name)
                     ->setWebsite($website)
+                    ->setStatus(\Lof\ProductReviews\Model\ReviewReply::STATUS_ENABLED)
                     ->save();
             } else {
                 $modelReply->setReviewId($reviewId)
@@ -219,6 +220,7 @@ class Save
                     ->setEmailAddress($email_address)
                     ->setUserName($user_name)
                     ->setWebsite($website)
+                    ->setStatus(\Lof\ProductReviews\Model\ReviewReply::STATUS_ENABLED)
                     ->save();
             }
         }

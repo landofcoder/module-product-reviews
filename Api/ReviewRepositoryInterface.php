@@ -55,7 +55,18 @@ interface ReviewRepositoryInterface
     public function save(ReviewInterface $review): \Lof\ProductReviews\Api\Data\ReviewInterface;
 
     /**
-     * Get review by id.
+     * Save review Reply.
+     *
+     * @param \Lof\ProductReviews\Api\Data\ReplyInterface $review
+     *
+     * @return \Lof\ProductReviews\Api\Data\ReplyInterface
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function reply(ReplyInterface $review): \Lof\ProductReviews\Api\Data\ReplyInterface;
+
+    /**
+     * Get review by review id.
      *
      * @param int $reviewId
      *
@@ -63,6 +74,16 @@ interface ReviewRepositoryInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function get(int $reviewId): \Lof\ProductReviews\Api\Data\ReviewInterface;
+
+    /**
+     * Get review Reply by review id.
+     *
+     * @param int $reviewId
+     *
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getReply(int $reviewId): \Lof\ProductReviews\Api\Data\ReplyInterface;
 
     /**
      * Lists the review items that match specified search criteria.

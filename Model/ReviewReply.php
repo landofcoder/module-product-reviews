@@ -23,6 +23,12 @@ namespace Lof\ProductReviews\Model;
 
 class ReviewReply extends \Magento\Framework\Model\AbstractModel
 {
+    /**#@+
+     * Gallery Status values
+     */
+    const STATUS_ENABLED = 1;
+    const STATUS_DISABLED = 0;
+
     /**
      * @inheritDoc
      */

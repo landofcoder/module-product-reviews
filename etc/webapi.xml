@@ -74,8 +74,20 @@
             <resource ref="Magento_Review::reviews_all"/>
         </resources>
     </route>
+    <route url="/V1/reviews/reply/:reviewId" method="GET">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getReply"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
     <route url="/V1/reviews/:id" method="PUT">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magento_Review::reviews_all"/>
+        </resources>
+    </route>
+    <route url="/V1/reviews/reply/:id" method="PUT">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="reply"/>
         <resources>
             <resource ref="Magento_Review::reviews_all"/>
         </resources>

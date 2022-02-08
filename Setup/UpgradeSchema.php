@@ -144,6 +144,19 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'comment' => 'Parent Id'
                 ]
             );
+
+            $installer->getConnection()->addColumn(
+                $replyTable,
+                'status',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    'length' => 4,
+                    'unsigned' => true,
+                    'nullable' => true,
+                    'default' => 0,
+                    'comment' => 'Status: 0 - disabled, 1 - enabled'
+                ]
+            );
         }
         $installer->endSetup();
     }
