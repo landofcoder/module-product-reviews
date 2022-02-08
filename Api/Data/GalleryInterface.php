@@ -50,7 +50,7 @@ interface GalleryInterface
     /**
      * Get Review Id
      *
-     * @return int\null
+     * @return int|null
      */
     public function getReviewID();
 
