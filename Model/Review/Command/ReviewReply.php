@@ -52,14 +52,14 @@ class ReviewReply implements ReviewReplyInterface
     /**
      * Save Review
      *
-     * @param ReviewInterface $dataModel
+     * @param ReplyInterface $dataModel
      *
-     * @return ReviewInterface
+     * @return ReplyInterface
      * @throws ValidationException
      * @throws AlreadyExistsException
      * @throws NoSuchEntityException
      */
-    public function execute(ReviewInterface $dataModel): ReviewInterface
+    public function execute(ReplyInterface $dataModel): ReplyInterface
     {
         $this->replyResource->save($dataModel);
         $this->replyResource->load($dataModel, $dataModel->getId());

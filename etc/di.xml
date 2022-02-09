@@ -93,6 +93,7 @@
         </arguments>
     </type>
 
+    <preference for="Lof\ProductReviews\Api\Data\GallerySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
     <preference for="Lof\ProductReviews\Api\Data\GalleryInterface" type="Lof\ProductReviews\Model\Gallery"/>
     <preference for="Lof\ProductReviews\Api\Data\ReviewInterface" type="Lof\ProductReviews\Model\Data\Review"/>
     <preference for="Lof\ProductReviews\Api\Data\ReplyInterface" type="Lof\ProductReviews\Model\ReviewReply"/>
