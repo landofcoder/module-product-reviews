@@ -20,42 +20,42 @@
   -->
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
 
-    <route url="/V1/lof-productreviews/gallery" method="POST">
+    <route url="/V1/reviews/gallery" method="POST">
 		<service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="save"/>
 		<resources>
 			<resource ref="Lof_ProductReviews::gallery_save"/>
 		</resources>
 	</route>
 
-    <route url="/V1/lof-productreviews/gallery/:galleryId" method="PUT">
+    <route url="/V1/reviews/gallery/:galleryId" method="PUT">
 		<service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="save"/>
 		<resources>
 			<resource ref="Lof_ProductReviews::gallery_save"/>
 		</resources>
 	</route>
 
-	<route url="/V1/lof-productreviews/gallery/:galleryId" method="DELETE">
+	<route url="/V1/reviews/gallery/:galleryId" method="DELETE">
 		<service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="deleteById"/>
 		<resources>
 			<resource ref="Lof_ProductReviews::gallery_delete"/>
 		</resources>
 	</route>
 
-        <route method="GET" url="/V1/lof-productreviews/gallery/:galleryId">
+        <route method="GET" url="/V1/reviews/gallery/:galleryId">
         <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getById"/>
         <resources>
             <resource ref="Magento_Review::reviews_all"/>
         </resources>
     </route>
 
-    <route method="GET" url="/V1/lof-productreviews/galleries">
+    <route method="GET" url="/V1/reviews/galleries">
         <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getList"/>
         <resources>
             <resource ref="Magento_Review::reviews_all"/>
         </resources>
     </route>
 
-    <route method="GET" url="/V1/lof-productreviews/galleries/:reviewId">
+    <route method="GET" url="/V1/reviews/galleries/:reviewId">
         <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getListByReview"/>
         <resources>
             <resource ref="Magento_Review::reviews_all"/>
