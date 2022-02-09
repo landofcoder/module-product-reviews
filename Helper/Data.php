@@ -40,6 +40,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_SEND_REMINDER_AUTO = 'lof_product_reviews/email_settings/send_emails_automatically';
 
     /**
+     * @var string
+     */
+    const UPLOAD_FILE_PATH = 'lof/product_reviews';
+
+    /**
      * @var \Magento\Framework\Module\ModuleListInterface
      */
     protected $moduleList;
@@ -334,12 +339,54 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * get coupon config data
+     *
+     * @param int|string|mixed
+     * @return mixed|array
+     */
+    public function getCouponData($couponConfig)
+    {
+        return [
+            'rule_id' => $couponConfig,
+            'qty' => 1,
+            'quantity' => 1,
+            'length' => 8,
+            'format' => 'alphanum',
+            'prefix' => 'YSX',
+            'suffix' => 'CXK',
+        ];
+    }
+
+    /**
+     * get available file type
+     *
+     * @return mixed|array
+     */
+    public function getAvailableFileTypes()
+    {
+        return ['jpg', 'jpeg', 'gif', 'png'];
+    }
+
+    /**
+     * get upload file folder path
+     *
+     * @return string
+     */
+    public function getUploadFilePath()
+    {
+        return self::UPLOAD_FILE_PATH;
+    }
+
+
+
+    /**
      * Check module is installed or not
      *
      * @param string $moduleName
      * @return bool|int
      */
-    public function checkModuleInstalled($moduleName){
+    public function checkModuleInstalled($moduleName)
+    {
         return $this->_moduleList->has($moduleName);
     }
 

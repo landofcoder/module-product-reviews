@@ -140,6 +140,7 @@ class Save extends ProductController
             //$data1 = $data2 = $data;
             $reviewData = [
                 "email" => isset($data['email'])?$data['email']:"",
+                "email_address" => isset($data['email'])?$data['email']:"",
                 "nickname" => isset($data['nickname'])?$this->helper->xss_clean($data['nickname']):"",
                 "title" => isset($data['title'])?$this->helper->xss_clean($data['title']):"",
                 "detail" => isset($data['detail'])?$this->helper->xss_clean($data['detail']):""
@@ -149,6 +150,7 @@ class Save extends ProductController
                 "advantages" => isset($data['advantages'])?$this->helper->xss_clean($data['advantages']):"",
                 "disadvantages" => isset($data['disadvantages'])?$this->helper->xss_clean($data['disadvantages']):""
             ];
+            $reviewData = $this->helper->xss_clean_array($reviewData);
             /** @var \Magento\Review\Model\Review $review */
             $review = $this->reviewFactory->create()->setData($reviewData);
             $review->unsetData('review_id');
@@ -208,15 +210,7 @@ class Save extends ProductController
                     if ($couponConfig) {
                         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
                         $couponGenerator = $objectManager->create('Magento\SalesRule\Model\CouponGenerator');
-                        $coupon= [
-                            'rule_id' => $couponConfig,
-                            'qty' => 1,
-                            'quantity' => 1,
-                            'length' => 8,
-                            'format' => 'alphanum',
-                            'prefix' => 'YSX',
-                            'suffix' => 'CXK',
-                        ];
+                        $coupon = $this->helper->getCouponData($couponConfig);
                         $codes = $couponGenerator->generateCodes($coupon);
                         $dataEmail['couponcode'] = $codes?$codes[0]:"";
                     }
@@ -244,13 +238,20 @@ class Save extends ProductController
         return $resultRedirect;
     }
 
+    /**
+     * Upload multiple images
+     *
+     * @param string $imageField
+     * @param int|string $reviewId
+     * @return void
+     */
     public function uploadMultipleImages($imageField, $reviewId)
     {
         try {
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
             $jsonEncode = $this->_objectManager->get(\Magento\Framework\Json\EncoderInterface::class);
             $reviewGallery = $this->_objectManager->create(Gallery::class);
-            $moduleHelper = $this->_objectManager->create(\Lof\ProductReviews\Helper\Data::class);
+            $moduleHelper = $this->helper;
             $limit_images = $moduleHelper->getConfig("lof_review_settings/limit_upload_image", 1);
             $limit_images = $limit_images ? (int)$limit_images : 1;
             $default_status = $moduleHelper->getConfig("lof_review_settings/default_status", 2);
@@ -258,6 +259,8 @@ class Save extends ProductController
             $names = [];
             if (isset($_FILES)) {
                 $count = 0;
+                $availableFileTypes = $moduleHelper->getAvailableFileTypes();
+                $uploadFilePath = $moduleHelper->getUploadFilePath();
                 foreach ($_FILES as $fileId => $fileInfo) {
                     if ($count <= $limit_images) {
                         //$fileId = $imageField . '_' . $i;
@@ -271,12 +274,12 @@ class Save extends ProductController
                             \Magento\MediaStorage\Model\File\Uploader::class,
                             ['fileId' => $fileId]
                         );
-                        $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
+                        $uploader->setAllowedExtensions($availableFileTypes);
                         $uploader->setAllowRenameFiles(true);
                         $uploader->setFilesDispersion(false);
                         $uploader->setAllowCreateFolders(true);
                         $mediaDirectory = $objectManager->get(\Magento\Framework\Filesystem::class)->getDirectoryRead(DirectoryList::MEDIA);
-                        $uploader->save($mediaDirectory->getAbsolutePath('lof/product_reviews'));
+                        $uploader->save($mediaDirectory->getAbsolutePath($uploadFilePath));
                     }
                 }
             }
