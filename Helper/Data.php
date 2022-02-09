@@ -377,8 +377,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return self::UPLOAD_FILE_PATH;
     }
 
-
-
     /**
      * Check module is installed or not
      *

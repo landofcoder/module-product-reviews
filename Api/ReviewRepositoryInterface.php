@@ -23,6 +23,7 @@ declare(strict_types=1);
 namespace Lof\ProductReviews\Api;
 
 use Lof\ProductReviews\Api\Data\ReviewInterface;
+use Lof\ProductReviews\Api\Data\ReplyInterface;
 use Magento\Framework\Api\SearchCriteria;
 
 /**
@@ -57,13 +58,13 @@ interface ReviewRepositoryInterface
     /**
      * Save review Reply.
      *
-     * @param \Lof\ProductReviews\Api\Data\ReplyInterface $review
+     * @param \Lof\ProductReviews\Api\Data\ReplyInterface $reply
      *
      * @return \Lof\ProductReviews\Api\Data\ReplyInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function reply(ReplyInterface $review): \Lof\ProductReviews\Api\Data\ReplyInterface;
+    public function reply(ReplyInterface $reply): \Lof\ProductReviews\Api\Data\ReplyInterface;
 
     /**
      * Get review by review id.
@@ -79,11 +80,11 @@ interface ReviewRepositoryInterface
      * Get review Reply by review id.
      *
      * @param int $reviewId
-     *
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param \Magento\Framework\Api\SearchCriteria|null $searchCriteria
+     * @return \Lof\ProductReviews\Api\Data\ReplySearchResultInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getReply(int $reviewId): \Lof\ProductReviews\Api\Data\ReplyInterface;
+    public function getListReply(int $reviewId, SearchCriteria $searchCriteria = null): \Lof\ProductReviews\Api\Data\ReplySearchResultInterface;
 
     /**
      * Lists the review items that match specified search criteria.

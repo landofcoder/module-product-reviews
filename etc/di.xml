@@ -95,6 +95,7 @@
 
     <preference for="Lof\ProductReviews\Api\Data\GalleryInterface" type="Lof\ProductReviews\Model\Gallery"/>
     <preference for="Lof\ProductReviews\Api\Data\ReviewInterface" type="Lof\ProductReviews\Model\Data\Review"/>
+    <preference for="Lof\ProductReviews\Api\Data\ReplyInterface" type="Lof\ProductReviews\Model\ReviewReply"/>
     <preference for="Lof\ProductReviews\Api\Data\RatingVoteInterface" type="Lof\ProductReviews\Model\Data\RatingVote"/>
     <preference for="Lof\ProductReviews\Api\GetProductReviewsInterface" type="Lof\ProductReviews\Model\GetProductReviews"/>
     <preference for="Lof\ProductReviews\Api\ReviewRepositoryInterface" type="Lof\ProductReviews\Model\ReviewRepository"/>
@@ -102,8 +103,11 @@
     <preference for="Lof\ProductReviews\Model\Review\Command\SaveInterface" type="Lof\ProductReviews\Model\Review\Command\Save"/>
     <preference for="Lof\ProductReviews\Model\Review\Command\GetInterface" type="Lof\ProductReviews\Model\Review\Command\Get"/>
     <preference for="Lof\ProductReviews\Model\Review\Command\GetListInterface" type="Lof\ProductReviews\Model\Review\Command\GetList"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\ReviewReplyInterface" type="Lof\ProductReviews\Model\Review\Command\ReviewReply"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\GetListReplyInterface" type="Lof\ProductReviews\Model\Review\Command\GetListReply"/>
     <preference for="Lof\ProductReviews\Model\ReviewValidatorInterface" type="Lof\ProductReviews\Model\ReviewValidationChain"/>
 
+    <preference for="Lof\ProductReviews\Api\Data\ReplySearchResultInterface" type="Lof\ProductReviews\Model\ReplySearchResult"/>
     <preference for="Lof\ProductReviews\Api\Data\ReviewSearchResultInterface" type="Lof\ProductReviews\Model\ReviewSearchResult"/>
     <preference for="Lof\ProductReviews\Model\Review\ReviewTypeResolverInterface" type="Lof\ProductReviews\Model\Review\ReviewTypeResolver"/>
 

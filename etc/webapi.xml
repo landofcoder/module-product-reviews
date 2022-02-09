@@ -75,7 +75,7 @@
         </resources>
     </route>
     <route url="/V1/reviews/reply/:reviewId" method="GET">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getReply"/>
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getListReply"/>
         <resources>
             <resource ref="Magento_Review::reviews_all"/>
         </resources>
