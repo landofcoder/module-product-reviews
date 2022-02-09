@@ -165,7 +165,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
         <div class="field review-field-text ">
             <label for="review_field" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
             <div class="control">
-                <input type="text" name="email" id="email_field" class="input-text"  data-bind="value: email()" />
+                <input type="text" name="email" id="email_field" class="input-text"  data-bind="value: review().email" />
             </div>
         </div>
         <?php if($enable_pros_cons){ ?>
@@ -225,12 +225,18 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
 <script type="text/javascript">
     var i = 0;
     require([
-        'jquery'
-        ], function($){
+        'jquery',
+        'Magento_Customer/js/customer-data',
+        'Magento_Customer/js/view/customer'
+        ], function($, customerData){
 
             //Verify order information before adding new review
             var customerLogin = '<?= $check_login; ?>';
             var verifyType = '<?= $verify_purchased ?>';
+
+            var review = customerData.get('review').extend({
+                disposableCustomerData: 'review'
+            });
 
             if (verifyType) {
                 $('#main-review-form').addClass('hidden');
@@ -351,6 +357,11 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                     document.getElementById("br_" + i).remove();
                     i--;
                 }
+            }
+
+            var email = review.email || customerData.get('customer')().email;
+            if (email && $("#email_field").length > 0) {
+                $("#email_field").val(email);
             }
         });
 </script>
