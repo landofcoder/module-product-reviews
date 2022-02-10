@@ -378,6 +378,28 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get gallery images from gallery model
+     *
+     * @param \Lof\ProductReviews\Api\Data\GalleryInterface|mixed|object $galleryModel
+     * @return mixed|array
+     */
+    public function getGalleryImages($galleryModel)
+    {
+        $value = $galleryModel->getValue();
+        $images = [];
+        if ($value) {
+            $imagePath = $this->getUploadFilePath();
+            $imageArr = json_decode($value);
+            if ($imageArr) {
+                foreach ($imageArr as $_img) {
+                    $images[] = $imagePath."/".$_img;
+                }
+            }
+        }
+        return $images;
+    }
+
+    /**
      * Check module is installed or not
      *
      * @param string $moduleName

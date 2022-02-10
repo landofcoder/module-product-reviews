@@ -52,6 +52,12 @@ interface ReviewInterface
     const CREATED_AT = 'created_at';
     const RATINGS = 'ratings';
 
+    /**
+     * Custom extra fields
+     */
+    const GALLERIES = 'galleries';
+    const CUSTOMIZE = 'customize';
+
     const REVIEW_TYPE_CUSTOMER = 1;
     const REVIEW_TYPE_GUEST = 2;
     const REVIEW_TYPE_ADMIN = 3;
@@ -97,6 +103,20 @@ interface ReviewInterface
      * @return \Lof\ProductReviews\Api\Data\RatingVoteInterface[]
      */
     public function getRatings();
+
+    /**
+     * Get review galleries.
+     *
+     * @return \Lof\ProductReviews\Api\Data\GalleryInterface[]
+     */
+    public function getGalleries();
+
+    /**
+     * Get review customize.
+     *
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface[]
+     */
+    public function getCustomize();
 
     /**
      * Get review entity type.
@@ -172,6 +192,24 @@ interface ReviewInterface
      * @return void
      */
     public function setRatings($ratings);
+
+    /**
+     * Set review galleries.
+     *
+     * @param \Lof\ProductReviews\Api\Data\GalleryInterface[] $galleries
+     *
+     * @return void
+     */
+    public function setGalleries($galleries);
+
+    /**
+     * Set review customize.
+     *
+     * @param \Lof\ProductReviews\Api\Data\CustomizeInterface[] $customize
+     *
+     * @return void
+     */
+    public function setCustomize($customize);
 
     /**
      * Set review entity type.

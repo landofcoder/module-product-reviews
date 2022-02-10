@@ -68,6 +68,26 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
+     * @return \Lof\ProductReviews\Api\Data\GalleryInterface[]
+     */
+    public function getGalleries()
+    {
+        return $this->_get(self::GALLERIES);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface[]
+     */
+    public function getCustomize()
+    {
+        return $this->_get(self::CUSTOMIZE);
+    }
+
+    /**
+     * @inheritdoc
+     *
      * @return string
      */
     public function getReviewEntity()
@@ -163,6 +183,30 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     public function setRatings($ratings)
     {
         return $this->setData(self::RATINGS, $ratings);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface[] $galleries
+     *
+     * @return Review|void
+     */
+    public function setGalleries($galleries)
+    {
+        return $this->setData(self::GALLERIES, $galleries);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface[] $customize
+     *
+     * @return Review|void
+     */
+    public function setCustomize($customize)
+    {
+        return $this->setData(self::CUSTOMIZE, $customize);
     }
 
     /**

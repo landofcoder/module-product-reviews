@@ -21,7 +21,9 @@
 
 namespace Lof\ProductReviews\Model;
 
-class CustomReview extends \Magento\Framework\Model\AbstractModel
+use Lof\ProductReviews\Api\Data\CustomizeInterface;
+
+class CustomReview extends \Magento\Framework\Model\AbstractModel implements CustomizeInterface
 {
 
     /**
