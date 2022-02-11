@@ -149,10 +149,18 @@ class ReviewRepository implements ReviewRepositoryInterface
         if (!$foundReview) {
             throw new NoSuchEntityException(__('Not found review ID %1 to reply.', $reply->getReviewId()));
         }
-        $reply->setReplyId(0);
-        $reply->setCustomerId($foundReview->getCustomerId());
-        $reply->setCreatedAt(null);
-        return $this->commandSaveReply->executeByGuest($reply);
+        $newData = [
+            "customer_id" => $foundReview->getCustomerId(),
+            "review_id" => $reply->getReviewId(),
+            "email_address" => $reply->getEmailAddress(),
+            "reply_title" => $reply->getReplyTitle(),
+            "reply_comment" => $reply->getReplyComment(),
+            "user_name" => $reply->getUserName(),
+            "website" => $reply->getWebsite(),
+            "parent_reply_id" => $reply->getParentReplyId()
+        ];
+        $reply->setData($newData);
+        return $this->commandSaveReply->execute($reply);
     }
 
     /**
@@ -175,12 +183,20 @@ class ReviewRepository implements ReviewRepositoryInterface
         if (!$foundReview) {
             throw new NoSuchEntityException(__('Not found review ID %1 to reply.', $reply->getReviewId()));
         }
-        $reply->setReplyId(0);
-        $reply->setCustomerId($foundReview->getCustomerId());
-        $reply->setCreatedAt(null);
-        $reply->setReplyCustomerId($customerId);
+        $newData = [
+            "customer_id" => $foundReview->getCustomerId(),
+            "reply_customer_id" => $customerId,
+            "review_id" => $reply->getReviewId(),
+            "email_address" => $reply->getEmailAddress(),
+            "reply_title" => $reply->getReplyTitle(),
+            "reply_comment" => $reply->getReplyComment(),
+            "user_name" => $reply->getUserName(),
+            "website" => $reply->getWebsite(),
+            "parent_reply_id" => $reply->getParentReplyId()
+        ];
+        $reply->setData($newData);
 
-        return $this->commandSaveReply->executeByCustomer($customerId, $reply);
+        return $this->commandSaveReply->execute($customerId, $reply);
     }
 
     /**

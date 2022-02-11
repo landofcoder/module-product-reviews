@@ -23,8 +23,8 @@ declare(strict_types=1);
 namespace Lof\ProductReviews\Model\Review\Command;
 
 use Lof\ProductReviews\Model\ResourceModel\ReviewReply as ReviewReplyResource;
-use Magento\Review\Model\ReviewReplyFactory;
-use Magento\Review\Model\ReviewReply;
+use Lof\ProductReviews\Model\ReviewReplyFactory;
+use Lof\ProductReviews\Model\ReviewReply;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 

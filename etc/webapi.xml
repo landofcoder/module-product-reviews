@@ -113,7 +113,7 @@
         </resources>
     </route>
 
-    <route url="/V1/reviews/reply" method="PUT">
+    <route url="/V1/reviews/reply" method="POST">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="reply"/>
         <resources>
             <resource ref="Lof_ProductReviews::save_reply"/>
@@ -140,7 +140,7 @@
         </data>
     </route>
 
-    <route url="/V1/reviews/me/reply" method="PUT">
+    <route url="/V1/reviews/me/reply" method="POST">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="replyByCustomer"/>
         <resources>
             <resource ref="self"/>
@@ -150,7 +150,7 @@
         </data>
     </route>
 
-    <route url="/V1/reviews/guest/reply" method="PUT">
+    <route url="/V1/reviews/guest/reply" method="POST">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="replyByGuest"/>
         <resources>
             <resource ref="anonymous"/>

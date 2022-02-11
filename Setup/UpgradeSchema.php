@@ -153,7 +153,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'length' => 4,
                     'unsigned' => true,
                     'nullable' => true,
-                    'default' => 0,
+                    'default' => 1,
                     'comment' => 'Status: 0 - disabled, 1 - enabled'
                 ]
             );

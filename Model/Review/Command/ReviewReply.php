@@ -26,6 +26,7 @@ use Lof\ProductReviews\Api\Data\ReplyInterface;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Lof\ProductReviews\Model\ResourceModel\ReviewReply as ReplyResource;
+use Lof\ProductReviews\Model\ReviewReplyFactory;
 use Lof\ProductReviews\Validation\ValidationException;
 
 /**
@@ -39,14 +40,22 @@ class ReviewReply implements ReviewReplyInterface
     private $replyResource;
 
     /**
+     * @var ReviewReplyFactory
+     */
+    private $replyFactory;
+
+    /**
      * Save Review Reply constructor.
      *
      * @param ReplyResource $replyResource
+     * @param ReviewReplyFactory $replyFactory
      */
     public function __construct(
-        ReplyResource $replyResource
+        ReplyResource $replyResource,
+        ReviewReplyFactory $replyFactory
     ) {
         $this->replyResource = $replyResource;
+        $this->replyFactory = $replyFactory;
     }
 
     /**
@@ -61,6 +70,13 @@ class ReviewReply implements ReviewReplyInterface
      */
     public function execute(ReplyInterface $dataModel): ReplyInterface
     {
+        if ($parentId = $dataModel->getParentReplyId()) {
+            $parentModel = $this->replyFactory->create();
+            $this->replyResource->load($parentModel, $parentId);
+            if (!$parentModel->getId() || ($parentModel->getReviewId() !== $dataModel->getReviewId())) {
+                $dataModel->setParentReplyId(null);
+            }
+        }
         $this->replyResource->save($dataModel);
         $this->replyResource->load($dataModel, $dataModel->getId());
 
