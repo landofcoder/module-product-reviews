@@ -111,4 +111,96 @@
         </resources>
     </route>
 
+
+    <route url="/V1/reviews/customize" method="POST">
+		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::Customize_save"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/customize/search" method="GET">
+		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::Customize_view"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/customize/:customizeId" method="GET">
+		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::Customize_view"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/customize/:customizeId" method="PUT">
+		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::Customize_update"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/customize/:customizeId" method="DELETE">
+		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::Customize_delete"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/reminders" method="POST">
+		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::Reminders_save"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/reminders/search" method="GET">
+		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::Reminders_view"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/reminders/:remindersId" method="GET">
+		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::Reminders_view"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/reminders/:id" method="PUT">
+		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::Reminders_update"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/reminders/:id" method="DELETE">
+		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::Reminders_delete"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/reporthistory" method="POST">
+		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::ReportHistory_save"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/reporthistory/search" method="GET">
+		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::ReportHistory_view"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/reporthistory/:id" method="GET">
+		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::ReportHistory_view"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/reporthistory/:id" method="PUT">
+		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::ReportHistory_update"/>
+		</resources>
+	</route>
+	<route url="/V1/reviews/reporthistory/:id" method="DELETE">
+		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Lof_ProductReviews::ReportHistory_delete"/>
+		</resources>
+	</route>
+
 </routes>

@@ -21,7 +21,9 @@
 
 namespace Lof\ProductReviews\Model;
 
-class Reminders extends \Magento\Framework\Model\AbstractModel
+use Lof\ProductReviews\Api\Data\RemindersInterface;
+
+class Reminders extends \Magento\Framework\Model\AbstractModel implements RemindersInterface
 {
 
     /**#@+
@@ -241,5 +243,165 @@ class Reminders extends \Magento\Framework\Model\AbstractModel
     public function getAvailableStatuses()
     {
         return [self::STATUS_PENDING => __('Pending'), self::STATUS_ON_HOLD => __('On Hold'), self::STATUS_SENT => __('Sent')];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getId()
+    {
+        return $this->getData(self::ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setId($id)
+    {
+        return $this->setData(self::ID, $id);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getOrderId()
+    {
+        return $this->getData(self::ORDER_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setOrderId($orderId)
+    {
+        return $this->setData(self::ORDER_ID, $orderId);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getOrderIncrementId()
+    {
+        return $this->getData(self::ORDER_INCREMENT_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setOrderIncrementId($orderIncrementId)
+    {
+        return $this->setData(self::ORDER_INCREMENT_ID, $orderIncrementId);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getProductId()
+    {
+        return $this->getData(self::PRODUCT_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setProductId($productId)
+    {
+        return $this->setData(self::PRODUCT_ID, $productId);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCustomerId()
+    {
+        return $this->getData(self::CUSTOMER_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setCustomerId($customerId)
+    {
+        return $this->setData(self::CUSTOMER_ID, $customerId);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return $this->getData(self::NAME);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setName($name)
+    {
+        return $this->setData(self::NAME, $name);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getEmail()
+    {
+        return $this->getData(self::EMAIL);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setEmail($email)
+    {
+        return $this->setData(self::EMAIL, $email);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStoreId()
+    {
+        return $this->getData(self::STORE_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setStoreId($storeId)
+    {
+        return $this->setData(self::STORE_ID, $storeId);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStatus()
+    {
+        return $this->getData(self::STATUS);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setStatus($status)
+    {
+        return $this->setData(self::STATUS, $status);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCreatedAt()
+    {
+        return $this->getData(self::CREATED_AT);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setCreatedAt($createdAt)
+    {
+        return $this->setData(self::CREATED_AT, $createdAt);
     }
 }

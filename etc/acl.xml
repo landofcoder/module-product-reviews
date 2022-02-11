@@ -30,6 +30,24 @@
                     <resource id="Lof_ProductReviews::gallery_save" title="Lof Product Reviews - Save Gallery" sortOrder="40" />
                     <resource id="Lof_ProductReviews::gallery_delete" title="Lof Product Reviews - Delete Gallery" sortOrder="50" />
                 </resource>
+                <resource id="Lof_ProductReviews::Customize" title="Lof Product Reviews Customize" sortOrder="10">
+					<resource id="Lof_ProductReviews::Customize_save" title="Save Customize" sortOrder="10"/>
+					<resource id="Lof_ProductReviews::Customize_delete" title="Delete Customize" sortOrder="20"/>
+					<resource id="Lof_ProductReviews::Customize_update" title="Update Customize" sortOrder="30"/>
+					<resource id="Lof_ProductReviews::Customize_view" title="View Customize" sortOrder="40"/>
+				</resource>
+				<resource id="Lof_ProductReviews::Reminders" title="Lof Product Reviews Reminders" sortOrder="10">
+					<resource id="Lof_ProductReviews::Reminders_save" title="Save Reminders" sortOrder="10"/>
+					<resource id="Lof_ProductReviews::Reminders_delete" title="Delete Reminders" sortOrder="20"/>
+					<resource id="Lof_ProductReviews::Reminders_update" title="Update Reminders" sortOrder="30"/>
+					<resource id="Lof_ProductReviews::Reminders_view" title="View Reminders" sortOrder="40"/>
+				</resource>
+				<resource id="Lof_ProductReviews::ReportHistory" title="Lof Product Reviews Report History" sortOrder="10">
+					<resource id="Lof_ProductReviews::ReportHistory_save" title="Save ReportHistory" sortOrder="10"/>
+					<resource id="Lof_ProductReviews::ReportHistory_delete" title="Delete ReportHistory" sortOrder="20"/>
+					<resource id="Lof_ProductReviews::ReportHistory_update" title="Update ReportHistory" sortOrder="30"/>
+					<resource id="Lof_ProductReviews::ReportHistory_view" title="View ReportHistory" sortOrder="40"/>
+				</resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">

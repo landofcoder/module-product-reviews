@@ -1,243 +1,182 @@
 <?php
 /**
- * Landofcoder
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Landofcoder.com license that is
- * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade this extension to newer
- * version in the future.
- *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * Copyright © landofcoder All rights reserved.
+ * See COPYING.txt for license details.
  */
-
 declare(strict_types=1);
 
 namespace Lof\ProductReviews\Api\Data;
 
-/**
- * Represents a CustomizeInterface object
- *
- * Used fully qualified namespaces in annotations for proper work of WebApi request parser
- *
- * @api
- */
 interface CustomizeInterface
 {
-    const REPLY_ID = 'reply_id';
-    const PARENT_REPLY_ID = 'parent_reply_id';
+
+    const COUNT_HELPFUL = 'count_helpful';
+    const AVATAR_IMAGE = 'avatar_image';
     const REVIEW_ID = 'review_id';
-    const CUSTOMER_ID = 'customer_id';
-    const REPLY_TITLE = 'reply_title';
-    const REPLY_COMMENT = 'reply_comment';
-    const USER_NAME = 'user_name';
-    const WEBSITE = 'website';
-    const STATUS = 'status';
     const EMAIL_ADDRESS = 'email_address';
+    const ADVANTAGES = 'advantages';
+    const REPORT_ABUSE = 'report_abuse';
+    const DISADVANTAGES = 'disadvantages';
+    const AVERAGE = 'average';
+    const COUNT_UNHELPFUL = 'count_unhelpful';
+    const TOTAL_HELPFUL = 'total_helpful';
+    const REVIEW_CUSTOMIZE_ID = 'review_customize_id ';
     const AVATAR_URL = 'avatar_url';
-    const ADMIN_USER_ID = 'admin_user_id';
-    const CREATED_AT = 'created_at';
 
     /**
-     * Get rating reply id.
-     *
-     * @return int
+     * Get review_customize_id
+     * @return int|null
      */
-    public function getReplyId();
+    public function getReviewCustomizeId();
 
     /**
-     * Set rating reply_id.
-     *
-     * @param int $reply_id
-     * @return ReplyInterface
+     * Set review_customize_id
+     * @param int $review_customize_id
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      */
-    public function setReplyId($reply_id);
+    public function setReviewCustomizeId($review_customize_id);
 
     /**
-     * Get rating parent_reply_id.
-     *
-     * @return int
+     * Get advantages
+     * @return string|null
      */
-    public function getParentReplyId();
+    public function getAdvantages();
 
     /**
-     * Set rating parent_reply_id.
-     *
-     * @param int $parent_reply_id
-     * @return ReplyInterface
+     * Set advantages
+     * @param string $advantages
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      */
-    public function setParentReplyId($parent_reply_id);
+    public function setAdvantages($advantages);
 
     /**
-     * Get rating review_id.
-     *
-     * @return int
+     * Get disadvantages
+     * @return string|null
+     */
+    public function getDisadvantages();
+
+    /**
+     * Set disadvantages
+     * @param string $disadvantages
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setDisadvantages($disadvantages);
+
+    /**
+     * Get average
+     * @return string|null
+     */
+    public function getAverage();
+
+    /**
+     * Set average
+     * @param string $average
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setAverage($average);
+
+    /**
+     * Get count_helpful
+     * @return int|null
+     */
+    public function getCountHelpful();
+
+    /**
+     * Set count_helpful
+     * @param int $countHelpful
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setCountHelpful($countHelpful);
+
+    /**
+     * Get count_unhelpful
+     * @return int|null
+     */
+    public function getCountUnhelpful();
+
+    /**
+     * Set count_unhelpful
+     * @param int $countUnhelpful
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setCountUnhelpful($countUnhelpful);
+
+    /**
+     * Get total_helpful
+     * @return int|null
+     */
+    public function getTotalHelpful();
+
+    /**
+     * Set total_helpful
+     * @param int $totalHelpful
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setTotalHelpful($totalHelpful);
+
+    /**
+     * Get report_abuse
+     * @return int|null
+     */
+    public function getReportAbuse();
+
+    /**
+     * Set report_abuse
+     * @param int $reportAbuse
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setReportAbuse($reportAbuse);
+
+    /**
+     * Get review_id
+     * @return int|null
      */
     public function getReviewId();
 
     /**
-     * Set rating review_id.
-     *
-     * @param int $review_id
-     * @return ReplyInterface
+     * Set review_id
+     * @param int $reviewId
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      */
-    public function setReviewId($review_id);
+    public function setReviewId($reviewId);
 
     /**
-     * Get rating customer_id.
-     *
-     * @return int
-     */
-    public function getCustomerId();
-
-    /**
-     * Set rating customer_id.
-     *
-     * @param int $customer_id
-     * @return ReplyInterface
-     */
-    public function setCustomerId($customer_id);
-
-    /**
-     * Get rating admin_user_id.
-     *
-     * @return int
-     */
-    public function getAdminUserId();
-
-    /**
-     * Set rating admin_user_id.
-     *
-     * @param int $admin_user_id
-     * @return ReplyInterface
-     */
-    public function setAdminUserId($admin_user_id);
-
-    /**
-     * Get rating status.
-     *
-     * @return int
-     */
-    public function getStatus();
-
-    /**
-     * Set rating status.
-     *
-     * @param int $status
-     * @return ReplyInterface
-     */
-    public function setStatus($status);
-
-    /**
-     * Get rating reply_title.
-     *
-     * @return string
-     */
-    public function getReplyTitle();
-
-    /**
-     * Set rating reply_title.
-     *
-     * @param string $reply_title
-     * @return ReplyInterface
-     */
-    public function setReplyTitle($reply_title);
-
-    /**
-     * Get rating reply_comment.
-     *
-     * @return string
-     */
-    public function getReplyComment();
-
-    /**
-     * Set rating reply_comment.
-     *
-     * @param string $reply_comment
-     * @return ReplyInterface
-     */
-    public function setReplyComment($reply_comment);
-
-    /**
-     * Get rating user_name.
-     *
-     * @return string
-     */
-    public function getUserName();
-
-    /**
-     * Set rating user_name.
-     *
-     * @param string $user_name
-     * @return ReplyInterface
-     */
-    public function setUserName($user_name);
-
-    /**
-     * Get rating website.
-     *
-     * @return string
-     */
-    public function getWebsite();
-
-    /**
-     * Set rating website.
-     *
-     * @param string $website
-     * @return ReplyInterface
-     */
-    public function setWebsite($website);
-
-    /**
-     * Get rating email_address.
-     *
-     * @return string
+     * Get email_address
+     * @return string|null
      */
     public function getEmailAddress();
 
     /**
-     * Set rating email_address.
-     *
-     * @param string $email_address
-     * @return ReplyInterface
+     * Set email_address
+     * @param string $emailAddress
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      */
-    public function setEmailAddress($email_address);
+    public function setEmailAddress($emailAddress);
 
     /**
-     * Get rating avatar_url.
-     *
-     * @return string
+     * Get avatar_image
+     * @return string|null
+     */
+    public function getAvatarImage();
+
+    /**
+     * Set avatar_image
+     * @param string $avatarImage
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setAvatarImage($avatarImage);
+
+    /**
+     * Get avatar_url
+     * @return string|null
      */
     public function getAvatarUrl();
 
     /**
-     * Set rating avatar_url.
-     *
-     * @param string $avatar_url
-     * @return ReplyInterface
+     * Set avatar_url
+     * @param string $avatarUrl
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      */
-    public function setAvatarUrl($avatar_url);
-
-    /**
-     * Get rating created_at.
-     *
-     * @return string
-     */
-    public function getCreatedAt();
-
-    /**
-     * Set rating created_at.
-     *
-     * @param string $created_at
-     * @return ReplyInterface
-     */
-    public function setCreatedAt($created_at);
+    public function setAvatarUrl($avatarUrl);
 }
+
