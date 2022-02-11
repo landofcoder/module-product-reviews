@@ -26,6 +26,7 @@ use Magento\Framework\Data\Form\Element\Factory;
 use Magento\Framework\Escaper;
 use Lof\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as CustomReviewCollection;
 use Magento\Framework\App\RequestInterface;
+use Magento\Backend\Model\UrlInterface;
 
 class NoteLink extends \Magento\Framework\Data\Form\Element\AbstractElement
 {

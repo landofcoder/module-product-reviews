@@ -68,10 +68,8 @@
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="lof_product_reviews_gallery_listing_data_source" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\Gallery\Grid\Collection</item>
-            </argument>
-
-            <argument name="collections" xsi:type="array">
                 <item name="lof_product_reviews_reminders_listing_data_source" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\Reminders\Grid\Collection</item>
+                <item name="lof_product_reviews_replies_listing_data_source" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\ReviewReply\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
@@ -90,6 +88,15 @@
             <argument name="eventPrefix" xsi:type="string">lof_product_reviews_reminders_grid_collection</argument>
             <argument name="eventObject" xsi:type="string">lof_product_reviews_reminders_grid_collection</argument>
             <argument name="resourceModel" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\Reminders</argument>
+        </arguments>
+    </type>
+
+    <type name="Lof\ProductReviews\Model\ResourceModel\ReviewReply\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">lof_review_reply</argument>
+            <argument name="eventPrefix" xsi:type="string">lof_product_reviews_replies_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">lof_product_reviews_replies_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\ReviewReply</argument>
         </arguments>
     </type>
 

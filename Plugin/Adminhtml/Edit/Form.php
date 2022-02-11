@@ -95,10 +95,13 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
             $custom = $foundItem->getData();
         }
 
-        $reviewReply = $this->_reviewReplyFactory->create()->addFieldToSelect('*')->addFieldToFilter(
+        $reviewReply = $this->_reviewReplyFactory->create()->addFieldToSelect('*')
+        ->addFieldToFilter(
             'review_id',
             ['in' => $reviewId]
-        );
+        )
+        ->addFieldToFilter('admin_user_id', ["gt" => 0]);
+
         $reply = [];
         if ($reviewReply->count()) {
             $foundItem = $reviewReply->getFirstItem();

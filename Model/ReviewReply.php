@@ -40,6 +40,16 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     }
 
     /**
+     * Prepare reminder's statuses.
+     *
+     * @return mixed|array
+     */
+    public function getAvailableStatuses()
+    {
+        return [self::STATUS_ENABLED => __('Enabled'), self::STATUS_DISABLED => __('Pending')];
+    }
+
+    /**
      * Get rating reply id.
      *
      * @return int|null
