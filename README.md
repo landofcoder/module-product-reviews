@@ -59,19 +59,11 @@ manage faq by navigation to ```Marketing > All Reviews ```
 - 100% open source
 - Lifetime free Update
 - Perfectly compatible with the latest magento 2.3 version
-- Easy to manage with backend management
-
-
-## Todo
-- Add option required/non required verify purchase code when review
-- Fix review gallery management
-- Display customer avatar on reviews
-- Display customer location on reviews
-- Improve ui design for reviews on frontend for Luma theme (example: https://www.fera.ai/features/show)
-- Manage reminder reviews campaign with rule (example: https://www.fera.ai/features/grow)
-- Support more beautiful reviews widgets (example: https://www.fera.ai/features/show)
-- Improve admin review grid with more filter
-- Improve admin edit review, allow admin reply
+- Easy to manage with backend management\
+- New option required/non required verify purchase code when review
 - Support Backend REST API
 - Support Frontend REST API get product reviews
-- Support Frontend REST API submit reviews (required verify purchase code, allow upload images/videos files)
+- Support Frontend REST API submit reviews
+- Support REST API for reply
+
+## Todo
