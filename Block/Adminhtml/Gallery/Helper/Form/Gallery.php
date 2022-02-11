@@ -105,7 +105,7 @@ class Gallery extends \Magento\Framework\View\Element\AbstractBlock
     /**
      * Get product images
      *
-     * @return array|null
+     * @return mixed|array|null
      */
     public function getImages()
     {

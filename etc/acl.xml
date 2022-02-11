@@ -24,10 +24,34 @@
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Backend::lof_reviews" title="Lof Reviews">
                     <resource id="Lof_ProductReviews::lof_product_reviews" title="Lof Product Reviews" sortOrder="10" />
-                    <resource id="Lof_ProductReviews::lof_product_reviews_reminders" title="Lof Product Reviews - Reminders" sortOrder="20" />
-                    <resource id="Lof_ProductReviews::send_reminder" title="Lof Product Reviews - Send Reminder" sortOrder="25" />
-                    <resource id="Lof_ProductReviews::lof_product_gallery" title="Lof Product Reviews - Gallery" sortOrder="30" />
+                    <resource id="Lof_ProductReviews::lof_product_gallery" title="Lof Product Reviews - Manage Gallery" sortOrder="30" />
+                    <resource id="Lof_ProductReviews::gallery_save" title="Lof Product Reviews - Save Gallery" sortOrder="40" />
+                    <resource id="Lof_ProductReviews::gallery_delete" title="Lof Product Reviews - Delete Gallery" sortOrder="50" />
+                    <resource id="Lof_ProductReviews::gallery_view" title="Lof Product Reviews - View Gallery" sortOrder="60" />
+                    <resource id="Lof_ProductReviews::reviews" title="Lof Product Reviews - View All" sortOrder="70" />
+                    <resource id="Lof_ProductReviews::review_reply" title="Lof Product Reviews - Reply" sortOrder="80" />
+                    <resource id="Lof_ProductReviews::delete_reply" title="Lof Product Reviews - Delete Reply" sortOrder="90" />
+                    <resource id="Lof_ProductReviews::save_reply" title="Lof Product Reviews - Save Reply" sortOrder="95" />
                 </resource>
+                <resource id="Lof_ProductReviews::customize" title="Lof Product Reviews Customize" sortOrder="10">
+					<resource id="Lof_ProductReviews::customize_save" title="Save Customize" sortOrder="10"/>
+					<resource id="Lof_ProductReviews::customize_delete" title="Delete Customize" sortOrder="20"/>
+					<resource id="Lof_ProductReviews::customize_update" title="Update Customize" sortOrder="30"/>
+					<resource id="Lof_ProductReviews::customize_view" title="View Customize" sortOrder="40"/>
+				</resource>
+				<resource id="Lof_ProductReviews::lof_product_reviews_reminders" title="Lof Product Reviews Reminders" sortOrder="10">
+					<resource id="Lof_ProductReviews::reminders_save" title="Save Reminders" sortOrder="10"/>
+					<resource id="Lof_ProductReviews::reminders_delete" title="Delete Reminders" sortOrder="20"/>
+					<resource id="Lof_ProductReviews::reminders_update" title="Update Reminders" sortOrder="30"/>
+					<resource id="Lof_ProductReviews::reminders_view" title="View Reminders" sortOrder="40"/>
+                    <resource id="Lof_ProductReviews::send_reminder" title="Lof Product Reviews - Send Reminder" sortOrder="25" />
+				</resource>
+				<resource id="Lof_ProductReviews::reportHistory" title="Lof Product Reviews Report History" sortOrder="10">
+					<resource id="Lof_ProductReviews::reportHistory_save" title="Save ReportHistory" sortOrder="10"/>
+					<resource id="Lof_ProductReviews::reportHistory_delete" title="Delete ReportHistory" sortOrder="20"/>
+					<resource id="Lof_ProductReviews::reportHistory_update" title="Update ReportHistory" sortOrder="30"/>
+					<resource id="Lof_ProductReviews::reportHistory_view" title="View ReportHistory" sortOrder="40"/>
+				</resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">

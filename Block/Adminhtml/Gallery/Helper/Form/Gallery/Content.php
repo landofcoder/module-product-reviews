@@ -205,7 +205,7 @@ class Content extends \Magento\Backend\Block\Widget
      * Sort images array by position key
      *
      * @param array $images
-     * @return array
+     * @return mixed|array
      */
     private function sortImagesByPosition($images)
     {
@@ -220,12 +220,12 @@ class Content extends \Magento\Backend\Block\Widget
     /**
      * Get image types data
      *
-     * @return array
+     * @return mixed|array
      */
     /**
      * Get image types data
      *
-     * @return array
+     * @return mixed|array
      */
     public function getImageTypes()
     {

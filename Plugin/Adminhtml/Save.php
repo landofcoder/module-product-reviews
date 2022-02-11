@@ -209,6 +209,7 @@ class Save
                     ->setEmailAddress($email_address)
                     ->setUserName($user_name)
                     ->setWebsite($website)
+                    ->setStatus(\Lof\ProductReviews\Model\ReviewReply::STATUS_ENABLED)
                     ->save();
             } else {
                 $modelReply->setReviewId($reviewId)
@@ -219,6 +220,7 @@ class Save
                     ->setEmailAddress($email_address)
                     ->setUserName($user_name)
                     ->setWebsite($website)
+                    ->setStatus(\Lof\ProductReviews\Model\ReviewReply::STATUS_ENABLED)
                     ->save();
             }
         }
@@ -227,7 +229,7 @@ class Save
         if ($modelGallery->getCollection()->getItemByColumnValue('review_id', $reviewId) != true) {
             $modelGallery->setReviewId($reviewId)
                 ->setLabel('Gallery of Review ' . $reviewId)
-                ->setStatus(2)
+                ->setStatus(\Lof\ProductReviews\Model\Gallery::STATUS_DISABLED)
                 ->setValue(json_encode([]))
                 ->save();
         }

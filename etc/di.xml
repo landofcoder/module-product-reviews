@@ -92,4 +92,50 @@
             <argument name="resourceModel" xsi:type="string">Lof\ProductReviews\Model\ResourceModel\Reminders</argument>
         </arguments>
     </type>
+
+    <preference for="Lof\ProductReviews\Api\Data\GallerySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Lof\ProductReviews\Api\Data\GalleryInterface" type="Lof\ProductReviews\Model\Gallery"/>
+    <preference for="Lof\ProductReviews\Api\Data\CustomizeInterface" type="Lof\ProductReviews\Model\CustomReview"/>
+    <preference for="Lof\ProductReviews\Api\Data\ReviewInterface" type="Lof\ProductReviews\Model\Data\Review"/>
+    <preference for="Lof\ProductReviews\Api\Data\ReplyInterface" type="Lof\ProductReviews\Model\ReviewReply"/>
+    <preference for="Lof\ProductReviews\Api\Data\RatingVoteInterface" type="Lof\ProductReviews\Model\Data\RatingVote"/>
+    <preference for="Lof\ProductReviews\Api\GetProductReviewsInterface" type="Lof\ProductReviews\Model\GetProductReviews"/>
+    <preference for="Lof\ProductReviews\Api\ReviewRepositoryInterface" type="Lof\ProductReviews\Model\ReviewRepository"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\DeleteByIdInterface" type="Lof\ProductReviews\Model\Review\Command\DeleteById"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\DeleteReplyByIdInterface" type="Lof\ProductReviews\Model\Review\Command\DeleteReplyById"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\SaveInterface" type="Lof\ProductReviews\Model\Review\Command\Save"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\GetInterface" type="Lof\ProductReviews\Model\Review\Command\Get"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\GetListInterface" type="Lof\ProductReviews\Model\Review\Command\GetList"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\ReviewReplyInterface" type="Lof\ProductReviews\Model\Review\Command\ReviewReply"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\GetListReplyInterface" type="Lof\ProductReviews\Model\Review\Command\GetListReply"/>
+    <preference for="Lof\ProductReviews\Model\ReviewValidatorInterface" type="Lof\ProductReviews\Model\ReviewValidationChain"/>
+
+    <preference for="Lof\ProductReviews\Api\CustomizeRepositoryInterface" type="Lof\ProductReviews\Model\CustomizeRepository"/>
+	<preference for="Lof\ProductReviews\Api\Data\CustomizeInterface" type="Lof\ProductReviews\Model\CustomReview"/>
+	<preference for="Lof\ProductReviews\Api\Data\CustomizeSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <preference for="Lof\ProductReviews\Api\RemindersRepositoryInterface" type="Lof\ProductReviews\Model\RemindersRepository"/>
+	<preference for="Lof\ProductReviews\Api\Data\RemindersInterface" type="Lof\ProductReviews\Model\Reminders"/>
+	<preference for="Lof\ProductReviews\Api\Data\RemindersSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <preference for="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" type="Lof\ProductReviews\Model\ReportHistoryRepository"/>
+	<preference for="Lof\ProductReviews\Api\Data\ReportHistoryInterface" type="Lof\ProductReviews\Model\RateReport"/>
+	<preference for="Lof\ProductReviews\Api\Data\ReportHistorySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <preference for="Lof\ProductReviews\Api\Data\ReplySearchResultInterface" type="Lof\ProductReviews\Model\ReplySearchResult"/>
+    <preference for="Lof\ProductReviews\Api\Data\ReviewSearchResultInterface" type="Lof\ProductReviews\Model\ReviewSearchResult"/>
+    <preference for="Lof\ProductReviews\Model\Review\ReviewTypeResolverInterface" type="Lof\ProductReviews\Model\Review\ReviewTypeResolver"/>
+
+    <type name="Lof\ProductReviews\Model\ReviewValidationChain">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="title" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\TitleValidator</item>
+                <item name="detail" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\DetailValidator</item>
+                <item name="nickname" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\NicknameValidator</item>
+                <item name="review_entity" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\ReviewEntityValidator</item>
+                <item name="entity_pk_value" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\EntityPkValueValidator</item>
+                <item name="stores" xsi:type="object">Lof\ProductReviews\Model\Review\Validator\StoresValidator</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

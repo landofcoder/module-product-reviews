@@ -23,6 +23,7 @@ namespace Lof\ProductReviews\Model;
 
 use Lof\ProductReviews\Api\GalleryRepositoryInterface;
 use Lof\ProductReviews\Api\Data;
+use Lof\ProductReviews\Helper\Data as HelperData;
 use Lof\ProductReviews\Model\ResourceModel\Gallery as ResourceGallery;
 use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
 use Magento\Framework\Api\DataObjectHelper;
@@ -85,6 +86,11 @@ class GalleryRepository implements GalleryRepositoryInterface
     private $collectionProcessor;
 
     /**
+     * @var HelperData
+     */
+    protected $helperData;
+
+    /**
      * GalleryRepository constructor.
      * @param ResourceGallery $resource
      * @param GalleryFactory $galleryFactory
@@ -94,6 +100,7 @@ class GalleryRepository implements GalleryRepositoryInterface
      * @param DataObjectHelper $dataObjectHelper
      * @param DataObjectProcessor $dataObjectProcessor
      * @param StoreManagerInterface $storeManager
+     * @param HelperData $helperData
      * @param CollectionProcessorInterface|null $collectionProcessor
      */
     public function __construct(
@@ -105,6 +112,7 @@ class GalleryRepository implements GalleryRepositoryInterface
         DataObjectHelper $dataObjectHelper,
         DataObjectProcessor $dataObjectProcessor,
         StoreManagerInterface $storeManager,
+        HelperData $helperData,
         CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->resource = $resource;
@@ -116,6 +124,7 @@ class GalleryRepository implements GalleryRepositoryInterface
         $this->dataObjectProcessor = $dataObjectProcessor;
         $this->storeManager = $storeManager;
         $this->collectionProcessor = $collectionProcessor ?: $this->getCollectionProcessor();
+        $this->helperData = $helperData;
     }
 
     /**
@@ -149,6 +158,8 @@ class GalleryRepository implements GalleryRepositoryInterface
         if (!$gallery->getId()) {
             throw new NoSuchEntityException(__('Gallery with id "%1" does not exist.', $galleryId));
         }
+        $images = $this->helperData->getGalleryImages($gallery);
+        $gallery->setImages($images);
         return $gallery;
     }
 
@@ -167,10 +178,43 @@ class GalleryRepository implements GalleryRepositoryInterface
 
         $this->collectionProcessor->process($criteria, $collection);
 
+        $items = [];
+        foreach ($collection->getItems() as $_item) {
+            $images = $this->helperData->getGalleryImages($_item);
+            $_item->setImages($images);
+            $items[] = $_item;
+        }
+
         /** @var Data\GallerySearchResultsInterface $searchResults */
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
-        $searchResults->setItems($collection->getItems());
+        $searchResults->setItems($items);
+        $searchResults->setTotalCount($collection->getSize());
+        return $searchResults;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getListByReview($reviewId, \Magento\Framework\Api\SearchCriteriaInterface $criteria)
+    {
+        /** @var \Lof\ProductReviews\Model\ResourceModel\Gallery\Collection $collection */
+        $collection = $this->galleryCollectionFactory->create();
+
+        $this->collectionProcessor->process($criteria, $collection);
+
+        $collection->addFieldToFilter("review_id", $reviewId);
+
+        $items = [];
+        foreach ($collection->getItems() as $_item) {
+            $images = $this->helperData->getGalleryImages($_item);
+            $_item->setImages($images);
+            $items[] = $_item;
+        }
+        /** @var Data\GallerySearchResultsInterface $searchResults */
+        $searchResults = $this->searchResultsFactory->create();
+        $searchResults->setSearchCriteria($criteria);
+        $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;
     }

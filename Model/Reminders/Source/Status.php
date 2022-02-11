@@ -111,7 +111,7 @@ class Status implements OptionSourceInterface
     /**
      * Get options
      *
-     * @return array
+     * @return mixed|array
      */
     public function toOptionArray()
     {

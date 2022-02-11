@@ -202,7 +202,7 @@ class Form extends \Magento\Review\Block\Form
     }
 
     /**
-     * @return array|\Magento\Sales\Model\ResourceModel\Order\Collection
+     * @return mixed|array|\Magento\Sales\Model\ResourceModel\Order\Collection
      */
     public function listOrderIds()
     {

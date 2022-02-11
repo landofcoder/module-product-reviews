@@ -30,7 +30,7 @@
 
 {{template config_path="design/email/header_template"}}
 <h5>{{trans "Dear "}} {{var data.name|raw}}</h5>
-<p>{{trans "Thanks so much for purchasing"}} {{var data.product_name|raw}} {{trans "on our %store_name." store_name=$store.getFrontendName()}}</p>
+<p>{{trans "Thanks so much for purchasing"}} <strong>{{var data.product_name|raw}}</strong> {{trans "on our %store_name." store_name=$store.getFrontendName()}}</p>
 <p>{{trans 'We are so happy if you feel free and possibility to make a review and rating for our product which you purchased.'}}</p>
 <p>
     {{trans

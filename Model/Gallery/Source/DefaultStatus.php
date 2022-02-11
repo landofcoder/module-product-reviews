@@ -26,7 +26,7 @@ class DefaultStatus implements \Magento\Framework\Option\ArrayInterface
     /**
      * Options getter
      *
-     * @return array
+     * @return mixed|array
      */
     public function toOptionArray()
     {

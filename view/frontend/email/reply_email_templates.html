@@ -17,7 +17,7 @@
   ~ @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
   ~ @license    https://landofcoder.com/terms
   -->
-<!--@subject {{trans "Welcome to %store_name" store_name=$store.getFrontendName()}} @-->
+<!--@subject {{trans "Admin comment for your review in store %store_name" store_name=$store.getFrontendName()}} @-->
 <!--@vars {
 "var this.getUrl($store, 'customer/account/')":"Customer Account URL",
 "var customer.email":"Customer Email",
@@ -27,7 +27,8 @@
 {{template config_path="design/email/header_template"}}
 <h5>{{trans "Dear "}} {{var data.name|raw}}</h5>
 <p>{{trans "I am "}} {{var data.sender_name|raw}}</p>
-<p>{{var data.title|raw}}</p>
-<p>{{var data.message|raw}}</p>
+<p>{{trans "We reply for your reviews"}}</p>
+<p>{{trans "Title: "}} {{var data.title|raw}}</p>
+<p>{{trans "Message: "}} {{var data.message|raw}}</p>
 <p>{{trans "Best Regards,"}}</p>
 {{template config_path="design/email/footer_template"}}
