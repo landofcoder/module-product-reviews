@@ -95,10 +95,13 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
             $custom = $foundItem->getData();
         }
 
-        $reviewReply = $this->_reviewReplyFactory->create()->addFieldToSelect('*')->addFieldToFilter(
+        $reviewReply = $this->_reviewReplyFactory->create()->addFieldToSelect('*')
+        ->addFieldToFilter(
             'review_id',
             ['in' => $reviewId]
-        );
+        )
+        ->addFieldToFilter('admin_user_id', ["gt" => 0]);
+
         $reply = [];
         if ($reviewReply->count()) {
             $foundItem = $reviewReply->getFirstItem();
@@ -119,6 +122,8 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
             'notes',
             '\Lof\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer\Notes'
         );
+
+
 
         $fieldset1->addField(
             'review_customize_id',
@@ -205,6 +210,11 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
                 ['legend' => __('Review Comment')]
             );
 
+            $fieldset2->addType(
+                'notelink',
+                '\Lof\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer\NoteLink'
+            );
+
             $fieldset2->addField(
                 'reply_id',
                 'hidden',
@@ -255,6 +265,17 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
                     'label' => __('Send to customer'),
                     'required' => false,
                     'onchange' => 'this.value = this.checked;'
+                ]
+            );
+
+            $fieldset2->addField(
+                'review_notes_link',
+                'notelink',
+                [
+                    'name' => 'review_notes_link',
+                    'label' => __('Manage Replies'),
+                    'title' => __('Manage Replies'),
+                    'required' => false
                 ]
             );
         }

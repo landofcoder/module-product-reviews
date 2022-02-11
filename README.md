@@ -2,6 +2,7 @@
 ## [ADVANCED MAGENTO 2 PRODUCT REVIEWS EXTENSION](https://landofcoder.com/advanced-magento-2-product-reviews.html/)
 
 OVERVIEW
+
 Creating customers an excellent product experience will lead to compliments, where powerful mouth-of-word was born to improve your sales performance. Reviews are also the type of “mouth-of-word” in the Net in order to test product’s quality.
 
 Knowing the importance of boosting the customer’s trust to stores via reviews, we developed Magento 2 Product Reviews Extension to boost your business to the new level. The extension gives customers an allowance to post images, rate the review helpful or not, and filter needed reviews to meet their demands.
@@ -37,8 +38,8 @@ php bin/magento setup:static-content:deploy -f
 
 ```
 
-###### manage faq extension
-manage faq by navigation to ```Marketing > All Reviews ```
+###### manage product reviews extension
+manage product reviews by navigation to ```Marketing > All Reviews ``` or ```Lof Product Reviews > All Reviews ```
 
 
 ## Features
@@ -53,25 +54,18 @@ manage faq by navigation to ```Marketing > All Reviews ```
 - Send email reminder
 - Improve your rankings
 - Multiple languages - RTL supports
-- 24/7 professional support
 - Fast speed with Magento Block Caching
 - Attractive Custom Work service
 - 100% open source
 - Lifetime free Update
 - Perfectly compatible with the latest magento 2.3 version
-- Easy to manage with backend management
-
-
-## Todo
-- Add option required/non required verify purchase code when review
-- Fix review gallery management
-- Display customer avatar on reviews
-- Display customer location on reviews
-- Improve ui design for reviews on frontend for Luma theme (example: https://www.fera.ai/features/show)
-- Manage reminder reviews campaign with rule (example: https://www.fera.ai/features/grow)
-- Support more beautiful reviews widgets (example: https://www.fera.ai/features/show)
-- Improve admin review grid with more filter
-- Improve admin edit review, allow admin reply
+- Easy to manage with backend management\
+- New option required/non required verify purchase code when review
 - Support Backend REST API
 - Support Frontend REST API get product reviews
-- Support Frontend REST API submit reviews (required verify purchase code, allow upload images/videos files)
+- Support Frontend REST API submit reviews
+- Support REST API for reply
+
+## Todo
+- View Replies list on frontend
+- Allow User Submit Reply a comment on frontend

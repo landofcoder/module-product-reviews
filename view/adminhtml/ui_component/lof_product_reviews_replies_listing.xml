@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  * Landofcoder
+  *
+  * NOTICE OF LICENSE
+  *
+  * This source file is subject to the Landofcoder.com license that is
+  * available through the world-wide-web at this URL:
+  * https://landofcoder.com/terms
+  *
+  * DISCLAIMER
+  *
+  * Do not edit or add to this file if you wish to upgrade this extension to newer
+  * version in the future.
+  *
+  * @category   Landofcoder
+  * @package    Lof_ProductReviews
+  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
+  * @license    https://landofcoder.com/terms
+  -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">lof_product_reviews_replies_listing.lof_product_reviews_replies_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>lof_product_reviews_replies_columns</spinner>
+        <deps>
+            <dep>lof_product_reviews_replies_listing.lof_product_reviews_replies_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="lof_product_reviews_replies_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">reply_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Lof_ProductReviews::review_reply</aclResource>
+        <dataProvider class="Lof\ProductReviews\Ui\DataProvider\Replies\RepliesDataProvider" name="lof_product_reviews_replies_listing_data_source">
+            <settings>
+                <requestFieldName>reply_id</requestFieldName>
+                <primaryFieldName>reply_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions" class="\Lof\ProductReviews\Ui\Component\Replies\MassAction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">lof_product_reviews_replies_listing.lof_product_reviews_replies_listing.lof_product_reviews_replies_columns.ids</item>
+                    <item name="indexField" xsi:type="string">reply_id</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="lof_product_reviews/replies/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="status">
+                <settings>
+                    <type>status</type>
+                    <label translate="true">Change status</label>
+                    <actions>
+                        <action name="0">
+                            <type>pending</type>
+                            <label translate="true">Pending</label>
+                            <url path="lof_product_reviews/replies/massStatus">
+                                <param name="status">0</param>
+                            </url>
+                        </action>
+                        <action name="1">
+                            <type>approved</type>
+                            <label translate="true">Approved</label>
+                            <url path="lof_product_reviews/replies/massStatus">
+                                <param name="status">1</param>
+                            </url>
+                        </action>
+                    </actions>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns  name="lof_product_reviews_replies_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">lof_product_reviews_replies_listing.lof_product_reviews_replies_listing.lof_product_reviews_replies_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">edit</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>reply_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="reply_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="20">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+        <column name="review_id" sortOrder="42">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Review Id</label>
+            </settings>
+        </column>
+        <column name="customer_id" sortOrder="45">
+            <settings>
+                <sortable>false</sortable>
+                <label translate="true">Customer Id</label>
+            </settings>
+        </column>
+        <column name="reply_title" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Reply Title</label>
+            </settings>
+        </column>
+        <column name="reply_comment" sortOrder="50">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Reply Comment</label>
+            </settings>
+        </column>
+        <column name="user_name" sortOrder="52">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">User Name</label>
+            </settings>
+        </column>
+
+        <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="60">
+            <settings>
+                <options class="Lof\ProductReviews\Model\Replies\Source\Status"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+
+        <column name="website" sortOrder="64">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Website</label>
+            </settings>
+        </column>
+
+        <column name="email_address" sortOrder="74">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Email Address</label>
+            </settings>
+        </column>
+
+        <column name="admin_user_id" sortOrder="74">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Admin User</label>
+            </settings>
+        </column>
+
+        <column name="parent_reply_id" sortOrder="78">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Parent Reply</label>
+            </settings>
+        </column>
+
+        <column name="reply_customer_id" sortOrder="80">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Reply By Customer</label>
+            </settings>
+        </column>
+
+        <actionsColumn name="review_actions" class="Lof\ProductReviews\Ui\Component\Listing\Columns\ReviewDetailAction" sortOrder="90">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="viewUrlPath" xsi:type="string">review/product/edit</item>
+                    <item name="urlEntityParamName" xsi:type="string">id</item>
+                </item>
+            </argument>
+            <settings>
+                <indexField>review_id</indexField>
+                <label translate="true">Review</label>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>
+

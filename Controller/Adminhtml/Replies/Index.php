@@ -48,11 +48,11 @@ class Index extends \Magento\Backend\App\Action
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
-        $resultPage->setActiveMenu('Lof_ProductReviews::lof_product_reviews_reminders')
+        $resultPage->setActiveMenu('Lof_ProductReviews::review_reply')
             ->addBreadcrumb(
-                __('Reviews Reminders List'),
-                __('Reviews Reminders List')
-            )->getConfig()->getTitle()->prepend(__('Reviews Reminders List'));
+                __('Reviews Reply List'),
+                __('Reviews Reply List')
+            )->getConfig()->getTitle()->prepend(__('Reviews Reply List'));
         return $resultPage;
     }
 

@@ -18,7 +18,7 @@
  * @license    https://landofcoder.com/terms
  */
 
-.lof-review-gallery {
+ .lof-review-gallery {
 	/*height: 300px;*/
 	min-height: 200px;
 	position: relative;
@@ -35,8 +35,12 @@
 	width: auto !important;
 	/*height: 300px;*/
 	min-height: 200px;
-	margin-left: -90px;
-	margin-right: -10px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+.lofreview-gallery-fancybox img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .lof-review-gallery .owl-stage-outer {
@@ -265,6 +269,21 @@ zoom: 1;
 .review-item .review-image img {
     width: 60px;
     height: 60px;
+}
+.lof-comment_content {
+    padding-left: 10px;
+    color:#777;
+    font-size: 0.9em;
+    font-style: italic;
+}
+.list-replies .list-reply-item {
+    border-radius: 5px;
+    padding: 10px;
+    background: #f0f0f0;
+    margin-bottom: 1em;
+}
+.list-replies .list-reply-item p {
+    margin-bottom: inherit;
 }
 @media (min-width: 640px){
     .review-ratings~.review-content, .review-ratings~.review-details {
