@@ -160,6 +160,43 @@ class Get implements GetInterface
         return $reviewModel;
     }
 
+    /**
+     * @inheritdoc
+     *
+     * @param int $customerId
+     * @param int $reviewId
+     * @param bool $moreInfo
+     * @return ReviewInterface
+     * @throws NoSuchEntityException
+     */
+    public function executeByCustomer(int $customerId, int $reviewId, bool $moreInfo = true): ReviewInterface
+    {
+        /** @var Review $reviewModel */
+        $reviewModel = $this->reviewFactory->create();
+        $this->reviewResource->load($reviewModel, $reviewId);
+
+        if (null === $reviewModel->getId()) {
+            throw new NoSuchEntityException(
+                __('Review with id "%value" does not exist.', ['value' => $reviewId])
+            );
+        }
+        if ($customerId !== $reviewModel->getCustomerId()) {
+            throw new NoSuchEntityException(
+                __('Review with id "%value" does not exist for this customer.', ['value' => $reviewId])
+            );
+        }
+
+        $reviewModel = $this->toDataModelConverter->toDataModel($reviewModel);
+
+        if ($moreInfo) {
+            $reviewModel = $this->addCustomize($reviewModel);
+            $reviewModel = $this->addGalleries($reviewModel);
+            $reviewModel = $this->addReply($reviewModel);
+        }
+
+        return $reviewModel;
+    }
+
      /**
      * add customize review
      *

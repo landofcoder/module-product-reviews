@@ -45,33 +45,49 @@ interface ReplyInterface
     const AVATAR_URL = 'avatar_url';
     const ADMIN_USER_ID = 'admin_user_id';
     const CREATED_AT = 'created_at';
+    const REPLY_CUSTOMER_ID = 'reply_customer_id';
 
     /**
      * Get rating reply id.
      *
-     * @return int
+     * @return int|null
      */
     public function getReplyId();
 
     /**
      * Set rating reply_id.
      *
-     * @param int $reply_id
+     * @param int|null $reply_id
      * @return ReplyInterface
      */
     public function setReplyId($reply_id);
 
     /**
+     * Get rating reply_customer_id id.
+     *
+     * @return int|null
+     */
+    public function getReplyCustomerId();
+
+    /**
+     * Set rating reply_customer_id.
+     *
+     * @param int|null $reply_customer_id
+     * @return ReplyInterface
+     */
+    public function setReplyCustomerId($reply_customer_id);
+
+    /**
      * Get rating parent_reply_id.
      *
-     * @return int
+     * @return int|null
      */
     public function getParentReplyId();
 
     /**
      * Set rating parent_reply_id.
      *
-     * @param int $parent_reply_id
+     * @param int|null $parent_reply_id
      * @return ReplyInterface
      */
     public function setParentReplyId($parent_reply_id);
@@ -94,14 +110,14 @@ interface ReplyInterface
     /**
      * Get rating customer_id.
      *
-     * @return int
+     * @return int|null
      */
     public function getCustomerId();
 
     /**
      * Set rating customer_id.
      *
-     * @param int $customer_id
+     * @param int|null $customer_id
      * @return ReplyInterface
      */
     public function setCustomerId($customer_id);
@@ -109,14 +125,14 @@ interface ReplyInterface
     /**
      * Get rating admin_user_id.
      *
-     * @return int
+     * @return int|null
      */
     public function getAdminUserId();
 
     /**
      * Set rating admin_user_id.
      *
-     * @param int $admin_user_id
+     * @param int|null $admin_user_id
      * @return ReplyInterface
      */
     public function setAdminUserId($admin_user_id);
@@ -236,7 +252,7 @@ interface ReplyInterface
     /**
      * Set rating created_at.
      *
-     * @param string $created_at
+     * @param string|null $created_at
      * @return ReplyInterface
      */
     public function setCreatedAt($created_at);

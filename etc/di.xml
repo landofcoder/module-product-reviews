@@ -102,6 +102,7 @@
     <preference for="Lof\ProductReviews\Api\GetProductReviewsInterface" type="Lof\ProductReviews\Model\GetProductReviews"/>
     <preference for="Lof\ProductReviews\Api\ReviewRepositoryInterface" type="Lof\ProductReviews\Model\ReviewRepository"/>
     <preference for="Lof\ProductReviews\Model\Review\Command\DeleteByIdInterface" type="Lof\ProductReviews\Model\Review\Command\DeleteById"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\DeleteReplyByIdInterface" type="Lof\ProductReviews\Model\Review\Command\DeleteReplyById"/>
     <preference for="Lof\ProductReviews\Model\Review\Command\SaveInterface" type="Lof\ProductReviews\Model\Review\Command\Save"/>
     <preference for="Lof\ProductReviews\Model\Review\Command\GetInterface" type="Lof\ProductReviews\Model\Review\Command\Get"/>
     <preference for="Lof\ProductReviews\Model\Review\Command\GetListInterface" type="Lof\ProductReviews\Model\Review\Command\GetList"/>

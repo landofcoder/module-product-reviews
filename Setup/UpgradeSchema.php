@@ -158,6 +158,20 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
         }
+        if (version_compare($context->getVersion(), '1.0.4', '<')) {
+            $replyTable = $installer->getTable('lof_review_reply');
+            $installer->getConnection()->addColumn(
+                $replyTable,
+                'reply_customer_id',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 10,
+                    'unsigned' => true,
+                    'nullable' => true,
+                    'comment' => 'Reply By Customer Id'
+                ]
+            );
+        }
         $installer->endSetup();
     }
 }

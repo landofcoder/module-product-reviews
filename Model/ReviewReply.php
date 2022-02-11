@@ -42,7 +42,7 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     /**
      * Get rating reply id.
      *
-     * @return int
+     * @return int|null
      */
     public function getReplyId()
     {
@@ -52,7 +52,7 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     /**
      * Set rating reply_id.
      *
-     * @param int $reply_id
+     * @param int|null $reply_id
      * @return ReplyInterface
      */
     public function setReplyId($reply_id)
@@ -63,7 +63,7 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     /**
      * Get rating parent_reply_id.
      *
-     * @return int
+     * @return int|null
      */
     public function getParentReplyId()
     {
@@ -73,7 +73,7 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     /**
      * Set rating parent_reply_id.
      *
-     * @param int $parent_reply_id
+     * @param int|null $parent_reply_id
      * @return ReplyInterface
      */
     public function setParentReplyId($parent_reply_id)
@@ -105,7 +105,7 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     /**
      * Get rating customer_id.
      *
-     * @return int
+     * @return int|null
      */
     public function getCustomerId()
     {
@@ -115,7 +115,7 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     /**
      * Set rating customer_id.
      *
-     * @param int $customer_id
+     * @param int|null $customer_id
      * @return ReplyInterface
      */
     public function setCustomerId($customer_id)
@@ -124,9 +124,30 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     }
 
     /**
+     * Get rating customer_id.
+     *
+     * @return int|null
+     */
+    public function getReplyCustomerId()
+    {
+        return $this->getData(self::REPLY_CUSTOMER_ID);
+    }
+
+    /**
+     * Set rating customer_id.
+     *
+     * @param int|null $customer_id
+     * @return ReplyInterface
+     */
+    public function setReplyCustomerId($reply_customer_id)
+    {
+        return $this->setData(self::REPLY_CUSTOMER_ID, $reply_customer_id);
+    }
+
+    /**
      * Get rating admin_user_id.
      *
-     * @return int
+     * @return int|null
      */
     public function getAdminUserId()
     {
@@ -136,7 +157,7 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     /**
      * Set rating admin_user_id.
      *
-     * @param int $admin_user_id
+     * @param int|null $admin_user_id
      * @return ReplyInterface
      */
     public function setAdminUserId($admin_user_id)
@@ -304,7 +325,7 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     /**
      * Set rating created_at.
      *
-     * @param string $created_at
+     * @param string|null $created_at
      * @return ReplyInterface
      */
     public function setCreatedAt($created_at)

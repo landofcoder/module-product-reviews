@@ -46,4 +46,15 @@ interface GetListInterface
      * @return ReviewSearchResultInterface
      */
     public function execute(SearchCriteriaInterface $searchCriteria = null, bool $moreInfo = true): ReviewSearchResultInterface;
+
+    /**
+     * Find Sources by given SearchCriteria. SearchCriteria is not required because load all sources is useful case for logged in customer
+     *
+     * @param int $customerId
+     * @param SearchCriteriaInterface|null $searchCriteria
+     * @param bool $moreInfo
+     *
+     * @return ReviewSearchResultInterface
+     */
+    public function executeByCustomer(int $customerId, SearchCriteriaInterface $searchCriteria = null, bool $moreInfo = true): ReviewSearchResultInterface;
 }

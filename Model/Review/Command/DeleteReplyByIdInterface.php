@@ -22,11 +22,10 @@ declare(strict_types=1);
 
 namespace Lof\ProductReviews\Model\Review\Command;
 
-use Lof\ProductReviews\Api\Data\ReviewInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Exception\CouldNotDeleteException;
 
 /**
- * Get review by id command (Service Provider Interface - SPI)
+ * Delete review by id command (Service Provider Interface - SPI)
  *
  * Separate command interface to which Repository proxies initial GetList call, could be considered as SPI - Interfaces
  * that you should extend and implement to customize current behaviour, but NOT expected to be used (called) in the code
@@ -35,28 +34,14 @@ use Magento\Framework\Exception\NoSuchEntityException;
  * @see \Lof\ProductReviews\Api\ReviewRepositoryInterface
  * @api
  */
-interface GetInterface
+interface DeleteReplyByIdInterface
 {
     /**
-     * Retrieve Review By Id
+     * Delete the review data by review.
      *
-     * @param int $reviewId
-     * @param bool $moreInfo
-     *
-     * @return ReviewInterface
-     * @throws NoSuchEntityException
+     * @param int $replyId
+     * @return void
+     * @throws CouldNotDeleteException
      */
-    public function execute(int $reviewId, bool $moreInfo = true): ReviewInterface;
-
-    /**
-     * Retrieve Review By Id for logged in customer
-     *
-     * @param int $customerId
-     * @param int $reviewId
-     * @param bool $moreInfo
-     *
-     * @return ReviewInterface
-     * @throws NoSuchEntityException
-     */
-    public function executeByCustomer(int $customerId, int $reviewId, bool $moreInfo = true): ReviewInterface;
+    public function execute(int $replyId): void;
 }

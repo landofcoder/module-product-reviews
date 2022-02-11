@@ -67,6 +67,29 @@ interface ReviewRepositoryInterface
     public function reply(ReplyInterface $reply): \Lof\ProductReviews\Api\Data\ReplyInterface;
 
     /**
+     * Save review Reply by guest.
+     *
+     * @param \Lof\ProductReviews\Api\Data\ReplyInterface $reply
+     *
+     * @return \Lof\ProductReviews\Api\Data\ReplyInterface
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function replyByGuest(ReplyInterface $reply): \Lof\ProductReviews\Api\Data\ReplyInterface;
+
+    /**
+     * Save review Reply by customer.
+     *
+     * @param int $customerId
+     * @param \Lof\ProductReviews\Api\Data\ReplyInterface $reply
+     *
+     * @return \Lof\ProductReviews\Api\Data\ReplyInterface
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function replyByCustomer(int $customerId, ReplyInterface $reply): \Lof\ProductReviews\Api\Data\ReplyInterface;
+
+    /**
      * Get review by review id.
      *
      * @param int $reviewId
@@ -97,6 +120,40 @@ interface ReviewRepositoryInterface
     ): \Lof\ProductReviews\Api\Data\ReviewSearchResultInterface;
 
     /**
+     * Lists of my the review items that match specified search criteria.
+     *
+     * @param int $customerId
+     * @param \Magento\Framework\Api\SearchCriteria|null $searchCriteria
+     * @return \Lof\ProductReviews\Api\Data\ReviewSearchResultInterface
+     */
+    public function getMyList(
+        int $customerId,
+        SearchCriteria $searchCriteria = null
+    ): \Lof\ProductReviews\Api\Data\ReviewSearchResultInterface;
+
+    /**
+     * Get my review by review id.
+     *
+     * @param int $customerId
+     * @param int $reviewId
+     *
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getMyReview(int $customerId, int $reviewId): \Lof\ProductReviews\Api\Data\ReviewInterface;
+
+    /**
+     * Get review Reply by review id.
+     *
+     * @param int $customerId
+     * @param int $reviewId
+     * @param \Magento\Framework\Api\SearchCriteria|null $searchCriteria
+     * @return \Lof\ProductReviews\Api\Data\ReplySearchResultInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getMyListReply(int $customerId, int $reviewId, SearchCriteria $searchCriteria = null): \Lof\ProductReviews\Api\Data\ReplySearchResultInterface;
+
+    /**
      * Delete Review by Id
      *
      * @param int $reviewId
@@ -104,4 +161,13 @@ interface ReviewRepositoryInterface
      * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
     public function deleteById(int $reviewId): void;
+
+    /**
+     * Delete Review Reply by Id
+     *
+     * @param int $replyId
+     * @return void
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
+     */
+    public function deleteReplyById(int $replyId): void;
 }

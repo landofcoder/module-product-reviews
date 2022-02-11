@@ -30,6 +30,8 @@
                     <resource id="Lof_ProductReviews::gallery_view" title="Lof Product Reviews - View Gallery" sortOrder="60" />
                     <resource id="Lof_ProductReviews::reviews" title="Lof Product Reviews - View All" sortOrder="70" />
                     <resource id="Lof_ProductReviews::review_reply" title="Lof Product Reviews - Reply" sortOrder="80" />
+                    <resource id="Lof_ProductReviews::delete_reply" title="Lof Product Reviews - Delete Reply" sortOrder="90" />
+                    <resource id="Lof_ProductReviews::save_reply" title="Lof Product Reviews - Save Reply" sortOrder="95" />
                 </resource>
                 <resource id="Lof_ProductReviews::customize" title="Lof Product Reviews Customize" sortOrder="10">
 					<resource id="Lof_ProductReviews::customize_save" title="Save Customize" sortOrder="10"/>

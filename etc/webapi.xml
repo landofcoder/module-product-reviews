@@ -86,12 +86,7 @@
             <resource ref="Magento_Review::reviews_all"/>
         </resources>
     </route>
-    <route url="/V1/reviews/reply/:id" method="PUT">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="reply"/>
-        <resources>
-            <resource ref="Lof_ProductReviews::review_reply"/>
-        </resources>
-    </route>
+
     <route url="/V1/reviews" method="POST">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="save"/>
         <resources>
@@ -104,10 +99,61 @@
             <resource ref="Magento_Review::reviews_all"/>
         </resources>
     </route>
+    <route url="/V1/reviews/reply/:replyId" method="DELETE">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="deleteReplyById"/>
+        <resources>
+            <resource ref="Lof_ProductReviews::delete_reply"/>
+        </resources>
+    </route>
+
     <route url="/V1/reviews" method="GET">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getList"/>
         <resources>
             <resource ref="Lof_ProductReviews::reviews"/>
+        </resources>
+    </route>
+
+    <route url="/V1/reviews/reply" method="PUT">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="reply"/>
+        <resources>
+            <resource ref="Lof_ProductReviews::save_reply"/>
+        </resources>
+    </route>
+
+    <route url="/V1/reviews/me" method="GET">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getMyList"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/reviews/me/:reviewId" method="GET">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getMyReview"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/reviews/me/reply" method="PUT">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="replyByCustomer"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <route url="/V1/reviews/guest/reply" method="PUT">
+        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="replyByGuest"/>
+        <resources>
+            <resource ref="anonymous"/>
         </resources>
     </route>
 

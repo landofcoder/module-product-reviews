@@ -106,4 +106,38 @@ class GetListReply implements GetListReplyInterface
 
         return $searchResult;
     }
+
+    /**
+     * @inheritdoc
+     *
+     * @param int $customerId
+     * @param int $reviewId
+     * @param SearchCriteriaInterface|null $searchCriteria
+     *
+     * @return ReplySearchResultInterface
+     */
+    public function executeByCustomer(int $customerId, int $reviewId, SearchCriteriaInterface $searchCriteria = null): ReplySearchResultInterface
+    {
+        /** @var Collection $collection */
+        $collection = $this->reviewReplyCollectionFactory->create();
+
+        if (null === $searchCriteria) {
+            $searchCriteria = $this->searchCriteriaBuilder->create();
+        } else {
+            $this->collectionProcessor->process($searchCriteria, $collection);
+        }
+
+        $collection->addFieldToFilter("review_id", $reviewId);
+        $collection->addFieldToFilter("customer_id", $customerId);
+
+        $collection->load();
+
+        /** @var ReviewSearchResultInterface $searchResult */
+        $searchResult = $this->reviewSearchResultsFactory->create();
+        $searchResult->setItems($collection->getItems());
+        $searchResult->setTotalCount($collection->getSize());
+        $searchResult->setSearchCriteria($searchCriteria);
+
+        return $searchResult;
+    }
 }

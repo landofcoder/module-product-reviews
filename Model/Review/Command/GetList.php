@@ -204,6 +204,56 @@ class GetList implements GetListInterface
     }
 
     /**
+     * @inheritdoc
+     *
+     * @param int $customerId
+     * @param SearchCriteriaInterface|null $searchCriteria
+     * @param bool $moreInfo
+     *
+     * @return ReviewSearchResultInterface
+     */
+    public function executeByCustomer(int $customerId, SearchCriteriaInterface $searchCriteria = null,  bool $moreInfo = true): ReviewSearchResultInterface
+    {
+        /** @var Collection $collection */
+        $collection = $this->reviewCollectionFactory->create();
+        $collection->addStoreData();
+        $collection->addStoreFilter($this->getStoreId());
+
+        if (null === $searchCriteria) {
+            $searchCriteria = $this->searchCriteriaBuilder->create();
+        } else {
+            $this->collectionProcessor->process($searchCriteria, $collection);
+        }
+
+        $collection->addFieldToFilter("customer_id", $customerId);
+
+        $collection->load();
+        $collection->addRateVotes();
+
+        $items = $this->convertItemsToDataModel($collection->getItems());
+        $reviews = [];
+
+        if ($moreInfo) {
+            foreach ($items as $reviewDataObject) {
+                $reviewDataObject = $this->addCustomize($reviewDataObject);
+                $reviewDataObject = $this->addGalleries($reviewDataObject);
+                $reviewDataObject = $this->addReply($reviewDataObject);
+                $reviews[] = $reviewDataObject;
+            }
+        } else {
+            $reviews = $items;
+        }
+
+        /** @var ReviewSearchResultInterface $searchResult */
+        $searchResult = $this->reviewSearchResultsFactory->create();
+        $searchResult->setItems($items);
+        $searchResult->setTotalCount($collection->getSize());
+        $searchResult->setSearchCriteria($searchCriteria);
+
+        return $searchResult;
+    }
+
+    /**
      * Convert Review Models to Data Models
      *
      * @param array $items
