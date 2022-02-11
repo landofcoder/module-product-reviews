@@ -17,6 +17,7 @@ use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryC
 use Lof\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as CustomReviewCollectionFactory;
 use Lof\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as ReviewReplyCollectionFactory;
 use Lof\ProductReviews\Model\Converter\Review\ToDataModel as ReviewConverter;
+use Lof\ProductReviews\Helper\Data as HelperData;
 
 /**
  * Class GetProductReviews load product reviews by product sku
@@ -64,6 +65,11 @@ class GetProductReviews implements GetProductReviewsInterface
     protected $replyCollectionFactory;
 
     /**
+     * @var HelperData
+     */
+    protected $helperData;
+
+    /**
      * GetProductReviews constructor.
      *
      * @param ReviewConverter $reviewConverter
@@ -74,6 +80,7 @@ class GetProductReviews implements GetProductReviewsInterface
      * @param CustomReviewCollectionFactory $customizeCollectionFactory
      * @param ReplyInterfaceFactory $dataReplyFactory
      * @param ReviewReplyCollectionFactory $replyCollectionFactory
+     * @param HelperData $helperData
      */
     public function __construct(
         ReviewConverter $reviewConverter,
@@ -83,7 +90,8 @@ class GetProductReviews implements GetProductReviewsInterface
         CustomizeInterfaceFactory $dataCustomizeFactory,
         CustomReviewCollectionFactory $customizeCollectionFactory,
         ReplyInterfaceFactory $dataReplyFactory,
-        ReviewReplyCollectionFactory $replyCollectionFactory
+        ReviewReplyCollectionFactory $replyCollectionFactory,
+        HelperData $helperData
     ) {
         $this->reviewConverter = $reviewConverter;
         $this->reviewCollectionFactory = $collectionFactory;
@@ -93,6 +101,7 @@ class GetProductReviews implements GetProductReviewsInterface
         $this->customizeCollectionFactory = $customizeCollectionFactory;
         $this->dataReplyFactory = $dataReplyFactory;
         $this->replyCollectionFactory = $replyCollectionFactory;
+        $this->helperData = $helperData;
     }
 
     /**
@@ -154,6 +163,8 @@ class GetProductReviews implements GetProductReviewsInterface
                     ->addFieldToFilter("review_id", $reviewDataObject->getId())
                     ->getFirstItem();
         if ($galleriesFound) {
+            $images = $this->helperData->getGalleryImages($galleriesFound);
+            $galleriesFound->setImages($images);
             $reviewDataObject->setGalleries($galleriesFound);
         }
         return $reviewDataObject;

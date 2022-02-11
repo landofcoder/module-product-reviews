@@ -41,9 +41,10 @@ interface GetInterface
      * Retrieve Review By Id
      *
      * @param int $reviewId
+     * @param bool $moreInfo
      *
      * @return ReviewInterface
      * @throws NoSuchEntityException
      */
-    public function execute(int $reviewId): ReviewInterface;
+    public function execute(int $reviewId, bool $moreInfo = true): ReviewInterface;
 }

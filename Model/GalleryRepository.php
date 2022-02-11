@@ -158,6 +158,8 @@ class GalleryRepository implements GalleryRepositoryInterface
         if (!$gallery->getId()) {
             throw new NoSuchEntityException(__('Gallery with id "%1" does not exist.', $galleryId));
         }
+        $images = $this->helperData->getGalleryImages($gallery);
+        $gallery->setImages($images);
         return $gallery;
     }
 
@@ -176,10 +178,17 @@ class GalleryRepository implements GalleryRepositoryInterface
 
         $this->collectionProcessor->process($criteria, $collection);
 
+        $items = [];
+        foreach ($collection->getItems() as $_item) {
+            $images = $this->helperData->getGalleryImages($_item);
+            $_item->setImages($images);
+            $items[] = $_item;
+        }
+
         /** @var Data\GallerySearchResultsInterface $searchResults */
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
-        $searchResults->setItems($collection->getItems());
+        $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;
     }

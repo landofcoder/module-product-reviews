@@ -31,6 +31,13 @@ use Lof\ProductReviews\Api\Data\ReviewSearchResultInterface;
 use Lof\ProductReviews\Api\Data\ReviewSearchResultInterfaceFactory;
 use Lof\ProductReviews\Model\Converter\Review\ToDataModel;
 use Magento\Store\Model\StoreManagerInterface;
+use Lof\ProductReviews\Helper\Data as HelperData;
+use Lof\ProductReviews\Api\Data\GalleryInterfaceFactory;
+use Lof\ProductReviews\Api\Data\CustomizeInterfaceFactory;
+use Lof\ProductReviews\Api\Data\ReplyInterfaceFactory;
+use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
+use Lof\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as CustomReviewCollectionFactory;
+use Lof\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as ReviewReplyCollectionFactory;
 
 /**
  * @inheritdoc
@@ -68,6 +75,41 @@ class GetList implements GetListInterface
     private $storeManager;
 
     /**
+     * @var GalleryInterfaceFactory
+     */
+    protected $dataGalleryFactory;
+
+    /**
+     * @var GalleryCollectionFactory
+     */
+    protected $galleryCollectionFactory;
+
+    /**
+     * @var CustomizeInterfaceFactory
+     */
+    protected $dataCustomizeFactory;
+
+    /**
+     * @var CustomReviewCollectionFactory
+     */
+    protected $customizeCollectionFactory;
+
+    /**
+     * @var ReplyInterfaceFactory
+     */
+    protected $dataReplyFactory;
+
+    /**
+     * @var ReviewReplyCollectionFactory
+     */
+    protected $replyCollectionFactory;
+
+    /**
+     * @var HelperData
+     */
+    protected $helperData;
+
+    /**
      * GetList constructor.
      *
      * @param ToDataModel $toDataModelConvert
@@ -76,6 +118,13 @@ class GetList implements GetListInterface
      * @param StoreManagerInterface $storeManager
      * @param ReviewSearchResultInterfaceFactory $reviewSearchResultInterfaceFactory
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param GalleryInterfaceFactory $dataGalleryFactory
+     * @param GalleryCollectionFactory $galleryCollectionFactory
+     * @param CustomizeInterfaceFactory $dataCustomizeFactory
+     * @param CustomReviewCollectionFactory $customizeCollectionFactory
+     * @param ReplyInterfaceFactory $dataReplyFactory
+     * @param ReviewReplyCollectionFactory $replyCollectionFactory
+     * @param HelperData $helperData,
      */
     public function __construct(
         ToDataModel $toDataModelConvert,
@@ -83,7 +132,14 @@ class GetList implements GetListInterface
         CollectionFactory $sourceCollectionFactory,
         StoreManagerInterface $storeManager,
         ReviewSearchResultInterfaceFactory $reviewSearchResultInterfaceFactory,
-        SearchCriteriaBuilder $searchCriteriaBuilder
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        GalleryInterfaceFactory $dataGalleryFactory,
+        GalleryCollectionFactory $galleryCollectionFactory,
+        CustomizeInterfaceFactory $dataCustomizeFactory,
+        CustomReviewCollectionFactory $customizeCollectionFactory,
+        ReplyInterfaceFactory $dataReplyFactory,
+        ReviewReplyCollectionFactory $replyCollectionFactory,
+        HelperData $helperData
     ) {
         $this->collectionProcessor = $collectionProcessor;
         $this->reviewCollectionFactory = $sourceCollectionFactory;
@@ -91,16 +147,24 @@ class GetList implements GetListInterface
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->toDataModelConverter = $toDataModelConvert;
         $this->storeManager = $storeManager;
+        $this->dataGalleryFactory = $dataGalleryFactory;
+        $this->galleryCollectionFactory = $galleryCollectionFactory;
+        $this->dataCustomizeFactory = $dataCustomizeFactory;
+        $this->customizeCollectionFactory = $customizeCollectionFactory;
+        $this->dataReplyFactory = $dataReplyFactory;
+        $this->replyCollectionFactory = $replyCollectionFactory;
+        $this->helperData = $helperData;
     }
 
     /**
      * @inheritdoc
      *
      * @param SearchCriteriaInterface|null $searchCriteria
+     * @param bool $moreInfo
      *
      * @return ReviewSearchResultInterface
      */
-    public function execute(SearchCriteriaInterface $searchCriteria = null): ReviewSearchResultInterface
+    public function execute(SearchCriteriaInterface $searchCriteria = null,  bool $moreInfo = true): ReviewSearchResultInterface
     {
         /** @var Collection $collection */
         $collection = $this->reviewCollectionFactory->create();
@@ -116,9 +180,23 @@ class GetList implements GetListInterface
         $collection->load();
         $collection->addRateVotes();
 
+        $items = $this->convertItemsToDataModel($collection->getItems());
+        $reviews = [];
+
+        if ($moreInfo) {
+            foreach ($items as $reviewDataObject) {
+                $reviewDataObject = $this->addCustomize($reviewDataObject);
+                $reviewDataObject = $this->addGalleries($reviewDataObject);
+                $reviewDataObject = $this->addReply($reviewDataObject);
+                $reviews[] = $reviewDataObject;
+            }
+        } else {
+            $reviews = $items;
+        }
+
         /** @var ReviewSearchResultInterface $searchResult */
         $searchResult = $this->reviewSearchResultsFactory->create();
-        $searchResult->setItems($this->convertItemsToDataModel($collection->getItems()));
+        $searchResult->setItems($items);
         $searchResult->setTotalCount($collection->getSize());
         $searchResult->setSearchCriteria($searchCriteria);
 
@@ -153,5 +231,62 @@ class GetList implements GetListInterface
     private function getStoreId(): int
     {
         return (int) $this->storeManager->getStore()->getId();
+    }
+
+     /**
+     * add customize review
+     *
+     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     */
+    protected function addCustomize($reviewDataObject)
+    {
+        $customizeFound = $this->customizeCollectionFactory->create()
+                        ->addFieldToFilter("review_id", $reviewDataObject->getId())
+                        ->getFirstItem();
+        if ($customizeFound) {
+            $reviewDataObject->setCustomize($customizeFound);
+        }
+        return $reviewDataObject;
+    }
+
+    /**
+     * add galleries review
+     *
+     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     */
+    protected function addGalleries($reviewDataObject)
+    {
+        $galleriesFound = $this->galleryCollectionFactory->create()
+                    ->addFieldToFilter("review_id", $reviewDataObject->getId())
+                    ->getFirstItem();
+        if ($galleriesFound) {
+            $images = $this->helperData->getGalleryImages($galleriesFound);
+            $galleriesFound->setImages($images);
+            $reviewDataObject->setGalleries($galleriesFound);
+        }
+        return $reviewDataObject;
+    }
+
+    /**
+     * add replies review
+     *
+     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     */
+    protected function addReply($reviewDataObject)
+    {
+        $replyCollection = $this->replyCollectionFactory->create()
+                    ->addFieldToFilter("review_id", $reviewDataObject->getId())
+                    ->addOrder("created_at", "DESC")
+                    ->setPageSize(10)
+                    ->setCurPage(1);
+
+        if ($replyCollection->count()) {
+            $reviewDataObject->setReply($replyCollection->getItems());
+            $reviewDataObject->setReplyTotal($replyCollection->count());
+        }
+        return $reviewDataObject;
     }
 }
