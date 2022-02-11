@@ -18,7 +18,7 @@
  * @license    https://landofcoder.com/terms
  */
 
-.lof-review-gallery {
+ .lof-review-gallery {
 	/*height: 300px;*/
 	min-height: 200px;
 	position: relative;
@@ -40,6 +40,7 @@
 }
 .lofreview-gallery-fancybox img {
     max-width: 100%;
+    max-height: 100%;
 }
 
 .lof-review-gallery .owl-stage-outer {

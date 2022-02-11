@@ -208,7 +208,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                                         <?php $imageURl = $block->resizeImage($_image,
                                                             $block->getImgWidth(), $block->getImgHeight()); ?>
                                                         <div class="gallery-item">
-                                                            <div class="gallery-image">
+                                                            <div class="gallery-image" style="max-width: <?= (int)$image_popup_width."px";?>">
                                                                 <a href="<?= $block->getMediaUrl($_image) ?>"
                                                                    class="lofreview-gallery-fancybox"
                                                                    rel="review-gallery<?= $_index.$_index2; ?>"
