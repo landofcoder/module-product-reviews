@@ -2,6 +2,7 @@
 ## [ADVANCED MAGENTO 2 PRODUCT REVIEWS EXTENSION](https://landofcoder.com/advanced-magento-2-product-reviews.html/)
 
 OVERVIEW
+
 Creating customers an excellent product experience will lead to compliments, where powerful mouth-of-word was born to improve your sales performance. Reviews are also the type of “mouth-of-word” in the Net in order to test product’s quality.
 
 Knowing the importance of boosting the customer’s trust to stores via reviews, we developed Magento 2 Product Reviews Extension to boost your business to the new level. The extension gives customers an allowance to post images, rate the review helpful or not, and filter needed reviews to meet their demands.
@@ -37,8 +38,8 @@ php bin/magento setup:static-content:deploy -f
 
 ```
 
-###### manage faq extension
-manage faq by navigation to ```Marketing > All Reviews ```
+###### manage product reviews extension
+manage product reviews by navigation to ```Marketing > All Reviews ``` or ```Lof Product Reviews > All Reviews ```
 
 
 ## Features
@@ -53,7 +54,6 @@ manage faq by navigation to ```Marketing > All Reviews ```
 - Send email reminder
 - Improve your rankings
 - Multiple languages - RTL supports
-- 24/7 professional support
 - Fast speed with Magento Block Caching
 - Attractive Custom Work service
 - 100% open source

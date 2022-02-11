@@ -120,6 +120,8 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
             '\Lof\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer\Notes'
         );
 
+
+
         $fieldset1->addField(
             'review_customize_id',
             'hidden',
@@ -205,6 +207,11 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
                 ['legend' => __('Review Comment')]
             );
 
+            $fieldset2->addType(
+                'notelink',
+                '\Lof\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer\NoteLink'
+            );
+
             $fieldset2->addField(
                 'reply_id',
                 'hidden',
@@ -255,6 +262,17 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
                     'label' => __('Send to customer'),
                     'required' => false,
                     'onchange' => 'this.value = this.checked;'
+                ]
+            );
+
+            $fieldset2->addField(
+                'review_notes_link',
+                'notelink',
+                [
+                    'name' => 'review_notes_link',
+                    'label' => __('Manage Replies'),
+                    'title' => __('Manage Replies'),
+                    'required' => false
                 ]
             );
         }
