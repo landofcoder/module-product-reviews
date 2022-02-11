@@ -68,7 +68,17 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @return \Lof\ProductReviews\Api\Data\GalleryInterface[]
+     * @return \Lof\ProductReviews\Api\Data\ReplyInterface[]
+     */
+    public function getReply()
+    {
+        return $this->_get(self::REPLY);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return \Lof\ProductReviews\Api\Data\GalleryInterface
      */
     public function getGalleries()
     {
@@ -78,7 +88,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface[]
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      */
     public function getCustomize()
     {
@@ -188,7 +198,19 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface[] $galleries
+     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $reply
+     *
+     * @return Review|void
+     */
+    public function setReply($reply)
+    {
+        return $this->setData(self::REPLY, $reply);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface $galleries
      *
      * @return Review|void
      */
@@ -200,7 +222,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface[] $customize
+     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface $customize
      *
      * @return Review|void
      */
@@ -343,5 +365,27 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     public function setStoreId($storeId)
     {
         return $this->setData(self::STORE_ID, $storeId);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return int
+     */
+    public function getReplyTotal()
+    {
+        return $this->_get(self::REPLY_TOTAL);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @param int $reply_total
+     *
+     * @return $this
+     */
+    public function setReplyTotal($reply_total)
+    {
+        return $this->setData(self::REPLY_TOTAL, $reply_total);
     }
 }

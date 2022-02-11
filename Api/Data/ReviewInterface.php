@@ -57,6 +57,8 @@ interface ReviewInterface
      */
     const GALLERIES = 'galleries';
     const CUSTOMIZE = 'customize';
+    const REPLY = 'reply';
+    const REPLY_TOTAL = 'reply_total';
 
     const REVIEW_TYPE_CUSTOMER = 1;
     const REVIEW_TYPE_GUEST = 2;
@@ -105,16 +107,23 @@ interface ReviewInterface
     public function getRatings();
 
     /**
+     * Get review replies.
+     *
+     * @return \Lof\ProductReviews\Api\Data\ReplyInterface[]
+     */
+    public function getReply();
+
+    /**
      * Get review galleries.
      *
-     * @return \Lof\ProductReviews\Api\Data\GalleryInterface[]
+     * @return \Lof\ProductReviews\Api\Data\GalleryInterface
      */
     public function getGalleries();
 
     /**
      * Get review customize.
      *
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface[]
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      */
     public function getCustomize();
 
@@ -194,9 +203,18 @@ interface ReviewInterface
     public function setRatings($ratings);
 
     /**
+     * Set review reply.
+     *
+     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $reply
+     *
+     * @return void
+     */
+    public function setReply($reply);
+
+    /**
      * Set review galleries.
      *
-     * @param \Lof\ProductReviews\Api\Data\GalleryInterface[] $galleries
+     * @param \Lof\ProductReviews\Api\Data\GalleryInterface $galleries
      *
      * @return void
      */
@@ -205,7 +223,7 @@ interface ReviewInterface
     /**
      * Set review customize.
      *
-     * @param \Lof\ProductReviews\Api\Data\CustomizeInterface[] $customize
+     * @param \Lof\ProductReviews\Api\Data\CustomizeInterface $customize
      *
      * @return void
      */
@@ -253,6 +271,22 @@ interface ReviewInterface
      * @return $this
      */
     public function setCreatedAt($createdAt);
+
+    /**
+     * Get total replies
+     *
+     * @return int
+     */
+    public function getReplyTotal();
+
+    /**
+     * Set total replies
+     *
+     * @param int $reply_total
+     *
+     * @return $this
+     */
+    public function setReplyTotal($reply_total);
 
     /**
      * Set Entity Id
