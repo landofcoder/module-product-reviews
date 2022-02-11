@@ -41,43 +41,43 @@
 		</resources>
 	</route>
 
-        <route method="GET" url="/V1/reviews/gallery/:galleryId">
+    <route method="GET" url="/V1/reviews/gallery/:galleryId">
         <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getById"/>
         <resources>
-            <resource ref="Magento_Review::reviews_all"/>
+            <resource ref="Lof_ProductReviews::gallery_view"/>
         </resources>
     </route>
 
     <route method="GET" url="/V1/reviews/galleries">
         <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getList"/>
         <resources>
-            <resource ref="Magento_Review::reviews_all"/>
+            <resource ref="Lof_ProductReviews::gallery_view"/>
         </resources>
     </route>
 
     <route method="GET" url="/V1/reviews/galleries/:reviewId">
         <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getListByReview"/>
         <resources>
-            <resource ref="Magento_Review::reviews_all"/>
+            <resource ref="Lof_ProductReviews::gallery_view"/>
         </resources>
     </route>
 
     <route url="/V1/products/:sku/reviews" method="GET">
         <service class="Lof\ProductReviews\Api\GetProductReviewsInterface" method="execute"/>
         <resources>
-            <resource ref="Magento_Review::reviews_all"/>
+            <resource ref="Lof_ProductReviews::reviews"/>
         </resources>
     </route>
     <route url="/V1/reviews/:reviewId" method="GET">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="get"/>
         <resources>
-            <resource ref="Magento_Review::reviews_all"/>
+            <resource ref="Lof_ProductReviews::reviews"/>
         </resources>
     </route>
     <route url="/V1/reviews/reply/:reviewId" method="GET">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getListReply"/>
         <resources>
-            <resource ref="Magento_Review::reviews_all"/>
+            <resource ref="Lof_ProductReviews::reviews"/>
         </resources>
     </route>
     <route url="/V1/reviews/:id" method="PUT">
@@ -89,13 +89,13 @@
     <route url="/V1/reviews/reply/:id" method="PUT">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="reply"/>
         <resources>
-            <resource ref="Magento_Review::reviews_all"/>
+            <resource ref="Lof_ProductReviews::review_reply"/>
         </resources>
     </route>
     <route url="/V1/reviews" method="POST">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="save"/>
         <resources>
-            <resource ref="Magento_Review::reviews_all"/>
+            <resource ref="Lof_ProductReviews::reviews"/>
         </resources>
     </route>
     <route url="/V1/reviews/:reviewId" method="DELETE">
@@ -107,7 +107,7 @@
     <route url="/V1/reviews" method="GET">
         <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getList"/>
         <resources>
-            <resource ref="Magento_Review::reviews_all"/>
+            <resource ref="Lof_ProductReviews::reviews"/>
         </resources>
     </route>
 
@@ -115,91 +115,91 @@
     <route url="/V1/reviews/customize" method="POST">
 		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::Customize_save"/>
+			<resource ref="Lof_ProductReviews::customize_save"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/customize/search" method="GET">
 		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="getList"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::Customize_view"/>
+			<resource ref="Lof_ProductReviews::customize_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/customize/:customizeId" method="GET">
 		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="get"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::Customize_view"/>
+			<resource ref="Lof_ProductReviews::customize_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/customize/:customizeId" method="PUT">
 		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::Customize_update"/>
+			<resource ref="Lof_ProductReviews::customize_update"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/customize/:customizeId" method="DELETE">
 		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="deleteById"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::Customize_delete"/>
+			<resource ref="Lof_ProductReviews::customize_delete"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reminders" method="POST">
 		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::Reminders_save"/>
+			<resource ref="Lof_ProductReviews::reminders_save"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reminders/search" method="GET">
 		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="getList"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::Reminders_view"/>
+			<resource ref="Lof_ProductReviews::reminders_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reminders/:remindersId" method="GET">
 		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="get"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::Reminders_view"/>
+			<resource ref="Lof_ProductReviews::reminders_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reminders/:id" method="PUT">
 		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::Reminders_update"/>
+			<resource ref="Lof_ProductReviews::reminders_update"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reminders/:id" method="DELETE">
 		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="deleteById"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::Reminders_delete"/>
+			<resource ref="Lof_ProductReviews::reminders_delete"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reporthistory" method="POST">
 		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::ReportHistory_save"/>
+			<resource ref="Lof_ProductReviews::reportHistory_save"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reporthistory/search" method="GET">
 		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="getList"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::ReportHistory_view"/>
+			<resource ref="Lof_ProductReviews::reportHistory_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reporthistory/:id" method="GET">
 		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="get"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::ReportHistory_view"/>
+			<resource ref="Lof_ProductReviews::reportHistory_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reporthistory/:id" method="PUT">
 		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::ReportHistory_update"/>
+			<resource ref="Lof_ProductReviews::reportHistory_update"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reporthistory/:id" method="DELETE">
 		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="deleteById"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::ReportHistory_delete"/>
+			<resource ref="Lof_ProductReviews::reportHistory_delete"/>
 		</resources>
 	</route>
 
