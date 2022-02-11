@@ -25,6 +25,7 @@ namespace Lof\ProductReviews\Block\Product\View;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\UrlInterface;
+use Lof\ProductReviews\Model\ReviewReply;
 
 class ListView extends \Magento\Review\Block\Product\View\ListView
 {
@@ -254,7 +255,9 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
     public function getReviewsReply($reviewId)
     {
         $reviewReply = $this->_replyFactory->create();
-        $reply = $reviewReply->addFieldToFilter('review_id', $reviewId);
+        $reply = $reviewReply
+                ->addFieldToFilter('review_id', $reviewId)
+                ->addFieldToFilter('status', ReviewReply::STATUS_ENABLED);
         return $reply;
     }
 

@@ -219,7 +219,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                                                    data-fancybox-padding="<?= $image_popup_padding ?>"
                                                                    data-fancybox-margin="<?= $image_popup_margin ?>"
                                                                    data-fancybox-auto-size="<?= (int)$auto_size; ?>">
-                                                                    <img src="<?= $imageURl ?>" alt="<?= $_image ?>">
+                                                                    <img src="<?= $imageURl ?>" alt="<?= $_image ?>" width="<?= (int)$image_popup_width;?>">
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -236,38 +236,47 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                     <?php foreach ($customReview as $cItem): ?>
                                         <?php if ($cItem->getAdvantages()) { ?>
                                             <div class="good-exp" style="color:green">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                        <path d="M0 0h18v18h-18z" fill="none"></path>
-                                        <path
-                                            d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm5 11h-4v4h-2v-4h-4v-2h4v-4h2v4h4v2z"></path>
-                                    </svg>
-                                </span>
-                                                <span><?= $block->escapeHtml($cItem->getAdvantages()) ?></span>
-                                            </div>
-                                        <?php } ?>
-                                        <?php if ($cItem->getDisadvantages()) { ?>
-                                            <div class="bad-exp" style="color:red">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                        <path d="M0 0h18v18h-18z" fill="none"></path>
-                                        <path
-                                            d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm5 11h-10v-2h10v2z"></path>
-                                    </svg>
-                                </span>
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                                        <path d="M0 0h18v18h-18z" fill="none"></path>
+                                                        <path
+                                                            d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm5 11h-4v4h-2v-4h-4v-2h4v-4h2v4h4v2z"></path>
+                                                    </svg>
+                                                </span>
+                                                                <span><?= $block->escapeHtml($cItem->getAdvantages()) ?></span>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php if ($cItem->getDisadvantages()) { ?>
+                                                            <div class="bad-exp" style="color:red">
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                                        <path d="M0 0h18v18h-18z" fill="none"></path>
+                                                        <path
+                                                            d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm5 11h-10v-2h10v2z"></path>
+                                                    </svg>
+                                                </span>
                                                 <span><?= $block->escapeHtml($cItem->getDisadvantages()) ?></span>
                                             </div>
                                         <?php } ?>
                                     <?php endforeach; ?>
                                 </div>
                                 <!--content comment-->
-                                <div class="lof-comment_content" itemprop="description"
-                                     style="padding-left: 40px; color:#777; font-size: 0.9em; font-style: italic;">
+                                <div class="lof-comment_content" itemprop="description">
                                     <?php $reviewComment = $block->getReviewsReply($_review->getId()); ?>
-                                    <?php foreach ($reviewComment as $comment): ?>
-                                        <b><?= $block->escapeHtml($comment->getReply_title()) ?></b><br>
-                                        <p><?= $block->escapeHtml($comment->getReply_comment()) ?></p>
-                                    <?php endforeach; ?>
+                                    <?php if ($reviewComment->count()) : ?>
+                                    <div class="list-replies">
+                                        <?php foreach ($reviewComment as $comment): ?>
+                                            <?php if ($comment->getReplyComment()): ?>
+                                                <div class="list-reply-item">
+                                                    <div><b><?= $block->escapeHtml($comment->getReplyTitle()) ?></b></div>
+                                                    <p><?= $block->escapeHtml($comment->getReplyComment()) ?></p>
+                                                    <div><span class="small small-text"><?= $block->escapeHtml(__("By User: %1 - at: %2", $comment->getUserName(), $comment->getCreatedAt())) ?></div>
+                                                    <hr/>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <?php endif; ?>
                                 </div>
 
                                 <!--rate and report review-->

@@ -90,14 +90,14 @@
                             <type>pending</type>
                             <label translate="true">Pending</label>
                             <url path="lof_product_reviews/replies/massStatus">
-                                <param name="status">1</param>
+                                <param name="status">0</param>
                             </url>
                         </action>
                         <action name="1">
-                            <type>onhold</type>
-                            <label translate="true">On Hold</label>
+                            <type>approved</type>
+                            <label translate="true">Approved</label>
                             <url path="lof_product_reviews/replies/massStatus">
-                                <param name="status">2</param>
+                                <param name="status">1</param>
                             </url>
                         </action>
                     </actions>

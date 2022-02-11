@@ -67,3 +67,5 @@ manage product reviews by navigation to ```Marketing > All Reviews ``` or ```Lof
 - Support REST API for reply
 
 ## Todo
+- View Replies list on frontend
+- Allow User Submit Reply a comment on frontend
