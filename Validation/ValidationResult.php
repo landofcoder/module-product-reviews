@@ -1,11 +1,26 @@
 <?php
 /**
- * Copyright Divante Sp. z o.o.
- * See LICENSE_DIVANTE.txt for license details.
+ * Landofcoder
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * https://landofcoder.com/terms
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category   Landofcoder
+ * @package    Lof_ProductReviews
+ * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
+ * @license    https://landofcoder.com/terms
  */
 declare(strict_types=1);
 
-namespace Divante\ReviewApi\Validation;
+namespace Lof\ProductReviews\Validation;
 
 /**
  * ValidationResult object supposed to be created by dedicated validator service which makes a validation and checks
