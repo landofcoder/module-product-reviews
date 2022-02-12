@@ -52,17 +52,17 @@ class Form extends \Magento\Review\Block\Adminhtml\Add\Form
             ]
         );
 
-        $fieldset1->addField(
-            'avatar_url',
-            'text',
-            [
-                'name' => 'avatar_url',
-                'title' => __('Avatar Url'),
-                'label' => __('Avatar Url'),
-                'maxlength' => '200',
-                'required' => false
-            ]
-        );
+        // $fieldset1->addField(
+        //     'avatar_url',
+        //     'text',
+        //     [
+        //         'name' => 'avatar_url',
+        //         'title' => __('Avatar Url'),
+        //         'label' => __('Avatar Url'),
+        //         'maxlength' => '200',
+        //         'required' => false
+        //     ]
+        // );
 
 
         $fieldset1->addField(
