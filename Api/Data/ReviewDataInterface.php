@@ -23,13 +23,13 @@ declare(strict_types=1);
 namespace Lof\ProductReviews\Api\Data;
 
 /**
- * Represents a Review object
+ * Represents a Review Data object
  *
  * Used fully qualified namespaces in annotations for proper work of WebApi request parser
  *
  * @api
  */
-interface ReviewInterface
+interface ReviewDataInterface
 {
     /**
      * Custom extra fields
