@@ -235,7 +235,7 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
 
         $fieldset1->addField(
             'answer',
-            'text',
+            'textarea',
             [
                 'name' => 'answer',
                 'title' => __('Admin Answer'),

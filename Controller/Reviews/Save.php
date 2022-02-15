@@ -31,6 +31,7 @@ use Lof\ProductReviews\Model\CustomReview;
 use Lof\ProductReviews\Model\Gallery;
 use Lof\ProductReviews\Model\Review\Command\SummaryRateInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use Lof\ProductReviews\Model\Review\Command\VerifyBuyerInterface;
 
 /**
  * Class Save
@@ -59,6 +60,11 @@ class Save extends ProductController
     protected $summaryRate;
 
     /**
+     * @var VerifyBuyerInterface
+     */
+    protected $commandVerifyBuyer;
+
+    /**
      * Save constructor.
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
@@ -75,6 +81,7 @@ class Save extends ProductController
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
      * @param SummaryRateInterface $summaryRate
+     * @param VerifyBuyerInterface $commandVerifyBuyer
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -92,12 +99,14 @@ class Save extends ProductController
         \Magento\Framework\Session\Generic $reviewSession,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
-        SummaryRateInterface $summaryRate
+        SummaryRateInterface $summaryRate,
+        VerifyBuyerInterface $commandVerifyBuyer
     ) {
         $this->cutomerCollectionFactory = $cutomerCollectionFactory;
         $this->sender = $sender;
         $this->helper = $helper;
         $this->summaryRate = $summaryRate;
+        $this->commandVerifyBuyer = $commandVerifyBuyer;
         parent::__construct(
             $context,
             $coreRegistry,
@@ -183,6 +192,9 @@ class Save extends ProductController
                     $reviewId = $review->getId();
                     try {
                         // Save customize review
+                        $order_id = isset($data["order_id"]) ? $data["order_id"] : "";
+                        $is_verified = isset($data["is_verified"]) ? $data["is_verified"] : 0;
+                        $data2['verified_buyer'] = $this->checkVerifyPurchase($reviewData["email"], $order_id, $product->getId(), $is_verified);
                         $data2['average'] = $customReview->addCountRating($reviewId);
                         $data2['count_helpful'] = 0;
                         $data2['total_helpful'] = 0;
@@ -190,6 +202,8 @@ class Save extends ProductController
                         $data2['review_id'] = $reviewId;
                         $customReview->setData($data2);
                         $customReview->save();
+
+
                         //Upload review image
                         $this->uploadMultipleImages('review_images', $reviewId);
 
@@ -249,6 +263,30 @@ class Save extends ProductController
         $redirectUrl = $this->reviewSession->getRedirectUrl(true);
         $resultRedirect->setUrl($redirectUrl ?: $this->_redirect->getRedirectUrl());
         return $resultRedirect;
+    }
+
+    /**
+     * check verify purchase
+     *
+     * @param string $customer_email
+     * @param string $order_id
+     * @param int $product_id
+     * @param int $is_force_verified
+     * @return bool;
+     */
+    protected function checkVerifyPurchase($customer_email, $order_id, int $product_id, int $is_force_verified = 0)
+    {
+        $isVerified = $is_force_verified ? true : false;
+        if ($this->helper->getAutoVerifyConfig()) {
+            $customerId = 0;
+
+            if ($this->_customerSession->isLoggedIn()) {
+                $customerId = $this->_customerSession->getCustomerId();
+            }
+            $isVerified = $this->_commandVerifyBuyer->execute($customerId, $customer_email, $product_id, $order_id);
+        }
+        return $isVerified;
+
     }
 
     /**

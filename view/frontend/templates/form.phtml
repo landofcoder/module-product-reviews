@@ -104,6 +104,8 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
 <form action="<?= $block->escapeUrl($block->getAction()) ?>" class="review-form" method="post" id="review-form" data-role="product-review-form" data-bind="scope: 'review-form'"  enctype="multipart/form-data" >
     <?= $block->getBlockHtml('formkey') ?>
     <?= $block->getChildHtml('form_fields_before') ?>
+    <input type="hidden" name="order_id" id="review_order_id" value=""/>
+    <input type="hidden" name="is_verified" id="review_verified" value="0"/>
     <fieldset class="fieldset review-fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
         <legend class="legend review-legend"><span><?= $block->escapeHtml(__("You're reviewing:")) ?></span><strong><?= $block->escapeHtml($block->getProductInfo()->getName()) ?></strong></legend><br />
         <?php if ($block->getRatings() && $block->getRatings()->getSize()) : ?>
@@ -263,6 +265,16 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                 }
             }
 
+            function updateOrderId(value) {
+                if ($("#review_order_id").length > 0) {
+                    $("#review_order_id").val(value);
+                }
+            }
+
+            $('#verify_order_field').on("change", function() {
+                updateOrderId($(this).val());
+            });
+
             window.verifyInfo = function(){
                 var verify_button_html = $("#verify_summit").html();
                 $(".verify-error").remove();
@@ -286,10 +298,17 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                             if (value.message == 'correct') {
                                 $('#main-review-form').removeClass('hidden');
                                 $('.lof-verify-purchased').addClass('hidden');
+                                $("#review_verified").val(1);
                             } else if (value.message == 'incorrect') {
+
+                                updateOrderId("");
+                                $("#review_verified").val(0);
                                 $(".verify-error").remove();
                                 $('#verify_order_field').after('<br><span class="verify-error"><?= __('This order was not made for this product') ?></span>');
                             } else if (value.message == 'invalid_order') {
+
+                                updateOrderId("");
+                                $("#review_verified").val(0);
                                 $(".verify-error").remove();
                                 $('#verify_order_field').after('<br><span class="verify-error"><?= __('Order id is not correct') ?></span>');
                             }
@@ -312,13 +331,23 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                             if (value.message == 'correct') {
                                 $('#main-review-form').removeClass('hidden');
                                 $('.lof-verify-purchased').addClass('hidden');
+                                $("#review_verified").val(1);
                             } else if (value.message == 'incorrect') {
+
+                                updateOrderId("");
+                                $("#review_verified").val(0);
                                 $(".verify-error").remove();
                                 $('#verify_order_field').after('<br><span class="verify-error"><?= __('This order was not made for this product') ?></span>');
                             } else if (value.message == 'incorrect_email') {
+
+                                updateOrderId("");
+                                $("#review_verified").val(0);
                                 $(".verify-error").remove();
                                 $('#verify_email_field').after('<br><span class="verify-error"><?= __('Email was not made this order.') ?></span>');
                             } else if (value.message == 'invalid_order') {
+
+                                updateOrderId("");
+                                $("#review_verified").val(0);
                                 $(".verify-error").remove();
                                 $('#verify_order_field').after('<br><span class="verify-error"><?= __('Order id is not correct') ?></span>');
                             }

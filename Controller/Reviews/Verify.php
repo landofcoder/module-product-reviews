@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Landofcoder
@@ -21,8 +22,6 @@
 
 namespace Lof\ProductReviews\Controller\Reviews;
 
-use Lof\ProductReviews\Model\Review\Command\VerifyBuyerInterface;
-
 class Verify extends \Magento\Framework\App\Action\Action
 {
     /**
@@ -41,9 +40,9 @@ class Verify extends \Magento\Framework\App\Action\Action
     protected $_resultJsonFactory;
 
     /**
-     * @var VerifyBuyerInterface
+     * @var Data
      */
-    protected $_commandVerifyBuyer;
+    protected $_helperData;
 
     /**
      * Verify constructor.
@@ -51,19 +50,16 @@ class Verify extends \Magento\Framework\App\Action\Action
      * @param \Magento\Sales\Model\Order $order
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
-     * @param VerifyBuyerInterface $commandVerifyBuyer
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Sales\Model\Order $order,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
-        VerifyBuyerInterface $commandVerifyBuyer
     ) {
         $this->_order = $order;
         $this->_customerSession = $customerSession;
         $this->_resultJsonFactory = $resultJsonFactory;
-        $this->_commandVerifyBuyer = $commandVerifyBuyer;
         parent::__construct($context);
     }
 
@@ -80,17 +76,45 @@ class Verify extends \Magento\Framework\App\Action\Action
 
         $data = $this->getRequest()->getParams();
 
-        $customer_email = isset($data['customer_email']) ? $data['customer_email'] : "";
-        $order_id = isset($data['order_id']) ? $data['order_id'] : "";
-        $product_id = isset($data['id']) ? (int)$data['id'] : 0;
-        $customerId = 0;
+        if ($this->_customerSession->isLoggedIn()) {
+            $customerId = $this->_customerSession->getCustomerId();
+            $order = $this->_order->loadByIncrementId($data['order_id']);
+            if (!empty($order) && $customerId == $order->getCustomerId()) {
+                $allItems = $order->getAllVisibleItems();
+                $productIds = [];
+                foreach ($allItems as $item) {
+                    $productIds[] = $item->getProductId();
+                }
+                if (in_array($data['id'], $productIds)) {
+                    $result = ['error' => false, 'message' => 'correct'];
+                } else {
+                    $result = ['error' => true, 'message' => 'incorrect'];
+                }
+            } else {
+                $result = ['error' => true, 'message' => 'invalid_order'];
+            }
 
-        $isVerified = $this->_commandVerifyBuyer->execute($customerId, $customer_email, $product_id, $order_id);
-
-        if ($isVerified) {
-            $result = ['error' => false, 'message' => 'correct'];
         } else {
-            $result = ['error' => true, 'message' => 'incorrect'];
+            $order = $this->_order->loadByIncrementId($data['order_id']);
+            if (!empty($order)) {
+                $email = $order->getCustomerEmail();
+                if ($email == $data['customer_email']) {
+                    $allItems = $order->getAllVisibleItems();
+                    $productIds = [];
+                    foreach ($allItems as $item) {
+                        $productIds[] = $item->getProductId();
+                    }
+                    if (in_array($data['id'], $productIds)) {
+                        $result = ['error' => false, 'message' => 'correct'];
+                    } else {
+                        $result = ['error' => true, 'message' => 'incorrect'];
+                    }
+                } else {
+                    $result = ['error' => true, 'message' => 'incorrect_email'];
+                }
+            } else {
+                $result = ['error' => true, 'message' => 'invalid_order'];
+            }
         }
 
         /** @var \Magento\Framework\Controller\Result\Json $resultJson */
