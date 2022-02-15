@@ -228,30 +228,6 @@ class GetProductReviews implements GetProductReviewsInterface
     }
 
     /**
-     * join customize table
-     *
-     * @param mixed|object|array $collection
-     * @return mixed|object|array
-     */
-    protected function joinCustomizeTable($collection)
-    {
-        if (!$this->_flag_joined) {
-            $collection->getSelect()->joinLeft(
-                ['lc' => $collection->getTable('lof_review_customize')],
-                'rt.review_id = lc.review_id',
-                [
-                    'count_helpful',
-                    'average',
-                    'is_recommended',
-                    'verified_buyer'
-                ]
-            );
-            $this->_flag_joined = true;
-        }
-        return $collection;
-    }
-
-    /**
      * build search keyword for collection
      *
      * @param mixed|object|array $collection
@@ -405,5 +381,29 @@ class GetProductReviews implements GetProductReviewsInterface
             $reviewDataObject->setReplyTotal($replyCollection->count());
         }
         return $reviewDataObject;
+    }
+
+    /**
+     * join customize table
+     *
+     * @param mixed|object|array $collection
+     * @return mixed|object|array
+     */
+    protected function joinCustomizeTable($collection)
+    {
+        if (!$this->_flag_joined) {
+            $collection->getSelect()->joinLeft(
+                ['lc' => $collection->getTable('lof_review_customize')],
+                'rt.review_id = lc.review_id',
+                [
+                    'count_helpful',
+                    'average',
+                    'is_recommended',
+                    'verified_buyer'
+                ]
+            );
+            $this->_flag_joined = true;
+        }
+        return $collection;
     }
 }
