@@ -48,7 +48,7 @@ class CustomReview extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             $select = $this->getConnection()->select()->from(
                         ['cp' => $table]
                     )->where(
-                        'cp.product_id = ?',
+                        'cp.entity_pk_value = ?',
                         (int)$product_id
                     );
 
@@ -84,7 +84,7 @@ class CustomReview extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $select = $this->getConnection()->select()->from(
             ['cp' => $table]
         )->where(
-            'cp.product_id = ?',
+            'cp.entity_pk_value = ?',
             (int)$productId
         )->where(
             'cp.store_id = ?',

@@ -124,7 +124,12 @@ class SummaryRate implements SummaryRateInterface
         foreach ($collection as $productReview) {
             $productReview->setCreatedAt($productReview->getReviewCreatedAt());
             $reviewDataObject = $this->reviewConverter->toDataModel($productReview);
-            $ratings[] = $reviewDataObject->getRatings();
+            $tmpRatings = $reviewDataObject->getRatings();
+            if ($tmpRatings) {
+                foreach ($tmpRatings as $_tmpRating) {
+                    $ratings[] = $_tmpRating;
+                }
+            }
             if (!$entity_pk_value) {
                 $entity_pk_value = $reviewDataObject->getEntityPkValue();
                 $entity_pk_value = (!$product_id || ($product_id && $entity_pk_value != $product_id)) ? $entity_pk_value : $product_id;

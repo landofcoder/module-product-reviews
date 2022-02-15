@@ -28,7 +28,6 @@ use Lof\ProductReviews\Api\Data\CustomizeInterfaceFactory;
 use Lof\ProductReviews\Api\Data\ReplyInterfaceFactory;
 use Lof\ProductReviews\Api\Data\ReviewDataInterfaceFactory;
 use Lof\ProductReviews\Api\Data\ImageInterfaceFactory;
-use Lof\ProductReviews\Api\Data\DetailedSummaryInterfaceFactory;
 use Magento\Review\Model\ResourceModel\Review\Product\Collection as ReviewCollection;
 use Magento\Review\Model\ResourceModel\Review\Product\CollectionFactory as ReviewCollectionFactory;
 use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
