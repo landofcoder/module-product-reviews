@@ -38,9 +38,9 @@ interface GetProductReviewsInterface
      * @param string $keyword
      * @param int $limit
      * @param int $page
-     * @param string $sort_by (helpful, rating, default or empty)
+     * @param string $sort_by (helpful, rating, latest, oldest, recommended, verified, default or empty)
      *
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewDataInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewDataInterface|mixed|array
      */
     public function execute(string $sku, string $keyword = "", int $limit = 0, int $page = 0, string $sort_by = "");
 }

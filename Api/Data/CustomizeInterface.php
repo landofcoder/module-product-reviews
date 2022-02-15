@@ -25,6 +25,7 @@ interface CustomizeInterface
     const ANSWER = 'answer';
     const IS_RECOMMENDED = 'is_recommended';
     const VERIFIED_BUYER = 'verified_buyer';
+    const COUNTRY = 'country';
 
     /**
      * Get review_customize_id
@@ -221,5 +222,18 @@ interface CustomizeInterface
      * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setAvatarUrl($avatarUrl);
+
+    /**
+     * Get country
+     * @return string|null
+     */
+    public function getCountry();
+
+    /**
+     * Set country
+     * @param string $country
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setCountry($country);
 }
 

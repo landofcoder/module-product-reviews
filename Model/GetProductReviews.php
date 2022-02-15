@@ -109,6 +109,11 @@ class GetProductReviews implements GetProductReviewsInterface
     protected $storeManager;
 
     /**
+     * @var bool
+     */
+    protected $_flag_joined = false;
+
+    /**
      * GetProductReviews constructor.
      *
      * @param ReviewConverter $reviewConverter
@@ -164,19 +169,9 @@ class GetProductReviews implements GetProductReviewsInterface
         $collection = $this->reviewCollectionFactory->create();
         $collection->addStoreData();
         $collection->addFieldToFilter('sku', $sku);
-        $collection->addRateVotes();
 
         /** Filter by keyword */
-        $keyword = trim($keyword);
-        if ($keyword && strlen($keyword) >= 3) {
-            $keyword = "%".$keyword."%";
-            $collection->addFieldToFilter(
-                [
-                    ['title' => [ "like" => $keyword]],
-                    ['detail' => [ "like" => $keyword]]
-                ]
-            );
-        }
+        $collection = $this->buildFilterKeyword($collection, $keyword);
         if ($limit) {
             $collection->setPageSize($limit);
         }
@@ -184,36 +179,16 @@ class GetProductReviews implements GetProductReviewsInterface
             $collection->setCurPage($page);
         }
         /** Sort By */
-        $sort_by = $sort_by ? trim($sort_by) : "default";
-        $sort_by = strtolower($sort_by);
-        switch ($sort_by) {
-            case "helpful":
-                $collection->getSelect()->joinLeft(
-                    ['lof_customize' => $collection->getTable('lof_review_customize')],
-                    'main_table.review_id = lof_customize.review_id',
-                    ['count_helpful']
-                );
-                $collection->setOrder('count_helpful', 'DESC');
-            break;
-            case "rating":
-                $collection->getSelect()->joinLeft(
-                    ['lof_customize' => $collection->getTable('lof_review_customize')],
-                    'main_table.review_id = lof_customize.review_id',
-                    ['average']
-                );
-                $collection->setOrder('average', 'DESC');
-            break;
-            case "default":
-            default:
-            break;
-        }
+        $collection = $this->addSortByToCollection($collection, $sort_by);
+        $reviews_count = $collection->getSize();
+        /** Add rate votes for collection */
+        $collection->addRateVotes();
 
         $reviews = [];
         $recommended_count = 0;
         $product_id = 0;
-
         /** @var \Magento\Catalog\Model\Product $productReview */
-        foreach ($collection as $productReview) {
+        foreach ($collection->getItems() as $productReview) {
             $productReview->setCreatedAt($productReview->getReviewCreatedAt());
             $reviewDataObject = $this->reviewConverter->toDataModel($productReview);
             $reviewDataObject = $this->addCustomize($reviewDataObject);
@@ -234,7 +209,7 @@ class GetProductReviews implements GetProductReviewsInterface
         $storeId = $this->storeManager->getStore()->getId();
         $detailedSummary = $this->getSummaryCommand->execute((int)$product_id, (int)$storeId);
 
-        $reviews_count = $detailedSummary->getReviewsCount();
+        //$reviews_count = $detailedSummary->getReviewsCount();
         $rating_summary = $detailedSummary->getRatingSummary();
         $recomended_percent = $reviews_count ? (($recommended_count / $reviews_count) * 100 ): 0;
         $recomended_percent = round ($recomended_percent, 1);
@@ -250,6 +225,100 @@ class GetProductReviews implements GetProductReviewsInterface
         $responseReviewData->setItems($reviews);
 
         return $responseReviewData;
+    }
+
+    /**
+     * join customize table
+     *
+     * @param mixed|object|array $collection
+     * @return mixed|object|array
+     */
+    protected function joinCustomizeTable($collection)
+    {
+        if (!$this->_flag_joined) {
+            $collection->getSelect()->joinLeft(
+                ['lc' => $collection->getTable('lof_review_customize')],
+                'rt.review_id = lc.review_id',
+                [
+                    'count_helpful',
+                    'average',
+                    'is_recommended',
+                    'verified_buyer'
+                ]
+            );
+            $this->_flag_joined = true;
+        }
+        return $collection;
+    }
+
+    /**
+     * build search keyword for collection
+     *
+     * @param mixed|object|array $collection
+     * @param string $sort_keywordby
+     * @return mixed|object|array
+     */
+    public function buildFilterKeyword($collection, $keyword = "")
+    {
+        $keyword = trim($keyword);
+        if ($keyword && strlen($keyword) >= 3) {
+            $testKeyword = strtolower($keyword);
+            $testKeyword = $testKeyword == "recommended" ? "is_recommended": $testKeyword;
+            $testKeyword = $testKeyword == "verified" ? "verified_buyer": $testKeyword;
+
+            if ($testKeyword == "is_recommended" || $testKeyword == "verified_buyer") {
+                $collection = $this->joinCustomizeTable($collection);
+                $collection->getSelect()
+                            ->where("lc." . $testKeyword . " = 1");
+            } else {
+                $keyword = "%".$keyword."%";
+                $collection->addAttributeToFilter("rdt.detail", [ "like" => $keyword]);//support rdt.detail or rdt.title
+            }
+        }
+        return $collection;
+    }
+
+    /**
+     * Add sort by for collection
+     *
+     * @param mixed|object|array $collection
+     * @param string $sort_by
+     * @return mixed|object|array
+     */
+    public function addSortByToCollection($collection, $sort_by = "")
+    {
+        $sort_by = $sort_by ? trim($sort_by) : "default";
+        $sort_by = strtolower($sort_by);
+        switch ($sort_by) {
+            case "helpful":
+                $collection = $this->joinCustomizeTable($collection);
+                $collection->setOrder('count_helpful', 'DESC');
+            break;
+            case "rating":
+                $collection = $this->joinCustomizeTable($collection);
+                $collection->setOrder('average', 'DESC');
+            break;
+            case "recommended":
+                $collection = $this->joinCustomizeTable($collection);
+                $collection->setOrder('is_recommended', 'DESC');
+                $collection->setDateOrder();
+            break;
+            case "verified":
+                $collection = $this->joinCustomizeTable($collection);
+                $collection->setOrder('verified_buyer', 'DESC');
+                $collection->setDateOrder();
+            break;
+            case "latest":
+                $collection->setDateOrder();
+            break;
+            case "oldest":
+                $collection->setDateOrder('ASC');
+            break;
+            case "default":
+            default:
+            break;
+        }
+        return $collection;
     }
 
     /**

@@ -290,4 +290,20 @@ class CustomReview extends \Magento\Framework\Model\AbstractModel implements Cus
     {
         return $this->setData(self::VERIFIED_BUYER, $verified_buyer);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCountry()
+    {
+        return $this->getData(self::COUNTRY);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setCountry($country)
+    {
+        return $this->setData(self::COUNTRY, $country);
+    }
 }

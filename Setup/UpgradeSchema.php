@@ -202,6 +202,17 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
             $installer->getConnection()->addColumn(
                 $customizeTable,
+                'country',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 50,
+                    'nullable' => true,
+                    'comment' => 'country code'
+                ]
+            );
+
+            $installer->getConnection()->addColumn(
+                $customizeTable,
                 'answer',
                 [
                     'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
