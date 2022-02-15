@@ -126,6 +126,7 @@
     <preference for="Lof\ProductReviews\Model\Review\Command\GetListReplyInterface" type="Lof\ProductReviews\Model\Review\Command\GetListReply"/>
     <preference for="Lof\ProductReviews\Model\Review\Command\SummaryRateInterface" type="Lof\ProductReviews\Model\Review\Command\SummaryRate"/>
     <preference for="Lof\ProductReviews\Model\Review\Command\VerifyBuyerInterface" type="Lof\ProductReviews\Model\Review\Command\VerifyBuyer"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\GetSummaryInterface" type="Lof\ProductReviews\Model\Review\Command\GetSummary"/>
     <preference for="Lof\ProductReviews\Model\ReviewValidatorInterface" type="Lof\ProductReviews\Model\ReviewValidationChain"/>
 
     <preference for="Lof\ProductReviews\Api\Data\DetailedSummaryInterface" type="Lof\ProductReviews\Model\Data\DetailedSummary"/>

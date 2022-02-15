@@ -201,11 +201,12 @@ class GetProductReviews implements GetProductReviewsInterface
         }
 
         $storeId = $this->storeManager->getStore()->getId();
-        $detailedSummary = $this->getSummaryCommand->execute($product_id, $storeId);
+        $detailedSummary = $this->getSummaryCommand->execute((int)$product_id, (int)$storeId);
 
         $reviews_count = $detailedSummary->getReviewsCount();
         $rating_summary = $detailedSummary->getRatingSummary();
         $recomended_percent = $reviews_count ? (($recommended_count / $reviews_count) * 100 ): 0;
+        $recomended_percent = round ($recomended_percent, 1);
         $rating_summary_value = $rating_summary * 5 / 100;
         $rating_summary_value = round ($rating_summary_value, 1);
 
@@ -253,7 +254,7 @@ class GetProductReviews implements GetProductReviewsInterface
             $galleriesFound->setImages($images);
             $imagesObjectArray = [];
             foreach ($images as $_image) {
-                $imagesObjectArray[] = $this->dataImageaFactory->create()
+                $imagesObjectArray[] = $this->dataImageFactory->create()
                                         ->setFullPath($_image)
                                         ->setResizedPath($_image);
             }
