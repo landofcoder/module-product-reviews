@@ -157,14 +157,8 @@ class GetProductReviews implements GetProductReviewsInterface
 
     /**
      * @inheritdoc
-     *
-     * @param string $sku
-     * @param int $limit
-     * @param int $page
-     *
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewDataInterface
      */
-    public function execute(string $sku, int $limit = 0, int $page = 0)
+    public function execute(string $sku, string $keyword = "", int $limit = 0, int $page = 0, string $sort_by = "")
     {
         /** @var ReviewCollection $collection */
         $collection = $this->reviewCollectionFactory->create();
@@ -172,11 +166,46 @@ class GetProductReviews implements GetProductReviewsInterface
         $collection->addFieldToFilter('sku', $sku);
         $collection->addRateVotes();
 
+        /** Filter by keyword */
+        $keyword = trim($keyword);
+        if ($keyword && strlen($keyword) >= 3) {
+            $keyword = "%".$keyword."%";
+            $collection->addFieldToFilter(
+                [
+                    ['title' => [ "like" => $keyword]],
+                    ['detail' => [ "like" => $keyword]]
+                ]
+            );
+        }
         if ($limit) {
             $collection->setPageSize($limit);
         }
         if ($page) {
             $collection->setCurPage($page);
+        }
+        /** Sort By */
+        $sort_by = $sort_by ? trim($sort_by) : "default";
+        $sort_by = strtolower($sort_by);
+        switch ($sort_by) {
+            case "helpful":
+                $collection->getSelect()->joinLeft(
+                    ['lof_customize' => $collection->getTable('lof_review_customize')],
+                    'main_table.review_id = lof_customize.review_id',
+                    ['count_helpful']
+                );
+                $collection->setOrder('count_helpful', 'DESC');
+            break;
+            case "rating":
+                $collection->getSelect()->joinLeft(
+                    ['lof_customize' => $collection->getTable('lof_review_customize')],
+                    'main_table.review_id = lof_customize.review_id',
+                    ['average']
+                );
+                $collection->setOrder('average', 'DESC');
+            break;
+            case "default":
+            default:
+            break;
         }
 
         $reviews = [];
@@ -197,6 +226,8 @@ class GetProductReviews implements GetProductReviewsInterface
             if ($reviewDataObject->getCustomize()->getIsRecommended()) {
                 $recommended_count++;
             }
+            $reviewDataObject = $this->mappingReviewData($reviewDataObject);
+
             $reviews[] = $reviewDataObject;
         }
 
@@ -219,6 +250,28 @@ class GetProductReviews implements GetProductReviewsInterface
         $responseReviewData->setItems($reviews);
 
         return $responseReviewData;
+    }
+
+    /**
+     * maaing customize review
+     *
+     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     */
+    protected function mappingReviewData($reviewDataObject)
+    {
+        $customizeReview = $reviewDataObject->getCustomize();
+        if ($customizeReview) {
+            $reviewDataObject->setVerifiedBuyer($customizeReview->getVerifiedBuyer());
+            $reviewDataObject->setIsRecommended($customizeReview->getIsRecommended());
+            $reviewDataObject->setAnswer($customizeReview->getAnswer());
+            $reviewDataObject->setLikeAbout($customizeReview->getAdvantages());
+            $reviewDataObject->setNotLikeAbout($customizeReview->getDisadvantages());
+            $reviewDataObject->setGuestEmail($customizeReview->getEmailAddress());
+            $reviewDataObject->setPlusReview($customizeReview->getCountHelpful());
+            $reviewDataObject->setMinusReview($customizeReview->getCountUnhelpful());
+        }
+        return $reviewDataObject;
     }
 
     /**
