@@ -26,6 +26,9 @@ use Lof\ProductReviews\Api\GetProductReviewsInterface;
 use Lof\ProductReviews\Api\Data\GalleryInterfaceFactory;
 use Lof\ProductReviews\Api\Data\CustomizeInterfaceFactory;
 use Lof\ProductReviews\Api\Data\ReplyInterfaceFactory;
+use Lof\ProductReviews\Api\Data\ReviewDataInterfaceFactory;
+use Lof\ProductReviews\Api\Data\ImageInterfaceFactory;
+use Lof\ProductReviews\Api\Data\DetailedSummaryInterfaceFactory;
 use Magento\Review\Model\ResourceModel\Review\Product\Collection as ReviewCollection;
 use Magento\Review\Model\ResourceModel\Review\Product\CollectionFactory as ReviewCollectionFactory;
 use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
@@ -33,6 +36,8 @@ use Lof\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as Cus
 use Lof\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as ReviewReplyCollectionFactory;
 use Lof\ProductReviews\Model\Converter\Review\ToDataModel as ReviewConverter;
 use Lof\ProductReviews\Helper\Data as HelperData;
+use Lof\ProductReviews\Model\Review\Command\GetSummaryInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class GetProductReviews load product reviews by product sku
@@ -80,9 +85,29 @@ class GetProductReviews implements GetProductReviewsInterface
     protected $replyCollectionFactory;
 
     /**
+     * @var ReviewDataInterfaceFactory
+     */
+    protected $dataReviewDataFactory;
+
+    /**
+     * @var ImageInterfaceFactory
+     */
+    protected $dataImageFactory;
+
+    /**
+     * @var GetSummaryInterface
+     */
+    protected $getSummaryCommand;
+
+    /**
      * @var HelperData
      */
     protected $helperData;
+
+    /**
+     * @var StoreManagerInterface
+     */
+    protected $storeManager;
 
     /**
      * GetProductReviews constructor.
@@ -96,6 +121,10 @@ class GetProductReviews implements GetProductReviewsInterface
      * @param ReplyInterfaceFactory $dataReplyFactory
      * @param ReviewReplyCollectionFactory $replyCollectionFactory
      * @param HelperData $helperData
+     * @param ReviewDataInterfaceFactory $dataReviewDataFactory
+     * @param GetSummaryInterface $getSummaryCommand
+     * @param ImageInterfaceFactory $dataImageFactory
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         ReviewConverter $reviewConverter,
@@ -106,7 +135,11 @@ class GetProductReviews implements GetProductReviewsInterface
         CustomReviewCollectionFactory $customizeCollectionFactory,
         ReplyInterfaceFactory $dataReplyFactory,
         ReviewReplyCollectionFactory $replyCollectionFactory,
-        HelperData $helperData
+        HelperData $helperData,
+        ReviewDataInterfaceFactory $dataReviewDataFactory,
+        GetSummaryInterface $getSummaryCommand,
+        ImageInterfaceFactory $dataImageFactory,
+        StoreManagerInterface $storeManager
     ) {
         $this->reviewConverter = $reviewConverter;
         $this->reviewCollectionFactory = $collectionFactory;
@@ -117,16 +150,22 @@ class GetProductReviews implements GetProductReviewsInterface
         $this->dataReplyFactory = $dataReplyFactory;
         $this->replyCollectionFactory = $replyCollectionFactory;
         $this->helperData = $helperData;
+        $this->dataReviewDataFactory = $dataReviewDataFactory;
+        $this->getSummaryCommand = $getSummaryCommand;
+        $this->dataImageFactory = $dataImageFactory;
+        $this->storeManager = $storeManager;
     }
 
     /**
      * @inheritdoc
      *
      * @param string $sku
+     * @param int $limit
+     * @param int $page
      *
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface[]
+     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewDataInterface
      */
-    public function execute(string $sku)
+    public function execute(string $sku, int $limit = 0, int $page = 0)
     {
         /** @var ReviewCollection $collection */
         $collection = $this->reviewCollectionFactory->create();
@@ -134,7 +173,16 @@ class GetProductReviews implements GetProductReviewsInterface
         $collection->addFieldToFilter('sku', $sku);
         $collection->addRateVotes();
 
+        if ($limit) {
+            $collection->setPageSize($limit);
+        }
+        if ($page) {
+            $collection->setCurPage($page);
+        }
+
         $reviews = [];
+        $recommended_count = 0;
+        $product_id = 0;
 
         /** @var \Magento\Catalog\Model\Product $productReview */
         foreach ($collection as $productReview) {
@@ -143,10 +191,34 @@ class GetProductReviews implements GetProductReviewsInterface
             $reviewDataObject = $this->addCustomize($reviewDataObject);
             $reviewDataObject = $this->addGalleries($reviewDataObject);
             $reviewDataObject = $this->addReply($reviewDataObject);
+
+            if (!$product_id) {
+                $product_id = $reviewDataObject->getEntityPkValue();
+            }
+            if ($reviewDataObject->getCustomize()->getIsRecommended()) {
+                $recommended_count++;
+            }
             $reviews[] = $reviewDataObject;
         }
 
-        return $reviews;
+        $storeId = $this->storeManager->getStore()->getId();
+        $detailedSummary = $this->getSummaryCommand->execute($product_id, $storeId);
+
+        $reviews_count = $detailedSummary->getReviewsCount();
+        $rating_summary = $detailedSummary->getRatingSummary();
+        $recomended_percent = $reviews_count ? (($recommended_count / $reviews_count) * 100 ): 0;
+        $rating_summary_value = $rating_summary * 5 / 100;
+        $rating_summary_value = round ($rating_summary_value, 1);
+
+        $responseReviewData = $this->dataReviewDataFactory->create();
+        $responseReviewData->setTotalRecords($reviews_count);
+        $responseReviewData->setRatingSummary($rating_summary);
+        $responseReviewData->setRatingSummaryValue($rating_summary_value);
+        $responseReviewData->setRecomendedPercent($recomended_percent);
+        $responseReviewData->setDetailedSummary($detailedSummary);
+        $responseReviewData->setItems($reviews);
+
+        return $responseReviewData;
     }
 
     /**
@@ -180,7 +252,14 @@ class GetProductReviews implements GetProductReviewsInterface
         if ($galleriesFound) {
             $images = $this->helperData->getGalleryImages($galleriesFound);
             $galleriesFound->setImages($images);
-            $reviewDataObject->setGalleries($galleriesFound);
+            $imagesObjectArray = [];
+            foreach ($images as $_image) {
+                $imagesObjectArray[] = $this->dataImageaFactory->create()
+                                        ->setFullPath($_image)
+                                        ->setResizedPath($_image);
+            }
+            //$reviewDataObject->setGalleries($galleriesFound);
+            $reviewDataObject->setImages($imagesObjectArray);
         }
         return $reviewDataObject;
     }
@@ -200,7 +279,7 @@ class GetProductReviews implements GetProductReviewsInterface
                     ->setCurPage(1);
 
         if ($replyCollection->count()) {
-            $reviewDataObject->setReply($replyCollection->getItems());
+            $reviewDataObject->setComments($replyCollection->getItems());
             $reviewDataObject->setReplyTotal($replyCollection->count());
         }
         return $reviewDataObject;

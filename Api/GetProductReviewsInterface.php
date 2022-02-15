@@ -35,7 +35,9 @@ interface GetProductReviewsInterface
      * Get product reviews.
      *
      * @param string $sku
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface[]
+     * @param int $limit
+     * @param int $page
+     * @return \Lof\ProductReviews\Api\Data\ReviewDataInterface
      */
-    public function execute(string $sku);
+    public function execute(string $sku, int $limit = 0, int $page = 0);
 }

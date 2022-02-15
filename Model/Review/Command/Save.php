@@ -70,6 +70,11 @@ class Save implements SaveInterface
     private $ratingSaveHandler;
 
     /**
+     * @var SummaryRateInterface
+     */
+    private $summaryRateCommand;
+
+    /**
      * Save constructor.
      *
      * @param ReviewValidatorInterface $reviewValidator
@@ -78,6 +83,7 @@ class Save implements SaveInterface
      * @param StoreManagerInterface $storeManager
      * @param ReviewResource $reviewResource
      * @param SaveHandler $ratingSaveHandler
+     * @param SummaryRateInterface $summaryRateCommand
      */
     public function __construct(
         ReviewValidatorInterface $reviewValidator,
@@ -85,7 +91,8 @@ class Save implements SaveInterface
         ToDataModel $toDataModelConvert,
         StoreManagerInterface $storeManager,
         ReviewResource $reviewResource,
-        SaveHandler $ratingSaveHandler
+        SaveHandler $ratingSaveHandler,
+        SummaryRateInterface $summaryRateCommand
     ) {
         $this->reviewValidator = $reviewValidator;
         $this->toDataModelConverter = $toDataModelConvert;
@@ -93,6 +100,7 @@ class Save implements SaveInterface
         $this->reviewResource = $reviewResource;
         $this->storeManager = $storeManager;
         $this->ratingSaveHandler = $ratingSaveHandler;
+        $this->summaryRateCommand = $summaryRateCommand;
     }
 
     /**
@@ -117,6 +125,10 @@ class Save implements SaveInterface
 
         $model = $this->saveReview($dataModel);
         $this->reviewResource->aggregate($model);
+
+        $product_id = $model->getEntityPkValue();
+        $sku = "";
+        $this->summaryRateCommand->execute($sku, $product_id);
 
         return $this->toDataModelConverter->toDataModel($model);
     }

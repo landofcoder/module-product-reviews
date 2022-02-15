@@ -135,6 +135,36 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
         );
 
         $fieldset1->addField(
+            'is_recommended',
+            'select',
+            [
+                'label' => __('Is Recommended?'),
+                'title' => __('Is Recommended?'),
+                'name' => 'is_recommended',
+                'options' => [
+                    '0' => __('No'),
+                    '1' => __('Yes')
+                ],
+                'required' => false
+            ]
+        );
+
+        $fieldset1->addField(
+            'verified_buyer',
+            'select',
+            [
+                'label' => __('Verified Buyer?'),
+                'title' => __('Verified Buyer?'),
+                'name' => 'verified_buyer',
+                'options' => [
+                    '0' => __('No'),
+                    '1' => __('Yes')
+                ],
+                'required' => false
+            ]
+        );
+
+        $fieldset1->addField(
             'email_address',
             'text',
             [
@@ -199,6 +229,18 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
                 'name' => 'review_notes',
                 'label' => __('Review Notes'),
                 'title' => __('Review Notes'),
+                'required' => false
+            ]
+        );
+
+        $fieldset1->addField(
+            'answer',
+            'text',
+            [
+                'name' => 'answer',
+                'title' => __('Admin Answer'),
+                'label' => __('Admin Answer'),
+                'maxlength' => '250',
                 'required' => false
             ]
         );

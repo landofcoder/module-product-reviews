@@ -29,6 +29,7 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Review\Model\Review;
 use Lof\ProductReviews\Model\CustomReview;
 use Lof\ProductReviews\Model\Gallery;
+use Lof\ProductReviews\Model\Review\Command\SummaryRateInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
 
 /**
@@ -53,6 +54,11 @@ class Save extends ProductController
     protected $helper;
 
     /**
+     * @var SummaryRateInterface
+     */
+    protected $summaryRate;
+
+    /**
      * Save constructor.
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
@@ -68,6 +74,7 @@ class Save extends ProductController
      * @param \Magento\Framework\Session\Generic $reviewSession
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+     * @param SummaryRateInterface $summaryRate
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -84,11 +91,13 @@ class Save extends ProductController
         Data $helper,
         \Magento\Framework\Session\Generic $reviewSession,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
+        SummaryRateInterface $summaryRate
     ) {
         $this->cutomerCollectionFactory = $cutomerCollectionFactory;
         $this->sender = $sender;
         $this->helper = $helper;
+        $this->summaryRate = $summaryRate;
         parent::__construct(
             $context,
             $coreRegistry,
@@ -215,6 +224,10 @@ class Save extends ProductController
                         $dataEmail['couponcode'] = $codes?$codes[0]:"";
                     }
                     $this->sender->sendCouponCodeEmail($dataEmail);
+
+                    /** Update review rating detailed summary */
+                    $this->summaryRate->execute($product->getSku(), $product->getId());
+
                     $this->messageManager->addSuccess(__('You submitted your review for moderation.'));
                 } catch (\Exception $e) {
                     $this->reviewSession->setFormData($data);

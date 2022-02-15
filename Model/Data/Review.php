@@ -85,9 +85,9 @@ class Review extends AbstractSimpleObject implements ReviewInterface
      *
      * @return \Lof\ProductReviews\Api\Data\ReplyInterface[]
      */
-    public function getReply()
+    public function getComments()
     {
-        return $this->_get(self::REPLY);
+        return $this->_get(self::COMMENTS);
     }
 
     /**
@@ -98,6 +98,16 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     public function getGalleries()
     {
         return $this->_get(self::GALLERIES);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return \Lof\ProductReviews\Api\Data\ImageInterface[]
+     */
+    public function getImages()
+    {
+        return $this->_get(self::IMAGES);
     }
 
     /**
@@ -213,25 +223,37 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $reply
+     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $comments
      *
      * @return Review|void
      */
-    public function setReply($reply)
+    public function setComments($comments)
     {
-        return $this->setData(self::REPLY, $reply);
+        return $this->setData(self::COMMENTS, $comments);
     }
 
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface $galleries
+     * @param \Lof\ProductReviews\Api\Data\GalleryInterface $galleries
      *
      * @return Review|void
      */
     public function setGalleries($galleries)
     {
         return $this->setData(self::GALLERIES, $galleries);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @param \Lof\ProductReviews\Api\Data\ImageInterface[] $images
+     *
+     * @return Review|void
+     */
+    public function setImages(array $images)
+    {
+        return $this->setData(self::IMAGES, $images);
     }
 
     /**

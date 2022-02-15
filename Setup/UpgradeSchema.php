@@ -172,6 +172,106 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
         }
+        if (version_compare($context->getVersion(), '1.0.5', '<')) {
+            $customizeTable = $installer->getTable('lof_review_customize');
+            $reviewSummaryTable = $installer->getTable('review_entity_summary');
+            $installer->getConnection()->addColumn(
+                $customizeTable,
+                'verified_buyer',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    'length' => 4,
+                    'unsigned' => true,
+                    'nullable' => true,
+                    'default' => 0,
+                    'comment' => 'Is verified buyer 0 - no, 1 - yes'
+                ]
+            );
+            $installer->getConnection()->addColumn(
+                $customizeTable,
+                'is_recommended',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    'length' => 4,
+                    'unsigned' => true,
+                    'nullable' => true,
+                    'default' => 0,
+                    'comment' => 'Is recommended 0 - no, 1 - yes'
+                ]
+            );
+
+            $installer->getConnection()->addColumn(
+                $customizeTable,
+                'answer',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => 255,
+                    'nullable' => true,
+                    'comment' => 'admin answer here'
+                ]
+            );
+
+            $installer->getConnection()->addColumn(
+                $reviewSummaryTable,
+                'rate_one',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 10,
+                    'unsigned' => true,
+                    'nullable' => true,
+                    'default' => 0,
+                    'comment' => 'rate one'
+                ]
+            );
+            $installer->getConnection()->addColumn(
+                $reviewSummaryTable,
+                'rate_two',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 10,
+                    'unsigned' => true,
+                    'nullable' => true,
+                    'default' => 0,
+                    'comment' => 'rate two'
+                ]
+            );
+            $installer->getConnection()->addColumn(
+                $reviewSummaryTable,
+                'rate_three',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 10,
+                    'unsigned' => true,
+                    'nullable' => true,
+                    'default' => 0,
+                    'comment' => 'rate three'
+                ]
+            );
+            $installer->getConnection()->addColumn(
+                $reviewSummaryTable,
+                'rate_four',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 10,
+                    'unsigned' => true,
+                    'nullable' => true,
+                    'default' => 0,
+                    'comment' => 'rate four'
+                ]
+            );
+            $installer->getConnection()->addColumn(
+                $reviewSummaryTable,
+                'rate_five',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    'length' => 10,
+                    'unsigned' => true,
+                    'nullable' => true,
+                    'default' => 0,
+                    'comment' => 'rate five'
+                ]
+            );
+        }
         $installer->endSetup();
     }
 }

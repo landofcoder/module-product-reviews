@@ -31,6 +31,15 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="lofreview_index_review_summary" xsi:type="object">Lof\ProductReviews\Console\Command\IndexReviewSummary</item>
+            </argument>
+        </arguments>
+    </type>
+
     <virtualType name="Lof\ProductReviews\Model\Api\SearchCriteria\CollectionProcessor\GalleryFilterProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
         <arguments>
             <argument name="customFilters" xsi:type="array">
@@ -115,7 +124,13 @@
     <preference for="Lof\ProductReviews\Model\Review\Command\GetListInterface" type="Lof\ProductReviews\Model\Review\Command\GetList"/>
     <preference for="Lof\ProductReviews\Model\Review\Command\ReviewReplyInterface" type="Lof\ProductReviews\Model\Review\Command\ReviewReply"/>
     <preference for="Lof\ProductReviews\Model\Review\Command\GetListReplyInterface" type="Lof\ProductReviews\Model\Review\Command\GetListReply"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\SummaryRateInterface" type="Lof\ProductReviews\Model\Review\Command\SummaryRate"/>
+    <preference for="Lof\ProductReviews\Model\Review\Command\VerifyBuyerInterface" type="Lof\ProductReviews\Model\Review\Command\VerifyBuyer"/>
     <preference for="Lof\ProductReviews\Model\ReviewValidatorInterface" type="Lof\ProductReviews\Model\ReviewValidationChain"/>
+
+    <preference for="Lof\ProductReviews\Api\Data\DetailedSummaryInterface" type="Lof\ProductReviews\Model\Data\DetailedSummary"/>
+    <preference for="Lof\ProductReviews\Api\Data\ReviewDataInterface" type="Lof\ProductReviews\Model\Data\ReviewData"/>
+    <preference for="Lof\ProductReviews\Api\Data\ImageInterface" type="Lof\ProductReviews\Model\Data\Image"/>
 
     <preference for="Lof\ProductReviews\Api\CustomizeRepositoryInterface" type="Lof\ProductReviews\Model\CustomizeRepository"/>
 	<preference for="Lof\ProductReviews\Api\Data\CustomizeInterface" type="Lof\ProductReviews\Model\CustomReview"/>

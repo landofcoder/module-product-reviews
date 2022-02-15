@@ -56,8 +56,9 @@ interface ReviewInterface
      * Custom extra fields
      */
     const GALLERIES = 'galleries';
+    const IMAGES = 'images';
     const CUSTOMIZE = 'customize';
-    const REPLY = 'reply';
+    const COMMENTS = 'comments';
     const REPLY_TOTAL = 'reply_total';
 
     const REVIEW_TYPE_CUSTOMER = 1;
@@ -107,11 +108,11 @@ interface ReviewInterface
     public function getRatings();
 
     /**
-     * Get review replies.
+     * Get review comments.
      *
      * @return \Lof\ProductReviews\Api\Data\ReplyInterface[]
      */
-    public function getReply();
+    public function getComments();
 
     /**
      * Get review galleries.
@@ -119,6 +120,13 @@ interface ReviewInterface
      * @return \Lof\ProductReviews\Api\Data\GalleryInterface
      */
     public function getGalleries();
+
+    /**
+     * Get review images.
+     *
+     * @return \Lof\ProductReviews\Api\Data\ImageInterface[]
+     */
+    public function getImages();
 
     /**
      * Get review customize.
@@ -203,13 +211,13 @@ interface ReviewInterface
     public function setRatings($ratings);
 
     /**
-     * Set review reply.
+     * Set review comments.
      *
-     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $reply
+     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $comments
      *
      * @return void
      */
-    public function setReply($reply);
+    public function setComments($comments);
 
     /**
      * Set review galleries.
@@ -219,6 +227,15 @@ interface ReviewInterface
      * @return void
      */
     public function setGalleries($galleries);
+
+    /**
+     * Set review images.
+     *
+     * @param \Lof\ProductReviews\Api\Data\ImageInterface[] $images
+     *
+     * @return void
+     */
+    public function setImages(array $images);
 
     /**
      * Set review customize.
