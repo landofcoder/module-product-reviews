@@ -38,6 +38,8 @@
                 <sort_type>helpful</sort_type>
                 <enable_search>1</enable_search>
                 <verify_purchased_code>1</verify_purchased_code>
+                <required_verify_purchased>0</required_verify_purchased>
+                <enable_auto_verify>0</enable_auto_verify>
                 <allow_list_order>1</allow_list_order>
                 <allow_upload>0</allow_upload>
                 <default_status>2</default_status>

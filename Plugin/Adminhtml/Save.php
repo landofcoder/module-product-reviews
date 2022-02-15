@@ -178,14 +178,21 @@ class Save
         $avatar_url = isset($data['avatar_url']) ? $data['avatar_url'] : '';
         /** @var \Lof\ProductReviews\Model\CustomReview $customReview */
         $modelCustom = $this->customReviewFactory->create();
-        if ($modelCustom->getCollection()->getItemByColumnValue('review_customize_id', $data['review_customize_id'])) {
 
+        $data['is_recommended'] = isset($data['is_recommended']) ? (int)$data['is_recommended'] : 0;
+        $data['verified_buyer'] = isset($data['verified_buyer']) ? (int)$data['verified_buyer'] : 0;
+        $data['answer'] = isset($data['answer']) ? $data['answer'] : "";
+
+        if ($modelCustom->getCollection()->getItemByColumnValue('review_customize_id', $data['review_customize_id'])) {
             $custom = $modelCustom->load($data['review_customize_id']);
             $custom->setReviewId($reviewId)
                 ->setAdvantages($data['advantages'])
                 ->setDisadvantages($data['disadvantages'])
                 ->setEmailAddress($email_address)
                 ->setAvatarUrl($avatar_url)
+                ->setIsRecommended($data['is_recommended'])
+                ->setVerifiedBuyer($data['verified_buyer'])
+                ->setAnswer($data['answer'])
                 ->save();
         } else {
             $modelCustom->setReviewId($reviewId)
@@ -193,6 +200,9 @@ class Save
                 ->setDisadvantages($data['disadvantages'])
                 ->setEmailAddress($email_address)
                 ->setAvatarUrl($avatar_url)
+                ->setIsRecommended($data['is_recommended'])
+                ->setVerifiedBuyer($data['verified_buyer'])
+                ->setAnswer($data['answer'])
                 ->save();
         }
 

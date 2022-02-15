@@ -242,4 +242,68 @@ class CustomReview extends \Magento\Framework\Model\AbstractModel implements Cus
     {
         return $this->setData(self::AVATAR_URL, $avatarUrl);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAnswer()
+    {
+        return $this->getData(self::ANSWER);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setAnswer($answer)
+    {
+        return $this->setData(self::ANSWER, $answer);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getIsRecommended()
+    {
+        return $this->getData(self::IS_RECOMMENDED);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setIsRecommended($is_recommended)
+    {
+        return $this->setData(self::IS_RECOMMENDED, $is_recommended);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getVerifiedBuyer()
+    {
+        return $this->getData(self::VERIFIED_BUYER);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setVerifiedBuyer($verified_buyer)
+    {
+        return $this->setData(self::VERIFIED_BUYER, $verified_buyer);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCountry()
+    {
+        return $this->getData(self::COUNTRY);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setCountry($country)
+    {
+        return $this->setData(self::COUNTRY, $country);
+    }
 }

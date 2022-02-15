@@ -32,6 +32,7 @@ use Lof\ProductReviews\Helper\Data as HelperData;
 use Lof\ProductReviews\Api\Data\GalleryInterfaceFactory;
 use Lof\ProductReviews\Api\Data\CustomizeInterfaceFactory;
 use Lof\ProductReviews\Api\Data\ReplyInterfaceFactory;
+use Lof\ProductReviews\Api\Data\ImageInterfaceFactory;
 use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
 use Lof\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as CustomReviewCollectionFactory;
 use Lof\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as ReviewReplyCollectionFactory;
@@ -92,6 +93,11 @@ class Get implements GetInterface
     protected $helperData;
 
     /**
+     * @var ImageInterfaceFactory
+     */
+    protected $dataImageFactory;
+
+    /**
      * Get constructor.
      *
      * @param ReviewFactory $reviewFactory
@@ -104,6 +110,7 @@ class Get implements GetInterface
      * @param ReplyInterfaceFactory $dataReplyFactory
      * @param ReviewReplyCollectionFactory $replyCollectionFactory
      * @param HelperData $helperData
+     * @param ImageInterfaceFactory $dataImageFactory
      */
     public function __construct(
         ReviewFactory $reviewFactory,
@@ -115,7 +122,8 @@ class Get implements GetInterface
         CustomReviewCollectionFactory $customizeCollectionFactory,
         ReplyInterfaceFactory $dataReplyFactory,
         ReviewReplyCollectionFactory $replyCollectionFactory,
-        HelperData $helperData
+        HelperData $helperData,
+        ImageInterfaceFactory $dataImageFactory
     ) {
         $this->reviewFactory = $reviewFactory;
         $this->toDataModelConverter = $toDataModelConvert;
@@ -127,6 +135,7 @@ class Get implements GetInterface
         $this->dataReplyFactory = $dataReplyFactory;
         $this->replyCollectionFactory = $replyCollectionFactory;
         $this->helperData = $helperData;
+        $this->dataImageFactory = $dataImageFactory;
     }
 
     /**
@@ -155,6 +164,7 @@ class Get implements GetInterface
             $reviewModel = $this->addCustomize($reviewModel);
             $reviewModel = $this->addGalleries($reviewModel);
             $reviewModel = $this->addReply($reviewModel);
+            $reviewModel = $this->mappingReviewData($reviewModel);
         }
 
         return $reviewModel;
@@ -192,6 +202,7 @@ class Get implements GetInterface
             $reviewModel = $this->addCustomize($reviewModel);
             $reviewModel = $this->addGalleries($reviewModel);
             $reviewModel = $this->addReply($reviewModel);
+            $reviewModel = $this->mappingReviewData($reviewModel);
         }
 
         return $reviewModel;
@@ -228,7 +239,15 @@ class Get implements GetInterface
         if ($galleriesFound) {
             $images = $this->helperData->getGalleryImages($galleriesFound);
             $galleriesFound->setImages($images);
-            $reviewDataObject->setGalleries($galleriesFound);
+
+            $imagesObjectArray = [];
+            foreach ($images as $_image) {
+                $imagesObjectArray[] = $this->dataImageFactory->create()
+                                        ->setFullPath($_image)
+                                        ->setResizedPath($_image);
+            }
+            //$reviewDataObject->setGalleries($galleriesFound);
+            $reviewDataObject->setImages($imagesObjectArray);
         }
         return $reviewDataObject;
     }
@@ -250,6 +269,28 @@ class Get implements GetInterface
         if ($replyCollection->count()) {
             $reviewDataObject->setReply($replyCollection->getItems());
             $reviewDataObject->setReplyTotal($replyCollection->count());
+        }
+        return $reviewDataObject;
+    }
+
+    /**
+     * maaing customize review
+     *
+     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     */
+    protected function mappingReviewData($reviewDataObject)
+    {
+        $customizeReview = $reviewDataObject->getCustomize();
+        if ($customizeReview) {
+            $reviewDataObject->setVerifiedBuyer($customizeReview->getVerifiedBuyer());
+            $reviewDataObject->setIsRecommended($customizeReview->getIsRecommended());
+            $reviewDataObject->setAnswer($customizeReview->getAnswer());
+            $reviewDataObject->setLikeAbout($customizeReview->getAdvantages());
+            $reviewDataObject->setNotLikeAbout($customizeReview->getDisadvantages());
+            $reviewDataObject->setGuestEmail($customizeReview->getEmailAddress());
+            $reviewDataObject->setPlusReview($customizeReview->getCountHelpful());
+            $reviewDataObject->setMinusReview($customizeReview->getCountUnhelpful());
         }
         return $reviewDataObject;
     }

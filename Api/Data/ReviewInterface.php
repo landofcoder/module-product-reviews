@@ -56,9 +56,19 @@ interface ReviewInterface
      * Custom extra fields
      */
     const GALLERIES = 'galleries';
+    const IMAGES = 'images';
     const CUSTOMIZE = 'customize';
-    const REPLY = 'reply';
+    const COMMENTS = 'comments';
     const REPLY_TOTAL = 'reply_total';
+
+    const VERIFIED_BUYER = 'verified_buyer';
+    const IS_RECOMMENDED = 'is_recommended';
+    const ANSWER = 'answer';
+    const LIVE_ABOUT = 'like_about';
+    const NOT_LIKE_ABOUT = 'not_like_about';
+    const GUEST_EMAIL = 'guest_email';
+    const PLUS_REVIEW = 'plus_review';
+    const MINUS_REVIEW = 'minus_review';
 
     const REVIEW_TYPE_CUSTOMER = 1;
     const REVIEW_TYPE_GUEST = 2;
@@ -107,11 +117,11 @@ interface ReviewInterface
     public function getRatings();
 
     /**
-     * Get review replies.
+     * Get review comments.
      *
      * @return \Lof\ProductReviews\Api\Data\ReplyInterface[]
      */
-    public function getReply();
+    public function getComments();
 
     /**
      * Get review galleries.
@@ -119,6 +129,13 @@ interface ReviewInterface
      * @return \Lof\ProductReviews\Api\Data\GalleryInterface
      */
     public function getGalleries();
+
+    /**
+     * Get review images.
+     *
+     * @return \Lof\ProductReviews\Api\Data\ImageInterface[]
+     */
+    public function getImages();
 
     /**
      * Get review customize.
@@ -203,13 +220,13 @@ interface ReviewInterface
     public function setRatings($ratings);
 
     /**
-     * Set review reply.
+     * Set review comments.
      *
-     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $reply
+     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $comments
      *
      * @return void
      */
-    public function setReply($reply);
+    public function setComments($comments);
 
     /**
      * Set review galleries.
@@ -219,6 +236,15 @@ interface ReviewInterface
      * @return void
      */
     public function setGalleries($galleries);
+
+    /**
+     * Set review images.
+     *
+     * @param \Lof\ProductReviews\Api\Data\ImageInterface[] $images
+     *
+     * @return void
+     */
+    public function setImages(array $images);
 
     /**
      * Set review customize.
@@ -335,4 +361,132 @@ interface ReviewInterface
      * @return $this
      */
     public function setStores(array $stores);
+
+    /**
+     * Get verified_buyer
+     *
+     * @return int
+     */
+    public function getVerifiedBuyer();
+
+    /**
+     * Set verified_buyer
+     *
+     * @param int $verified_buyer
+     *
+     * @return $this
+     */
+    public function setVerifiedBuyer($verified_buyer);
+
+    /**
+     * Get is_recommended
+     *
+     * @return bool
+     */
+    public function getIsRecommended();
+
+    /**
+     * Set is_recommended
+     *
+     * @param bool $is_recommended
+     *
+     * @return $this
+     */
+    public function setIsRecommended($is_recommended);
+
+    /**
+     * Get answer
+     *
+     * @return string
+     */
+    public function getAnswer();
+
+    /**
+     * Set answer
+     *
+     * @param string $answer
+     *
+     * @return $this
+     */
+    public function setAnswer($answer);
+
+    /**
+     * Get like_about
+     *
+     * @return string
+     */
+    public function getLikeAbout();
+
+    /**
+     * Set like_about
+     *
+     * @param string $like_about
+     *
+     * @return $this
+     */
+    public function setLikeAbout($like_about);
+
+    /**
+     * Get not_like_about
+     *
+     * @return string
+     */
+    public function getNotLikeAbout();
+
+    /**
+     * Set not_like_about
+     *
+     * @param string $not_like_about
+     *
+     * @return $this
+     */
+    public function setNotLikeAbout($not_like_about);
+
+    /**
+     * Get guest_email
+     *
+     * @return string
+     */
+    public function getGuestEmail();
+
+    /**
+     * Set guest_email
+     *
+     * @param string $guest_email
+     *
+     * @return $this
+     */
+    public function setGuestEmail($guest_email);
+
+    /**
+     * Get plus_review
+     *
+     * @return int
+     */
+    public function getPlusReview();
+
+    /**
+     * Set plus_review
+     *
+     * @param int $plus_review
+     *
+     * @return $this
+     */
+    public function setPlusReview($plus_review);
+
+    /**
+     * Get minus_review
+     *
+     * @return int
+     */
+    public function getMinusReview();
+
+    /**
+     * Set minus_review
+     *
+     * @param int $minus_review
+     *
+     * @return $this
+     */
+    public function setMinusReview($minus_review);
 }

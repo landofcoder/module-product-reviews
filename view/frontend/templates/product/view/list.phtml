@@ -230,10 +230,20 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                     </div>
                                 <?php endif; ?>
 
-                                <!--review advantages and disadvantages-->
+                                <!--review advantages and disadvantages and admin answers, comments-->
                                 <div class="lof-review-customize">
 
                                     <?php foreach ($customReview as $cItem): ?>
+
+                                        <!-- admin answer -->
+                                        <?php if ($cItem->getAnswer()) : ?>
+                                        <div class="lof-review_answer">
+                                            <div class="review-text-answer">
+                                                <span><i><?= $block->escapeHtml($cItem->getAnswer()); ?></i></span>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+
                                         <?php if ($cItem->getAdvantages()) { ?>
                                             <div class="good-exp" style="color:green">
                                                 <span>
@@ -260,6 +270,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                         <?php } ?>
                                     <?php endforeach; ?>
                                 </div>
+
                                 <!--content comment-->
                                 <div class="lof-comment_content" itemprop="description">
                                     <?php $reviewComment = $block->getReviewsReply($_review->getId()); ?>

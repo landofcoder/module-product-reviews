@@ -89,6 +89,36 @@ class Form extends \Magento\Review\Block\Adminhtml\Add\Form
             ]
         );
 
+        $fieldset1->addField(
+            'is_recommended',
+            'select',
+            [
+                'label' => __('Is Recommended?'),
+                'title' => __('Is Recommended?'),
+                'name' => 'is_recommended',
+                'options' => [
+                    '0' => __('No'),
+                    '1' => __('Yes')
+                ],
+                'required' => false
+            ]
+        );
+
+        $fieldset1->addField(
+            'verified_buyer',
+            'select',
+            [
+                'label' => __('Verified Buyer?'),
+                'title' => __('Verified Buyer?'),
+                'name' => 'verified_buyer',
+                'options' => [
+                    '0' => __('No'),
+                    '1' => __('Yes')
+                ],
+                'required' => false
+            ]
+        );
+
         /*$fieldset1->addField(
             'review_images',
             'images',

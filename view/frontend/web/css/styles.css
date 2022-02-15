@@ -285,6 +285,13 @@ zoom: 1;
 .list-replies .list-reply-item p {
     margin-bottom: inherit;
 }
+.lof-review_answer {
+    margin-top: 5px;
+    border-radius: 5px;
+    padding: 5px 5px 5px 10px;
+    background: #e6f6ff;
+    margin-bottom: 5px;
+}
 @media (min-width: 640px){
     .review-ratings~.review-content, .review-ratings~.review-details {
         margin-left: 0px;

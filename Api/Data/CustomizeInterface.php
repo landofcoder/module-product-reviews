@@ -22,6 +22,10 @@ interface CustomizeInterface
     const TOTAL_HELPFUL = 'total_helpful';
     const REVIEW_CUSTOMIZE_ID = 'review_customize_id ';
     const AVATAR_URL = 'avatar_url';
+    const ANSWER = 'answer';
+    const IS_RECOMMENDED = 'is_recommended';
+    const VERIFIED_BUYER = 'verified_buyer';
+    const COUNTRY = 'country';
 
     /**
      * Get review_customize_id
@@ -35,6 +39,46 @@ interface CustomizeInterface
      * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setReviewCustomizeId($review_customize_id);
+
+    /**
+     * Get is_recommended
+     * @return int|null
+     */
+    public function getIsRecommended();
+
+    /**
+     * Set is_recommended
+     * @param int $is_recommended
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setIsRecommended($is_recommended);
+
+    /**
+     * Get verified_buyer
+     * @return int|null
+     */
+    public function getVerifiedBuyer();
+
+    /**
+     * Set verified_buyer
+     * @param int $verified_buyer
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setVerifiedBuyer($verified_buyer);
+
+    /**
+     * Get answer
+     * @return string|null
+     */
+    public function getAnswer();
+
+    /**
+     * Set answer
+     * @param string $answer
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setAnswer($answer);
+
 
     /**
      * Get advantages
@@ -178,5 +222,18 @@ interface CustomizeInterface
      * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setAvatarUrl($avatarUrl);
+
+    /**
+     * Get country
+     * @return string|null
+     */
+    public function getCountry();
+
+    /**
+     * Set country
+     * @param string $country
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     */
+    public function setCountry($country);
 }
 

@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Landofcoder
@@ -39,6 +40,11 @@ class Verify extends \Magento\Framework\App\Action\Action
     protected $_resultJsonFactory;
 
     /**
+     * @var Data
+     */
+    protected $_helperData;
+
+    /**
      * Verify constructor.
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Sales\Model\Order $order
@@ -49,7 +55,7 @@ class Verify extends \Magento\Framework\App\Action\Action
         \Magento\Framework\App\Action\Context $context,
         \Magento\Sales\Model\Order $order,
         \Magento\Customer\Model\Session $customerSession,
-        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
+        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
     ) {
         $this->_order = $order;
         $this->_customerSession = $customerSession;

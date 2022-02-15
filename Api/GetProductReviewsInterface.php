@@ -32,10 +32,15 @@ namespace Lof\ProductReviews\Api;
 interface GetProductReviewsInterface
 {
     /**
-     * Get product reviews.
+     * @inheritdoc
      *
      * @param string $sku
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface[]
+     * @param string $keyword
+     * @param int $limit
+     * @param int $page
+     * @param string $sort_by (helpful, rating, latest, oldest, recommended, verified, default or empty)
+     *
+     * @return \Lof\ProductReviews\Api\Data\ReviewDataInterface|mixed|array
      */
-    public function execute(string $sku);
+    public function execute(string $sku, string $keyword = "", int $limit = 0, int $page = 0, string $sort_by = "");
 }

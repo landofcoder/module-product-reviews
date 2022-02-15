@@ -85,9 +85,9 @@ class Review extends AbstractSimpleObject implements ReviewInterface
      *
      * @return \Lof\ProductReviews\Api\Data\ReplyInterface[]
      */
-    public function getReply()
+    public function getComments()
     {
-        return $this->_get(self::REPLY);
+        return $this->_get(self::COMMENTS);
     }
 
     /**
@@ -98,6 +98,16 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     public function getGalleries()
     {
         return $this->_get(self::GALLERIES);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return \Lof\ProductReviews\Api\Data\ImageInterface[]
+     */
+    public function getImages()
+    {
+        return $this->_get(self::IMAGES);
     }
 
     /**
@@ -213,25 +223,37 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $reply
+     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $comments
      *
      * @return Review|void
      */
-    public function setReply($reply)
+    public function setComments($comments)
     {
-        return $this->setData(self::REPLY, $reply);
+        return $this->setData(self::COMMENTS, $comments);
     }
 
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface $galleries
+     * @param \Lof\ProductReviews\Api\Data\GalleryInterface $galleries
      *
      * @return Review|void
      */
     public function setGalleries($galleries)
     {
         return $this->setData(self::GALLERIES, $galleries);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @param \Lof\ProductReviews\Api\Data\ImageInterface[] $images
+     *
+     * @return Review|void
+     */
+    public function setImages(array $images)
+    {
+        return $this->setData(self::IMAGES, $images);
     }
 
     /**
@@ -402,5 +424,181 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     public function setReplyTotal($reply_total)
     {
         return $this->setData(self::REPLY_TOTAL, $reply_total);
+    }
+
+    /**
+     * Get verified_buyer
+     *
+     * @return int
+     */
+    public function getVerifiedBuyer()
+    {
+        return $this->_get(self::VERIFIED_BUYER);
+    }
+
+    /**
+     * Set verified_buyer
+     *
+     * @param int $verified_buyer
+     *
+     * @return $this
+     */
+    public function setVerifiedBuyer($verified_buyer)
+    {
+        return $this->setData(self::VERIFIED_BUYER, $verified_buyer);
+    }
+
+    /**
+     * Get is_recommended
+     *
+     * @return bool
+     */
+    public function getIsRecommended()
+    {
+        return $this->_get(self::IS_RECOMMENDED);
+    }
+
+    /**
+     * Set is_recommended
+     *
+     * @param bool $is_recommended
+     *
+     * @return $this
+     */
+    public function setIsRecommended($is_recommended)
+    {
+        return $this->setData(self::IS_RECOMMENDED, $is_recommended);
+    }
+
+    /**
+     * Get answer
+     *
+     * @return string
+     */
+    public function getAnswer()
+    {
+        return $this->_get(self::ANSWER);
+    }
+
+    /**
+     * Set answer
+     *
+     * @param string $answer
+     *
+     * @return $this
+     */
+    public function setAnswer($answer)
+    {
+        return $this->setData(self::ANSWER, $answer);
+    }
+
+    /**
+     * Get like_about
+     *
+     * @return string
+     */
+    public function getLikeAbout()
+    {
+        return $this->_get(self::LIVE_ABOUT);
+    }
+
+    /**
+     * Set like_about
+     *
+     * @param string $like_about
+     *
+     * @return $this
+     */
+    public function setLikeAbout($like_about)
+    {
+        return $this->setData(self::LIVE_ABOUT, $like_about);
+    }
+
+    /**
+     * Get not_like_about
+     *
+     * @return string
+     */
+    public function getNotLikeAbout()
+    {
+        return $this->_get(self::NOT_LIKE_ABOUT);
+    }
+
+    /**
+     * Set not_like_about
+     *
+     * @param string $not_like_about
+     *
+     * @return $this
+     */
+    public function setNotLikeAbout($not_like_about)
+    {
+        return $this->setData(self::NOT_LIKE_ABOUT, $not_like_about);
+    }
+
+    /**
+     * Get guest_email
+     *
+     * @return string
+     */
+    public function getGuestEmail()
+    {
+        return $this->_get(self::GUEST_EMAIL);
+    }
+
+    /**
+     * Set guest_email
+     *
+     * @param string $guest_email
+     *
+     * @return $this
+     */
+    public function setGuestEmail($guest_email)
+    {
+        return $this->setData(self::GUEST_EMAIL, $guest_email);
+    }
+
+    /**
+     * Get plus_review
+     *
+     * @return int
+     */
+    public function getPlusReview()
+    {
+        return $this->_get(self::PLUS_REVIEW);
+    }
+
+    /**
+     * Set plus_review
+     *
+     * @param int $plus_review
+     *
+     * @return $this
+     */
+    public function setPlusReview($plus_review)
+    {
+        return $this->setData(self::PLUS_REVIEW, $plus_review);
+    }
+
+    /**
+     * Get minus_review
+     *
+     * @return int
+     */
+    public function getMinusReview()
+    {
+        return $this->_get(self::MINUS_REVIEW);
+    }
+
+    /**
+     * Set minus_review
+     *
+     * @param int $minus_review
+     *
+     * @return $this
+     */
+    public function setMinusReview($minus_review)
+    {
+        return $this->setData(self::MINUS_REVIEW, $minus_review);
     }
 }
