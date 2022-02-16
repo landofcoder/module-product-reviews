@@ -28,6 +28,7 @@ use Lof\ProductReviews\Api\Data\CustomizeInterfaceFactory;
 use Lof\ProductReviews\Api\Data\ReplyInterfaceFactory;
 use Lof\ProductReviews\Api\Data\ReviewDataInterfaceFactory;
 use Lof\ProductReviews\Api\Data\ImageInterfaceFactory;
+use Lof\ProductReviews\Api\Data\ReviewInterface;
 use Magento\Review\Model\ResourceModel\Review\Product\Collection as ReviewCollection;
 use Magento\Review\Model\ResourceModel\Review\Product\CollectionFactory as ReviewCollectionFactory;
 use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
@@ -301,8 +302,8 @@ class GetProductReviews implements GetProductReviewsInterface
     /**
      * add customize review
      *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param mixed|array|ReviewInterface
+     * @return mixed|array|ReviewInterface
      */
     protected function addCustomize($reviewDataObject)
     {
@@ -318,8 +319,8 @@ class GetProductReviews implements GetProductReviewsInterface
     /**
      * add galleries review
      *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param mixed|array|ReviewInterface
+     * @return mixed|array|ReviewInterface
      */
     protected function addGalleries($reviewDataObject)
     {
@@ -344,8 +345,8 @@ class GetProductReviews implements GetProductReviewsInterface
     /**
      * add replies review
      *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param mixed|array|ReviewInterface
+     * @return mixed|array|ReviewInterface
      */
     protected function addReply($reviewDataObject)
     {

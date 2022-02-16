@@ -177,7 +177,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
      *
      * @param string $detail
      *
-     * @return ReviewInterface
+     * @return $this
      */
     public function setDetail($detail)
     {
@@ -189,7 +189,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
      *
      * @param int|null $customerId
      *
-     * @return ReviewInterface
+     * @return $this
      */
     public function setCustomerId($customerId)
     {
@@ -201,7 +201,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
      *
      * @param string $nickName
      *
-     * @return ReviewInterface
+     * @return $this
      */
     public function setNickname($nickName)
     {

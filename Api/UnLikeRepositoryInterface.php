@@ -23,7 +23,6 @@ declare(strict_types=1);
 namespace Lof\ProductReviews\Api;
 
 use Lof\ProductReviews\Api\Data\ReviewInterface;
-use Lof\ProductReviews\Api\Data\ReplyInterface;
 
 /**
  * Post product unlike by sku
@@ -40,8 +39,8 @@ interface UnLikeRepositoryInterface
      * @param int $customerId
      * @param int $reviewId
      *
-     * @return ReviewInterface|mixed|array
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface|mixed|array
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function execute(int $customerId, $reviewId): ReviewInterface;
+    public function execute(int $customerId, int $reviewId): ReviewInterface;
 }

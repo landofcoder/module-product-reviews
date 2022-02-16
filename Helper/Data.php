@@ -21,6 +21,8 @@
 
 namespace Lof\ProductReviews\Helper;
 
+use Lof\ProductReviews\Api\Data\ReviewInterface;
+
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     //Lof Product Reviews frontend configs
@@ -84,10 +86,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * maaing customize review
      *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param mixed|array|ReviewInterface
+     * @return mixed|array|ReviewInterface
      */
-    protected function mappingReviewData($reviewDataObject)
+    public function mappingReviewData($reviewDataObject)
     {
         $customizeReview = $reviewDataObject->getCustomize();
         if ($customizeReview) {

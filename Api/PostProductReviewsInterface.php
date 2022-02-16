@@ -23,7 +23,6 @@ declare(strict_types=1);
 namespace Lof\ProductReviews\Api;
 
 use Lof\ProductReviews\Api\Data\ReviewInterface;
-use Lof\ProductReviews\Api\Data\ReplyInterface;
 
 /**
  * Post product reviews by sku
@@ -41,7 +40,7 @@ interface PostProductReviewsInterface
      * @param string $sku
      * @param ReviewInterface $review
      *
-     * @return ReviewInterface|mixed|array
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface|mixed|array
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function execute(int $customerId, string $sku, ReviewInterface $review): ReviewInterface;

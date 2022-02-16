@@ -79,7 +79,7 @@ class LikeRepository implements LikeRepositoryInterface
      */
     public function execute(int $customerId, int $reviewId): ReviewInterface
     {
-        $review = $this->reviewRepository->getMyReview($customerId, $reviewId);
+        $review = $this->reviewRepository->getReviewByCustomer($customerId, $reviewId);
         if (!$review || !$review->getId()) {
             throw new NoSuchEntityException(__('Review with id "%1" does not exist.', $reviewId));
         }

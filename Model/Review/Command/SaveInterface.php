@@ -44,7 +44,7 @@ interface SaveInterface
      *
      * @param ReviewInterface $dataModel
      *
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      *
      * @throws ValidationException
      * @throws NoSuchEntityException

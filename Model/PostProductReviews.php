@@ -144,6 +144,7 @@ class PostProductReviews implements PostProductReviewsInterface
             $countryCode = $foundAddress ? $foundAddress->getCountryId() : "";
         }
 
+        $review->setReviewEntity("product");
         $review->setGuestEmail($customerData->getEmail());
         $review->setCountry($countryCode);
         $review->setCustomerId($customerId);

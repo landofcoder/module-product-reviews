@@ -30,6 +30,7 @@ use Lof\ProductReviews\Validation\ValidationException;
 use Lof\ProductReviews\Model\ReviewValidatorInterface;
 use Lof\ProductReviews\Model\CustomReviewFactory;
 use Lof\ProductReviews\Model\GalleryFactory;
+use Lof\ProductReviews\Helper\Data as HelperData;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Review\Model\ResourceModel\Review as ReviewResource;
@@ -87,6 +88,16 @@ class Save implements SaveInterface
     private $galleryFactory;
 
     /**
+     * @var HelperData
+     */
+    protected $helperData;
+
+    /**
+     * @var GetInterface
+     */
+    protected $getReviewCommand;
+
+    /**
      * Save constructor.
      *
      * @param ReviewValidatorInterface $reviewValidator
@@ -98,6 +109,8 @@ class Save implements SaveInterface
      * @param SummaryRateInterface $summaryRateCommand
      * @param CustomReviewFactory $customReviewFactory
      * @param GalleryFactory $galleryFactory
+     * @param HelperData $helperData
+     * @param GetInterface $getReviewCommand
      */
     public function __construct(
         ReviewValidatorInterface $reviewValidator,
@@ -108,7 +121,9 @@ class Save implements SaveInterface
         SaveHandler $ratingSaveHandler,
         SummaryRateInterface $summaryRateCommand,
         CustomReviewFactory $customReviewFactory,
-        GalleryFactory $galleryFactory
+        GalleryFactory $galleryFactory,
+        HelperData $helperData,
+        GetInterface $getReviewCommand
     ) {
         $this->reviewValidator = $reviewValidator;
         $this->toDataModelConverter = $toDataModelConvert;
@@ -119,6 +134,8 @@ class Save implements SaveInterface
         $this->summaryRateCommand = $summaryRateCommand;
         $this->galleryFactory = $galleryFactory;
         $this->customReviewFactory = $customReviewFactory;
+        $this->helperData = $helperData;
+        $this->getReviewCommand = $getReviewCommand;
     }
 
     /**
@@ -126,7 +143,7 @@ class Save implements SaveInterface
      *
      * @param ReviewInterface $dataModel
      *
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws ValidationException
      * @throws AlreadyExistsException
      * @throws NoSuchEntityException
@@ -148,9 +165,9 @@ class Save implements SaveInterface
 
         $product_id = $model->getEntityPkValue();
         $sku = "";
-        $this->summaryRateCommand->execute($sku, $product_id);
+        $this->summaryRateCommand->execute($sku, (int)$product_id);
 
-        return $this->toDataModelConverter->toDataModel($model);
+        return $this->getReviewCommand->executeByCustomerId((int)$model->getCustomerId(), (int)$model->getId());
     }
 
     /**
@@ -167,7 +184,7 @@ class Save implements SaveInterface
         $limitImages = $this->helperData->getConfig("lof_review_settings/limit_upload_image", 1);
         $limitImages = $limitImages ? (int)$limitImages : 1;
 
-        $id = $model->getId();
+        $id = (int)$model->getId();
         $images = $dataModel->getImages();
         $average = $this->customReviewFactory->create()->addCountRating($id);
         $helpful = (int) $dataModel->getPlusReview();

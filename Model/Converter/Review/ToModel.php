@@ -21,8 +21,7 @@
 declare(strict_types=1);
 
 namespace Lof\ProductReviews\Model\Converter\Review;
-
-use Lof\ProductReviews\Api\Data\ReviewInterface;
+;
 use Lof\ProductReviews\Api\Data\ReviewInterface as ReviewData;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
@@ -100,7 +99,7 @@ class ToModel
     {
         $data = $this->dataObjectProcessor->buildOutputDataArray(
             $reviewData,
-            ReviewInterface::class
+            ReviewData::class
         );
 
         $modelData = $reviewModel->getData();

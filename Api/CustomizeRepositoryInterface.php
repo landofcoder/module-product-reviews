@@ -36,7 +36,7 @@ interface CustomizeRepositoryInterface
      * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getByReview($reviewId);
+    public function getByReview(int $reviewId);
 
     /**
      * Retrieve Customize matching the specified criteria.

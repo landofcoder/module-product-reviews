@@ -30,6 +30,7 @@ use Magento\Review\Model\ResourceModel\Review\CollectionFactory;
 use Lof\ProductReviews\Api\Data\ReviewSearchResultInterface;
 use Lof\ProductReviews\Api\Data\ReviewSearchResultInterfaceFactory;
 use Lof\ProductReviews\Model\Converter\Review\ToDataModel;
+use Lof\ProductReviews\Api\Data\ReviewInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Lof\ProductReviews\Helper\Data as HelperData;
 use Lof\ProductReviews\Api\Data\GalleryInterfaceFactory;
@@ -299,8 +300,8 @@ class GetList implements GetListInterface
      /**
      * add customize review
      *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param mixed|array|ReviewInterface
+     * @return mixed|array|ReviewInterface
      */
     protected function addCustomize($reviewDataObject)
     {
@@ -316,8 +317,8 @@ class GetList implements GetListInterface
     /**
      * add galleries review
      *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param mixed|array|ReviewInterface
+     * @return mixed|array|ReviewInterface
      */
     protected function addGalleries($reviewDataObject)
     {
@@ -343,8 +344,8 @@ class GetList implements GetListInterface
     /**
      * add replies review
      *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param mixed|array|ReviewInterface
+     * @return mixed|array|ReviewInterface
      */
     protected function addReply($reviewDataObject)
     {
@@ -355,7 +356,7 @@ class GetList implements GetListInterface
                     ->setCurPage(1);
 
         if ($replyCollection->count()) {
-            $reviewDataObject->setReply($replyCollection->getItems());
+            $reviewDataObject->setComments($replyCollection->getItems());
             $reviewDataObject->setReplyTotal($replyCollection->count());
         }
         return $reviewDataObject;

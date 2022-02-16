@@ -80,7 +80,7 @@ class ToDataModel
      *
      * @param Product|Review $productReview
      *
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      */
     public function toDataModel($productReview): ReviewInterface
     {
@@ -96,7 +96,7 @@ class ToDataModel
      *
      * @param Product|Review $productReview
      *
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      */
     private function createReviewDataObject($productReview): ReviewInterface
     {
