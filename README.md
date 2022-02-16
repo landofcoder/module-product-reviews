@@ -39,9 +39,25 @@ php bin/magento setup:static-content:deploy -f
 
 ```
 
-###### manage product reviews extension
-manage product reviews by navigation to ```Marketing > All Reviews ``` or ```Lof Product Reviews > All Reviews ```
+###### Manage product reviews extension
 
+- Manage product reviews by navigation to ```Marketing > All Reviews ``` or ```Lof Product Reviews > All Reviews ```
+- Manage Reviews Reminder List ```Lof Product Reviews > Reviews Reminders List ```
+- Import Product Reviews from CSV file ```Lof Product Reviews > Import Reviews ```
+
+###### Module configuration
+
+Go to ```Lof Product Reviews > Reviews Configuration ```
+
+- Config Verify Purchase code before review:
+**Verify Purchased Code** = Yes
+**Required Verify Purchased Code (New)** = No (Yes - will require verify purchase code before)
+**Enable Auto Verify Order** = No (Yes - will auto verify for logged in customer)
+
+- Config upload images when reviews:
+**Allow Upload Images/Videos** = Yes
+**Set Number images/videos files can upload on frontend form** = 5 (change value to limit images for uploading)
+**Gallery Default Status** = Disabled (Disabled - require admin review before active to show images on frontend)
 
 ## Features
 - Review using Image with ease
@@ -53,23 +69,27 @@ manage product reviews by navigation to ```Marketing > All Reviews ``` or ```Lof
 - Full control of managing the images & reviews
 - Reply from admin
 - Send email reminder
+- Allow send coupon code when send reminder review email
 - Improve your rankings
 - Multiple languages - RTL supports
 - Fast speed with Magento Block Caching
 - Attractive Custom Work service
 - 100% open source
 - Lifetime free Update
-- Perfectly compatible with the latest magento 2.3 version
-- Easy to manage with backend management\
+- Perfectly compatible with the latest magento 2.3 - 2.4.x version
+- Easy to manage with backend management
 - New option required/non required verify purchase code when review
 - Support Backend REST API
 - Support Frontend REST API get product reviews
 - Support Frontend REST API submit reviews
 - Support REST API for reply
+- Allow process collect review ratings for product. 
+Use console command as this: ```php bin/magento lofreview:index-summary:process --sku=[product-sku]``` or collect for all products: ```php bin/magento lofreview:index-summary:process```
 
 
 ## Todo
 - View Replies list on frontend
+- Refactor Import Reviews CSV
 - Allow User Submit Reply a comment on frontend
 - GraphQl module
 

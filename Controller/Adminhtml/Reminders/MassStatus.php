@@ -91,6 +91,6 @@ class MassStatus extends \Magento\Backend\App\Action
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Lof_ProductReviews::lof_product_reviews_reminders');
+        return $this->_authorization->isAllowed('Lof_ProductReviews::reminders_update');
     }
 }
