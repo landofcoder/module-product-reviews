@@ -143,7 +143,7 @@ class Get implements GetInterface
      *
      * @param int $reviewId
      * @param bool $moreInfo
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws NoSuchEntityException
      */
     public function execute(int $reviewId, bool $moreInfo = true): ReviewInterface
@@ -164,7 +164,7 @@ class Get implements GetInterface
             $reviewModel = $this->addCustomize($reviewModel);
             $reviewModel = $this->addGalleries($reviewModel);
             $reviewModel = $this->addReply($reviewModel);
-            $reviewModel = $this->mappingReviewData($reviewModel);
+            $reviewModel = $this->helperData->mappingReviewData($reviewModel);
         }
 
         return $reviewModel;
@@ -176,10 +176,39 @@ class Get implements GetInterface
      * @param int $customerId
      * @param int $reviewId
      * @param bool $moreInfo
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws NoSuchEntityException
      */
     public function executeByCustomer(int $customerId, int $reviewId, bool $moreInfo = true): ReviewInterface
+    {
+        return $this->getReviewByCustomer($customerId, $reviewId, $moreInfo, true);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @param int $customerId
+     * @param int $reviewId
+     * @param bool $moreInfo
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @throws NoSuchEntityException
+     */
+    public function executeByCustomerId(int $customerId, int $reviewId, bool $moreInfo = true): ReviewInterface
+    {
+       return $this->getReviewByCustomer($customerId, $reviewId, $moreInfo, false);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @param int $customerId
+     * @param int $reviewId
+     * @param bool $moreInfo
+     * @param bool $checkCustomer
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @throws NoSuchEntityException
+     */
+    protected function getReviewByCustomer(int $customerId, int $reviewId, bool $moreInfo = true, bool $checkCustomer = true): ReviewInterface
     {
         /** @var Review $reviewModel */
         $reviewModel = $this->reviewFactory->create();
@@ -190,7 +219,8 @@ class Get implements GetInterface
                 __('Review with id "%value" does not exist.', ['value' => $reviewId])
             );
         }
-        if ($customerId !== $reviewModel->getCustomerId()) {
+
+        if ($checkCustomer && (int)$customerId !== (int)$reviewModel->getCustomerId()) {
             throw new NoSuchEntityException(
                 __('Review with id "%value" does not exist for this customer.', ['value' => $reviewId])
             );
@@ -202,17 +232,16 @@ class Get implements GetInterface
             $reviewModel = $this->addCustomize($reviewModel);
             $reviewModel = $this->addGalleries($reviewModel);
             $reviewModel = $this->addReply($reviewModel);
-            $reviewModel = $this->mappingReviewData($reviewModel);
+            $reviewModel = $this->helperData->mappingReviewData($reviewModel);
         }
-
         return $reviewModel;
     }
 
      /**
      * add customize review
      *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param mixed|array|ReviewInterface
+     * @return mixed|array|ReviewInterface
      */
     protected function addCustomize($reviewDataObject)
     {
@@ -228,8 +257,8 @@ class Get implements GetInterface
     /**
      * add galleries review
      *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param mixed|array|ReviewInterface
+     * @return mixed|array|ReviewInterface
      */
     protected function addGalleries($reviewDataObject)
     {
@@ -255,8 +284,8 @@ class Get implements GetInterface
     /**
      * add replies review
      *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @param mixed|array|ReviewInterface
+     * @return mixed|array|ReviewInterface
      */
     protected function addReply($reviewDataObject)
     {
@@ -267,30 +296,8 @@ class Get implements GetInterface
                     ->setCurPage(1);
 
         if ($replyCollection->count()) {
-            $reviewDataObject->setReply($replyCollection->getItems());
+            $reviewDataObject->setComments($replyCollection->getItems());
             $reviewDataObject->setReplyTotal($replyCollection->count());
-        }
-        return $reviewDataObject;
-    }
-
-    /**
-     * maaing customize review
-     *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     */
-    protected function mappingReviewData($reviewDataObject)
-    {
-        $customizeReview = $reviewDataObject->getCustomize();
-        if ($customizeReview) {
-            $reviewDataObject->setVerifiedBuyer($customizeReview->getVerifiedBuyer());
-            $reviewDataObject->setIsRecommended($customizeReview->getIsRecommended());
-            $reviewDataObject->setAnswer($customizeReview->getAnswer());
-            $reviewDataObject->setLikeAbout($customizeReview->getAdvantages());
-            $reviewDataObject->setNotLikeAbout($customizeReview->getDisadvantages());
-            $reviewDataObject->setGuestEmail($customizeReview->getEmailAddress());
-            $reviewDataObject->setPlusReview($customizeReview->getCountHelpful());
-            $reviewDataObject->setMinusReview($customizeReview->getCountUnhelpful());
         }
         return $reviewDataObject;
     }

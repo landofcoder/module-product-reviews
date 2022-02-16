@@ -177,7 +177,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
      *
      * @param string $detail
      *
-     * @return ReviewInterface
+     * @return $this
      */
     public function setDetail($detail)
     {
@@ -189,7 +189,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
      *
      * @param int|null $customerId
      *
-     * @return ReviewInterface
+     * @return $this
      */
     public function setCustomerId($customerId)
     {
@@ -201,7 +201,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
      *
      * @param string $nickName
      *
-     * @return ReviewInterface
+     * @return $this
      */
     public function setNickname($nickName)
     {
@@ -600,5 +600,27 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     public function setMinusReview($minus_review)
     {
         return $this->setData(self::MINUS_REVIEW, $minus_review);
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->_get(self::COUNTRY);
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        return $this->setData(self::COUNTRY, $country);
     }
 }

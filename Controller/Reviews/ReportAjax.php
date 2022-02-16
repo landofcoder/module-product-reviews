@@ -79,6 +79,7 @@ class ReportAjax extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         $reportType = $this->getRequest()->getPost('type');
+        $reportType = "report";
         $reviewId = $this->getRequest()->getPost('reviewId');
         $userAgent = $this->httpHeader->getHttpUserAgent();
         $customerIpAddress = $this->remoteAddress->getRemoteAddress();
@@ -121,6 +122,7 @@ class ReportAjax extends \Magento\Framework\App\Action\Action
             $value['id'] = $data->getId();
             $value['ip_address'] = $data->getIpAddress();
         }
+
 
         if (!empty($value['id'])) {
             $model = $rateReportModel->load($value['id']);

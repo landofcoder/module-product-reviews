@@ -43,7 +43,7 @@ interface GetInterface
      * @param int $reviewId
      * @param bool $moreInfo
      *
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws NoSuchEntityException
      */
     public function execute(int $reviewId, bool $moreInfo = true): ReviewInterface;
@@ -55,8 +55,20 @@ interface GetInterface
      * @param int $reviewId
      * @param bool $moreInfo
      *
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws NoSuchEntityException
      */
     public function executeByCustomer(int $customerId, int $reviewId, bool $moreInfo = true): ReviewInterface;
+
+    /**
+     * Retrieve Review By Id and customer id
+     *
+     * @param int $customerId
+     * @param int $reviewId
+     * @param bool $moreInfo
+     *
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @throws NoSuchEntityException
+     */
+    public function executeByCustomerId(int $customerId, int $reviewId, bool $moreInfo = true): ReviewInterface;
 }

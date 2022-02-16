@@ -31,6 +31,14 @@ interface CustomizeRepositoryInterface
     public function get($customizeId);
 
     /**
+     * Retrieve Customize by reviewId
+     * @param int $reviewId
+     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getByReview(int $reviewId);
+
+    /**
      * Retrieve Customize matching the specified criteria.
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \Lof\ProductReviews\Api\Data\CustomizeSearchResultsInterface

@@ -100,6 +100,19 @@ class CustomizeRepository implements CustomizeRepositoryInterface
     /**
      * @inheritDoc
      */
+    public function getByReview(int $reviewId)
+    {
+        $collection = $this->customizeCollectionFactory->create();
+        $collection->addFieldToFilter("review_id", $reviewId);
+        $found = $collection->getFirstItem();
+        if ($found && $found->getId()) {
+            return $this->get($found->getId());
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getList(
         \Magento\Framework\Api\SearchCriteriaInterface $criteria
     ) {

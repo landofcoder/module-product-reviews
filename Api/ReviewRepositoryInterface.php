@@ -47,13 +47,13 @@ interface ReviewRepositoryInterface
     /**
      * Save review.
      *
-     * @param \Lof\ProductReviews\Api\Data\ReviewInterface $review
+     * @param ReviewInterface $review
      *
      * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function save(ReviewInterface $review): \Lof\ProductReviews\Api\Data\ReviewInterface;
+    public function save(ReviewInterface $review): ReviewInterface;
 
     /**
      * Save review Reply.
@@ -97,7 +97,7 @@ interface ReviewRepositoryInterface
      * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function get(int $reviewId): \Lof\ProductReviews\Api\Data\ReviewInterface;
+    public function get(int $reviewId): ReviewInterface;
 
     /**
      * Get review Reply by review id.
@@ -140,7 +140,18 @@ interface ReviewRepositoryInterface
      * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getMyReview(int $customerId, int $reviewId): \Lof\ProductReviews\Api\Data\ReviewInterface;
+    public function getMyReview(int $customerId, int $reviewId): ReviewInterface;
+
+    /**
+     * Get my review by review id.
+     *
+     * @param int $customerId
+     * @param int $reviewId
+     *
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getReviewByCustomer(int $customerId, int $reviewId): ReviewInterface;
 
     /**
      * Get review Reply by review id.

@@ -111,7 +111,7 @@ class ReviewRepository implements ReviewRepositoryInterface
      *
      * @param ReviewInterface $review
      *
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws \Lof\ProductReviews\Validation\ValidationException
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
@@ -211,7 +211,7 @@ class ReviewRepository implements ReviewRepositoryInterface
         ];
         $reply->setData($newData);
 
-        return $this->commandSaveReply->execute($customerId, $reply);
+        return $this->commandSaveReply->execute($reply);
     }
 
     /**
@@ -219,7 +219,7 @@ class ReviewRepository implements ReviewRepositoryInterface
      *
      * @param int $reviewId
      *
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function get(int $reviewId): ReviewInterface
@@ -271,12 +271,26 @@ class ReviewRepository implements ReviewRepositoryInterface
      * @param int $customerId
      * @param int $reviewId
      *
-     * @return ReviewInterface
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getMyReview(int $customerId, int $reviewId): ReviewInterface
     {
         return $this->commandGet->executeByCustomer($customerId, $reviewId);
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @param int $customerId
+     * @param int $reviewId
+     *
+     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getReviewByCustomer(int $customerId, int $reviewId): ReviewInterface
+    {
+        return $this->commandGet->executeByCustomerId($customerId, $reviewId);
     }
 
     /**
