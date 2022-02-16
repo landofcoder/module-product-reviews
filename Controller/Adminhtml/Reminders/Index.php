@@ -19,7 +19,7 @@
  * @license    https://landofcoder.com/terms
  */
 
-namespace Lof\ProductReviews\Controller\Adminhtml\Replies;
+namespace Lof\ProductReviews\Controller\Adminhtml\Reminders;
 
 class Index extends \Magento\Backend\App\Action
 {
@@ -61,6 +61,6 @@ class Index extends \Magento\Backend\App\Action
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Lof_ProductReviews::lof_product_reviews_reminders');
+        return $this->_authorization->isAllowed('Lof_ProductReviews::reminders_view');
     }
 }
