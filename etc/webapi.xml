@@ -63,7 +63,7 @@
     </route>
 
     <route url="/V1/reviews/me/:reviewId/like" method="POST">
-        <service class="Lof\ProductReviews\Api\LikeRepositoryInterface" method="save"/>
+        <service class="Lof\ProductReviews\Api\LikeRepositoryInterface" method="execute"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -73,7 +73,7 @@
     </route>
 
     <route url="/V1/reviews/me/:reviewId/unlike" method="POST">
-        <service class="Lof\ProductReviews\Api\UnLikeRepositoryInterface" method="save"/>
+        <service class="Lof\ProductReviews\Api\UnLikeRepositoryInterface" method="execute"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -83,7 +83,7 @@
     </route>
 
     <route url="/V1/reviews/me/:reviewId/report" method="POST">
-        <service class="Lof\ProductReviews\Api\ReportRepositoryInterface" method="save"/>
+        <service class="Lof\ProductReviews\Api\ReportRepositoryInterface" method="execute"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -93,7 +93,7 @@
     </route>
 
     <route url="/V1/reviews/me/verify" method="POST">
-        <service class="Lof\ProductReviews\Api\VerifyRepositoryInterface" method="save"/>
+        <service class="Lof\ProductReviews\Api\VerifyRepositoryInterface" method="execute"/>
         <resources>
             <resource ref="self"/>
         </resources>
