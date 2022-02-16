@@ -55,7 +55,7 @@ class Verify extends \Magento\Framework\App\Action\Action
         \Magento\Framework\App\Action\Context $context,
         \Magento\Sales\Model\Order $order,
         \Magento\Customer\Model\Session $customerSession,
-        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
+        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
     ) {
         $this->_order = $order;
         $this->_customerSession = $customerSession;

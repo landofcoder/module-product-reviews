@@ -201,7 +201,7 @@ class GetProductReviews implements GetProductReviewsInterface
             if ($reviewDataObject->getCustomize()->getIsRecommended()) {
                 $recommended_count++;
             }
-            $reviewDataObject = $this->mappingReviewData($reviewDataObject);
+            $reviewDataObject = $this->helperData->mappingReviewData($reviewDataObject);
 
             $reviews[] = $reviewDataObject;
         }
@@ -297,27 +297,6 @@ class GetProductReviews implements GetProductReviewsInterface
         return $collection;
     }
 
-    /**
-     * maaing customize review
-     *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     */
-    protected function mappingReviewData($reviewDataObject)
-    {
-        $customizeReview = $reviewDataObject->getCustomize();
-        if ($customizeReview) {
-            $reviewDataObject->setVerifiedBuyer($customizeReview->getVerifiedBuyer());
-            $reviewDataObject->setIsRecommended($customizeReview->getIsRecommended());
-            $reviewDataObject->setAnswer($customizeReview->getAnswer());
-            $reviewDataObject->setLikeAbout($customizeReview->getAdvantages());
-            $reviewDataObject->setNotLikeAbout($customizeReview->getDisadvantages());
-            $reviewDataObject->setGuestEmail($customizeReview->getEmailAddress());
-            $reviewDataObject->setPlusReview($customizeReview->getCountHelpful());
-            $reviewDataObject->setMinusReview($customizeReview->getCountUnhelpful());
-        }
-        return $reviewDataObject;
-    }
 
     /**
      * add customize review

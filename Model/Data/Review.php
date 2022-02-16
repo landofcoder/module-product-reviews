@@ -601,4 +601,26 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     {
         return $this->setData(self::MINUS_REVIEW, $minus_review);
     }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->_get(self::COUNTRY);
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        return $this->setData(self::COUNTRY, $country);
+    }
 }

@@ -107,6 +107,7 @@ class RateAjax extends \Magento\Framework\App\Action\Action
                     ->setTotalHelpful($info['total'] + 1)
                     ->save();
             } else {
+                $choice = "unhelpful";
                 $custom->setCountUnhelpful($info['unhelpful'] + 1)
                     ->setTotalHelpful($info['total'] + 1)
                     ->save();
@@ -118,6 +119,7 @@ class RateAjax extends \Magento\Framework\App\Action\Action
                     ->setReviewId($reviewId)
                     ->save();
             } else {
+                $choice = "unhelpful";
                 $modelCustom->setCountUnhelpful(1)
                     ->setTotalHelpful(1)
                     ->setReviewId($reviewId)

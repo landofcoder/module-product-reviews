@@ -82,6 +82,29 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * maaing customize review
+     *
+     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
+     */
+    protected function mappingReviewData($reviewDataObject)
+    {
+        $customizeReview = $reviewDataObject->getCustomize();
+        if ($customizeReview) {
+            $reviewDataObject->setVerifiedBuyer($customizeReview->getVerifiedBuyer());
+            $reviewDataObject->setIsRecommended($customizeReview->getIsRecommended());
+            $reviewDataObject->setAnswer($customizeReview->getAnswer());
+            $reviewDataObject->setLikeAbout($customizeReview->getAdvantages());
+            $reviewDataObject->setNotLikeAbout($customizeReview->getDisadvantages());
+            $reviewDataObject->setGuestEmail($customizeReview->getEmailAddress());
+            $reviewDataObject->setPlusReview($customizeReview->getCountHelpful());
+            $reviewDataObject->setMinusReview($customizeReview->getCountUnhelpful());
+            $reviewDataObject->setCountry($customizeReview->getCountry());
+        }
+        return $reviewDataObject;
+    }
+
+    /**
      * @return bool
      */
     public function getReviewSortingConfig()
@@ -392,11 +415,35 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $imageArr = json_decode($value);
             if ($imageArr) {
                 foreach ($imageArr as $_img) {
-                    $images[] = $imagePath."/".$_img;
+                    $parsed = parse_url($_img);
+                    if (!empty($parsed['scheme'])) {
+                        $images[] = $_img;
+                    } else {
+                        $images[] = $imagePath."/".$_img;
+                    }
                 }
             }
         }
         return $images;
+    }
+
+    /**
+     * format upload image
+     *
+     * @param string $imageUrl
+     * @return string
+     */
+    public function formatUploadImage(string $imageUrl): string
+    {
+        $imagePath = $this->getUploadFilePath();
+        $returnImagePath = "";
+        $parsed = parse_url($imageUrl);
+        if (!empty($parsed['scheme'])) {
+            $returnImagePath = $imageUrl;
+        } else {
+            $returnImagePath = str_replace($imagePath."/", "", $imageUrl);
+        }
+        return $returnImagePath;
     }
 
     /**

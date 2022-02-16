@@ -197,7 +197,7 @@ class GetList implements GetListInterface
                 $reviewDataObject = $this->addCustomize($reviewDataObject);
                 $reviewDataObject = $this->addGalleries($reviewDataObject);
                 $reviewDataObject = $this->addReply($reviewDataObject);
-                $reviewDataObject = $this->mappingReviewData($reviewDataObject);
+                $reviewDataObject = $this->helperData->mappingReviewData($reviewDataObject);
 
                 $reviews[] = $reviewDataObject;
             }
@@ -249,7 +249,7 @@ class GetList implements GetListInterface
                 $reviewDataObject = $this->addCustomize($reviewDataObject);
                 $reviewDataObject = $this->addGalleries($reviewDataObject);
                 $reviewDataObject = $this->addReply($reviewDataObject);
-                $reviewDataObject = $this->mappingReviewData($reviewDataObject);
+                $reviewDataObject = $this->helperData->mappingReviewData($reviewDataObject);
 
                 $reviews[] = $reviewDataObject;
             }
@@ -357,28 +357,6 @@ class GetList implements GetListInterface
         if ($replyCollection->count()) {
             $reviewDataObject->setReply($replyCollection->getItems());
             $reviewDataObject->setReplyTotal($replyCollection->count());
-        }
-        return $reviewDataObject;
-    }
-
-    /**
-     * maaing customize review
-     *
-     * @param mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     * @return mixed|array|\Lof\ProductReviews\Api\Data\ReviewInterface
-     */
-    protected function mappingReviewData($reviewDataObject)
-    {
-        $customizeReview = $reviewDataObject->getCustomize();
-        if ($customizeReview) {
-            $reviewDataObject->setVerifiedBuyer($customizeReview->getVerifiedBuyer());
-            $reviewDataObject->setIsRecommended($customizeReview->getIsRecommended());
-            $reviewDataObject->setAnswer($customizeReview->getAnswer());
-            $reviewDataObject->setLikeAbout($customizeReview->getAdvantages());
-            $reviewDataObject->setNotLikeAbout($customizeReview->getDisadvantages());
-            $reviewDataObject->setGuestEmail($customizeReview->getEmailAddress());
-            $reviewDataObject->setPlusReview($customizeReview->getCountHelpful());
-            $reviewDataObject->setMinusReview($customizeReview->getCountUnhelpful());
         }
         return $reviewDataObject;
     }

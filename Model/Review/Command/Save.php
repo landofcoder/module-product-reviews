@@ -25,14 +25,16 @@ namespace Lof\ProductReviews\Model\Review\Command;
 use Lof\ProductReviews\Api\Data\ReviewInterface;
 use Lof\ProductReviews\Model\Converter\Review\ToModel;
 use Lof\ProductReviews\Model\Converter\Review\ToDataModel;
+use Lof\ProductReviews\Model\Review\Rating\SaveHandler;
+use Lof\ProductReviews\Validation\ValidationException;
+use Lof\ProductReviews\Model\ReviewValidatorInterface;
+use Lof\ProductReviews\Model\CustomReviewFactory;
+use Lof\ProductReviews\Model\GalleryFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Review\Model\ResourceModel\Review as ReviewResource;
-use Lof\ProductReviews\Validation\ValidationException;
-use Lof\ProductReviews\Model\ReviewValidatorInterface;
 use Magento\Review\Model\Review;
 use Magento\Store\Model\StoreManagerInterface;
-use Lof\ProductReviews\Model\Review\Rating\SaveHandler;
 
 /**
  * @inheritdoc
@@ -75,6 +77,16 @@ class Save implements SaveInterface
     private $summaryRateCommand;
 
     /**
+     * @var CustomReviewFactory
+     */
+    private $customReviewFactory;
+
+    /**
+     * @var GalleryFactory
+     */
+    private $galleryFactory;
+
+    /**
      * Save constructor.
      *
      * @param ReviewValidatorInterface $reviewValidator
@@ -84,6 +96,8 @@ class Save implements SaveInterface
      * @param ReviewResource $reviewResource
      * @param SaveHandler $ratingSaveHandler
      * @param SummaryRateInterface $summaryRateCommand
+     * @param CustomReviewFactory $customReviewFactory
+     * @param GalleryFactory $galleryFactory
      */
     public function __construct(
         ReviewValidatorInterface $reviewValidator,
@@ -92,7 +106,9 @@ class Save implements SaveInterface
         StoreManagerInterface $storeManager,
         ReviewResource $reviewResource,
         SaveHandler $ratingSaveHandler,
-        SummaryRateInterface $summaryRateCommand
+        SummaryRateInterface $summaryRateCommand,
+        CustomReviewFactory $customReviewFactory,
+        GalleryFactory $galleryFactory
     ) {
         $this->reviewValidator = $reviewValidator;
         $this->toDataModelConverter = $toDataModelConvert;
@@ -101,6 +117,8 @@ class Save implements SaveInterface
         $this->storeManager = $storeManager;
         $this->ratingSaveHandler = $ratingSaveHandler;
         $this->summaryRateCommand = $summaryRateCommand;
+        $this->galleryFactory = $galleryFactory;
+        $this->customReviewFactory = $customReviewFactory;
     }
 
     /**
@@ -126,11 +144,68 @@ class Save implements SaveInterface
         $model = $this->saveReview($dataModel);
         $this->reviewResource->aggregate($model);
 
+        $this->saveExtraData($dataModel, $model);
+
         $product_id = $model->getEntityPkValue();
         $sku = "";
         $this->summaryRateCommand->execute($sku, $product_id);
 
         return $this->toDataModelConverter->toDataModel($model);
+    }
+
+    /**
+     * Save extra data like customize, gallery images
+     *
+     * @param ReviewInterface $dataModel
+     * @param mixed|object $model
+     * @return mixed|array
+     */
+    public function saveExtraData($dataModel, $model)
+    {
+        $defaultStatus = (int)$this->helperData->getConfig("lof_review_settings/default_status", 2);
+        $defaultStatus = $defaultStatus ? (int)$defaultStatus : 2;
+        $limitImages = $this->helperData->getConfig("lof_review_settings/limit_upload_image", 1);
+        $limitImages = $limitImages ? (int)$limitImages : 1;
+
+        $id = $model->getId();
+        $images = $dataModel->getImages();
+        $average = $this->customReviewFactory->create()->addCountRating($id);
+        $helpful = (int) $dataModel->getPlusReview();
+        $unhelpful = (int) $dataModel->getMinusReview();
+        $total = $helpful + $unhelpful;
+
+        /** save custom review */
+        $customizeData = $this->customReviewFactory->create()
+            ->setAverage($average)
+            ->setReviewId($id)
+            ->setCountHelpful($helpful)
+            ->setCountUnhelpful($unhelpful)
+            ->setTotalHelpful($total)
+            ->setEmailAddress($dataModel->getGuestEmail())
+            ->setVerifiedBuyer($dataModel->getVerifiedBuyer())
+            ->setCountry($dataModel->getCountry())
+            ->setAdvantages($dataModel->getLikeAbout())
+            ->setDisadvantages($dataModel->getNotLikeAbout())
+            ->save();
+
+        /** save gallery */
+        $galleryImages = [];
+        if ($images && count($images) > 0) {
+            foreach ($images as $_image) {
+                $galleryImages[] = $this->helperData->formatUploadImage($_image->getFullPath());
+            }
+        }
+        $galleryData = $this->galleryFactory->create()
+            ->setReviewId($id)
+            ->setLabel('Gallery of Review '.$id)
+            ->setValue(json_encode($galleryImages))
+            ->setStatus($defaultStatus)
+            ->save();
+
+        return [
+            "customize" => $customizeData,
+            "gallery" => $galleryData
+        ];
     }
 
     /**
@@ -179,4 +254,5 @@ class Save implements SaveInterface
             $dataModel->setStoreId($this->storeManager->getStore()->getId());
         }
     }
+
 }
