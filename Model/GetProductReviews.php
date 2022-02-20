@@ -171,6 +171,8 @@ class GetProductReviews implements GetProductReviewsInterface
         $collection->addStoreData();
         $collection->addFieldToFilter('sku', $sku);
 
+        $reviews_count = $collection->getSize();
+
         /** Filter by keyword */
         $collection = $this->buildFilterKeyword($collection, $keyword);
         if ($limit) {
@@ -181,8 +183,8 @@ class GetProductReviews implements GetProductReviewsInterface
         }
         /** Sort By */
         $collection = $this->addSortByToCollection($collection, $sort_by);
-        $reviews_count = $collection->getSize();
-        $foundTotal = $collection->count();
+        $foundTotal = $collection->getSize();
+
         /** Add rate votes for collection */
         $collection->addRateVotes();
 
