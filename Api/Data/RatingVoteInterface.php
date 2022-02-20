@@ -37,6 +37,9 @@ interface RatingVoteInterface
     const KEY_VALUE = 'value';
     const KEY_PERCENT = 'percent';
     const KEY_RATING_NAME = 'rating_name';
+    const KEY_RATING_CODE = 'rating_code';
+    const KEY_REVIEW_ID = 'review_id';
+    const KEY_OPTION_ID = 'option_id';
 
     /**
      * Get rating vote id.
@@ -116,4 +119,49 @@ interface RatingVoteInterface
      * @return RatingVoteInterface
      */
     public function setValue($value);
+
+    /**
+     * Get rating code.
+     *
+     * @return string
+     */
+    public function getRatingCode();
+
+    /**
+     * Set rating code.
+     *
+     * @param string $rating_code
+     * @return RatingVoteInterface
+     */
+    public function setRatingCode($rating_code);
+
+    /**
+     * Get rating review_id.
+     *
+     * @return int
+     */
+    public function getReviewId();
+
+    /**
+     * Set rating review_id.
+     *
+     * @param int $review_id
+     * @return RatingVoteInterface
+     */
+    public function setReviewId($review_id);
+
+    /**
+     * Get rating option_id.
+     *
+     * @return int
+     */
+    public function getOptionId();
+
+    /**
+     * Set rating option_id.
+     *
+     * @param int $option_id
+     * @return RatingVoteInterface
+     */
+    public function setOptionId($option_id);
 }

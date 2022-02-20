@@ -90,13 +90,14 @@ class LoadHandler
         $ratingList = [];
         $reviewRatings = $this->getReviewRatingVotes($productReview);
         $storeId = (int) $productReview->getStoreId();
+        $reviewId = (int) $productReview->getId();
         $ratingCollection = $this->getRatingCollection($storeId);
 
         foreach ($reviewRatings as $ratingVote) {
             $rating = $ratingCollection->getItemByColumnValue('rating_id', $ratingVote->getRatingId());
 
             if ($rating) {
-                $ratingList[] = $this->convertRatingVoteToDataModel($ratingVote, $rating);
+                $ratingList[] = $this->convertRatingVoteToDataModel($ratingVote, $rating, $reviewId);
             }
         }
 
@@ -108,12 +109,14 @@ class LoadHandler
      *
      * @param Vote $ratingVote
      * @param Rating $rating
+     * @param int $reviewId
      *
      * @return RatingVoteInterface
      */
     private function convertRatingVoteToDataModel(
         Vote $ratingVote,
-        Rating $rating
+        Rating $rating,
+        int $reviewId
     ): RatingVoteInterface {
         $ratingData = [
             'value' => $ratingVote->getValue(),
@@ -121,6 +124,9 @@ class LoadHandler
             'vote_id' => $ratingVote->getVoteId(),
             'rating_id' => $rating->getId(),
             'rating_name' => $rating->getRatingCode(),
+            'rating_code' => $rating->getRatingCode(),
+            'review_id' => $reviewId,
+            'option_id' => 0
         ];
 
         return $this->ratingConverter->arrayToDataModel($ratingData);

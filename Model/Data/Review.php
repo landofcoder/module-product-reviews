@@ -259,7 +259,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface $customize
+     * @param \Lof\ProductReviews\Api\Data\CustomizeInterface $customize
      *
      * @return Review|void
      */
