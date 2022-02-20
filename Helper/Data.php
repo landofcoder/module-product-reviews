@@ -222,6 +222,23 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->scopeConfig->getValue(self::XML_SENDER_EMAIL, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
+    /**
+     * get is enabled module
+     *
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return (bool)$this->getConfig("lof_general_settings/enabled_module");
+    }
+
+    /**
+     * get config
+     *
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
     public function getConfig($key, $default = "")
     {
         $key = 'lof_product_reviews/' . $key;
