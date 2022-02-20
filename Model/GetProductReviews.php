@@ -223,6 +223,8 @@ class GetProductReviews implements GetProductReviewsInterface
         $responseReviewData->setRatingSummaryValue($rating_summary_value);
         $responseReviewData->setRecomendedPercent($recomended_percent);
         $responseReviewData->setDetailedSummary($detailedSummary);
+        $responseReviewData->setPageSize($limit);
+        $responseReviewData->setCurPage($page);
         $responseReviewData->setItems($reviews);
 
         return $responseReviewData;

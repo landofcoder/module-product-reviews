@@ -76,6 +76,50 @@ class ReviewData extends AbstractSimpleObject implements ReviewDataInterface
     }
 
     /**
+     * Get total_records
+     *
+     * @return int
+     */
+    public function getPageSize()
+    {
+        return $this->_get(self::PAGE_SIZE);
+    }
+
+    /**
+     * Set page_size
+     *
+     * @param int $page_size
+     *
+     * @return $this
+     */
+    public function setPageSize(int $page_size)
+    {
+        return $this->setData(self::PAGE_SIZE, $page_size);
+    }
+
+    /**
+     * Get cur_page
+     *
+     * @return int
+     */
+    public function getCurPage()
+    {
+        return $this->_get(self::CUR_PAGE);
+    }
+
+    /**
+     * Set cur_page
+     *
+     * @param int $cur_page
+     *
+     * @return $this
+     */
+    public function setCurPage(int $cur_page = 1)
+    {
+        return $this->setData(self::CUR_PAGE, $cur_page);
+    }
+
+    /**
      * Get rating_summary
      *
      * @return float|int

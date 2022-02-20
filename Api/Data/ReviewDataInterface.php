@@ -40,6 +40,41 @@ interface ReviewDataInterface
     const RECOMMEND_PERCENT = 'recomended_percent';
     const DETAILED_SUMMARY = 'detailed_summary';
     const ITEMS = 'items';
+    const PAGE_SIZE = 'page_size';
+    const CUR_PAGE = 'cur_page';
+
+
+    /**
+     * Get page_size
+     *
+     * @return float|int
+     */
+    public function getPageSize();
+
+    /**
+     * Set page_size
+     *
+     * @param int $page_size
+     *
+     * @return $this
+     */
+    public function setPageSize(int $page_size);
+
+    /**
+     * Get cur_page
+     *
+     * @return float|int
+     */
+    public function getCurPage();
+
+    /**
+     * Set cur_page
+     *
+     * @param int $cur_page
+     *
+     * @return $this
+     */
+    public function setCurPage(int $cur_page = 1);
 
     /**
      * Get total_records
