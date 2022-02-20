@@ -120,6 +120,28 @@ class ReviewData extends AbstractSimpleObject implements ReviewDataInterface
     }
 
     /**
+     * Get total_found
+     *
+     * @return int
+     */
+    public function getTotalFound()
+    {
+        return $this->_get(self::TOTAL_FOUND);
+    }
+
+    /**
+     * Set total_found
+     *
+     * @param int $total_found
+     *
+     * @return $this
+     */
+    public function setTotalFound(int $total_found)
+    {
+        return $this->setData(self::TOTAL_FOUND, $total_found);
+    }
+
+    /**
      * Get rating_summary
      *
      * @return float|int

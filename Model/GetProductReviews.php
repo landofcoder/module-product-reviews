@@ -182,6 +182,7 @@ class GetProductReviews implements GetProductReviewsInterface
         /** Sort By */
         $collection = $this->addSortByToCollection($collection, $sort_by);
         $reviews_count = $collection->getSize();
+        $foundTotal = $collection->count();
         /** Add rate votes for collection */
         $collection->addRateVotes();
 
@@ -224,6 +225,7 @@ class GetProductReviews implements GetProductReviewsInterface
         $responseReviewData->setRecomendedPercent($recomended_percent);
         $responseReviewData->setDetailedSummary($detailedSummary);
         $responseReviewData->setPageSize($limit);
+        $responseReviewData->setTotalFound($foundTotal);
         $responseReviewData->setCurPage($page);
         $responseReviewData->setItems($reviews);
 

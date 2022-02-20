@@ -42,7 +42,7 @@ interface ReviewDataInterface
     const ITEMS = 'items';
     const PAGE_SIZE = 'page_size';
     const CUR_PAGE = 'cur_page';
-
+    const TOTAL_FOUND = 'total_found';
 
     /**
      * Get page_size
@@ -59,6 +59,22 @@ interface ReviewDataInterface
      * @return $this
      */
     public function setPageSize(int $page_size);
+
+    /**
+     * Get total_found
+     *
+     * @return float|int
+     */
+    public function getTotalFound();
+
+    /**
+     * Set total_found
+     *
+     * @param int $total_found
+     *
+     * @return $this
+     */
+    public function setTotalFound(int $total_found);
 
     /**
      * Get cur_page
