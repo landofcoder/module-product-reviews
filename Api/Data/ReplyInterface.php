@@ -45,6 +45,7 @@ interface ReplyInterface
     const AVATAR_URL = 'avatar_url';
     const ADMIN_USER_ID = 'admin_user_id';
     const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
     const REPLY_CUSTOMER_ID = 'reply_customer_id';
 
     /**
@@ -256,4 +257,19 @@ interface ReplyInterface
      * @return ReplyInterface
      */
     public function setCreatedAt($created_at);
+
+    /**
+     * Get rating updated_at.
+     *
+     * @return string
+     */
+    public function getUpdatedAt();
+
+    /**
+     * Set rating updated_at.
+     *
+     * @param string|null $updated_at
+     * @return ReplyInterface
+     */
+    public function setUpdatedAt($updated_at);
 }

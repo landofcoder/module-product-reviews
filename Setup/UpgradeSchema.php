@@ -283,6 +283,19 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 ]
             );
         }
+        if (version_compare($context->getVersion(), '1.0.6', '<')) {
+            $replyTable = $installer->getTable('lof_review_reply');
+            $installer->getConnection()->addColumn(
+                $replyTable,
+                'updated_at',
+                [
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                    'nullable' => true,
+                    'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT_UPDATE,
+                    'comment' => 'Updated time',
+                ]
+            );
+        }
         $installer->endSetup();
     }
 }
