@@ -171,6 +171,8 @@ class GetProductReviews implements GetProductReviewsInterface
         $collection->addStoreData();
         $collection->addFieldToFilter('sku', $sku);
 
+        $reviews_count = $collection->getSize();
+
         /** Filter by keyword */
         $collection = $this->buildFilterKeyword($collection, $keyword);
         if ($limit) {
@@ -181,7 +183,8 @@ class GetProductReviews implements GetProductReviewsInterface
         }
         /** Sort By */
         $collection = $this->addSortByToCollection($collection, $sort_by);
-        $reviews_count = $collection->getSize();
+        $foundTotal = $collection->getSize();
+
         /** Add rate votes for collection */
         $collection->addRateVotes();
 
@@ -223,6 +226,9 @@ class GetProductReviews implements GetProductReviewsInterface
         $responseReviewData->setRatingSummaryValue($rating_summary_value);
         $responseReviewData->setRecomendedPercent($recomended_percent);
         $responseReviewData->setDetailedSummary($detailedSummary);
+        $responseReviewData->setPageSize($limit);
+        $responseReviewData->setTotalFound($foundTotal);
+        $responseReviewData->setCurPage($page);
         $responseReviewData->setItems($reviews);
 
         return $responseReviewData;

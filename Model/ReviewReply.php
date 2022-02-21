@@ -342,4 +342,20 @@ class ReviewReply extends \Magento\Framework\Model\AbstractModel implements Repl
     {
         return $this->setData(self::CREATED_AT, $created_at);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getUpdatedAt()
+    {
+        return $this->getData(self::UPDATED_AT);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        return $this->setData(self::UPDATED_AT, $updated_at);
+    }
 }
