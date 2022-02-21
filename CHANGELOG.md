@@ -11,3 +11,7 @@
 - Upgrade database tables add some columns
 - Refactor list reviews
 - Update email templates
+
+# Version 1.0.6 - 02/16/2022
+- Refactor REST API
+- Add new column updated_at for table "lof_review_reply"
