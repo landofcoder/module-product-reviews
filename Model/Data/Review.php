@@ -623,4 +623,22 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     {
         return $this->setData(self::COUNTRY, $country);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getReportAbuse()
+    {
+        return $this->_get(self::REPORT_ABUSE);
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @return $this
+     */
+    public function setReportAbuse($reportAbuse)
+    {
+        return $this->setData(self::REPORT_ABUSE, $reportAbuse);
+    }
 }

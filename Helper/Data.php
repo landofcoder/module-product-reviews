@@ -102,6 +102,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $reviewDataObject->setPlusReview($customizeReview->getCountHelpful());
             $reviewDataObject->setMinusReview($customizeReview->getCountUnhelpful());
             $reviewDataObject->setCountry($customizeReview->getCountry());
+            $reviewDataObject->setReportAbuse($customizeReview->getReportAbuse());
         }
         return $reviewDataObject;
     }

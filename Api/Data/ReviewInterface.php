@@ -69,6 +69,7 @@ interface ReviewInterface
     const GUEST_EMAIL = 'guest_email';
     const PLUS_REVIEW = 'plus_review';
     const MINUS_REVIEW = 'minus_review';
+    const REPORT_ABUSE = 'report_abuse';
     const COUNTRY = 'country';
 
     const REVIEW_TYPE_CUSTOMER = 1;
@@ -506,4 +507,17 @@ interface ReviewInterface
      * @return $this
      */
     public function setCountry($country);
+
+    /**
+     * Get report_abuse
+     * @return int|null
+     */
+    public function getReportAbuse();
+
+    /**
+     * Set report_abuse
+     * @param int $reportAbuse
+     * @return $this
+     */
+    public function setReportAbuse($reportAbuse);
 }
