@@ -22,7 +22,8 @@ Knowing the importance of boosting the customer’s trust to stores via reviews,
 - Multiple languages - RTL supports
 - Fast Speed with Magento Block Caching
 - Attractive Custom Work service
-- Support REST APIs
+- Support REST API
+- Support Graph Ql [Product Review GraphQl Module](https://github.com/landofcoder/module-product-reviews-graph-ql)
 
 1. **Enjoy Amazing Customer Experience With Us**
 
