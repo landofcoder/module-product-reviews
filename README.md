@@ -92,7 +92,6 @@ Use console command as this: ```php bin/magento lofreview:index-summary:process 
 - View Replies list on frontend
 - Refactor Import Reviews CSV
 - Allow User Submit Reply a comment on frontend
-- GraphQl module
 
 ## Demo
 
