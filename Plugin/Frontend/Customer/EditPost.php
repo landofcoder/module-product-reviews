@@ -77,32 +77,35 @@ class EditPost extends \Magento\Customer\Controller\Account\EditPost
     public function afterExecute(\Magento\Customer\Controller\Account\EditPost $object, $resultRedirect)
     {
         $data = $object->getRequest()->getPostValue();
-        $customerId = $this->session->getCustomerData()->getId();
-        $customerName = $data['firstname'] . ' ' . $data['lastname'];
-        $customerEmail = isset($data['email']) ? $data['email'] : '';
-        if ($customerEmail) {
-            try {
-                $reminders = $this->_reminders->getCollection()->getData();
-                if (!empty($reminders)) {
-                    foreach ($reminders as $reminder) {
-                        if ($customerId == $reminder['customer_id']) {
-                            $model = $this->_reminders->load($reminder['id']);
-                            $model->setName($customerName)
-                                ->setEmail($customerEmail)
-                                ->save();
+        $customerSession = $this->session->getCustomerData();
+        if ($customerSession) {
+            $customerId = $customerSession->getId();
+            $customerName = $data['firstname'] . ' ' . $data['lastname'];
+            $customerEmail = isset($data['email']) ? $data['email'] : '';
+            if ($customerEmail) {
+                try {
+                    $reminders = $this->_reminders->getCollection()->getData();
+                    if (!empty($reminders)) {
+                        foreach ($reminders as $reminder) {
+                            if ($customerId == $reminder['customer_id']) {
+                                $model = $this->_reminders->load($reminder['id']);
+                                $model->setName($customerName)
+                                    ->setEmail($customerEmail)
+                                    ->save();
+                            }
                         }
                     }
+                    $resultRedirect->setPath('customer/account');
+                    return $resultRedirect;
+                } catch (\Magento\Framework\Exception\LocalizedException $e) {
+                    $this->messageManager->addError($e->getMessage());
+                } catch (\Exception $e) {
+                    $this->messageManager->addException($e, __('Could not update customer info to review reminder.'));
                 }
+            } else {
                 $resultRedirect->setPath('customer/account');
                 return $resultRedirect;
-            } catch (\Magento\Framework\Exception\LocalizedException $e) {
-                $this->messageManager->addError($e->getMessage());
-            } catch (\Exception $e) {
-                $this->messageManager->addException($e, __('Could not update customer info to review reminder.'));
             }
-        } else {
-            $resultRedirect->setPath('customer/account');
-            return $resultRedirect;
         }
     }
 }
