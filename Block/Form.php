@@ -59,13 +59,13 @@ class Form extends \Magento\Review\Block\Form
      * @param \Magento\Framework\Message\ManagerInterface $messageManager
      * @param \Magento\Framework\App\Http\Context $httpContext
      * @param \Magento\Customer\Model\Url $customerUrl
-     * @param array $data
-     * @param \Magento\Framework\Serialize\Serializer\Json|null $serializer
      * @param \Lof\ProductReviews\Helper\Data $helperData
      * @param \Magento\Framework\App\ProductMetadataInterface $productMetadata
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
      * @param \Magento\Sales\Model\Order\Config $orderConfig
+     * @param array $data
+     * @param \Magento\Framework\Serialize\Serializer\Json|null $serializer
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -78,13 +78,13 @@ class Form extends \Magento\Review\Block\Form
         \Magento\Framework\Message\ManagerInterface $messageManager,
         \Magento\Framework\App\Http\Context $httpContext,
         \Magento\Customer\Model\Url $customerUrl,
-        array $data = [],
-        \Magento\Framework\Serialize\Serializer\Json $serializer = null,
         \Lof\ProductReviews\Helper\Data $helperData,
         \Magento\Framework\App\ProductMetadataInterface $productMetadata,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory,
-        \Magento\Sales\Model\Order\Config $orderConfig
+        \Magento\Sales\Model\Order\Config $orderConfig,
+        array $data = [],
+        \Magento\Framework\Serialize\Serializer\Json $serializer = null
     ) {
         $this->helperData = $helperData;
         $this->productMetadata = $productMetadata;
