@@ -22,6 +22,7 @@ declare(strict_types=1);
 
 namespace Lof\ProductReviews\Model;
 
+use Lof\ProductReviews\Api\Data\VerifyInterface;
 use Lof\ProductReviews\Api\VerifyRepositoryInterface;
 use Lof\ProductReviews\Helper\Data as HelperData;
 use Lof\ProductReviews\Model\Review\Command\VerifyBuyerInterface;
