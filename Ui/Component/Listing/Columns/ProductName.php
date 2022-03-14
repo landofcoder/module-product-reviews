@@ -50,18 +50,18 @@ class ProductName extends Column
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
      * @param UrlInterface $urlBuilder
+     * @param \Magento\catalog\Model\ProductFactory $product
      * @param array $components
      * @param array $data
-     * @param \Magento\catalog\Model\ProductFactory $product
      * @param string $editUrl
      */
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         UrlInterface $urlBuilder,
+        \Magento\catalog\Model\ProductFactory $product,
         array $components = [],
         array $data = [],
-        \Magento\catalog\Model\ProductFactory $product,
         $editUrl = self::PRODUCT_URL_PATH_EDIT
     ) {
         $this->urlBuilder = $urlBuilder;
