@@ -220,11 +220,17 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
     }
 
     /**
-     * @param $image , $width, $height
-     * @return $imageLink
+     * @param string $image
+     * @param int|float|string $width
+     * @param int|float|string $height
+     * @return string
      */
     public function resizeImage($image, $width, $height)
     {
+        $parsed = parse_url($image);
+        if (!empty($parsed['scheme'])) {
+            return $image;
+        }
         $absolutePath = $this->_filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath('lof/product_reviews/') . $image;
         if (!file_exists($absolutePath)) {
             return false;
