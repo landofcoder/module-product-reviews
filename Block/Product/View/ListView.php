@@ -206,12 +206,16 @@ class ListView extends \Magento\Review\Block\Product\View\ListView
     }
 
     /**
-     * @param $image
+     * @param string $image
      * @return string
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getMediaUrl($image)
     {
+        $parsed = parse_url($image);
+        if (!empty($parsed['scheme'])) {
+            return $image;
+        }
         $mediaUrl = $this->_storeManager
                 ->getStore()
                 ->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . 'lof/product_reviews/' . ltrim($image, '/');
