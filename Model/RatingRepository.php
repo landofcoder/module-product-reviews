@@ -105,8 +105,8 @@ class RatingRepository implements RatingRepositoryInterface
         foreach ($ratingCollection as $_rating) {
             $data = [
                 "rating_id" => $_rating->getRatingId(),
-                "rating_name" => $_rating->getRatingcode(),
-                'rating_code' => $_rating->getRatingcode()
+                "rating_name" => $_rating->getData("rating_code"),
+                'rating_code' => $_rating->getData("rating_code")
             ];
             $items[] = $this->ratingConverter->arrayToDataModel($data);
         }
@@ -130,7 +130,6 @@ class RatingRepository implements RatingRepositoryInterface
                 ->addRatingPerStoreName($storeId)
                 ->setPositionOrder()
                 ->load();
-
             $this->ratingCollection = $ratingCollection;
         }
 
