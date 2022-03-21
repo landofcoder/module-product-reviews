@@ -35,6 +35,7 @@ interface ReviewInterface
     const STATUS_ID = 'status_id';
     const TITLE = 'title';
     const DETAIL = 'detail';
+    const REVIEW_ID = 'review_id';
 
     /**
      * Product id

@@ -397,7 +397,6 @@ Common rest api docs
         "full_path": "string"
       }
     ],
-    "entity_pk_value": 0,
     "store_id": 0,
     "stores": [
       0
@@ -409,7 +408,6 @@ Common rest api docs
   }
 }
 ```
-- entity_pk_value : that is product id
 
 - Response: 
 

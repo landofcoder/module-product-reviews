@@ -36,6 +36,7 @@
     <preference for="Lof\ProductReviews\Api\CustomizeRepositoryInterface" type="Lof\ProductReviews\Model\CustomizeRepository"/>
     <preference for="Lof\ProductReviews\Api\RemindersRepositoryInterface" type="Lof\ProductReviews\Model\RemindersRepository"/>
     <preference for="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" type="Lof\ProductReviews\Model\ReportHistoryRepository"/>
+    <preference for="Lof\ProductReviews\Api\RatingRepositoryInterface" type="Lof\ProductReviews\Model\RatingRepository" />
 
     <!-- API Data -->
     <preference for="Lof\ProductReviews\Api\Data\GallerySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>

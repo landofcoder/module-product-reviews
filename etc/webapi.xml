@@ -118,6 +118,13 @@
         </resources>
     </route>
 
+    <route url="/V1/reviews/ratings/:storeId" method="GET">
+        <service class="Lof\ProductReviews\Api\RatingRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- Admin API -->
 
     <route url="/V1/reviews" method="GET">

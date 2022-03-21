@@ -88,9 +88,11 @@ class SaveHandler
         $votes = $this->getVotes($reviewId);
 
         foreach ($reviewRatings as $ratingVote) {
-            $ratingCode = $ratingVote->getRatingName();
-            $ratingId = $this->getRatingIdByCode->execute($ratingCode, $storeId);
-
+            $ratingId = $ratingVote->getRatingId();
+            if (!$ratingId) {
+                $ratingCode = $ratingVote->getRatingName();
+                $ratingId = $this->getRatingIdByCode->execute($ratingCode, $storeId);
+            }
             if (!$ratingId) {
                 /*TODO Throw error if given rating is not available in store*/
                 continue;

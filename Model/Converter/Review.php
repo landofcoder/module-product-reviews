@@ -22,19 +22,19 @@ declare(strict_types=1);
 
 namespace Lof\ProductReviews\Model\Converter;
 
-use Lof\ProductReviews\Api\Data\RatingVoteInterface as RatingDataInterface;
-use Lof\ProductReviews\Api\Data\RatingVoteInterfaceFactory as RatingDataFactory;
+use Lof\ProductReviews\Api\Data\ReviewInterface as ReviewDataInterface;
+use Lof\ProductReviews\Api\Data\ReviewInterfaceFactory as RreviewDataFactory;
 use Magento\Framework\Api\DataObjectHelper;
 
 /**
- * Class RatingVote
+ * Class Review
  */
-class RatingVote
+class Review
 {
     /**
-     * @var RatingDataFactory
+     * @var RreviewDataFactory
      */
-    private $ratingDataFactory;
+    private $reviewDataFactory;
 
     /**
      * @var DataObjectHelper
@@ -45,33 +45,33 @@ class RatingVote
      * ToDataModel constructor.
      *
      * @param DataObjectHelper $dataObjectHelper
-     * @param RatingDataFactory $ratingDataFactory
+     * @param RreviewDataFactory $reviewDataFactory
      */
     public function __construct(
         DataObjectHelper $dataObjectHelper,
-        RatingDataFactory $ratingDataFactory
+        RreviewDataFactory $reviewDataFactory
     ) {
         $this->dataObjectHelper = $dataObjectHelper;
-        $this->ratingDataFactory = $ratingDataFactory;
+        $this->reviewDataFactory = $reviewDataFactory;
     }
 
     /**
-     * Retrieve Rating
+     * Retrieve Review object model
      *
      * @param array $data
      *
-     * @return \Lof\ProductReviews\Api\Data\RatingVoteInterface
+     * @return ReviewDataInterface
      */
-    public function arrayToDataModel(array $data): RatingDataInterface
+    public function arrayToDataModel(array $data): ReviewDataInterface
     {
-        /** @var RatingDataInterface $rating */
-        $rating = $this->ratingDataFactory->create();
+        /** @var ReviewDataInterface $review */
+        $review = $this->reviewDataFactory->create();
         $this->dataObjectHelper->populateWithArray(
-            $rating,
+            $review,
             $data,
-            RatingDataInterface::class
+            ReviewDataInterface::class
         );
 
-        return $rating;
+        return $review;
     }
 }
