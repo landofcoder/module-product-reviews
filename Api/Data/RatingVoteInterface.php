@@ -81,7 +81,7 @@ interface RatingVoteInterface
      * Set Review Percent
      *
      * @param int $percent
-     * @return RatingVoteInterface
+     * @return $this
      */
     public function setPercent($percent);
 
@@ -90,7 +90,7 @@ interface RatingVoteInterface
      *
      * @param int $id
      *
-     * @return RatingVoteInterface
+     * @return $this
      */
     public function setVoteId($id);
 
@@ -108,7 +108,7 @@ interface RatingVoteInterface
      *
      * @param string $ratingCode
      *
-     * @return RatingVoteInterface
+     * @return $this
      */
     public function setRatingName($ratingCode);
 
@@ -116,7 +116,7 @@ interface RatingVoteInterface
      * Set rating value.
      *
      * @param int $value
-     * @return RatingVoteInterface
+     * @return $this
      */
     public function setValue($value);
 
@@ -131,7 +131,7 @@ interface RatingVoteInterface
      * Set rating code.
      *
      * @param string $rating_code
-     * @return RatingVoteInterface
+     * @return $this
      */
     public function setRatingCode($rating_code);
 
@@ -146,7 +146,7 @@ interface RatingVoteInterface
      * Set rating review_id.
      *
      * @param int $review_id
-     * @return RatingVoteInterface
+     * @return $this
      */
     public function setReviewId($review_id);
 
@@ -161,7 +161,7 @@ interface RatingVoteInterface
      * Set rating option_id.
      *
      * @param int $option_id
-     * @return RatingVoteInterface
+     * @return $this
      */
     public function setOptionId($option_id);
 }

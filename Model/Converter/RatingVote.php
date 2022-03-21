@@ -60,7 +60,7 @@ class RatingVote
      *
      * @param array $data
      *
-     * @return RatingDataInterface
+     * @return \Lof\ProductReviews\Api\Data\RatingVoteInterface
      */
     public function arrayToDataModel(array $data): RatingDataInterface
     {
