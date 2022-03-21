@@ -126,7 +126,7 @@ class LoadHandler
             'rating_name' => $rating->getRatingCode(),
             'rating_code' => $rating->getRatingCode(),
             'review_id' => $reviewId,
-            'option_id' => 0
+            'option_id' => $ratingVote->getOptionId()
         ];
 
         return $this->ratingConverter->arrayToDataModel($ratingData);

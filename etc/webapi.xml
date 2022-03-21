@@ -118,7 +118,7 @@
         </resources>
     </route>
 
-    <route url="/V1/reviews/ratings/:storeCode" method="GET">
+    <route url="/V1/reviews/ratings/:storeId" method="GET">
         <service class="Lof\ProductReviews\Api\RatingRepositoryInterface" method="getList"/>
         <resources>
             <resource ref="anonymous"/>

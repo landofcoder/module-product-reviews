@@ -51,6 +51,6 @@ interface RatingRepositoryInterface
      * @return \Lof\ProductReviews\Api\Data\RatingVoteInterface[]
      */
     public function getList(
-        $store_id = null
+        $storeId = null
     );
 }

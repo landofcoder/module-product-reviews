@@ -92,15 +92,15 @@ class RatingRepository implements RatingRepositoryInterface
      * @inheritdoc
      *
      */
-    public function getList($store_id = null)
+    public function getList($storeId = null)
     {
-        if ($store_id) {
-            if (!is_numeric($store_id)) {
-                $store = $this->storeManager->getStore($store_id);
-                $store_id = $store ? $store->getId() : 0;
+        if ($storeId) {
+            if (!is_numeric($storeId)) {
+                $store = $this->storeManager->getStore($storeId);
+                $storeId = $store ? $store->getId() : 0;
             }
         }
-        $ratingCollection = $this->getRatingCollection((int)$store_id);
+        $ratingCollection = $this->getRatingCollection((int)$storeId);
         $items = [];
         foreach ($ratingCollection as $_rating) {
             $data = [

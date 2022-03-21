@@ -155,6 +155,7 @@ class PostProductReviews implements PostProductReviewsInterface
         $review->setPlusReview(0);
         $review->setMinusReview(0);
         $review->setVerifiedBuyer( $isVerified ? 1 : 0);
+        $review->setEntityPkValue((int)$productId);
 
         return $this->commandSaveReview->execute($review);
     }
