@@ -105,10 +105,10 @@ class Image extends ImageField
             $imageName = $this->_jsonDecoder->decode($gallery['value']);
             $i = 0;
             foreach ($imageName as $data) {
+                $url = $data;
                 if (!preg_match("/^http\:\/\/|https\:\/\//", $data)) {
                     $url = $this->_urlBuilder->getBaseUrl(['_type' => UrlInterface::URL_TYPE_MEDIA]) . 'lof/product_reviews/' . $data;
                 }
-
                 echo '<a href="' .
                     $url .
                     '"' .
