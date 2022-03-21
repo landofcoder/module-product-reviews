@@ -521,18 +521,4 @@ interface ReviewInterface
      * @return $this
      */
     public function setReportAbuse($reportAbuse);
-
-    /**
-     * Get review_id
-     *
-     * @return int
-     */
-    public function getReviewId();
-
-    /**
-     * set review_id
-     * @param int $review_id
-     * @return $this
-     */
-    public function setReviewId($review_id);
 }
