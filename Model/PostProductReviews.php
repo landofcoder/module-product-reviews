@@ -145,9 +145,12 @@ class PostProductReviews implements PostProductReviewsInterface
                 $countryCode = $foundAddress ? $foundAddress->getCountryId() : "";
             }
             $review->setCustomerId($customerId);
+            $review->setGuestEmail($customerData->getEmail());
+        }
+        if (!$review->getGuestEmail()) {
+            throw new NoSuchEntityException(__('Missing required Field Guest Email Address.'));
         }
         $review->setReviewEntity("product");
-        $review->setGuestEmail($customerData->getEmail());
         $review->setCountry($countryCode);
         $review->setId(0);
         $review->setReviewStatus(self::STATUS_PENDING);
