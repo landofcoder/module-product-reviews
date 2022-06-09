@@ -123,31 +123,32 @@ class PostProductReviews implements PostProductReviewsInterface
         $verify_purchased_code = $this->helperData->getConfig("lof_review_settings/verify_purchased_code");
         $required_verify_purchased = $this->helperData->getConfig("lof_review_settings/required_verify_purchased");
         $isVerified = false;
-        if ($verify_purchased_code && $required_verify_purchased && $this->helperData->getAutoVerifyConfig()) {
+        if ($verify_purchased_code && $required_verify_purchased && $this->helperData->getAutoVerifyConfig() && $customerId) {
             $isVerified = $this->commandVerifyBuyer->execute($customerId, "", $productId, "");
             if (!$isVerified) {
                 throw new NoSuchEntityException(__('You should purchased the product with SKU "%1" before review.', $sku));
             }
         }
-        $customerData = $this->customerRepository->getById($customerId);
-        $defaultAddressId = $customerData->getDefaultBilling();
-        $addresses = $customerData->getAddresses();
         $countryCode = "";
-        if ($addresses && $defaultAddressId) {
-            $foundAddress = null;
-            foreach ($addresses as $_address) {
-                if ($_address->getId() == (int)$defaultAddressId) {
-                    $foundAddress = $_address;
-                    break;
+        if ($customerId) {
+            $customerData = $this->customerRepository->getById($customerId);
+            $defaultAddressId = $customerData->getDefaultBilling();
+            $addresses = $customerData->getAddresses();
+            if ($addresses && $defaultAddressId) {
+                $foundAddress = null;
+                foreach ($addresses as $_address) {
+                    if ($_address->getId() == (int)$defaultAddressId) {
+                        $foundAddress = $_address;
+                        break;
+                    }
                 }
+                $countryCode = $foundAddress ? $foundAddress->getCountryId() : "";
             }
-            $countryCode = $foundAddress ? $foundAddress->getCountryId() : "";
+            $review->setCustomerId($customerId);
         }
-
         $review->setReviewEntity("product");
         $review->setGuestEmail($customerData->getEmail());
         $review->setCountry($countryCode);
-        $review->setCustomerId($customerId);
         $review->setId(0);
         $review->setReviewStatus(self::STATUS_PENDING);
         $review->setIsRecommended(false);
