@@ -35,7 +35,7 @@ use Lof\ProductReviews\Api\ReviewRepositoryInterface;
 use Lof\ProductReviews\Api\Data\ReviewInterface;
 use Lof\ProductReviews\Api\Data\ReplyInterface;
 use Lof\ProductReviews\Api\Data\ReplySearchResultInterface;
-use Magento\Framework\Api\SearchCriteria;
+use Magento\Framework\Api\SearchCriteriaInterface;
 
 /**
  * @inheritdoc
@@ -231,11 +231,11 @@ class ReviewRepository implements ReviewRepositoryInterface
      * @inheritdoc
      *
      * @param int $reviewId
-     * @param SearchCriteria|null $searchCriteria
+     * @param SearchCriteriaInterface|null $searchCriteria
      * @return ReviewSearchResultInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getListReply(int $reviewId, SearchCriteria $searchCriteria = null): ReplySearchResultInterface
+    public function getListReply(int $reviewId, SearchCriteriaInterface $searchCriteria = null): ReplySearchResultInterface
     {
         return $this->commandGetListReply->execute($reviewId, $searchCriteria);
     }
@@ -243,11 +243,11 @@ class ReviewRepository implements ReviewRepositoryInterface
     /**
      * @inheritdoc
      *
-     * @param SearchCriteria|null $searchCriteria
+     * @param SearchCriteriaInterface|null $searchCriteria
      *
      * @return ReviewSearchResultInterface
      */
-    public function getList(SearchCriteria $searchCriteria = null): ReviewSearchResultInterface
+    public function getList(SearchCriteriaInterface $searchCriteria = null): ReviewSearchResultInterface
     {
         return $this->commandGetList->execute($searchCriteria);
     }
@@ -256,11 +256,11 @@ class ReviewRepository implements ReviewRepositoryInterface
      * @inheritdoc
      *
      * @param int $customerId
-     * @param SearchCriteria|null $searchCriteria
+     * @param SearchCriteriaInterface|null $searchCriteria
      *
      * @return ReviewSearchResultInterface
      */
-    public function getMyList(int $customerId, SearchCriteria $searchCriteria = null): ReviewSearchResultInterface
+    public function getMyList(int $customerId, SearchCriteriaInterface $searchCriteria = null): ReviewSearchResultInterface
     {
         return $this->commandGetList->executeByCustomer($customerId, $searchCriteria);
     }
@@ -298,11 +298,11 @@ class ReviewRepository implements ReviewRepositoryInterface
      *
      * @param int $customerId
      * @param int $reviewId
-     * @param SearchCriteria|null $searchCriteria
+     * @param SearchCriteriaInterface|null $searchCriteria
      * @return ReviewSearchResultInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getMyListReply(int $customerId, int $reviewId, SearchCriteria $searchCriteria = null): ReplySearchResultInterface
+    public function getMyListReply(int $customerId, int $reviewId, SearchCriteriaInterface $searchCriteria = null): ReplySearchResultInterface
     {
         return $this->commandGetListReply->executeByCustomer($customerId, $reviewId, $searchCriteria);
     }

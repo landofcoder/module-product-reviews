@@ -24,7 +24,7 @@ namespace Lof\ProductReviews\Api;
 
 use Lof\ProductReviews\Api\Data\ReviewInterface;
 use Lof\ProductReviews\Api\Data\ReplyInterface;
-use Magento\Framework\Api\SearchCriteria;
+use Magento\Framework\Api\SearchCriteriaInterface;
 
 /**
  * In Magento 2 Repository considered as an implementation of Facade pattern which provides a simplified interface
@@ -103,32 +103,32 @@ interface ReviewRepositoryInterface
      * Get review Reply by review id.
      *
      * @param int $reviewId
-     * @param \Magento\Framework\Api\SearchCriteria|null $searchCriteria
+     * @param \Magento\Framework\Api\SearchCriteriaInterface|null $searchCriteria
      * @return \Lof\ProductReviews\Api\Data\ReplySearchResultInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getListReply(int $reviewId, SearchCriteria $searchCriteria = null): \Lof\ProductReviews\Api\Data\ReplySearchResultInterface;
+    public function getListReply(int $reviewId, SearchCriteriaInterface $searchCriteria = null): \Lof\ProductReviews\Api\Data\ReplySearchResultInterface;
 
     /**
      * Lists the review items that match specified search criteria.
      *
-     * @param \Magento\Framework\Api\SearchCriteria|null $searchCriteria
+     * @param \Magento\Framework\Api\SearchCriteriaInterface|null $searchCriteria
      * @return \Lof\ProductReviews\Api\Data\ReviewSearchResultInterface
      */
     public function getList(
-        SearchCriteria $searchCriteria = null
+        SearchCriteriaInterface $searchCriteria = null
     ): \Lof\ProductReviews\Api\Data\ReviewSearchResultInterface;
 
     /**
      * Lists of my the review items that match specified search criteria.
      *
      * @param int $customerId
-     * @param \Magento\Framework\Api\SearchCriteria|null $searchCriteria
+     * @param \Magento\Framework\Api\SearchCriteriaInterface|null $searchCriteria
      * @return \Lof\ProductReviews\Api\Data\ReviewSearchResultInterface
      */
     public function getMyList(
         int $customerId,
-        SearchCriteria $searchCriteria = null
+        SearchCriteriaInterface $searchCriteria = null
     ): \Lof\ProductReviews\Api\Data\ReviewSearchResultInterface;
 
     /**
@@ -158,11 +158,11 @@ interface ReviewRepositoryInterface
      *
      * @param int $customerId
      * @param int $reviewId
-     * @param \Magento\Framework\Api\SearchCriteria|null $searchCriteria
+     * @param \Magento\Framework\Api\SearchCriteriaInterface|null $searchCriteria
      * @return \Lof\ProductReviews\Api\Data\ReplySearchResultInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getMyListReply(int $customerId, int $reviewId, SearchCriteria $searchCriteria = null): \Lof\ProductReviews\Api\Data\ReplySearchResultInterface;
+    public function getMyListReply(int $customerId, int $reviewId, SearchCriteriaInterface $searchCriteria = null): \Lof\ProductReviews\Api\Data\ReplySearchResultInterface;
 
     /**
      * Delete Review by Id
