@@ -280,8 +280,8 @@ class Save extends ProductController
         if ($this->helper->getAutoVerifyConfig()) {
             $customerId = 0;
 
-            if ($this->_customerSession->isLoggedIn()) {
-                $customerId = $this->_customerSession->getCustomerId();
+            if ($this->customerSession->isLoggedIn()) {
+                $customerId = $this->customerSession->getCustomerId();
             }
             $isVerified = $this->_commandVerifyBuyer->execute($customerId, $customer_email, $product_id, $order_id);
         }
