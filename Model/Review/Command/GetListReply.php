@@ -29,6 +29,8 @@ use Lof\ProductReviews\Model\ResourceModel\ReviewReply\Collection;
 use Lof\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory;
 use Lof\ProductReviews\Api\Data\ReplySearchResultInterface;
 use Lof\ProductReviews\Api\Data\ReplySearchResultInterfaceFactory;
+use Lof\ProductReviews\Api\Data\ReviewSearchResultInterfaceFactory;
+
 
 /**
  * @inheritdoc
@@ -46,14 +48,14 @@ class GetListReply implements GetListReplyInterface
     private $reviewReplyCollectionFactory;
 
     /**
-     * @var ReplySearchResultInterfaceFactory
-     */
-    private $replySearchResultsFactory;
-
-    /**
      * @var SearchCriteriaBuilder
      */
     private $searchCriteriaBuilder;
+
+     /**
+     * @var ReviewSearchResultInterfaceFactory
+     */
+    private $reviewSearchResultsFactory;
 
     /**
      * GetList constructor.
@@ -66,11 +68,13 @@ class GetListReply implements GetListReplyInterface
     public function __construct(
         CollectionProcessorInterface $collectionProcessor,
         CollectionFactory $sourceCollectionFactory,
+        ReviewSearchResultInterfaceFactory $reviewSearchResultInterfaceFactory,
         ReplySearchResultInterfaceFactory $replySearchResultInterfaceFactory,
         SearchCriteriaBuilder $searchCriteriaBuilder
     ) {
         $this->collectionProcessor = $collectionProcessor;
         $this->reviewReplyCollectionFactory = $sourceCollectionFactory;
+        $this->reviewSearchResultsFactory = $reviewSearchResultInterfaceFactory;
         $this->replySearchResultInterfaceFactory = $replySearchResultInterfaceFactory;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
     }
@@ -98,8 +102,8 @@ class GetListReply implements GetListReplyInterface
 
         $collection->load();
 
-        /** @var ReviewSearchResultInterface $searchResult */
-        $searchResult = $this->reviewSearchResultsFactory->create();
+        /** @var ReplySearchResultInterfaceFactory $searchResult */
+        $searchResult = $this->replySearchResultInterfaceFactory->create();
         $searchResult->setItems($collection->getItems());
         $searchResult->setTotalCount($collection->getSize());
         $searchResult->setSearchCriteria($searchCriteria);
