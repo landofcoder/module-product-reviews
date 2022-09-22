@@ -35,20 +35,19 @@ class CustomReview extends \Magento\Framework\Model\AbstractModel implements Cus
     }
 
     /**
-     * @param $reviewId
-     * @return mixed
+     * @param int $reviewId
+     * @return int|float|mixed
      */
     public function addCountRating($reviewId)
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $getConnection = $objectManager->get(\Magento\Framework\App\ResourceConnection::class);
-
+        $connection = $this->getResource()->getConnection();
+        $table = $connection->getTableName("rating_option_vote");
         $query = 'SELECT *, SUM(rate_vote.percent) AS sum, COUNT(*) AS count, SUM(rate_vote.percent)/COUNT(*) AS average';
-        $query .= ' FROM rating_option_vote as rate_vote';
+        $query .= ' FROM '.$table.' as rate_vote';
         $query .= ' WHERE review_id = ' . (int)$reviewId;
 
-        $item = $getConnection->getConnection()->fetchAll($query);
-        return $item[0]['average'];
+        $item = $connection->fetchAll($query);
+        return isset($item[0]) && isset($item[0]['average']) ? $item[0]['average'] : 0;
     }
 
     /**
