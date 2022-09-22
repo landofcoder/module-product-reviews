@@ -20,3 +20,6 @@
 - Refactor REST API Submit Product Review, dont need entity_pk_id value for post data
 - Update API doc
 - New Rest api get list avaibale product ratings
+
+# Version 1.0.8 - 09/22/2022
+- Fix wrong table name in native sql query in model CustomReview
