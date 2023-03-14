@@ -86,7 +86,8 @@ class SendReminder extends \Magento\Backend\App\Action
                         'email' => $reminderObj->getEmail(),
                         'product_id' => $reminderObj->getProductId(),
                         'order_increment_id' => $order_increment_id,
-                        'order_id' => $orderId
+                        'order_id' => $orderId,
+                        'store_id' => $reminderObj->getStoreId()
                     ];
                 }
             }
