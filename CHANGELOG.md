@@ -23,3 +23,7 @@
 
 # Version 1.0.8 - 09/22/2022
 - Fix wrong table name in native sql query in model CustomReview
+
+# Version 1.0.9 - 03/14/2023
+- Fix issue when submit product review on frontend
+- Support store view email templates
