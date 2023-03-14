@@ -237,7 +237,8 @@ class Save extends ProductController
                         $codes = $couponGenerator->generateCodes($coupon);
                         $dataEmail['couponcode'] = $codes?$codes[0]:"";
                     }
-                    $this->sender->sendCouponCodeEmail($dataEmail);
+                    $emailTemplate = $this->helper->getProductEmailTemplate($this->storeManager->getStore()->getId());
+                    $this->sender->sendCouponCodeEmail($dataEmail, $this->storeManager->getStore()->getId() , $emailTemplate);
 
                     /** Update review rating detailed summary */
                     $this->summaryRate->execute($product->getSku(), $product->getId());
@@ -283,7 +284,7 @@ class Save extends ProductController
             if ($this->customerSession->isLoggedIn()) {
                 $customerId = $this->customerSession->getCustomerId();
             }
-            $isVerified = $this->_commandVerifyBuyer->execute($customerId, $customer_email, $product_id, $order_id);
+            $isVerified = $this->commandVerifyBuyer->execute($customerId, $customer_email, $product_id, $order_id);
         }
         return $isVerified;
 

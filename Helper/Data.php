@@ -40,6 +40,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_EMAIL_TEMPLATE = 'lof_product_reviews/email_settings/email_templates';
     const XML_PATH_REPLY_EMAIL_TEMPLATE = 'lof_product_reviews/email_settings/reply_email_templates';
     const XML_SEND_REMINDER_AUTO = 'lof_product_reviews/email_settings/send_emails_automatically';
+    const XML_PATH_EMAIL_PRODUCT_TEMPLATE = 'lof_product_reviews/email_settings/review_product_templates';
 
     /**
      * @var string
@@ -184,7 +185,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * Retrieve Email Template
+     * Retrieve Notify Email Template
      *
      * @param int $store
      * @return mixed
@@ -199,7 +200,22 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * Retrieve Email Template
+     * Retrieve Product Review Email Template
+     *
+     * @param int $store
+     * @return mixed
+     */
+    public function getProductEmailTemplate($store = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::XML_PATH_EMAIL_PRODUCT_TEMPLATE,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * Retrieve Reply Email Template
      *
      * @param int $store
      * @return mixed

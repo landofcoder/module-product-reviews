@@ -98,7 +98,8 @@ class AutoSendReminders
                             'email' => $data->getEmail(),
                             'product_id' => $data->getProductId(),
                             'order_increment_id' => $order_increment_id,
-                            'order_id' => $orderId
+                            'order_id' => $orderId,
+                            'store_id' => $data->getStoreId()
                         ];
                     }
                     $currentDate = new \DateTime();
