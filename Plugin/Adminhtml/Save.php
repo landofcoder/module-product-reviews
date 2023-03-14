@@ -145,6 +145,16 @@ class Save
     {
         $reviewId = $object->getRequest()->getParam('id');
         $data = $object->getRequest()->getPostValue();
+        $stores = isset($data['stores']) ? $data['stores'] : [];
+        $storeId = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
+        if ($stores) {
+            foreach ($stores as $_storeId) {
+                if ($_storeId) {
+                    $storeId = $_storeId;
+                    break;
+                }
+            }
+        }
         $current_admin_user = $this->getCurrentUser();
         $admin_user_id = 0;
         $email_address = "";
@@ -172,7 +182,7 @@ class Save
             $title = htmlspecialchars($data['reply_title']);
             $message = nl2br(htmlspecialchars($data['reply_comment']));
 
-            $this->sendReplyToCustomer($sender, $recipient, $title, $message);
+            $this->sendReplyToCustomer($sender, $recipient, $title, $message, $storeId);
         }
         $email_address = isset($data['email_address']) ? $data['email_address'] : '';
         $avatar_url = isset($data['avatar_url']) ? $data['avatar_url'] : '';
@@ -240,7 +250,7 @@ class Save
             $modelGallery->setReviewId($reviewId)
                 ->setLabel('Gallery of Review ' . $reviewId)
                 ->setStatus(\Lof\ProductReviews\Model\Gallery::STATUS_DISABLED)
-                ->setValue(json_encode([]))
+                ->setValue(@json_encode([]))
                 ->save();
         }
 
@@ -252,13 +262,15 @@ class Save
      * @param $recipient
      * @param $title
      * @param $message
+     * @param int|null $storeId
      * @return $this
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\MailException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function sendReplyToCustomer($sender, $recipient, $title, $message)
+    public function sendReplyToCustomer($sender, $recipient, $title, $message, $storeId = null)
     {
+        $storeId = $storeId ? (int)$storeId : \Magento\Store\Model\Store::DEFAULT_STORE_ID;
         $this->inlineTranslation->suspend();
 
         $dataObj = $this->_dataObjectFactory->create()->setData(
@@ -273,11 +285,11 @@ class Save
         );
 
         $this->_transportBuilder->setTemplateIdentifier(
-            $this->_dataHelper->getReplyEmailTemplate()
+            $this->_dataHelper->getReplyEmailTemplate($storeId)
         )->setTemplateOptions(
             [
                 'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
-                'store' => $this->_storeManager->getStore()->getId(),
+                'store' => $storeId,
             ]
         )->setFrom(
             $sender

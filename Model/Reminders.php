@@ -124,19 +124,22 @@ class Reminders extends \Magento\Framework\Model\AbstractModel implements Remind
         ];
 
         if ($customerInfo) {
-            $tmp_customerInfo = [];
+            $tmpCustomerInfo = [];
             foreach ($customerInfo as $key => $customer) {
-                if (!isset($tmp_customerInfo[$customer['order_id']])) {
-                    $tmp_customerInfo[$customer['order_id']] = $customer;
-                    $tmp_customerInfo[$customer['order_id']]['products'] = [];
-                    $tmp_customerInfo[$customer['order_id']]['products'][] = $customer['product_id'];
+                $customer['store_id'] = isset($customer['store_id']) ? (int)($customer['store_id']) : \Magento\Store\Model\Store::DEFAULT_STORE_ID;
+                if (!isset($tmpCustomerInfo[$customer['order_id']])) {
+                    $tmpCustomerInfo[$customer['order_id']] = $customer;
+                    $tmpCustomerInfo[$customer['order_id']]['products'] = [];
+                    $tmpCustomerInfo[$customer['order_id']]['products'][] = $customer['product_id'];
                 } else {
-                    $tmp_customerInfo[$customer['order_id']]['products'][] = $customer['product_id'];
+                    $tmpCustomerInfo[$customer['order_id']]['products'][] = $customer['product_id'];
                 }
+
             }
-            $customerInfo = $tmp_customerInfo;
+            $customerInfo = $tmpCustomerInfo;
         }
         foreach ($customerInfo as $data) {
+            $storeId = isset($data['store_id']) ? (int)($data['store_id']) : \Magento\Store\Model\Store::DEFAULT_STORE_ID;
             $recipient = [
                 'name' => $this->_escaper->escapeHtml($data['name']),
                 'email' => $this->_escaper->escapeHtml($data['email']),
@@ -154,7 +157,7 @@ class Reminders extends \Magento\Framework\Model\AbstractModel implements Remind
                 foreach ($product_ids as $product_id) {
                     $product = $this->_product->load($product_id);
                     $productName = $product->getName();
-                    $product->setStoreId($this->_storeManager->getStore()->getId());
+                    $product->setStoreId($storeId);
                     $productUrl = $product->getProductUrl();
                     $tmp = ['product_name' => $productName, 'product_url' => $productUrl];
                     $products[] = $tmp;
@@ -171,16 +174,18 @@ class Reminders extends \Magento\Framework\Model\AbstractModel implements Remind
                     'email' => $recipient['email'],
                     'products' => $products_html,
                     'order_increment_id' => $orderIncrementId,
-                    'order_id' => $orderId
+                    'order_id' => $orderId,
+                    'store_id' => $storeId
                 ]
             );
-
+            $emailTemplate = $this->_dataHelper->getEmailTemplate($storeId);
+            $emailTemplate = $emailTemplate ? $emailTemplate : 'lof_product_reviews_email_settings_email_templates';
             $transportBuilder = $this->_transportBuilder->setTemplateIdentifier(
-                'lof_product_reviews_email_settings_email_templates'
+                $emailTemplate
             )->setTemplateOptions(
                 [
                     'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
-                    'store' => $this->_storeManager->getStore()->getId(),
+                    'store' => $storeId,
                 ]
             )->setFrom(
                 $sender

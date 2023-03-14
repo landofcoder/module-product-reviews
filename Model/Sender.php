@@ -25,6 +25,7 @@ use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
+use Lof\ProductReviews\Helper\Data;
 
 /**
  * Class Sender
@@ -102,13 +103,15 @@ class Sender
     }
 
     /**
-     * @param $data
+     * @param mixed $data
+     * @param int|null $storeId
      */
-    public function sendCouponCodeEmail($data)
+    public function sendCouponCodeEmail($data, $storeId = null, $emailTemplate = "lof_product_reviews_email_settings_review_product_templates")
     {
         $sender ['email'] = $this->scopeConfig->getValue(
             self::SENDER_EMAIL,
-            ScopeInterface::SCOPE_STORE
+            ScopeInterface::SCOPE_STORE,
+            $storeId
         );
         $sender['name'] = 'admin';
         try {
@@ -123,11 +126,11 @@ class Sender
                 )->getData();
                 $customerEmail = $customer[0]['email'];
                 $transport = $this->_transportBuilder
-                    ->setTemplateIdentifier('lof_product_reviews_email_settings_review_product_templates')
+                    ->setTemplateIdentifier($emailTemplate)
                     ->setTemplateOptions(
                         [
                             'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
-                            'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
+                            'store' => $storeId ? (int)$storeId : \Magento\Store\Model\Store::DEFAULT_STORE_ID,
                         ]
                     )
                     ->setTemplateVars(['data' => $postObject])
@@ -135,11 +138,11 @@ class Sender
 
             } else {
                 $transport = $this->_transportBuilder
-                    ->setTemplateIdentifier('lof_product_reviews_email_settings_review_product_templates')
+                    ->setTemplateIdentifier($emailTemplate)
                     ->setTemplateOptions(
                         [
                             'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
-                            'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
+                            'store' => $storeId ? (int)$storeId : \Magento\Store\Model\Store::DEFAULT_STORE_ID,
                         ]
                     )
                     ->setTemplateVars(['data' => $postObject])

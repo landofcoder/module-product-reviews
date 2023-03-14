@@ -237,7 +237,8 @@ class Save extends ProductController
                         $codes = $couponGenerator->generateCodes($coupon);
                         $dataEmail['couponcode'] = $codes?$codes[0]:"";
                     }
-                    $this->sender->sendCouponCodeEmail($dataEmail);
+                    $emailTemplate = $this->helper->getProductEmailTemplate($this->storeManager->getStore()->getId());
+                    $this->sender->sendCouponCodeEmail($dataEmail, $this->storeManager->getStore()->getId() , $emailTemplate);
 
                     /** Update review rating detailed summary */
                     $this->summaryRate->execute($product->getSku(), $product->getId());
