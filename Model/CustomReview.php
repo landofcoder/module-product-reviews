@@ -40,8 +40,9 @@ class CustomReview extends \Magento\Framework\Model\AbstractModel implements Cus
      */
     public function addCountRating($reviewId)
     {
-        $connection = $this->getResource()->getConnection();
-        $table = $connection->getTableName("rating_option_vote");
+        $resource = $this->getResource();
+        $connection = $resource->getConnection();
+        $table = $resource->getTableName("rating_option_vote");
         $query = 'SELECT *, SUM(rate_vote.percent) AS sum, COUNT(*) AS count, SUM(rate_vote.percent)/COUNT(*) AS average';
         $query .= ' FROM '.$table.' as rate_vote';
         $query .= ' WHERE review_id = ' . (int)$reviewId;
