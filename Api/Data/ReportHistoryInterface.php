@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright © landofcoder All rights reserved.
+ * Copyright © hgati All rights reserved.
  * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Api\Data;
+namespace Hgati\ProductReviews\Api\Data;
 
 interface ReportHistoryInterface
 {
@@ -28,7 +28,7 @@ interface ReportHistoryInterface
     /**
      * Set id
      * @param int $id
-     * @return \Lof\ProductReviews\Api\Data\ReportHistoryInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReportHistoryInterface
      */
     public function setId($id);
 
@@ -41,7 +41,7 @@ interface ReportHistoryInterface
     /**
      * Set review_id
      * @param int $reviewId
-     * @return \Lof\ProductReviews\Api\Data\ReportHistoryInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReportHistoryInterface
      */
     public function setReviewId($reviewId);
 
@@ -54,7 +54,7 @@ interface ReportHistoryInterface
     /**
      * Set customer_id
      * @param int $customerId
-     * @return \Lof\ProductReviews\Api\Data\ReportHistoryInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReportHistoryInterface
      */
     public function setCustomerId($customerId);
 
@@ -67,7 +67,7 @@ interface ReportHistoryInterface
     /**
      * Set ip_address
      * @param string $ipAddress
-     * @return \Lof\ProductReviews\Api\Data\ReportHistoryInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReportHistoryInterface
      */
     public function setIpAddress($ipAddress);
 
@@ -80,7 +80,7 @@ interface ReportHistoryInterface
     /**
      * Set browser_data
      * @param string $browserData
-     * @return \Lof\ProductReviews\Api\Data\ReportHistoryInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReportHistoryInterface
      */
     public function setBrowserData($browserData);
 
@@ -93,7 +93,7 @@ interface ReportHistoryInterface
     /**
      * Set rate_type
      * @param string $rateType
-     * @return \Lof\ProductReviews\Api\Data\ReportHistoryInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReportHistoryInterface
      */
     public function setRateType($rateType);
 
@@ -106,7 +106,7 @@ interface ReportHistoryInterface
     /**
      * Set report_type
      * @param string $reportType
-     * @return \Lof\ProductReviews\Api\Data\ReportHistoryInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReportHistoryInterface
      */
     public function setReportType($reportType);
 
@@ -119,7 +119,7 @@ interface ReportHistoryInterface
     /**
      * Set created_at
      * @param string $createdAt
-     * @return \Lof\ProductReviews\Api\Data\ReportHistoryInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReportHistoryInterface
      */
     public function setCreatedAt($createdAt);
 }

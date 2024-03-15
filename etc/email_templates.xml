@@ -1,29 +1,29 @@
 <?xml version="1.0"?>
 <!--
-  * Landofcoder
+  * Hgati
   *
   * NOTICE OF LICENSE
   *
-  * This source file is subject to the Landofcoder.com license that is
+  * This source file is subject to the Hgati.com license that is
   * available through the world-wide-web at this URL:
-  * https://landofcoder.com/terms
+  * https://hgati.com/terms
   *
   * DISCLAIMER
   *
   * Do not edit or add to this file if you wish to upgrade this extension to newer
   * version in the future.
   *
-  * @category   Landofcoder
-  * @package    Lof_ProductReviews
-  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
-  * @license    https://landofcoder.com/terms
+  * @category   Hgati
+  * @package    Hgati_ProductReviews
+  * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+  * @license    https://hgati.com/terms
   -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
-    <template id="lof_product_reviews_email_settings_email_templates" label="Notify Review Email templates 1" file="email_templates.html" type="html" module="Lof_ProductReviews" area="frontend"/>
-    <template id="lof_product_reviews_email_settings_review_product_templates" label="Notify Review Product Email templates 1" file="review_product_templates.html" type="html" module="Lof_ProductReviews" area="frontend"/>
-    <template id="lof_product_reviews_email_settings_reply_email_templates" label="Reply Email templates 1" file="reply_email_templates.html" type="html" module="Lof_ProductReviews" area="frontend"/>
+    <template id="hgati_product_reviews_email_settings_email_templates" label="Notify Review Email templates 1" file="email_templates.html" type="html" module="Hgati_ProductReviews" area="frontend"/>
+    <template id="hgati_product_reviews_email_settings_review_product_templates" label="Notify Review Product Email templates 1" file="review_product_templates.html" type="html" module="Hgati_ProductReviews" area="frontend"/>
+    <template id="hgati_product_reviews_email_settings_reply_email_templates" label="Reply Email templates 1" file="reply_email_templates.html" type="html" module="Hgati_ProductReviews" area="frontend"/>
 
-    <template id="lof_product_reviews_lof_general_settings_email_templates" label="Notify Review Email templates" file="email_templates.html" type="html" module="Lof_ProductReviews" area="frontend"/>
-    <template id="lof_product_reviews_lof_general_settings_review_product_templates" label="Notify Review Product Email templates" file="review_product_templates.html" type="html" module="Lof_ProductReviews" area="frontend"/>
-    <template id="lof_product_reviews_lof_general_settings_reply_email_templates" label="Notify Reply Email templates" file="reply_email_templates.html" type="html" module="Lof_ProductReviews" area="frontend"/>
+    <template id="hgati_product_reviews_hgati_general_settings_email_templates" label="Notify Review Email templates" file="email_templates.html" type="html" module="Hgati_ProductReviews" area="frontend"/>
+    <template id="hgati_product_reviews_hgati_general_settings_review_product_templates" label="Notify Review Product Email templates" file="review_product_templates.html" type="html" module="Hgati_ProductReviews" area="frontend"/>
+    <template id="hgati_product_reviews_hgati_general_settings_reply_email_templates" label="Notify Reply Email templates" file="reply_email_templates.html" type="html" module="Hgati_ProductReviews" area="frontend"/>
 </config>

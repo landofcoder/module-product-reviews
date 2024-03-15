@@ -1,31 +1,31 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model\Review\Validator;
+namespace Hgati\ProductReviews\Model\Review\Validator;
 
-use Lof\ProductReviews\Api\Data\ReviewInterface;
-use Lof\ProductReviews\Validation\ValidationResult;
-use Lof\ProductReviews\Validation\ValidationResultFactory;
-use Lof\ProductReviews\Model\ReviewValidatorInterface;
+use Hgati\ProductReviews\Api\Data\ReviewInterface;
+use Hgati\ProductReviews\Validation\ValidationResult;
+use Hgati\ProductReviews\Validation\ValidationResultFactory;
+use Hgati\ProductReviews\Model\ReviewValidatorInterface;
 
 /**
  * Class TitleValidator - validates review details

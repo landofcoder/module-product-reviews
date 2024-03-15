@@ -1,27 +1,27 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Api\Data;
+namespace Hgati\ProductReviews\Api\Data;
 
 /**
  * Represents a ReviewVote object
@@ -80,7 +80,7 @@ interface DetailedSummaryInterface
      * Set Review one
      *
      * @param int $one
-     * @return \Lof\ProductReviews\Api\Data\DetailedSummaryInterface
+     * @return \Hgati\ProductReviews\Api\Data\DetailedSummaryInterface
      */
     public function setOne($one);
 
@@ -89,7 +89,7 @@ interface DetailedSummaryInterface
      *
      * @param int $id
      *
-     * @return \Lof\ProductReviews\Api\Data\DetailedSummaryInterface
+     * @return \Hgati\ProductReviews\Api\Data\DetailedSummaryInterface
      */
     public function setTwo($two);
 
@@ -98,7 +98,7 @@ interface DetailedSummaryInterface
      *
      * @param int $two
      *
-     * @return \Lof\ProductReviews\Api\Data\DetailedSummaryInterface
+     * @return \Hgati\ProductReviews\Api\Data\DetailedSummaryInterface
      */
     public function setThree($two);
 
@@ -107,7 +107,7 @@ interface DetailedSummaryInterface
      *
      * @param int $four
      *
-     * @return \Lof\ProductReviews\Api\Data\DetailedSummaryInterface
+     * @return \Hgati\ProductReviews\Api\Data\DetailedSummaryInterface
      */
     public function setFour($four);
 
@@ -116,7 +116,7 @@ interface DetailedSummaryInterface
      *
      * @param int $five
      *
-     * @return \Lof\ProductReviews\Api\Data\DetailedSummaryInterface
+     * @return \Hgati\ProductReviews\Api\Data\DetailedSummaryInterface
      */
     public function setFive($five);
 
@@ -131,7 +131,7 @@ interface DetailedSummaryInterface
      * Set rating_summary
      *
      * @param float|int $rating_summary
-     * @return \Lof\ProductReviews\Api\Data\DetailedSummaryInterface
+     * @return \Hgati\ProductReviews\Api\Data\DetailedSummaryInterface
      */
     public function setRatingSummary($rating_summary);
 
@@ -146,7 +146,7 @@ interface DetailedSummaryInterface
      * Set reviews_count
      *
      * @param int $reviews_count
-     * @return \Lof\ProductReviews\Api\Data\DetailedSummaryInterface
+     * @return \Hgati\ProductReviews\Api\Data\DetailedSummaryInterface
      */
     public function setReviewsCount($reviews_count);
 }

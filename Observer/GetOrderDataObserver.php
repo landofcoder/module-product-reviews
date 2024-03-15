@@ -1,25 +1,25 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Observer;
+namespace Hgati\ProductReviews\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
 
@@ -41,7 +41,7 @@ class GetOrderDataObserver implements ObserverInterface
     protected $_customerSession;
 
     /**
-     * @var \Lof\ProductReviews\Model\Reminders
+     * @var \Hgati\ProductReviews\Model\Reminders
      */
     protected $_reminders;
 
@@ -50,13 +50,13 @@ class GetOrderDataObserver implements ObserverInterface
      * @param \Magento\Sales\Model\Order $order
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Framework\Message\ManagerInterface $messageManager
-     * @param \Lof\ProductReviews\Model\Reminders $reminders
+     * @param \Hgati\ProductReviews\Model\Reminders $reminders
      */
     public function __construct(
         \Magento\Sales\Model\Order $order,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Framework\Message\ManagerInterface $messageManager,
-        \Lof\ProductReviews\Model\Reminders $reminders
+        \Hgati\ProductReviews\Model\Reminders $reminders
     ) {
         $this->_order = $order;
         $this->_customerSession = $customerSession;

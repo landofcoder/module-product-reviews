@@ -1,36 +1,36 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model\Review\Command;
+namespace Hgati\ProductReviews\Model\Review\Command;
 
-use Lof\ProductReviews\Api\Data\ReviewInterface;
-use Lof\ProductReviews\Model\Converter\Review\ToModel;
-use Lof\ProductReviews\Model\Converter\Review\ToDataModel;
-use Lof\ProductReviews\Model\Review\Rating\SaveHandler;
-use Lof\ProductReviews\Validation\ValidationException;
-use Lof\ProductReviews\Model\ReviewValidatorInterface;
-use Lof\ProductReviews\Model\CustomReviewFactory;
-use Lof\ProductReviews\Model\GalleryFactory;
-use Lof\ProductReviews\Helper\Data as HelperData;
+use Hgati\ProductReviews\Api\Data\ReviewInterface;
+use Hgati\ProductReviews\Model\Converter\Review\ToModel;
+use Hgati\ProductReviews\Model\Converter\Review\ToDataModel;
+use Hgati\ProductReviews\Model\Review\Rating\SaveHandler;
+use Hgati\ProductReviews\Validation\ValidationException;
+use Hgati\ProductReviews\Model\ReviewValidatorInterface;
+use Hgati\ProductReviews\Model\CustomReviewFactory;
+use Hgati\ProductReviews\Model\GalleryFactory;
+use Hgati\ProductReviews\Helper\Data as HelperData;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Review\Model\ResourceModel\Review as ReviewResource;
@@ -143,7 +143,7 @@ class Save implements SaveInterface
      *
      * @param ReviewInterface $dataModel
      *
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReviewInterface
      * @throws ValidationException
      * @throws AlreadyExistsException
      * @throws NoSuchEntityException
@@ -179,9 +179,9 @@ class Save implements SaveInterface
      */
     public function saveExtraData($dataModel, $model)
     {
-        $defaultStatus = (int)$this->helperData->getConfig("lof_review_settings/default_status", 2);
+        $defaultStatus = (int)$this->helperData->getConfig("hgati_review_settings/default_status", 2);
         $defaultStatus = $defaultStatus ? (int)$defaultStatus : 2;
-        $limitImages = $this->helperData->getConfig("lof_review_settings/limit_upload_image", 1);
+        $limitImages = $this->helperData->getConfig("hgati_review_settings/limit_upload_image", 1);
         $limitImages = $limitImages ? (int)$limitImages : 1;
 
         $id = (int)$model->getId();

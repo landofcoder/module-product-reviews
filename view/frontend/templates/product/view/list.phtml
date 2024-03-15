@@ -1,72 +1,72 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
 // @codingStandardsIgnoreFile
-/** @var Lof\ProductReviews\Block\Product\View\ListView $block */
-$helper         = $this->helper('Lof\ProductReviews\Helper\Data');
+/** @var Hgati\ProductReviews\Block\Product\View\ListView $block */
+$helper         = $this->helper('Hgati\ProductReviews\Helper\Data');
 $format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
-$rateAjaxLink = $block->getFrontendUrl() . 'lof_productreviews/reviews/rateAjax';
-$reportAjaxLink = $block->getFrontendUrl() . 'lof_productreviews/reviews/reportAjax';
-$loadBlock = $block->getFrontendUrl() . 'lof_productreviews/reviews/loadBlock';
+$rateAjaxLink = $block->getFrontendUrl() . 'hgati_productreviews/reviews/rateAjax';
+$reportAjaxLink = $block->getFrontendUrl() . 'hgati_productreviews/reviews/reportAjax';
+$loadBlock = $block->getFrontendUrl() . 'hgati_productreviews/reviews/loadBlock';
 
 //CUSTOM CONFIGURATIONS
-$enableSorting = $block->getIsSetFlagConfig('lof_product_reviews/lof_review_settings/enable_sorting');
-$enableSearch = $block->getIsSetFlagConfig('lof_product_reviews/lof_review_settings/enable_search');
-$sortType = $block->getValueConfig('lof_product_reviews/lof_review_settings/sort_type');
+$enableSorting = $block->getIsSetFlagConfig('hgati_product_reviews/hgati_review_settings/enable_sorting');
+$enableSearch = $block->getIsSetFlagConfig('hgati_product_reviews/hgati_review_settings/enable_search');
+$sortType = $block->getValueConfig('hgati_product_reviews/hgati_review_settings/sort_type');
 $type = $block->getRequest()->getParam('type');
 
 !empty($type) ? $_items = $block->getReviewsCollectionByType($type) : $_items = $block->getReviewsCollectionByType($sortType);
 
 //Owl configurations
 $blockId = rand() . time() . uniqid();
-$number_item_per_column = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/number_item_per_column');
+$number_item_per_column = (int)$block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/number_item_per_column');
 if ($number_item_per_column == '' || $number_item_per_column == 0) {
     $number_item_per_column = 1;
 }
 
-$carousel_layout = $block->getValueConfig('lof_product_reviews/gallery_carousel_settings/carousel_layout');
-$default_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/default_items');
-$mobile_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/mobile_items');
-$tablet_small_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/tablet_small_items');
-$tablet_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/tablet_items');
-$portrait_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/portrait_items');
-$large_items = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/large_items');
-$autoplay_timeout = (int)$block->getValueConfig('lof_product_reviews/gallery_carousel_settings/autoplay_timeout');
-$nav = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/nav');
-$nav_prev = $block->getValueConfig('lof_product_reviews/gallery_carousel_settings/nav_prev');
-$nav_next = $block->getValueConfig('lof_product_reviews/gallery_carousel_settings/nav_next');
-$dots = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/dots');
-$loop = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/loop');
-$autoplay = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/autoplay');
-$autoplay_pauseonhover = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/autoplay_pauseonhover');
-$auto_play = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/auto_play');
-$rtl = $block->getIsSetFlagConfig('lof_product_reviews/gallery_carousel_settings/rtl');
+$carousel_layout = $block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/carousel_layout');
+$default_items = (int)$block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/default_items');
+$mobile_items = (int)$block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/mobile_items');
+$tablet_small_items = (int)$block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/tablet_small_items');
+$tablet_items = (int)$block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/tablet_items');
+$portrait_items = (int)$block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/portrait_items');
+$large_items = (int)$block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/large_items');
+$autoplay_timeout = (int)$block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/autoplay_timeout');
+$nav = $block->getIsSetFlagConfig('hgati_product_reviews/gallery_carousel_settings/nav');
+$nav_prev = $block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/nav_prev');
+$nav_next = $block->getValueConfig('hgati_product_reviews/gallery_carousel_settings/nav_next');
+$dots = $block->getIsSetFlagConfig('hgati_product_reviews/gallery_carousel_settings/dots');
+$loop = $block->getIsSetFlagConfig('hgati_product_reviews/gallery_carousel_settings/loop');
+$autoplay = $block->getIsSetFlagConfig('hgati_product_reviews/gallery_carousel_settings/autoplay');
+$autoplay_pauseonhover = $block->getIsSetFlagConfig('hgati_product_reviews/gallery_carousel_settings/autoplay_pauseonhover');
+$auto_play = $block->getIsSetFlagConfig('hgati_product_reviews/gallery_carousel_settings/auto_play');
+$rtl = $block->getIsSetFlagConfig('hgati_product_reviews/gallery_carousel_settings/rtl');
 
 //Fancybox configurations
 $fancybox_type = 'iframe';
-$image_popup_height = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settings/fancybox_height');
-$image_popup_width = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settings/fancybox_width');
-$image_popup_padding = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settings/fancybox_padding');
-$image_popup_margin = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settings/fancybox_margin');
-$auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settings/auto_size');
+$image_popup_height = $block->getValueConfig('hgati_product_reviews/gallery_fancybox_settings/fancybox_height');
+$image_popup_width = $block->getValueConfig('hgati_product_reviews/gallery_fancybox_settings/fancybox_width');
+$image_popup_padding = $block->getValueConfig('hgati_product_reviews/gallery_fancybox_settings/fancybox_padding');
+$image_popup_margin = $block->getValueConfig('hgati_product_reviews/gallery_fancybox_settings/fancybox_margin');
+$auto_size = $block->getValueConfig('hgati_product_reviews/gallery_fancybox_settings/auto_size');
 ?>
 
 <?php if (count($_items)): ?>
@@ -76,13 +76,13 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
             <?php if ($enableSorting) : ?>
                 <div class="sort-order-reviews">
                     <label><?= $block->escapeHtml(__('Sort review by: ')) ?></label>
-                    <select id="sort-order" name="sort-order" class="lof-sort-order">
+                    <select id="sort-order" name="sort-order" class="hgati-sort-order">
                         <option value="default"><?= $block->escapeHtml(__('Default')) ?></option>
                         <option value="helpful"><?= $block->escapeHtml(__('Helpful')) ?></option>
                         <option value="rating"><?= $block->escapeHtml(__('Average Rating Percent')) ?></option>
                     </select>
 
-                    <img class="lof-sort-loading" src="<?= $this->getViewFileUrl('images/loader-1.gif'); ?>"
+                    <img class="hgati-sort-loading" src="<?= $this->getViewFileUrl('images/loader-1.gif'); ?>"
                          style="display: none;"/>
                 </div>
             <?php endif; ?>
@@ -90,7 +90,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
             <?php if ($enableSearch) : ?>
                 <div class="filter-reviews">
                     <label><?= $block->escapeHtml(__('Search review: ')) ?></label>
-                    <input id="review-keyword" name="review-keyword" type="text" class="lof-keyword"
+                    <input id="review-keyword" name="review-keyword" type="text" class="hgati-keyword"
                            placeholder="<?= $block->escapeHtml(__('enter keyword...')) ?>"/>
                 </div>
             <?php endif; ?>
@@ -104,9 +104,9 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                     <?php $customReview = $block->getReviewsCustom($_review->getId()); ?>
                     <?php $avatarImg = ""; ?>
                     <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
-                        <?php if ($helper->checkModuleInstalled("Lof_CustomerAvatar")) : ?>
+                        <?php if ($helper->checkModuleInstalled("Hgati_CustomerAvatar")) : ?>
                             <?php
-                            $avatarBlock = $block->getLayout()->createBlock('\Lof\CustomerAvatar\Block\Attributes\Avatar');
+                            $avatarBlock = $block->getLayout()->createBlock('\Hgati\CustomerAvatar\Block\Attributes\Avatar');
                             if ($avatarBlock) :
                             $avatarImg = $avatarBlock->getCustomerAvatarById($_review->getData('customer_id'));
                             ?>
@@ -127,7 +127,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                 $helpful = '<b id="helpful-' . $_review->getId() . '" data="' . $customize[0] . '">' . $customize[0] . '</b>';
                                 $total = '<b id="total-' . $_review->getId() . '" data="' . $customize[1] . '">' . $customize[1] . '</b>';
                                 ?>
-                                <div class="lof-helpful" style="margin-bottom: 30px;">
+                                <div class="hgati-helpful" style="margin-bottom: 30px;">
                                     <p><?= __('There are %1 of %2 people found this helpful.', $helpful, $total) ?></p>
                                 </div>
                                 <?php
@@ -161,9 +161,9 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                 <!--review gallery-->
                                 <?php if ($block->getGalleryStatus($_review->getId()) == 1): ?>
                                     <div
-                                        class="lof-review-gallery <?php if ($carousel_layout && $carousel_layout == "owl_carousel") { ?>gallery-play<?php } ?>"
+                                        class="hgati-review-gallery <?php if ($carousel_layout && $carousel_layout == "owl_carousel") { ?>gallery-play<?php } ?>"
                                         data-lcarousel="<?= $carousel_layout; ?>">
-                                        <ul id="lof-carousel-<?= $blockId . '-' . $_review->getId() ?>"
+                                        <ul id="hgati-carousel-<?= $blockId . '-' . $_review->getId() ?>"
                                             class="<?php if ($carousel_layout && $carousel_layout == "owl_carousel") { ?>owl-carousel owl-theme-default<?php } else { ?>gallery-listing<?php } ?>"
                                             data-rtl="<?= $rtl ? "1" : "0" ?>" data-loop="<?= $loop ? "1" : "0" ?>"
                                             data-nav="<?= $nav ? "1" : "0" ?>" data-dot="<?= $dots ? "1" : "0" ?>"
@@ -210,7 +210,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                                         <div class="gallery-item">
                                                             <div class="gallery-image" style="max-width: <?= (int)$image_popup_width."px";?>">
                                                                 <a href="<?= $block->getMediaUrl($_image) ?>"
-                                                                   class="lofreview-gallery-fancybox"
+                                                                   class="hgatireview-gallery-fancybox"
                                                                    rel="review-gallery<?= $_index.$_index2; ?>"
                                                                    data-fancybox-type="<?= $fancybox_type ?>"
                                                                    onclick="return false;"
@@ -231,13 +231,13 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                 <?php endif; ?>
 
                                 <!--review advantages and disadvantages and admin answers, comments-->
-                                <div class="lof-review-customize">
+                                <div class="hgati-review-customize">
 
                                     <?php foreach ($customReview as $cItem): ?>
 
                                         <!-- admin answer -->
                                         <?php if ($cItem->getAnswer()) : ?>
-                                        <div class="lof-review_answer">
+                                        <div class="hgati-review_answer">
                                             <div class="review-text-answer">
                                                 <span><i><?= $block->escapeHtml($cItem->getAnswer()); ?></i></span>
                                             </div>
@@ -272,7 +272,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                                 </div>
 
                                 <!--content comment-->
-                                <div class="lof-comment_content" itemprop="description">
+                                <div class="hgati-comment_content" itemprop="description">
                                     <?php $reviewComment = $block->getReviewsReply($_review->getId()); ?>
                                     <?php if ($reviewComment->count()) : ?>
                                     <div class="list-replies">
@@ -398,7 +398,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
         });
 
         $('select#sort-order').on('change', function () {
-            $('.lof-sort-loading').show();
+            $('.hgati-sort-loading').show();
             var value = $(this).val();
             var url = "<?= $block->escapeUrl($block->getProductReviewUrl()) ?>?type=" + value;
             $.ajax({
@@ -488,7 +488,7 @@ $auto_size = $block->getValueConfig('lof_product_reviews/gallery_fancybox_settin
                     }
                     ;
 
-                    $('.lof-sort-loading').hide();
+                    $('.hgati-sort-loading').hide();
                 }
             });
         });

@@ -1,32 +1,32 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer;
+namespace Hgati\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer;
 
 use Magento\Framework\Data\Form\Element\Image as ImageField;
 use Magento\Framework\Data\Form\Element\Factory as ElementFactory;
 use Magento\Framework\Data\Form\Element\CollectionFactory as ElementCollectionFactory;
 use Magento\Framework\Escaper;
 use Magento\Framework\UrlInterface;
-use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollection;
+use Hgati\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollection;
 use Magento\Framework\Json\DecoderInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Store\Model\StoreManagerInterface;
@@ -107,7 +107,7 @@ class Image extends ImageField
             foreach ($imageName as $data) {
                 $url = $data;
                 if (!preg_match("/^http\:\/\/|https\:\/\//", $data)) {
-                    $url = $this->_urlBuilder->getBaseUrl(['_type' => UrlInterface::URL_TYPE_MEDIA]) . 'lof/product_reviews/' . $data;
+                    $url = $this->_urlBuilder->getBaseUrl(['_type' => UrlInterface::URL_TYPE_MEDIA]) . 'hgati/product_reviews/' . $data;
                 }
                 echo '<a href="' .
                     $url .
@@ -135,8 +135,8 @@ class Image extends ImageField
                 $i++;
             }
 
-            $editLink =  $this->_backendUrl->getUrl('lof_product_reviews/gallery/edit', ['id' => $gallery['id']]);
-            $deleteLink = $this->_backendUrl->getUrl('lof_product_reviews/gallery/delete', ['id' => $gallery['id']]);
+            $editLink =  $this->_backendUrl->getUrl('hgati_product_reviews/gallery/edit', ['id' => $gallery['id']]);
+            $deleteLink = $this->_backendUrl->getUrl('hgati_product_reviews/gallery/delete', ['id' => $gallery['id']]);
 
             $galleryLink = '<a href="' . $editLink . '">' . __('Add/Edit Gallery') .'</a> ';
             $galleryLink .= !empty($imageName[0]) ? '<a href="' . $deleteLink . '">' . __('Delete Gallery') .'</a> ' : '';

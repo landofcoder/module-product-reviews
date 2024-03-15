@@ -1,25 +1,25 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Block\Adminhtml\Gallery\Helper\Form\Gallery;
+namespace Hgati\ProductReviews\Block\Adminhtml\Gallery\Helper\Form\Gallery;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Backend\Block\Media\Uploader;
@@ -34,10 +34,10 @@ class Content extends \Magento\Backend\Block\Widget
     /**
      * @var string
      */
-    protected $_template = 'Lof_ProductReviews::helper/gallery.phtml';
+    protected $_template = 'Hgati_ProductReviews::helper/gallery.phtml';
 
     /**
-     * @var \Lof\ProductReviews\Model\Gallery\Config
+     * @var \Hgati\ProductReviews\Model\Gallery\Config
      */
     protected $_mediaConfig;
 
@@ -65,7 +65,7 @@ class Content extends \Magento\Backend\Block\Widget
      * Content constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
-     * @param \Lof\ProductReviews\Model\Gallery\Config $mediaConfig
+     * @param \Hgati\ProductReviews\Model\Gallery\Config $mediaConfig
      * @param \Magento\Framework\Registry $coreRegister
      * @param \Magento\Framework\ObjectManagerInterface $objectManager
      * @param array $data
@@ -75,7 +75,7 @@ class Content extends \Magento\Backend\Block\Widget
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Json\EncoderInterface $jsonEncoder,
-        \Lof\ProductReviews\Model\Gallery\Config $mediaConfig,
+        \Hgati\ProductReviews\Model\Gallery\Config $mediaConfig,
         \Magento\Framework\Registry $coreRegister,
         \Magento\Framework\ObjectManagerInterface $objectManager,
         array $data = [],
@@ -105,7 +105,7 @@ class Content extends \Magento\Backend\Block\Widget
         );
 
         $this->getUploader()->getConfig()->setUrl(
-            $this->_urlBuilder->getUrl('lof_product_reviews/gallery/upload')
+            $this->_urlBuilder->getUrl('hgati_product_reviews/gallery/upload')
         )->setFileField(
             'image'
         )->setFilters(
@@ -117,7 +117,7 @@ class Content extends \Magento\Backend\Block\Widget
             ]
         );
 
-        $this->_eventManager->dispatch('lof_productreviews_gallery_prepare_layout', ['block' => $this]);
+        $this->_eventManager->dispatch('hgati_productreviews_gallery_prepare_layout', ['block' => $this]);
 
         return parent::_prepareLayout();
     }
@@ -238,7 +238,7 @@ class Content extends \Magento\Backend\Block\Widget
                     'value' => $attribute['file'],
                     'label' => $attribute['label'],
                     'scope' => 'Store View',
-                    'name' => 'lofgallery[image]',
+                    'name' => 'hgatigallery[image]',
                 ];
             }
 

@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright © landofcoder All rights reserved.
+ * Copyright © hgati All rights reserved.
  * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Api;
+namespace Hgati\ProductReviews\Api;
 
 use Magento\Framework\Api\SearchCriteriaInterface;
 
@@ -14,18 +14,18 @@ interface RemindersRepositoryInterface
 
     /**
      * Save Reminders
-     * @param \Lof\ProductReviews\Api\Data\RemindersInterface $reminders
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @param \Hgati\ProductReviews\Api\Data\RemindersInterface $reminders
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function save(
-        \Lof\ProductReviews\Api\Data\RemindersInterface $reminders
+        \Hgati\ProductReviews\Api\Data\RemindersInterface $reminders
     );
 
     /**
      * Retrieve Reminders
      * @param int $id
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function get($id);
@@ -33,7 +33,7 @@ interface RemindersRepositoryInterface
     /**
      * Retrieve Reminders matching the specified criteria.
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @return \Lof\ProductReviews\Api\Data\RemindersSearchResultsInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersSearchResultsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getList(
@@ -42,12 +42,12 @@ interface RemindersRepositoryInterface
 
     /**
      * Delete Reminders
-     * @param \Lof\ProductReviews\Api\Data\RemindersInterface $reminders
+     * @param \Hgati\ProductReviews\Api\Data\RemindersInterface $reminders
      * @return bool true on success
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function delete(
-        \Lof\ProductReviews\Api\Data\RemindersInterface $reminders
+        \Hgati\ProductReviews\Api\Data\RemindersInterface $reminders
     );
 
     /**

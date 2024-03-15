@@ -1,28 +1,28 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Plugin\Adminhtml;
+namespace Hgati\ProductReviews\Plugin\Adminhtml;
 
-use Lof\ProductReviews\Model\CustomReviewFactory;
-use Lof\ProductReviews\Model\ReviewReplyFactory;
+use Hgati\ProductReviews\Model\CustomReviewFactory;
+use Hgati\ProductReviews\Model\ReviewReplyFactory;
 
 class Save
 {
@@ -48,7 +48,7 @@ class Save
     protected $_escaper;
 
     /**
-     * @var \Lof\ProductReviews\Helper\Data
+     * @var \Hgati\ProductReviews\Helper\Data
      */
     protected $_dataHelper;
 
@@ -81,10 +81,10 @@ class Save
      * Save constructor.
      * @param CustomReviewFactory $customReviewFactory
      * @param ReviewReplyFactory $reviewReplyFactory
-     * @param \Lof\ProductReviews\Model\GalleryFactory $galleryFactory
+     * @param \Hgati\ProductReviews\Model\GalleryFactory $galleryFactory
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
      * @param \Magento\Framework\Escaper $escaper
-     * @param \Lof\ProductReviews\Helper\Data $dataHelper
+     * @param \Hgati\ProductReviews\Helper\Data $dataHelper
      * @param \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation
      * @param \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -100,10 +100,10 @@ class Save
     public function __construct(
         CustomReviewFactory $customReviewFactory,
         ReviewReplyFactory $reviewReplyFactory,
-        \Lof\ProductReviews\Model\GalleryFactory $galleryFactory,
+        \Hgati\ProductReviews\Model\GalleryFactory $galleryFactory,
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\Framework\Escaper $escaper,
-        \Lof\ProductReviews\Helper\Data $dataHelper,
+        \Hgati\ProductReviews\Helper\Data $dataHelper,
         \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
         \Magento\Framework\Mail\Template\TransportBuilder $transportBuilder,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -186,7 +186,7 @@ class Save
         }
         $email_address = isset($data['email_address']) ? $data['email_address'] : '';
         $avatar_url = isset($data['avatar_url']) ? $data['avatar_url'] : '';
-        /** @var \Lof\ProductReviews\Model\CustomReview $customReview */
+        /** @var \Hgati\ProductReviews\Model\CustomReview $customReview */
         $modelCustom = $this->customReviewFactory->create();
 
         $data['is_recommended'] = isset($data['is_recommended']) ? (int)$data['is_recommended'] : 0;
@@ -216,7 +216,7 @@ class Save
                 ->save();
         }
 
-        /** @var \Lof\ProductReviews\Model\ReviewReply $reviewReply */
+        /** @var \Hgati\ProductReviews\Model\ReviewReply $reviewReply */
         if (isset($data['reply_id'])) {
             $modelReply = $this->reviewReplyFactory->create();
             if ($modelReply->getCollection()->getItemByColumnValue('reply_id', $data['reply_id'])) {
@@ -229,7 +229,7 @@ class Save
                     ->setEmailAddress($email_address)
                     ->setUserName($user_name)
                     ->setWebsite($website)
-                    ->setStatus(\Lof\ProductReviews\Model\ReviewReply::STATUS_ENABLED)
+                    ->setStatus(\Hgati\ProductReviews\Model\ReviewReply::STATUS_ENABLED)
                     ->save();
             } else {
                 $modelReply->setReviewId($reviewId)
@@ -240,7 +240,7 @@ class Save
                     ->setEmailAddress($email_address)
                     ->setUserName($user_name)
                     ->setWebsite($website)
-                    ->setStatus(\Lof\ProductReviews\Model\ReviewReply::STATUS_ENABLED)
+                    ->setStatus(\Hgati\ProductReviews\Model\ReviewReply::STATUS_ENABLED)
                     ->save();
             }
         }
@@ -249,7 +249,7 @@ class Save
         if ($modelGallery->getCollection()->getItemByColumnValue('review_id', $reviewId) != true) {
             $modelGallery->setReviewId($reviewId)
                 ->setLabel('Gallery of Review ' . $reviewId)
-                ->setStatus(\Lof\ProductReviews\Model\Gallery::STATUS_DISABLED)
+                ->setStatus(\Hgati\ProductReviews\Model\Gallery::STATUS_DISABLED)
                 ->setValue(@json_encode([]))
                 ->save();
         }

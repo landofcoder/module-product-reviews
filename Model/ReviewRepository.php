@@ -1,40 +1,40 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model;
+namespace Hgati\ProductReviews\Model;
 
-use Lof\ProductReviews\Api\Data\ReviewSearchResultInterface;
-use Lof\ProductReviews\Model\Review\Command\DeleteByIdInterface;
-use Lof\ProductReviews\Model\Review\Command\GetInterface;
-use Lof\ProductReviews\Model\Review\Command\GetListInterface;
-use Lof\ProductReviews\Model\Review\Command\GetListReplyInterface;
-use Lof\ProductReviews\Model\Review\Command\SaveInterface;
-use Lof\ProductReviews\Model\Review\Command\ReviewReplyInterface;
-use Lof\ProductReviews\Model\Review\Command\DeleteReplyByIdInterface;
+use Hgati\ProductReviews\Api\Data\ReviewSearchResultInterface;
+use Hgati\ProductReviews\Model\Review\Command\DeleteByIdInterface;
+use Hgati\ProductReviews\Model\Review\Command\GetInterface;
+use Hgati\ProductReviews\Model\Review\Command\GetListInterface;
+use Hgati\ProductReviews\Model\Review\Command\GetListReplyInterface;
+use Hgati\ProductReviews\Model\Review\Command\SaveInterface;
+use Hgati\ProductReviews\Model\Review\Command\ReviewReplyInterface;
+use Hgati\ProductReviews\Model\Review\Command\DeleteReplyByIdInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Lof\ProductReviews\Api\ReviewRepositoryInterface;
-use Lof\ProductReviews\Api\Data\ReviewInterface;
-use Lof\ProductReviews\Api\Data\ReplyInterface;
-use Lof\ProductReviews\Api\Data\ReplySearchResultInterface;
+use Hgati\ProductReviews\Api\ReviewRepositoryInterface;
+use Hgati\ProductReviews\Api\Data\ReviewInterface;
+use Hgati\ProductReviews\Api\Data\ReplyInterface;
+use Hgati\ProductReviews\Api\Data\ReplySearchResultInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 
 /**
@@ -111,8 +111,8 @@ class ReviewRepository implements ReviewRepositoryInterface
      *
      * @param ReviewInterface $review
      *
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
-     * @throws \Lof\ProductReviews\Validation\ValidationException
+     * @return \Hgati\ProductReviews\Api\Data\ReviewInterface
+     * @throws \Hgati\ProductReviews\Validation\ValidationException
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
@@ -127,7 +127,7 @@ class ReviewRepository implements ReviewRepositoryInterface
      * @param ReplyInterface $reply
      *
      * @return ReplyInterface
-     * @throws \Lof\ProductReviews\Validation\ValidationException
+     * @throws \Hgati\ProductReviews\Validation\ValidationException
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
@@ -151,7 +151,7 @@ class ReviewRepository implements ReviewRepositoryInterface
      * @param ReplyInterface $reply
      *
      * @return ReplyInterface
-     * @throws \Lof\ProductReviews\Validation\ValidationException
+     * @throws \Hgati\ProductReviews\Validation\ValidationException
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
@@ -185,7 +185,7 @@ class ReviewRepository implements ReviewRepositoryInterface
      * @param ReplyInterface $reply
      *
      * @return ReplyInterface
-     * @throws \Lof\ProductReviews\Validation\ValidationException
+     * @throws \Hgati\ProductReviews\Validation\ValidationException
      * @throws \Magento\Framework\Exception\CouldNotSaveException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
@@ -219,7 +219,7 @@ class ReviewRepository implements ReviewRepositoryInterface
      *
      * @param int $reviewId
      *
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReviewInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function get(int $reviewId): ReviewInterface
@@ -271,7 +271,7 @@ class ReviewRepository implements ReviewRepositoryInterface
      * @param int $customerId
      * @param int $reviewId
      *
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReviewInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getMyReview(int $customerId, int $reviewId): ReviewInterface
@@ -285,7 +285,7 @@ class ReviewRepository implements ReviewRepositoryInterface
      * @param int $customerId
      * @param int $reviewId
      *
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReviewInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getReviewByCustomer(int $customerId, int $reviewId): ReviewInterface

@@ -1,42 +1,42 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model;
+namespace Hgati\ProductReviews\Model;
 
-use Lof\ProductReviews\Api\GetProductReviewsInterface;
-use Lof\ProductReviews\Api\Data\GalleryInterfaceFactory;
-use Lof\ProductReviews\Api\Data\CustomizeInterfaceFactory;
-use Lof\ProductReviews\Api\Data\ReplyInterfaceFactory;
-use Lof\ProductReviews\Api\Data\ReviewDataInterfaceFactory;
-use Lof\ProductReviews\Api\Data\ImageInterfaceFactory;
-use Lof\ProductReviews\Api\Data\ReviewInterface;
+use Hgati\ProductReviews\Api\GetProductReviewsInterface;
+use Hgati\ProductReviews\Api\Data\GalleryInterfaceFactory;
+use Hgati\ProductReviews\Api\Data\CustomizeInterfaceFactory;
+use Hgati\ProductReviews\Api\Data\ReplyInterfaceFactory;
+use Hgati\ProductReviews\Api\Data\ReviewDataInterfaceFactory;
+use Hgati\ProductReviews\Api\Data\ImageInterfaceFactory;
+use Hgati\ProductReviews\Api\Data\ReviewInterface;
 use Magento\Review\Model\ResourceModel\Review\Product\Collection as ReviewCollection;
 use Magento\Review\Model\ResourceModel\Review\Product\CollectionFactory as ReviewCollectionFactory;
-use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
-use Lof\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as CustomReviewCollectionFactory;
-use Lof\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as ReviewReplyCollectionFactory;
-use Lof\ProductReviews\Model\Converter\Review\ToDataModel as ReviewConverter;
-use Lof\ProductReviews\Helper\Data as HelperData;
-use Lof\ProductReviews\Model\Review\Command\GetSummaryInterface;
+use Hgati\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
+use Hgati\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as CustomReviewCollectionFactory;
+use Hgati\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as ReviewReplyCollectionFactory;
+use Hgati\ProductReviews\Model\Converter\Review\ToDataModel as ReviewConverter;
+use Hgati\ProductReviews\Helper\Data as HelperData;
+use Hgati\ProductReviews\Model\Review\Command\GetSummaryInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
 /**
@@ -382,7 +382,7 @@ class GetProductReviews implements GetProductReviewsInterface
     {
         if (!$this->_flag_joined) {
             $collection->getSelect()->joinLeft(
-                ['lc' => $collection->getTable('lof_review_customize')],
+                ['lc' => $collection->getTable('hgati_review_customize')],
                 'rt.review_id = lc.review_id',
                 [
                     'count_helpful',

@@ -1,28 +1,28 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
 // @codingStandardsIgnoreFile
 
 /** @var \Magento\Review\Block\Form $block 1*/
-/** @var \Lof\ProductReviews\Block\Form $block 2*/
+/** @var \Hgati\ProductReviews\Block\Form $block 2*/
 $limit_image = $this->getReviewConfig("limit_upload_image", 1);
 $enable_pros_cons = $this->getReviewConfig("enable_pros_cons", 0);
 $verify_purchased = $block->getVerifyConfig();
@@ -39,7 +39,7 @@ if($verify_purchased && $auto_verify_purchased){
 }
 if($verify_purchased && $auto_verify_purchased && !$is_verified){
    ?>
-<div class="lof-verify-purchased">
+<div class="hgati-verify-purchased">
     <div class="verify-title">
         <h3><?= $block->escapeHtml(__('Please complete order for the product to write review.')) ?></h3>
     </div>
@@ -48,12 +48,12 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
 }else {
 ?>
 <?php if ($verify_purchased) :?>
-<div class="lof-verify-purchased">
+<div class="hgati-verify-purchased">
     <div class="verify-title">
         <h3><?= $block->escapeHtml(__('You need to enter info before adding a new review.')) ?></h3>
     </div>
     <div class="verify-content">
-        <fieldset class="fieldset lof-verify-fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+        <fieldset class="fieldset hgati-verify-fieldset" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
 
             <?php if ($check_login == false) { ?>
                 <div class="field verify-field-order">
@@ -88,7 +88,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                 <?php } ?>
             <?php } ?>
         </fieldset>
-        <div class="actions-toolbar lof-verify-form-actions">
+        <div class="actions-toolbar hgati-verify-form-actions">
             <div class="primary actions-primary">
                 <button type="submit" id="verify_summit" data-link="<?= $verify_link; ?>" class="action submit primary" onclick="verifyInfo()"><span><?= $block->escapeHtml(__('Submit')) ?></span></button>
             </div>
@@ -188,7 +188,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
         <div class="field review-field-images">
             <label for="review_images" class="label"><span><?= $block->escapeHtml(__('Review Images')) ?></span></label>
             <div class="control" id="control_image">
-                <input type="file" id="review_images_0" name="review_images_0" class="input-text lof-review-images">
+                <input type="file" id="review_images_0" name="review_images_0" class="input-text hgati-review-images">
                 <br id="br_0">
             </div>
             <div style="padding-left: 127px;">
@@ -297,7 +297,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                             value = $.parseJSON(data);
                             if (value.message == 'correct') {
                                 $('#main-review-form').removeClass('hidden');
-                                $('.lof-verify-purchased').addClass('hidden');
+                                $('.hgati-verify-purchased').addClass('hidden');
                                 $("#review_verified").val(1);
                             } else if (value.message == 'incorrect') {
 
@@ -330,7 +330,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                             value = $.parseJSON(data);
                             if (value.message == 'correct') {
                                 $('#main-review-form').removeClass('hidden');
-                                $('.lof-verify-purchased').addClass('hidden');
+                                $('.hgati-verify-purchased').addClass('hidden');
                                 $("#review_verified").val(1);
                             } else if (value.message == 'incorrect') {
 
@@ -362,7 +362,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                 if(data_limit <= 1) {
                     data_limit = 1;
                 }
-                var number_image_tags = $(".lof-review-images").length;
+                var number_image_tags = $(".hgati-review-images").length;
                 if(parseInt(number_image_tags) < data_limit){
                     i++;
                     img = document.getElementById('control_image');
@@ -372,7 +372,7 @@ if($verify_purchased && $auto_verify_purchased && !$is_verified){
                     input.type = "file";
                     input.id = "review_images_" + i;
                     input.name = "review_images_" + i;
-                    input.className = "input-text lof-review-images";
+                    input.className = "input-text hgati-review-images";
                     img.appendChild(input);
                     img.appendChild(br);
                 }

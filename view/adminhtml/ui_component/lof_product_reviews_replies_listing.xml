@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  * Landofcoder
+  * Hgati
   *
   * NOTICE OF LICENSE
   *
-  * This source file is subject to the Landofcoder.com license that is
+  * This source file is subject to the Hgati.com license that is
   * available through the world-wide-web at this URL:
-  * https://landofcoder.com/terms
+  * https://hgati.com/terms
   *
   * DISCLAIMER
   *
   * Do not edit or add to this file if you wish to upgrade this extension to newer
   * version in the future.
   *
-  * @category   Landofcoder
-  * @package    Lof_ProductReviews
-  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
-  * @license    https://landofcoder.com/terms
+  * @category   Hgati
+  * @package    Hgati_ProductReviews
+  * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+  * @license    https://hgati.com/terms
   -->
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">lof_product_reviews_replies_listing.lof_product_reviews_replies_listing_data_source</item>
+            <item name="provider" xsi:type="string">hgati_product_reviews_replies_listing.hgati_product_reviews_replies_listing_data_source</item>
         </item>
     </argument>
     <settings>
-        <spinner>lof_product_reviews_replies_columns</spinner>
+        <spinner>hgati_product_reviews_replies_columns</spinner>
         <deps>
-            <dep>lof_product_reviews_replies_listing.lof_product_reviews_replies_listing_data_source</dep>
+            <dep>hgati_product_reviews_replies_listing.hgati_product_reviews_replies_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="lof_product_reviews_replies_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="hgati_product_reviews_replies_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">reply_id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Lof_ProductReviews::review_reply</aclResource>
-        <dataProvider class="Lof\ProductReviews\Ui\DataProvider\Replies\RepliesDataProvider" name="lof_product_reviews_replies_listing_data_source">
+        <aclResource>Hgati_ProductReviews::review_reply</aclResource>
+        <dataProvider class="Hgati\ProductReviews\Ui\DataProvider\Replies\RepliesDataProvider" name="hgati_product_reviews_replies_listing_data_source">
             <settings>
                 <requestFieldName>reply_id</requestFieldName>
                 <primaryFieldName>reply_id</primaryFieldName>
@@ -63,10 +63,10 @@
                 </templates>
             </settings>
         </filters>
-        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions" class="\Lof\ProductReviews\Ui\Component\Replies\MassAction">
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions" class="\Hgati\ProductReviews\Ui\Component\Replies\MassAction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">lof_product_reviews_replies_listing.lof_product_reviews_replies_listing.lof_product_reviews_replies_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">hgati_product_reviews_replies_listing.hgati_product_reviews_replies_listing.hgati_product_reviews_replies_columns.ids</item>
                     <item name="indexField" xsi:type="string">reply_id</item>
                 </item>
             </argument>
@@ -76,7 +76,7 @@
                         <message translate="true">Are you sure you want to delete selected items?</message>
                         <title translate="true">Delete items</title>
                     </confirm>
-                    <url path="lof_product_reviews/replies/massDelete"/>
+                    <url path="hgati_product_reviews/replies/massDelete"/>
                     <type>delete</type>
                     <label translate="true">Delete</label>
                 </settings>
@@ -89,14 +89,14 @@
                         <action name="0">
                             <type>pending</type>
                             <label translate="true">Pending</label>
-                            <url path="lof_product_reviews/replies/massStatus">
+                            <url path="hgati_product_reviews/replies/massStatus">
                                 <param name="status">0</param>
                             </url>
                         </action>
                         <action name="1">
                             <type>approved</type>
                             <label translate="true">Approved</label>
-                            <url path="lof_product_reviews/replies/massStatus">
+                            <url path="hgati_product_reviews/replies/massStatus">
                                 <param name="status">1</param>
                             </url>
                         </action>
@@ -106,11 +106,11 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns  name="lof_product_reviews_replies_columns">
+    <columns  name="hgati_product_reviews_replies_columns">
         <settings>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">lof_product_reviews_replies_listing.lof_product_reviews_replies_listing.lof_product_reviews_replies_columns.actions</item>
+                    <item name="provider" xsi:type="string">hgati_product_reviews_replies_listing.hgati_product_reviews_replies_listing.hgati_product_reviews_replies_columns.actions</item>
                     <item name="target" xsi:type="string">applyAction</item>
                     <item name="params" xsi:type="array">
                         <item name="0" xsi:type="string">edit</item>
@@ -171,7 +171,7 @@
 
         <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="60">
             <settings>
-                <options class="Lof\ProductReviews\Model\Replies\Source\Status"/>
+                <options class="Hgati\ProductReviews\Model\Replies\Source\Status"/>
                 <filter>select</filter>
                 <dataType>select</dataType>
                 <label translate="true">Status</label>
@@ -213,7 +213,7 @@
             </settings>
         </column>
 
-        <actionsColumn name="review_actions" class="Lof\ProductReviews\Ui\Component\Listing\Columns\ReviewDetailAction" sortOrder="90">
+        <actionsColumn name="review_actions" class="Hgati\ProductReviews\Ui\Component\Listing\Columns\ReviewDetailAction" sortOrder="90">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="viewUrlPath" xsi:type="string">review/product/edit</item>

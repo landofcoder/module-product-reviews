@@ -1,51 +1,51 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Helper;
+namespace Hgati\ProductReviews\Helper;
 
-use Lof\ProductReviews\Api\Data\ReviewInterface;
+use Hgati\ProductReviews\Api\Data\ReviewInterface;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    //Lof Product Reviews frontend configs
-    const REVIEW_ENABLE_SORTING = 'lof_product_reviews/lof_review_settings/enable_sorting';
-    const REVIEW_COUPON = 'lof_product_reviews/lof_general_settings/choose_coupon';
-    const REVIEW_AFTER_DAY = 'lof_product_reviews/lof_general_settings/after_day';
-    const REVIEW_VERIFY_PURCHASED = 'lof_product_reviews/lof_review_settings/verify_purchased_code';
-    const REVIEW_AUTO_VERIFY_PURCHASED = 'lof_product_reviews/lof_review_settings/enable_auto_verify';
-    const REVIEW_ALLOW_UPLOAD_IMAGE = 'lof_product_reviews/lof_review_settings/allow_upload';
-    const REVIEW_IMAGE_WIDTH = 'lof_product_reviews/lof_review_settings/image_width';
-    const REVIEW_IMAGE_HEIGHT = 'lof_product_reviews/lof_review_settings/image_height';
+    //Hgati Product Reviews frontend configs
+    const REVIEW_ENABLE_SORTING = 'hgati_product_reviews/hgati_review_settings/enable_sorting';
+    const REVIEW_COUPON = 'hgati_product_reviews/hgati_general_settings/choose_coupon';
+    const REVIEW_AFTER_DAY = 'hgati_product_reviews/hgati_general_settings/after_day';
+    const REVIEW_VERIFY_PURCHASED = 'hgati_product_reviews/hgati_review_settings/verify_purchased_code';
+    const REVIEW_AUTO_VERIFY_PURCHASED = 'hgati_product_reviews/hgati_review_settings/enable_auto_verify';
+    const REVIEW_ALLOW_UPLOAD_IMAGE = 'hgati_product_reviews/hgati_review_settings/allow_upload';
+    const REVIEW_IMAGE_WIDTH = 'hgati_product_reviews/hgati_review_settings/image_width';
+    const REVIEW_IMAGE_HEIGHT = 'hgati_product_reviews/hgati_review_settings/image_height';
 
-    //Lof Product Reviews backend configs
-    const XML_SENDER_EMAIL = 'lof_product_reviews/email_settings/email_sender';
-    const XML_PATH_EMAIL_TEMPLATE = 'lof_product_reviews/email_settings/email_templates';
-    const XML_PATH_REPLY_EMAIL_TEMPLATE = 'lof_product_reviews/email_settings/reply_email_templates';
-    const XML_SEND_REMINDER_AUTO = 'lof_product_reviews/email_settings/send_emails_automatically';
-    const XML_PATH_EMAIL_PRODUCT_TEMPLATE = 'lof_product_reviews/email_settings/review_product_templates';
+    //Hgati Product Reviews backend configs
+    const XML_SENDER_EMAIL = 'hgati_product_reviews/email_settings/email_sender';
+    const XML_PATH_EMAIL_TEMPLATE = 'hgati_product_reviews/email_settings/email_templates';
+    const XML_PATH_REPLY_EMAIL_TEMPLATE = 'hgati_product_reviews/email_settings/reply_email_templates';
+    const XML_SEND_REMINDER_AUTO = 'hgati_product_reviews/email_settings/send_emails_automatically';
+    const XML_PATH_EMAIL_PRODUCT_TEMPLATE = 'hgati_product_reviews/email_settings/review_product_templates';
 
     /**
      * @var string
      */
-    const UPLOAD_FILE_PATH = 'lof/product_reviews';
+    const UPLOAD_FILE_PATH = 'hgati/product_reviews';
 
     /**
      * @var \Magento\Framework\Module\ModuleListInterface
@@ -254,7 +254,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function isEnabled()
     {
-        return (bool)$this->getConfig("lof_general_settings/enabled_module");
+        return (bool)$this->getConfig("hgati_general_settings/enabled_module");
     }
 
     /**
@@ -266,7 +266,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getConfig($key, $default = "")
     {
-        $key = 'lof_product_reviews/' . $key;
+        $key = 'hgati_product_reviews/' . $key;
         $value = $this->scopeConfig->getValue($key, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         return $value ? $value : $default;
     }
@@ -447,7 +447,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * Get gallery images from gallery model
      *
-     * @param \Lof\ProductReviews\Api\Data\GalleryInterface|mixed|object $galleryModel
+     * @param \Hgati\ProductReviews\Api\Data\GalleryInterface|mixed|object $galleryModel
      * @return mixed|array
      */
     public function getGalleryImages($galleryModel)

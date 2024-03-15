@@ -1,28 +1,28 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model\Data;
+namespace Hgati\ProductReviews\Model\Data;
 
-use Lof\ProductReviews\Api\Data\ReviewInterface;
+use Hgati\ProductReviews\Api\Data\ReviewInterface;
 use Magento\Framework\Api\AbstractSimpleObject;
 
 /**
@@ -73,7 +73,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @return \Lof\ProductReviews\Api\Data\RatingVoteInterface[]
+     * @return \Hgati\ProductReviews\Api\Data\RatingVoteInterface[]
      */
     public function getRatings()
     {
@@ -83,7 +83,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @return \Lof\ProductReviews\Api\Data\ReplyInterface[]
+     * @return \Hgati\ProductReviews\Api\Data\ReplyInterface[]
      */
     public function getComments()
     {
@@ -93,7 +93,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @return \Lof\ProductReviews\Api\Data\GalleryInterface
+     * @return \Hgati\ProductReviews\Api\Data\GalleryInterface
      */
     public function getGalleries()
     {
@@ -103,7 +103,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @return \Lof\ProductReviews\Api\Data\ImageInterface[]
+     * @return \Hgati\ProductReviews\Api\Data\ImageInterface[]
      */
     public function getImages()
     {
@@ -113,7 +113,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function getCustomize()
     {
@@ -211,7 +211,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface[] $ratings
+     * @param \Hgati\ProductReviews\Api\Data\RatingVoteInterface[] $ratings
      *
      * @return Review|void
      */
@@ -223,7 +223,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $comments
+     * @param \Hgati\ProductReviews\Api\Data\ReplyInterface[] $comments
      *
      * @return Review|void
      */
@@ -235,7 +235,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\GalleryInterface $galleries
+     * @param \Hgati\ProductReviews\Api\Data\GalleryInterface $galleries
      *
      * @return Review|void
      */
@@ -247,7 +247,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\ImageInterface[] $images
+     * @param \Hgati\ProductReviews\Api\Data\ImageInterface[] $images
      *
      * @return Review|void
      */
@@ -259,7 +259,7 @@ class Review extends AbstractSimpleObject implements ReviewInterface
     /**
      * @inheritdoc
      *
-     * @param \Lof\ProductReviews\Api\Data\CustomizeInterface $customize
+     * @param \Hgati\ProductReviews\Api\Data\CustomizeInterface $customize
      *
      * @return Review|void
      */

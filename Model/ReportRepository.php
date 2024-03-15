@@ -1,33 +1,33 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model;
+namespace Hgati\ProductReviews\Model;
 
-use Lof\ProductReviews\Api\ReportRepositoryInterface;
-use Lof\ProductReviews\Api\ReviewRepositoryInterface;
-use Lof\ProductReviews\Api\CustomizeRepositoryInterface;
-use Lof\ProductReviews\Helper\Data as HelperData;
-use Lof\ProductReviews\Api\Data\ReviewInterface;
-use Lof\ProductReviews\Model\ResourceModel\RateReport\CollectionFactory as ReportHistoryCollectionFactory;
+use Hgati\ProductReviews\Api\ReportRepositoryInterface;
+use Hgati\ProductReviews\Api\ReviewRepositoryInterface;
+use Hgati\ProductReviews\Api\CustomizeRepositoryInterface;
+use Hgati\ProductReviews\Helper\Data as HelperData;
+use Hgati\ProductReviews\Api\Data\ReviewInterface;
+use Hgati\ProductReviews\Model\ResourceModel\RateReport\CollectionFactory as ReportHistoryCollectionFactory;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 

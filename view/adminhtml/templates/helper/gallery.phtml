@@ -1,27 +1,27 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
 // @codingStandardsIgnoreFile
 
-/** @var $block \Lof\ProductReviews\Block\Adminhtml\Gallery\Helper\Form\Gallery */
+/** @var $block \Hgati\ProductReviews\Block\Adminhtml\Gallery\Helper\Form\Gallery */
 
 $elementName = $block->getElement()->getName() . '[images]';
 $formName = $block->getFormName();
@@ -29,7 +29,7 @@ $formName = $block->getFormName();
 ?>
 
 <div id="<?= $block->getHtmlId() ?>" class="gallery"
-     data-mage-init='{"lofReviewGallery":{"template":"#<?= $block->getHtmlId() ?>-template"}}'
+     data-mage-init='{"hgatiReviewGallery":{"template":"#<?= $block->getHtmlId() ?>-template"}}'
      data-parent-component="<?= $block->escapeHtml($block->getData('config/parentComponent')) ?>"
      data-images="<?= $block->escapeHtml($block->getImagesJson()) ?>"
      data-types="<?= $block->escapeHtml($this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($block->getImageTypes())) ?>">

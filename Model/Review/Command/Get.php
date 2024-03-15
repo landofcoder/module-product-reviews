@@ -1,41 +1,41 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model\Review\Command;
+namespace Hgati\ProductReviews\Model\Review\Command;
 
-use Lof\ProductReviews\Api\Data\ReviewInterface;
-use Lof\ProductReviews\Model\Converter\Review\ToDataModel;
+use Hgati\ProductReviews\Api\Data\ReviewInterface;
+use Hgati\ProductReviews\Model\Converter\Review\ToDataModel;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Review\Model\ResourceModel\Review as ReviewResource;
 use Magento\Review\Model\ReviewFactory;
 use Magento\Review\Model\Review;
-use Lof\ProductReviews\Helper\Data as HelperData;
-use Lof\ProductReviews\Api\Data\GalleryInterfaceFactory;
-use Lof\ProductReviews\Api\Data\CustomizeInterfaceFactory;
-use Lof\ProductReviews\Api\Data\ReplyInterfaceFactory;
-use Lof\ProductReviews\Api\Data\ImageInterfaceFactory;
-use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
-use Lof\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as CustomReviewCollectionFactory;
-use Lof\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as ReviewReplyCollectionFactory;
+use Hgati\ProductReviews\Helper\Data as HelperData;
+use Hgati\ProductReviews\Api\Data\GalleryInterfaceFactory;
+use Hgati\ProductReviews\Api\Data\CustomizeInterfaceFactory;
+use Hgati\ProductReviews\Api\Data\ReplyInterfaceFactory;
+use Hgati\ProductReviews\Api\Data\ImageInterfaceFactory;
+use Hgati\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
+use Hgati\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as CustomReviewCollectionFactory;
+use Hgati\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as ReviewReplyCollectionFactory;
 
 /**
  * @inheritdoc
@@ -143,7 +143,7 @@ class Get implements GetInterface
      *
      * @param int $reviewId
      * @param bool $moreInfo
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReviewInterface
      * @throws NoSuchEntityException
      */
     public function execute(int $reviewId, bool $moreInfo = true): ReviewInterface
@@ -176,7 +176,7 @@ class Get implements GetInterface
      * @param int $customerId
      * @param int $reviewId
      * @param bool $moreInfo
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReviewInterface
      * @throws NoSuchEntityException
      */
     public function executeByCustomer(int $customerId, int $reviewId, bool $moreInfo = true): ReviewInterface
@@ -190,7 +190,7 @@ class Get implements GetInterface
      * @param int $customerId
      * @param int $reviewId
      * @param bool $moreInfo
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReviewInterface
      * @throws NoSuchEntityException
      */
     public function executeByCustomerId(int $customerId, int $reviewId, bool $moreInfo = true): ReviewInterface
@@ -205,7 +205,7 @@ class Get implements GetInterface
      * @param int $reviewId
      * @param bool $moreInfo
      * @param bool $checkCustomer
-     * @return \Lof\ProductReviews\Api\Data\ReviewInterface
+     * @return \Hgati\ProductReviews\Api\Data\ReviewInterface
      * @throws NoSuchEntityException
      */
     protected function getReviewByCustomer(int $customerId, int $reviewId, bool $moreInfo = true, bool $checkCustomer = true): ReviewInterface

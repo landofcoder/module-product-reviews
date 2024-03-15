@@ -1,29 +1,29 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model\Converter;
+namespace Hgati\ProductReviews\Model\Converter;
 
-use Lof\ProductReviews\Api\Data\ReviewInterface as ReviewDataInterface;
-use Lof\ProductReviews\Api\Data\ReviewInterfaceFactory as RreviewDataFactory;
+use Hgati\ProductReviews\Api\Data\ReviewInterface as ReviewDataInterface;
+use Hgati\ProductReviews\Api\Data\ReviewInterfaceFactory as RreviewDataFactory;
 use Magento\Framework\Api\DataObjectHelper;
 
 /**

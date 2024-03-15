@@ -1,25 +1,25 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Controller\Adminhtml\Gallery;
+namespace Hgati\ProductReviews\Controller\Adminhtml\Gallery;
 
 use Magento\Backend\App\Action;
 
@@ -80,14 +80,14 @@ class Delete extends \Magento\Backend\App\Action
 
         if ($id) {
             // init model and delete
-            $model = $this->_objectManager->create(\Lof\ProductReviews\Model\Gallery::class);
+            $model = $this->_objectManager->create(\Hgati\ProductReviews\Model\Gallery::class);
             $model->load($id);
             $reviewId =  $model->getReviewId();
 
             $imageNames = $this->_jsonDecoder->decode($model->getValue());
             foreach ($imageNames as $name) {
                 $mediaDirectory = $this->_fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
-                $mediaRootDir = $mediaDirectory->getAbsolutePath('lof/product_reviews/');
+                $mediaRootDir = $mediaDirectory->getAbsolutePath('hgati/product_reviews/');
 
                 if ($this->_file->isExists($mediaRootDir .$name)) {
                     $this->_file->deleteFile($mediaRootDir .$name);
@@ -107,6 +107,6 @@ class Delete extends \Magento\Backend\App\Action
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Lof_ProductReviews::lof_product_gallery');
+        return $this->_authorization->isAllowed('Hgati_ProductReviews::hgati_product_gallery');
     }
 }

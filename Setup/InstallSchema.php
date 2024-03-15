@@ -1,25 +1,25 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Setup;
+namespace Hgati\ProductReviews\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -40,10 +40,10 @@ class InstallSchema implements InstallSchemaInterface
         $installer->startSetup();
 
         /**
-         * Create table 'lof_review_customize'
+         * Create table 'hgati_review_customize'
          */
         $table = $installer->getConnection()->newTable(
-            $installer->getTable('lof_review_customize')
+            $installer->getTable('hgati_review_customize')
         )->addColumn(
             'review_customize_id',
             Table::TYPE_BIGINT,
@@ -108,24 +108,24 @@ class InstallSchema implements InstallSchemaInterface
                 'Review Id'
             )
             ->addIndex(
-                $installer->getIdxName('lof_review_customize', ['review_id']),
+                $installer->getIdxName('hgati_review_customize', ['review_id']),
                 ['review_id']
             )
             ->addForeignKey(
-                $installer->getFkName('lof_review_customize', 'review_id', 'review', 'review_id'),
+                $installer->getFkName('hgati_review_customize', 'review_id', 'review', 'review_id'),
                 'review_id',
                 $installer->getTable('review'),
                 'review_id',
                 Table::ACTION_CASCADE
             )
-            ->setComment('Lof Review Customize');
+            ->setComment('Hgati Review Customize');
         $installer->getConnection()->createTable($table);
 
         /**
-         * Create table 'lof_review_report_history'
+         * Create table 'hgati_review_report_history'
          */
         $table = $installer->getConnection()->newTable(
-            $installer->getTable('lof_review_report_history')
+            $installer->getTable('hgati_review_report_history')
         )->addColumn(
             'id',
             Table::TYPE_BIGINT,
@@ -182,24 +182,24 @@ class InstallSchema implements InstallSchemaInterface
                 'Reply create date'
             )
             ->addIndex(
-                $installer->getIdxName('lof_review_report_history', ['review_id']),
+                $installer->getIdxName('hgati_review_report_history', ['review_id']),
                 ['review_id']
             )
             ->addForeignKey(
-                $installer->getFkName('lof_review_report_history', 'review_id', 'review', 'review_id'),
+                $installer->getFkName('hgati_review_report_history', 'review_id', 'review', 'review_id'),
                 'review_id',
                 $installer->getTable('review'),
                 'review_id',
                 Table::ACTION_CASCADE
             )
-            ->setComment('Lof Review Report History');
+            ->setComment('Hgati Review Report History');
         $installer->getConnection()->createTable($table);
 
         /**
-         * Create table 'lof_review_reply'
+         * Create table 'hgati_review_reply'
          */
         $table = $installer->getConnection()->newTable(
-            $installer->getTable('lof_review_reply')
+            $installer->getTable('hgati_review_reply')
         )->addColumn(
             'reply_id',
             Table::TYPE_BIGINT,
@@ -243,35 +243,35 @@ class InstallSchema implements InstallSchemaInterface
                 'Reply create date'
             )
             ->addIndex(
-                $installer->getIdxName('lof_review_reply', ['review_id']),
+                $installer->getIdxName('hgati_review_reply', ['review_id']),
                 ['review_id']
             )
             ->addIndex(
-                $installer->getIdxName('lof_review_reply', ['customer_id']),
+                $installer->getIdxName('hgati_review_reply', ['customer_id']),
                 ['customer_id']
             )
             ->addForeignKey(
-                $installer->getFkName('lof_review_reply', 'review_id', 'review', 'review_id'),
+                $installer->getFkName('hgati_review_reply', 'review_id', 'review', 'review_id'),
                 'review_id',
                 $installer->getTable('review'),
                 'review_id',
                 Table::ACTION_CASCADE
             )
             ->addForeignKey(
-                $installer->getFkName('lof_review_reply', 'customer_id', 'customer_entity', 'entity_id'),
+                $installer->getFkName('hgati_review_reply', 'customer_id', 'customer_entity', 'entity_id'),
                 'customer_id',
                 $installer->getTable('customer_entity'),
                 'entity_id',
                 Table::ACTION_CASCADE
             )
-            ->setComment('Lof Review Reply');
+            ->setComment('Hgati Review Reply');
         $installer->getConnection()->createTable($table);
 
         /**
-         * Create table 'lof_product_reviews_gallery'
+         * Create table 'hgati_product_reviews_gallery'
          */
         $table = $installer->getConnection()
-            ->newTable($installer->getTable('lof_product_reviews_gallery'))
+            ->newTable($installer->getTable('hgati_product_reviews_gallery'))
             ->addColumn(
                 'id',
                 Table::TYPE_INTEGER,
@@ -308,24 +308,24 @@ class InstallSchema implements InstallSchemaInterface
                 'Status'
             )
             ->addIndex(
-                $installer->getIdxName('lof_product_reviews_gallery', ['review_id']),
+                $installer->getIdxName('hgati_product_reviews_gallery', ['review_id']),
                 ['review_id']
             )
             ->addForeignKey(
-                $installer->getFkName('lof_product_reviews_gallery', 'review_id', 'review', 'review_id'),
+                $installer->getFkName('hgati_product_reviews_gallery', 'review_id', 'review', 'review_id'),
                 'review_id',
                 $installer->getTable('review'),
                 'review_id',
                 Table::ACTION_CASCADE
             )
-            ->setComment('Lof Product Reviews Gallery Attribute Backend Table');
+            ->setComment('Hgati Product Reviews Gallery Attribute Backend Table');
         $installer->getConnection()->createTable($table);
 
         /**
-         * Create table 'lof_product_reviews_reminders'
+         * Create table 'hgati_product_reviews_reminders'
          */
         $table = $installer->getConnection()
-            ->newTable($installer->getTable('lof_product_reviews_reminders'))
+            ->newTable($installer->getTable('hgati_product_reviews_reminders'))
             ->addColumn(
                 'id',
                 Table::TYPE_INTEGER,
@@ -397,31 +397,31 @@ class InstallSchema implements InstallSchemaInterface
                 'Order created date'
             )
             ->addIndex(
-                $installer->getIdxName('lof_product_reviews_reminders', ['id']),
+                $installer->getIdxName('hgati_product_reviews_reminders', ['id']),
                 ['id']
             )
             ->addForeignKey(
-                $installer->getFkName('lof_product_reviews_reminders', 'order_id', 'sales_order', 'entity_id'),
+                $installer->getFkName('hgati_product_reviews_reminders', 'order_id', 'sales_order', 'entity_id'),
                 'order_id',
                 $installer->getTable('sales_order'),
                 'entity_id',
                 Table::ACTION_CASCADE
             )
             /*->addForeignKey(
-                $installer->getFkName('lof_product_reviews_reminders', 'customer_id', 'customer_entity', 'entity_id'),
+                $installer->getFkName('hgati_product_reviews_reminders', 'customer_id', 'customer_entity', 'entity_id'),
                 'customer_id',
                 $installer->getTable('customer_entity'),
                 'entity_id',
                 Table::ACTION_CASCADE
             )*/
             ->addForeignKey(
-                $installer->getFkName('lof_product_reviews_reminders', 'store_id', 'store', 'store_id'),
+                $installer->getFkName('hgati_product_reviews_reminders', 'store_id', 'store', 'store_id'),
                 'store_id',
                 $installer->getTable('store'),
                 'store_id',
                 Table::ACTION_CASCADE
             )
-            ->setComment('Lof Product Reviews Reminders Backend Table');
+            ->setComment('Hgati Product Reviews Reminders Backend Table');
         $installer->getConnection()->createTable($table);
 
         $installer->endSetup();

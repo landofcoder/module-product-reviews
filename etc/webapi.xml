@@ -1,29 +1,29 @@
 <?xml version="1.0" ?>
 <!--
-  * Landofcoder
+  * Hgati
   *
   * NOTICE OF LICENSE
   *
-  * This source file is subject to the Landofcoder.com license that is
+  * This source file is subject to the Hgati.com license that is
   * available through the world-wide-web at this URL:
-  * https://landofcoder.com/terms
+  * https://hgati.com/terms
   *
   * DISCLAIMER
   *
   * Do not edit or add to this file if you wish to upgrade this extension to newer
   * version in the future.
   *
-  * @category   Landofcoder
-  * @package    Lof_ProductReviews
-  * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
-  * @license    https://landofcoder.com/terms
+  * @category   Hgati
+  * @package    Hgati_ProductReviews
+  * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+  * @license    https://hgati.com/terms
   -->
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
 
     <!-- Customer API -->
 
     <route url="/V1/reviews/me" method="GET">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getMyList"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="getMyList"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -33,7 +33,7 @@
     </route>
 
     <route url="/V1/reviews/me/:reviewId" method="GET">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getMyReview"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="getMyReview"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -43,7 +43,7 @@
     </route>
 
     <route url="/V1/reviews/me/reply" method="POST">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="replyByCustomer"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="replyByCustomer"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -53,7 +53,7 @@
     </route>
 
     <route url="/V1/products/:sku/reviews" method="POST">
-        <service class="Lof\ProductReviews\Api\PostProductReviewsInterface" method="execute"/>
+        <service class="Hgati\ProductReviews\Api\PostProductReviewsInterface" method="execute"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -63,7 +63,7 @@
     </route>
 
     <route url="/V1/reviews/me/:reviewId/like" method="POST">
-        <service class="Lof\ProductReviews\Api\LikeRepositoryInterface" method="execute"/>
+        <service class="Hgati\ProductReviews\Api\LikeRepositoryInterface" method="execute"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -73,7 +73,7 @@
     </route>
 
     <route url="/V1/reviews/me/:reviewId/unlike" method="POST">
-        <service class="Lof\ProductReviews\Api\UnLikeRepositoryInterface" method="execute"/>
+        <service class="Hgati\ProductReviews\Api\UnLikeRepositoryInterface" method="execute"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -83,7 +83,7 @@
     </route>
 
     <route url="/V1/reviews/me/:reviewId/report" method="POST">
-        <service class="Lof\ProductReviews\Api\ReportRepositoryInterface" method="execute"/>
+        <service class="Hgati\ProductReviews\Api\ReportRepositoryInterface" method="execute"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -93,7 +93,7 @@
     </route>
 
     <route url="/V1/reviews/me/verify" method="POST">
-        <service class="Lof\ProductReviews\Api\VerifyRepositoryInterface" method="execute"/>
+        <service class="Hgati\ProductReviews\Api\VerifyRepositoryInterface" method="execute"/>
         <resources>
             <resource ref="self"/>
         </resources>
@@ -105,21 +105,21 @@
     <!-- Guest API -->
 
     <route url="/V1/products/:sku/reviews" method="GET">
-        <service class="Lof\ProductReviews\Api\GetProductReviewsInterface" method="execute"/>
+        <service class="Hgati\ProductReviews\Api\GetProductReviewsInterface" method="execute"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
     </route>
 
     <route url="/V1/reviews/guest/reply" method="POST">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="replyByGuest"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="replyByGuest"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
     </route>
 
     <route url="/V1/reviews/ratings/:storeId" method="GET">
-        <service class="Lof\ProductReviews\Api\RatingRepositoryInterface" method="getList"/>
+        <service class="Hgati\ProductReviews\Api\RatingRepositoryInterface" method="getList"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
@@ -128,187 +128,187 @@
     <!-- Admin API -->
 
     <route url="/V1/reviews" method="GET">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getList"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="getList"/>
         <resources>
-            <resource ref="Lof_ProductReviews::reviews"/>
+            <resource ref="Hgati_ProductReviews::reviews"/>
         </resources>
     </route>
 
     <route url="/V1/reviews/reply" method="POST">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="reply"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="reply"/>
         <resources>
-            <resource ref="Lof_ProductReviews::save_reply"/>
+            <resource ref="Hgati_ProductReviews::save_reply"/>
         </resources>
     </route>
 
     <route url="/V1/reviews/gallery" method="POST">
-		<service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="save"/>
+		<service class="Hgati\ProductReviews\Api\GalleryRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::gallery_save"/>
+			<resource ref="Hgati_ProductReviews::gallery_save"/>
 		</resources>
 	</route>
 
     <route url="/V1/reviews/gallery/:galleryId" method="PUT">
-		<service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="save"/>
+		<service class="Hgati\ProductReviews\Api\GalleryRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::gallery_save"/>
+			<resource ref="Hgati_ProductReviews::gallery_save"/>
 		</resources>
 	</route>
 
 	<route url="/V1/reviews/gallery/:galleryId" method="DELETE">
-		<service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="deleteById"/>
+		<service class="Hgati\ProductReviews\Api\GalleryRepositoryInterface" method="deleteById"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::gallery_delete"/>
+			<resource ref="Hgati_ProductReviews::gallery_delete"/>
 		</resources>
 	</route>
 
     <route method="GET" url="/V1/reviews/gallery/:galleryId">
-        <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getById"/>
+        <service class="Hgati\ProductReviews\Api\GalleryRepositoryInterface" method="getById"/>
         <resources>
-            <resource ref="Lof_ProductReviews::gallery_view"/>
+            <resource ref="Hgati_ProductReviews::gallery_view"/>
         </resources>
     </route>
 
     <route method="GET" url="/V1/reviews/galleries">
-        <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getList"/>
+        <service class="Hgati\ProductReviews\Api\GalleryRepositoryInterface" method="getList"/>
         <resources>
-            <resource ref="Lof_ProductReviews::gallery_view"/>
+            <resource ref="Hgati_ProductReviews::gallery_view"/>
         </resources>
     </route>
 
     <route method="GET" url="/V1/reviews/galleries/:reviewId">
-        <service class="Lof\ProductReviews\Api\GalleryRepositoryInterface" method="getListByReview"/>
+        <service class="Hgati\ProductReviews\Api\GalleryRepositoryInterface" method="getListByReview"/>
         <resources>
-            <resource ref="Lof_ProductReviews::gallery_view"/>
+            <resource ref="Hgati_ProductReviews::gallery_view"/>
         </resources>
     </route>
 
     <route url="/V1/reviews/:reviewId" method="GET">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="get"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="get"/>
         <resources>
-            <resource ref="Lof_ProductReviews::reviews"/>
+            <resource ref="Hgati_ProductReviews::reviews"/>
         </resources>
     </route>
     <route url="/V1/reviews/reply/:reviewId" method="GET">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="getListReply"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="getListReply"/>
         <resources>
-            <resource ref="Lof_ProductReviews::reviews"/>
+            <resource ref="Hgati_ProductReviews::reviews"/>
         </resources>
     </route>
     <route url="/V1/reviews/:id" method="PUT">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="save"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="save"/>
         <resources>
             <resource ref="Magento_Review::reviews_all"/>
         </resources>
     </route>
 
     <route url="/V1/reviews" method="POST">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="save"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="save"/>
         <resources>
-            <resource ref="Lof_ProductReviews::reviews"/>
+            <resource ref="Hgati_ProductReviews::reviews"/>
         </resources>
     </route>
     <route url="/V1/reviews/:reviewId" method="DELETE">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="deleteById"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="deleteById"/>
         <resources>
             <resource ref="Magento_Review::reviews_all"/>
         </resources>
     </route>
     <route url="/V1/reviews/reply/:replyId" method="DELETE">
-        <service class="Lof\ProductReviews\Api\ReviewRepositoryInterface" method="deleteReplyById"/>
+        <service class="Hgati\ProductReviews\Api\ReviewRepositoryInterface" method="deleteReplyById"/>
         <resources>
-            <resource ref="Lof_ProductReviews::delete_reply"/>
+            <resource ref="Hgati_ProductReviews::delete_reply"/>
         </resources>
     </route>
 
     <route url="/V1/reviews/customize" method="POST">
-		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="save"/>
+		<service class="Hgati\ProductReviews\Api\CustomizeRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::customize_save"/>
+			<resource ref="Hgati_ProductReviews::customize_save"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/customize/search" method="GET">
-		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="getList"/>
+		<service class="Hgati\ProductReviews\Api\CustomizeRepositoryInterface" method="getList"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::customize_view"/>
+			<resource ref="Hgati_ProductReviews::customize_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/customize/:customizeId" method="GET">
-		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="get"/>
+		<service class="Hgati\ProductReviews\Api\CustomizeRepositoryInterface" method="get"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::customize_view"/>
+			<resource ref="Hgati_ProductReviews::customize_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/customize/:customizeId" method="PUT">
-		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="save"/>
+		<service class="Hgati\ProductReviews\Api\CustomizeRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::customize_update"/>
+			<resource ref="Hgati_ProductReviews::customize_update"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/customize/:customizeId" method="DELETE">
-		<service class="Lof\ProductReviews\Api\CustomizeRepositoryInterface" method="deleteById"/>
+		<service class="Hgati\ProductReviews\Api\CustomizeRepositoryInterface" method="deleteById"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::customize_delete"/>
+			<resource ref="Hgati_ProductReviews::customize_delete"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reminders" method="POST">
-		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="save"/>
+		<service class="Hgati\ProductReviews\Api\RemindersRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::reminders_save"/>
+			<resource ref="Hgati_ProductReviews::reminders_save"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reminders/search" method="GET">
-		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="getList"/>
+		<service class="Hgati\ProductReviews\Api\RemindersRepositoryInterface" method="getList"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::reminders_view"/>
+			<resource ref="Hgati_ProductReviews::reminders_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reminders/:remindersId" method="GET">
-		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="get"/>
+		<service class="Hgati\ProductReviews\Api\RemindersRepositoryInterface" method="get"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::reminders_view"/>
+			<resource ref="Hgati_ProductReviews::reminders_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reminders/:id" method="PUT">
-		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="save"/>
+		<service class="Hgati\ProductReviews\Api\RemindersRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::reminders_update"/>
+			<resource ref="Hgati_ProductReviews::reminders_update"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reminders/:id" method="DELETE">
-		<service class="Lof\ProductReviews\Api\RemindersRepositoryInterface" method="deleteById"/>
+		<service class="Hgati\ProductReviews\Api\RemindersRepositoryInterface" method="deleteById"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::reminders_delete"/>
+			<resource ref="Hgati_ProductReviews::reminders_delete"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reporthistory" method="POST">
-		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="save"/>
+		<service class="Hgati\ProductReviews\Api\ReportHistoryRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::reportHistory_save"/>
+			<resource ref="Hgati_ProductReviews::reportHistory_save"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reporthistory/search" method="GET">
-		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="getList"/>
+		<service class="Hgati\ProductReviews\Api\ReportHistoryRepositoryInterface" method="getList"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::reportHistory_view"/>
+			<resource ref="Hgati_ProductReviews::reportHistory_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reporthistory/:id" method="GET">
-		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="get"/>
+		<service class="Hgati\ProductReviews\Api\ReportHistoryRepositoryInterface" method="get"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::reportHistory_view"/>
+			<resource ref="Hgati_ProductReviews::reportHistory_view"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reporthistory/:id" method="PUT">
-		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="save"/>
+		<service class="Hgati\ProductReviews\Api\ReportHistoryRepositoryInterface" method="save"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::reportHistory_update"/>
+			<resource ref="Hgati_ProductReviews::reportHistory_update"/>
 		</resources>
 	</route>
 	<route url="/V1/reviews/reporthistory/:id" method="DELETE">
-		<service class="Lof\ProductReviews\Api\ReportHistoryRepositoryInterface" method="deleteById"/>
+		<service class="Hgati\ProductReviews\Api\ReportHistoryRepositoryInterface" method="deleteById"/>
 		<resources>
-			<resource ref="Lof_ProductReviews::reportHistory_delete"/>
+			<resource ref="Hgati_ProductReviews::reportHistory_delete"/>
 		</resources>
 	</route>
 

@@ -1,27 +1,27 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Model;
+namespace Hgati\ProductReviews\Model;
 
-use Lof\ProductReviews\Api\Data\CustomizeInterface;
+use Hgati\ProductReviews\Api\Data\CustomizeInterface;
 
 class CustomReview extends \Magento\Framework\Model\AbstractModel implements CustomizeInterface
 {
@@ -31,7 +31,7 @@ class CustomReview extends \Magento\Framework\Model\AbstractModel implements Cus
      */
     protected function _construct()
     {
-        $this->_init('Lof\ProductReviews\Model\ResourceModel\CustomReview');
+        $this->_init('Hgati\ProductReviews\Model\ResourceModel\CustomReview');
     }
 
     /**

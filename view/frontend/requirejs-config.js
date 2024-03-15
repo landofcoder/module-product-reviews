@@ -1,29 +1,29 @@
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
 var config = {
     map: {
         '*': {
-            metaCounter: 'Lof_ProductReviews/js/rateReviewList',
-            owlGallery: 'Lof_ProductReviews/js/galleryCarousel',
-            fancyGallery: 'Lof_ProductReviews/js/fancyboxGallery'
+            metaCounter: 'Hgati_ProductReviews/js/rateReviewList',
+            owlGallery: 'Hgati_ProductReviews/js/galleryCarousel',
+            fancyGallery: 'Hgati_ProductReviews/js/fancyboxGallery'
         }
     },
     deps: ["jquery"]

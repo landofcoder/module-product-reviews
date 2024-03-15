@@ -1,35 +1,35 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Controller\Reviews;
+namespace Hgati\ProductReviews\Controller\Reviews;
 
 class RateAjax extends \Magento\Framework\App\Action\Action
 {
     /**
-     * @var \Lof\ProductReviews\Model\CustomReviewFactory
+     * @var \Hgati\ProductReviews\Model\CustomReviewFactory
      */
     protected $customReviewFactory;
 
     /**
-     * @var \Lof\ProductReviews\Model\RateReportFactory
+     * @var \Hgati\ProductReviews\Model\RateReportFactory
      */
     protected $rateReportFactory;
 
@@ -54,16 +54,16 @@ class RateAjax extends \Magento\Framework\App\Action\Action
      * @param \Magento\Framework\HTTP\Header $httpHeader
      * @param \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress
      * @param \Magento\Customer\Model\Session $customerSession
-     * @param \Lof\ProductReviews\Model\CustomReviewFactory $customReviewFactory
-     * @param \Lof\ProductReviews\Model\RateReportFactory $rateReportFactory
+     * @param \Hgati\ProductReviews\Model\CustomReviewFactory $customReviewFactory
+     * @param \Hgati\ProductReviews\Model\RateReportFactory $rateReportFactory
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\HTTP\Header $httpHeader,
         \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress $remoteAddress,
         \Magento\Customer\Model\Session $customerSession,
-        \Lof\ProductReviews\Model\CustomReviewFactory $customReviewFactory,
-        \Lof\ProductReviews\Model\RateReportFactory $rateReportFactory
+        \Hgati\ProductReviews\Model\CustomReviewFactory $customReviewFactory,
+        \Hgati\ProductReviews\Model\RateReportFactory $rateReportFactory
     ) {
         $this->httpHeader = $httpHeader;
         $this->remoteAddress = $remoteAddress;

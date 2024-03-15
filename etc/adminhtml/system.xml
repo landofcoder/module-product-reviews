@@ -1,31 +1,31 @@
 <?xml version="1.0"?>
 <!--
-  * Landofcoder
+  * Hgati
   *
   * NOTICE OF LICENSE
   *
-  * This source file is subject to the Landofcoder.com license that is
+  * This source file is subject to the Hgati.com license that is
   * available through the world-wide-web at this URL:
-  * https://landofcoder.com/terms
+  * https://hgati.com/terms
   *
   * DISCLAIMER
   *
   * Do not edit or add to this file if you wish to upgrade this extension to newer
   * version in the future.
   *
-  * @category   Landofcoder
-  * @package    Lof_ProductReviews
-  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
-  * @license    https://landofcoder.com/terms
+  * @category   Hgati
+  * @package    Hgati_ProductReviews
+  * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+  * @license    https://hgati.com/terms
   -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="lof_product_reviews" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="hgati_product_reviews" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Product Reviews And Ratings</label>
-            <tab>landofcoder</tab>
-            <resource>Lof_ProductReviews::lof_product_reviews_config</resource>
-            <group id="lof_general_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <tab>hgati</tab>
+            <resource>Hgati_ProductReviews::hgati_product_reviews_config</resource>
+            <group id="hgati_general_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General Settings</label>
                 <field id="enabled_module" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enabled/Disabled Advanved Reviews</label>
@@ -39,7 +39,7 @@
                 </field>
                 <field id="choose_coupon" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Choose Coupon For Customer Review</label>
-                    <source_model>Lof\ProductReviews\Model\Config\Source\ChooseCoupon</source_model>
+                    <source_model>Hgati\ProductReviews\Model\Config\Source\ChooseCoupon</source_model>
                 </field>
                 <field id="after_day" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Number Of Days To Send Reminder Email</label>
@@ -72,7 +72,7 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
-            <group id="lof_review_settings" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="hgati_review_settings" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Review Settings</label>
                 <field id="verify_purchased_code" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Verify Purchased Code</label>
@@ -93,7 +93,7 @@
                 </field>
                 <field id="enable_customer_avatar" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enable Customer Avatar (New)</label>
-                    <comment>Require setup module: https://github.com/landofcoder/module-customer-avatar.</comment>
+                    <comment>Require setup module: https://github.com/hgati/module-customer-avatar.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="enable_customer_location" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -107,7 +107,7 @@
                 </field>
                 <field id="sort_type" type="select" translate="label comment" showInDefault="26" showInWebsite="1" showInStore="1" sortOrder="5" >
                     <label>Sort Review By</label>
-                    <source_model>Lof\ProductReviews\Model\Gallery\Source\ReviewSortType</source_model>
+                    <source_model>Hgati\ProductReviews\Model\Gallery\Source\ReviewSortType</source_model>
                     <depends>
                         <field id="enable_sorting">1</field>
                     </depends>
@@ -134,7 +134,7 @@
                 </field>
                 <field id="default_status" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="56" >
                     <label>Gallery Default Status</label>
-                    <source_model>Lof\ProductReviews\Model\Gallery\Source\DefaultStatus</source_model>
+                    <source_model>Hgati\ProductReviews\Model\Gallery\Source\DefaultStatus</source_model>
                     <depends><field id="allow_upload">1</field></depends>
                 </field>
                 <field id="image_width" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -153,7 +153,7 @@
                 <label>Gallery Owl Carousel Settings</label>
                 <field id="carousel_layout" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="60" >
                     <label>Carousel Layout</label>
-                    <source_model>Lof\ProductReviews\Model\Gallery\Source\CarouselLayout</source_model>
+                    <source_model>Hgati\ProductReviews\Model\Gallery\Source\CarouselLayout</source_model>
                 </field>
                 <field id="number_item_per_column" type="text" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="65">
                     <label>Number Item per Column</label>

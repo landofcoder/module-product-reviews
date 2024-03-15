@@ -1,25 +1,25 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Setup;
+namespace Hgati\ProductReviews\Setup;
 
 use Magento\Framework\Setup\UpgradeSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
@@ -41,8 +41,8 @@ class UpgradeSchema implements UpgradeSchemaInterface
         $installer->startSetup();
         //Update for version 1.0.5
         if (version_compare($context->getVersion(), '1.0.2', '<')) {
-            $table = $installer->getTable('lof_review_customize');
-            $replyTable = $installer->getTable('lof_review_reply');
+            $table = $installer->getTable('hgati_review_customize');
+            $replyTable = $installer->getTable('hgati_review_reply');
 
             $installer->getConnection()->addColumn(
                 $table,
@@ -131,7 +131,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
         if (version_compare($context->getVersion(), '1.0.3', '<')) {
-            $replyTable = $installer->getTable('lof_review_reply');
+            $replyTable = $installer->getTable('hgati_review_reply');
 
             $installer->getConnection()->addColumn(
                 $replyTable,
@@ -159,7 +159,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
         if (version_compare($context->getVersion(), '1.0.4', '<')) {
-            $replyTable = $installer->getTable('lof_review_reply');
+            $replyTable = $installer->getTable('hgati_review_reply');
             $installer->getConnection()->addColumn(
                 $replyTable,
                 'reply_customer_id',
@@ -173,7 +173,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
         if (version_compare($context->getVersion(), '1.0.5', '<')) {
-            $customizeTable = $installer->getTable('lof_review_customize');
+            $customizeTable = $installer->getTable('hgati_review_customize');
             $reviewSummaryTable = $installer->getTable('review_entity_summary');
             $installer->getConnection()->addColumn(
                 $customizeTable,
@@ -284,7 +284,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             );
         }
         if (version_compare($context->getVersion(), '1.0.6', '<')) {
-            $replyTable = $installer->getTable('lof_review_reply');
+            $replyTable = $installer->getTable('hgati_review_reply');
             $installer->getConnection()->addColumn(
                 $replyTable,
                 'updated_at',

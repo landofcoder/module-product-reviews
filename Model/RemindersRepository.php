@@ -1,18 +1,18 @@
 <?php
 /**
- * Copyright © landofcoder All rights reserved.
+ * Copyright © hgati All rights reserved.
  * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model;
+namespace Hgati\ProductReviews\Model;
 
-use Lof\ProductReviews\Api\Data\RemindersInterface;
-use Lof\ProductReviews\Api\Data\RemindersInterfaceFactory;
-use Lof\ProductReviews\Api\Data\RemindersSearchResultsInterfaceFactory;
-use Lof\ProductReviews\Api\RemindersRepositoryInterface;
-use Lof\ProductReviews\Model\ResourceModel\Reminders as ResourceReminders;
-use Lof\ProductReviews\Model\ResourceModel\Reminders\CollectionFactory as RemindersCollectionFactory;
+use Hgati\ProductReviews\Api\Data\RemindersInterface;
+use Hgati\ProductReviews\Api\Data\RemindersInterfaceFactory;
+use Hgati\ProductReviews\Api\Data\RemindersSearchResultsInterfaceFactory;
+use Hgati\ProductReviews\Api\RemindersRepositoryInterface;
+use Hgati\ProductReviews\Model\ResourceModel\Reminders as ResourceReminders;
+use Hgati\ProductReviews\Model\ResourceModel\Reminders\CollectionFactory as RemindersCollectionFactory;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;

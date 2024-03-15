@@ -1,25 +1,25 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Block\Adminhtml\Import;
+namespace Hgati\ProductReviews\Block\Adminhtml\Import;
 
 class Upload extends \Magento\Backend\Block\Widget\Form\Container
 {
@@ -52,7 +52,7 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
     protected function _construct()
     {
         $this->_objectId = 'review_id';
-        $this->_blockGroup = 'Lof_ProductReviews';
+        $this->_blockGroup = 'Hgati_ProductReviews';
         $this->_controller = 'adminhtml_import';
 
         parent::_construct();
@@ -62,13 +62,13 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
             [
                 'label' => __('Save Upload'),
                 'class' => 'save primary',
-                'onclick' => 'setLocation(\'' . $this->getUrl('lof_product_reviews/import/save_upload') . '\')'
+                'onclick' => 'setLocation(\'' . $this->getUrl('hgati_product_reviews/import/save_upload') . '\')'
             ]
         );
 
         $this->buttonList->remove('save');
         $this->buttonList->remove('reset');
-        if ($this->_isAllowedAction('Lof_ProductReviews::import_delete')) {
+        if ($this->_isAllowedAction('Hgati_ProductReviews::import_delete')) {
             $this->buttonList->update('delete', 'label', __('Delete Review'));
         } else {
             $this->buttonList->remove('delete');
@@ -82,10 +82,10 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
      */
     public function getHeaderText()
     {
-        if ($this->_coreRegistry->registry('lofproductreviews_import')->getId()) {
+        if ($this->_coreRegistry->registry('hgatiproductreviews_import')->getId()) {
             return __(
                 "Edit Message '%1'",
-                $this->escapeHtml($this->_coreRegistry->registry('lofproductreviews_import')->getTitle())
+                $this->escapeHtml($this->_coreRegistry->registry('hgatiproductreviews_import')->getTitle())
             );
         } else {
             return __('New Message');
@@ -112,7 +112,7 @@ class Upload extends \Magento\Backend\Block\Widget\Form\Container
     protected function _getSaveAndContinueUrl()
     {
         return $this->getUrl(
-            'lof_product_reviews/import/save',
+            'hgati_product_reviews/import/save',
             ['_current' => true, 'back' => 'edit', 'active_tab' => '{{tab_id}}']
         );
     }

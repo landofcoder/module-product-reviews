@@ -1,33 +1,33 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Plugin\Adminhtml;
+namespace Hgati\ProductReviews\Plugin\Adminhtml;
 
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
 use Magento\Review\Model\RatingFactory;
 use Magento\Review\Model\ReviewFactory;
-use Lof\ProductReviews\Model\CustomReviewFactory;
-use Lof\ProductReviews\Model\GalleryFactory;
-use Lof\ProductReviews\Model\Review\Command\SummaryRateInterface;
+use Hgati\ProductReviews\Model\CustomReviewFactory;
+use Hgati\ProductReviews\Model\GalleryFactory;
+use Hgati\ProductReviews\Model\Review\Command\SummaryRateInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 
 class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
@@ -98,7 +98,7 @@ class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
         $modelGallery = $this->galleryFactory->create();
         $modelGallery->setReviewId($latestItem['review_id'])
             ->setLabel('Gallery of Review ' . $latestItem['review_id'])
-            ->setStatus(\Lof\ProductReviews\Model\Gallery::STATUS_DISABLED)
+            ->setStatus(\Hgati\ProductReviews\Model\Gallery::STATUS_DISABLED)
             ->setValue(json_encode([]))
             ->save();
 

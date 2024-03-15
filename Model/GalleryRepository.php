@@ -1,31 +1,31 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Model;
+namespace Hgati\ProductReviews\Model;
 
-use Lof\ProductReviews\Api\GalleryRepositoryInterface;
-use Lof\ProductReviews\Api\Data;
-use Lof\ProductReviews\Helper\Data as HelperData;
-use Lof\ProductReviews\Model\ResourceModel\Gallery as ResourceGallery;
-use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
+use Hgati\ProductReviews\Api\GalleryRepositoryInterface;
+use Hgati\ProductReviews\Api\Data;
+use Hgati\ProductReviews\Helper\Data as HelperData;
+use Hgati\ProductReviews\Model\ResourceModel\Gallery as ResourceGallery;
+use Hgati\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory as GalleryCollectionFactory;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
@@ -106,7 +106,7 @@ class GalleryRepository implements GalleryRepositoryInterface
     public function __construct(
         ResourceGallery $resource,
         GalleryFactory $galleryFactory,
-        \Lof\ProductReviews\Api\Data\GalleryInterfaceFactory $dataGalleryFactory,
+        \Hgati\ProductReviews\Api\Data\GalleryInterfaceFactory $dataGalleryFactory,
         GalleryCollectionFactory $galleryCollectionFactory,
         Data\GallerySearchResultsInterfaceFactory $searchResultsFactory,
         DataObjectHelper $dataObjectHelper,
@@ -130,7 +130,7 @@ class GalleryRepository implements GalleryRepositoryInterface
     /**
      * Save Gallery data
      *
-     * @param \Lof\ProductReviews\Api\Data\GalleryInterface $gallery
+     * @param \Hgati\ProductReviews\Api\Data\GalleryInterface $gallery
      * @return Gallery
      * @throws CouldNotSaveException
      */
@@ -169,11 +169,11 @@ class GalleryRepository implements GalleryRepositoryInterface
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @param \Magento\Framework\Api\SearchCriteriaInterface $criteria
-     * @return \Lof\ProductReviews\Api\Data\GallerySearchResultsInterface
+     * @return \Hgati\ProductReviews\Api\Data\GallerySearchResultsInterface
      */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria)
     {
-        /** @var \Lof\ProductReviews\Model\ResourceModel\Gallery\Collection $collection */
+        /** @var \Hgati\ProductReviews\Model\ResourceModel\Gallery\Collection $collection */
         $collection = $this->galleryCollectionFactory->create();
 
         $this->collectionProcessor->process($criteria, $collection);
@@ -198,7 +198,7 @@ class GalleryRepository implements GalleryRepositoryInterface
      */
     public function getListByReview($reviewId, \Magento\Framework\Api\SearchCriteriaInterface $criteria)
     {
-        /** @var \Lof\ProductReviews\Model\ResourceModel\Gallery\Collection $collection */
+        /** @var \Hgati\ProductReviews\Model\ResourceModel\Gallery\Collection $collection */
         $collection = $this->galleryCollectionFactory->create();
 
         $this->collectionProcessor->process($criteria, $collection);
@@ -222,7 +222,7 @@ class GalleryRepository implements GalleryRepositoryInterface
     /**
      * Delete Gallery
      *
-     * @param \Lof\ProductReviews\Api\Data\GalleryInterface $gallery
+     * @param \Hgati\ProductReviews\Api\Data\GalleryInterface $gallery
      * @return bool
      * @throws CouldNotDeleteException
      */
@@ -259,7 +259,7 @@ class GalleryRepository implements GalleryRepositoryInterface
     {
         if (!$this->collectionProcessor) {
             $this->collectionProcessor = \Magento\Framework\App\ObjectManager::getInstance()->get(
-                'Lof\ProductReviews\Model\Api\SearchCriteria\GalleryCollectionProcessor'
+                'Hgati\ProductReviews\Model\Api\SearchCriteria\GalleryCollectionProcessor'
             );
         }
         return $this->collectionProcessor;

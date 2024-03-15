@@ -1,61 +1,61 @@
 <?xml version="1.0"?>
 <!--
-  * Landofcoder
+  * Hgati
   *
   * NOTICE OF LICENSE
   *
-  * This source file is subject to the Landofcoder.com license that is
+  * This source file is subject to the Hgati.com license that is
   * available through the world-wide-web at this URL:
-  * https://landofcoder.com/terms
+  * https://hgati.com/terms
   *
   * DISCLAIMER
   *
   * Do not edit or add to this file if you wish to upgrade this extension to newer
   * version in the future.
   *
-  * @category   Landofcoder
-  * @package    Lof_ProductReviews
-  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
-  * @license    https://landofcoder.com/terms
+  * @category   Hgati
+  * @package    Hgati_ProductReviews
+  * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+  * @license    https://hgati.com/terms
   -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Magento_Backend::lof_reviews" title="Lof Reviews">
-                    <resource id="Lof_ProductReviews::lof_product_reviews" title="Lof Product Reviews" sortOrder="10" />
-                    <resource id="Lof_ProductReviews::lof_product_gallery" title="Lof Product Reviews - Manage Gallery" sortOrder="30" />
-                    <resource id="Lof_ProductReviews::gallery_save" title="Lof Product Reviews - Save Gallery" sortOrder="40" />
-                    <resource id="Lof_ProductReviews::gallery_delete" title="Lof Product Reviews - Delete Gallery" sortOrder="50" />
-                    <resource id="Lof_ProductReviews::gallery_view" title="Lof Product Reviews - View Gallery" sortOrder="60" />
-                    <resource id="Lof_ProductReviews::reviews" title="Lof Product Reviews - View All" sortOrder="70" />
-                    <resource id="Lof_ProductReviews::review_reply" title="Lof Product Reviews - Reply" sortOrder="80" />
-                    <resource id="Lof_ProductReviews::delete_reply" title="Lof Product Reviews - Delete Reply" sortOrder="90" />
-                    <resource id="Lof_ProductReviews::save_reply" title="Lof Product Reviews - Save Reply" sortOrder="95" />
+                <resource id="Magento_Backend::hgati_reviews" title="Hgati Reviews">
+                    <resource id="Hgati_ProductReviews::hgati_product_reviews" title="Hgati Product Reviews" sortOrder="10" />
+                    <resource id="Hgati_ProductReviews::hgati_product_gallery" title="Hgati Product Reviews - Manage Gallery" sortOrder="30" />
+                    <resource id="Hgati_ProductReviews::gallery_save" title="Hgati Product Reviews - Save Gallery" sortOrder="40" />
+                    <resource id="Hgati_ProductReviews::gallery_delete" title="Hgati Product Reviews - Delete Gallery" sortOrder="50" />
+                    <resource id="Hgati_ProductReviews::gallery_view" title="Hgati Product Reviews - View Gallery" sortOrder="60" />
+                    <resource id="Hgati_ProductReviews::reviews" title="Hgati Product Reviews - View All" sortOrder="70" />
+                    <resource id="Hgati_ProductReviews::review_reply" title="Hgati Product Reviews - Reply" sortOrder="80" />
+                    <resource id="Hgati_ProductReviews::delete_reply" title="Hgati Product Reviews - Delete Reply" sortOrder="90" />
+                    <resource id="Hgati_ProductReviews::save_reply" title="Hgati Product Reviews - Save Reply" sortOrder="95" />
                 </resource>
-                <resource id="Lof_ProductReviews::customize" title="Lof Product Reviews Customize" sortOrder="10">
-					<resource id="Lof_ProductReviews::customize_save" title="Save Customize" sortOrder="10"/>
-					<resource id="Lof_ProductReviews::customize_delete" title="Delete Customize" sortOrder="20"/>
-					<resource id="Lof_ProductReviews::customize_update" title="Update Customize" sortOrder="30"/>
-					<resource id="Lof_ProductReviews::customize_view" title="View Customize" sortOrder="40"/>
+                <resource id="Hgati_ProductReviews::customize" title="Hgati Product Reviews Customize" sortOrder="10">
+					<resource id="Hgati_ProductReviews::customize_save" title="Save Customize" sortOrder="10"/>
+					<resource id="Hgati_ProductReviews::customize_delete" title="Delete Customize" sortOrder="20"/>
+					<resource id="Hgati_ProductReviews::customize_update" title="Update Customize" sortOrder="30"/>
+					<resource id="Hgati_ProductReviews::customize_view" title="View Customize" sortOrder="40"/>
 				</resource>
-				<resource id="Lof_ProductReviews::lof_product_reviews_reminders" title="Lof Product Reviews Reminders" sortOrder="10">
-					<resource id="Lof_ProductReviews::reminders_save" title="Save Reminders" sortOrder="10"/>
-					<resource id="Lof_ProductReviews::reminders_delete" title="Delete Reminders" sortOrder="20"/>
-					<resource id="Lof_ProductReviews::reminders_update" title="Update Reminders" sortOrder="30"/>
-					<resource id="Lof_ProductReviews::reminders_view" title="View Reminders" sortOrder="40"/>
-                    <resource id="Lof_ProductReviews::send_reminder" title="Lof Product Reviews - Send Reminder" sortOrder="25" />
+				<resource id="Hgati_ProductReviews::hgati_product_reviews_reminders" title="Hgati Product Reviews Reminders" sortOrder="10">
+					<resource id="Hgati_ProductReviews::reminders_save" title="Save Reminders" sortOrder="10"/>
+					<resource id="Hgati_ProductReviews::reminders_delete" title="Delete Reminders" sortOrder="20"/>
+					<resource id="Hgati_ProductReviews::reminders_update" title="Update Reminders" sortOrder="30"/>
+					<resource id="Hgati_ProductReviews::reminders_view" title="View Reminders" sortOrder="40"/>
+                    <resource id="Hgati_ProductReviews::send_reminder" title="Hgati Product Reviews - Send Reminder" sortOrder="25" />
 				</resource>
-				<resource id="Lof_ProductReviews::reportHistory" title="Lof Product Reviews Report History" sortOrder="10">
-					<resource id="Lof_ProductReviews::reportHistory_save" title="Save ReportHistory" sortOrder="10"/>
-					<resource id="Lof_ProductReviews::reportHistory_delete" title="Delete ReportHistory" sortOrder="20"/>
-					<resource id="Lof_ProductReviews::reportHistory_update" title="Update ReportHistory" sortOrder="30"/>
-					<resource id="Lof_ProductReviews::reportHistory_view" title="View ReportHistory" sortOrder="40"/>
+				<resource id="Hgati_ProductReviews::reportHistory" title="Hgati Product Reviews Report History" sortOrder="10">
+					<resource id="Hgati_ProductReviews::reportHistory_save" title="Save ReportHistory" sortOrder="10"/>
+					<resource id="Hgati_ProductReviews::reportHistory_delete" title="Delete ReportHistory" sortOrder="20"/>
+					<resource id="Hgati_ProductReviews::reportHistory_update" title="Update ReportHistory" sortOrder="30"/>
+					<resource id="Hgati_ProductReviews::reportHistory_view" title="View ReportHistory" sortOrder="40"/>
 				</resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="Lof_ProductReviews::lof_product_reviews_config" title="Lof ProductReviews" translate="title" />
+                            <resource id="Hgati_ProductReviews::hgati_product_reviews_config" title="Hgati ProductReviews" translate="title" />
                         </resource>
                     </resource>
                 </resource>

@@ -1,25 +1,25 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Controller\Adminhtml\Gallery;
+namespace Hgati\ProductReviews\Controller\Adminhtml\Gallery;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Exception\LocalizedException;
@@ -27,12 +27,12 @@ use Magento\Framework\Exception\LocalizedException;
 class Save extends \Magento\Backend\App\Action
 {
     /**
-     * @var \Lof\ProductReviews\Model\Gallery
+     * @var \Hgati\ProductReviews\Model\Gallery
      */
     private $galleryFactory;
 
     /**
-     * @var \Lof\ProductReviews\Api\GalleryRepositoryInterface
+     * @var \Hgati\ProductReviews\Api\GalleryRepositoryInterface
      */
     private $galleryRepository;
 
@@ -44,14 +44,14 @@ class Save extends \Magento\Backend\App\Action
     /**
      * Save constructor.
      * @param Action\Context $context
-     * @param \Lof\ProductReviews\Model\GalleryFactory $galleryFactory
-     * @param \Lof\ProductReviews\Api\GalleryRepositoryInterface $galleryRepository
+     * @param \Hgati\ProductReviews\Model\GalleryFactory $galleryFactory
+     * @param \Hgati\ProductReviews\Api\GalleryRepositoryInterface $galleryRepository
      * @param \Magento\Framework\Json\EncoderInterface $jsonEncoder
      */
     public function __construct(
         Action\Context $context,
-        \Lof\ProductReviews\Model\GalleryFactory $galleryFactory,
-        \Lof\ProductReviews\Api\GalleryRepositoryInterface $galleryRepository,
+        \Hgati\ProductReviews\Model\GalleryFactory $galleryFactory,
+        \Hgati\ProductReviews\Api\GalleryRepositoryInterface $galleryRepository,
         \Magento\Framework\Json\EncoderInterface $jsonEncoder
     ) {
         $this->_jsonEncoder = $jsonEncoder;
@@ -76,7 +76,7 @@ class Save extends \Magento\Backend\App\Action
         $resultRedirect = $this->resultRedirectFactory->create();
 
         if ($data) {
-            /** @var \Lof\ProductReviews\Model\Gallery $model */
+            /** @var \Hgati\ProductReviews\Model\Gallery $model */
             $model = $this->galleryFactory->create();
             $id = $this->getRequest()->getParam('id');
             if ($id) {
@@ -109,6 +109,6 @@ class Save extends \Magento\Backend\App\Action
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('Lof_ProductReviews::lof_product_gallery');
+        return $this->_authorization->isAllowed('Hgati_ProductReviews::hgati_product_gallery');
     }
 }

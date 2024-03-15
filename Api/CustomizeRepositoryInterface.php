@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright © landofcoder All rights reserved.
+ * Copyright © hgati All rights reserved.
  * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Api;
+namespace Hgati\ProductReviews\Api;
 
 use Magento\Framework\Api\SearchCriteriaInterface;
 
@@ -14,18 +14,18 @@ interface CustomizeRepositoryInterface
 
     /**
      * Save Customize
-     * @param \Lof\ProductReviews\Api\Data\CustomizeInterface $customize
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @param \Hgati\ProductReviews\Api\Data\CustomizeInterface $customize
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function save(
-        \Lof\ProductReviews\Api\Data\CustomizeInterface $customize
+        \Hgati\ProductReviews\Api\Data\CustomizeInterface $customize
     );
 
     /**
      * Retrieve Customize
      * @param int $customizeId
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function get($customizeId);
@@ -33,7 +33,7 @@ interface CustomizeRepositoryInterface
     /**
      * Retrieve Customize by reviewId
      * @param int $reviewId
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getByReview(int $reviewId);
@@ -41,7 +41,7 @@ interface CustomizeRepositoryInterface
     /**
      * Retrieve Customize matching the specified criteria.
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @return \Lof\ProductReviews\Api\Data\CustomizeSearchResultsInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeSearchResultsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getList(
@@ -50,12 +50,12 @@ interface CustomizeRepositoryInterface
 
     /**
      * Delete Customize
-     * @param \Lof\ProductReviews\Api\Data\CustomizeInterface $customize
+     * @param \Hgati\ProductReviews\Api\Data\CustomizeInterface $customize
      * @return bool true on success
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function delete(
-        \Lof\ProductReviews\Api\Data\CustomizeInterface $customize
+        \Hgati\ProductReviews\Api\Data\CustomizeInterface $customize
     );
 
     /**

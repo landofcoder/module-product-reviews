@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  * Landofcoder
+  * Hgati
   *
   * NOTICE OF LICENSE
   *
-  * This source file is subject to the Landofcoder.com license that is
+  * This source file is subject to the Hgati.com license that is
   * available through the world-wide-web at this URL:
-  * https://landofcoder.com/terms
+  * https://hgati.com/terms
   *
   * DISCLAIMER
   *
   * Do not edit or add to this file if you wish to upgrade this extension to newer
   * version in the future.
   *
-  * @category   Landofcoder
-  * @package    Lof_ProductReviews
-  * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
-  * @license    https://landofcoder.com/terms
+  * @category   Hgati
+  * @package    Hgati_ProductReviews
+  * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+  * @license    https://hgati.com/terms
   -->
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">lof_product_reviews_reminders_listing.lof_product_reviews_reminders_listing_data_source</item>
+            <item name="provider" xsi:type="string">hgati_product_reviews_reminders_listing.hgati_product_reviews_reminders_listing_data_source</item>
         </item>
     </argument>
     <settings>
@@ -32,20 +32,20 @@
                 <label translate="true">Reminders To All</label>
             </button>
         </buttons>
-        <spinner>lof_product_reviews_reminders_columns</spinner>
+        <spinner>hgati_product_reviews_reminders_columns</spinner>
         <deps>
-            <dep>lof_product_reviews_reminders_listing.lof_product_reviews_reminders_listing_data_source</dep>
+            <dep>hgati_product_reviews_reminders_listing.hgati_product_reviews_reminders_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="lof_product_reviews_reminders_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="hgati_product_reviews_reminders_listing_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">id</param>
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Lof_ProductReviews::lof_product_reviews_reminders</aclResource>
-        <dataProvider class="Lof\ProductReviews\Ui\DataProvider\Reminders\RemindersDataProvider" name="lof_product_reviews_reminders_listing_data_source">
+        <aclResource>Hgati_ProductReviews::hgati_product_reviews_reminders</aclResource>
+        <dataProvider class="Hgati\ProductReviews\Ui\DataProvider\Reminders\RemindersDataProvider" name="hgati_product_reviews_reminders_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
@@ -70,10 +70,10 @@
                 </templates>
             </settings>
         </filters>
-        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions" class="\Lof\ProductReviews\Ui\Component\Reminders\MassAction">
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions" class="\Hgati\ProductReviews\Ui\Component\Reminders\MassAction">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">lof_product_reviews_reminders_listing.lof_product_reviews_reminders_listing.lof_product_reviews_reminders_columns.ids</item>
+                    <item name="selectProvider" xsi:type="string">hgati_product_reviews_reminders_listing.hgati_product_reviews_reminders_listing.hgati_product_reviews_reminders_columns.ids</item>
                     <item name="indexField" xsi:type="string">id</item>
                 </item>
             </argument>
@@ -83,7 +83,7 @@
                         <message translate="true">Are you sure you want to delete selected items?</message>
                         <title translate="true">Delete items</title>
                     </confirm>
-                    <url path="lof_product_reviews/reminders/massDelete"/>
+                    <url path="hgati_product_reviews/reminders/massDelete"/>
                     <type>delete</type>
                     <label translate="true">Delete</label>
                 </settings>
@@ -96,14 +96,14 @@
                         <action name="0">
                             <type>pending</type>
                             <label translate="true">Pending</label>
-                            <url path="lof_product_reviews/reminders/massStatus">
+                            <url path="hgati_product_reviews/reminders/massStatus">
                                 <param name="status">1</param>
                             </url>
                         </action>
                         <action name="1">
                             <type>onhold</type>
                             <label translate="true">On Hold</label>
-                            <url path="lof_product_reviews/reminders/massStatus">
+                            <url path="hgati_product_reviews/reminders/massStatus">
                                 <param name="status">2</param>
                             </url>
                         </action>
@@ -116,7 +116,7 @@
                         <message translate="true">Are you sure you want to send email to selected items?</message>
                         <title translate="true">Send Reminders</title>
                     </confirm>
-                    <url path="lof_product_reviews/reminders/sendReminder"/>
+                    <url path="hgati_product_reviews/reminders/sendReminder"/>
                     <type>send</type>
                     <label translate="true">Send Email</label>
                 </settings>
@@ -124,11 +124,11 @@
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
-    <columns  name="lof_product_reviews_reminders_columns">
+    <columns  name="hgati_product_reviews_reminders_columns">
         <settings>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">lof_product_reviews_reminders_listing.lof_product_reviews_reminders_listing.lof_product_reviews_reminders_columns.actions</item>
+                    <item name="provider" xsi:type="string">hgati_product_reviews_reminders_listing.hgati_product_reviews_reminders_listing.hgati_product_reviews_reminders_columns.actions</item>
                     <item name="target" xsi:type="string">applyAction</item>
                     <item name="params" xsi:type="array">
                         <item name="0" xsi:type="string">edit</item>
@@ -156,7 +156,7 @@
                 <label translate="true">Created At</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Lof\ProductReviews\Ui\Component\Listing\Columns\ReminderOrderViewActions" sortOrder="30">
+        <actionsColumn name="actions" class="Hgati\ProductReviews\Ui\Component\Listing\Columns\ReminderOrderViewActions" sortOrder="30">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="viewUrlPath" xsi:type="string">sales/order/view</item>
@@ -198,10 +198,10 @@
                 <label translate="true">Product ID</label>
             </settings>
         </column>
-        <column name="product_name" class="Lof\ProductReviews\Ui\Component\Listing\Columns\ProductName" sortOrder="55">
+        <column name="product_name" class="Hgati\ProductReviews\Ui\Component\Listing\Columns\ProductName" sortOrder="55">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="component" xsi:type="string">Lof_ProductReviews/js/grid/columns/customlink</item>
+                    <item name="component" xsi:type="string">Hgati_ProductReviews/js/grid/columns/customlink</item>
                     <item name="indexField" xsi:type="string">product_id</item>
                     <item name="label" xsi:type="string" translate="true">Product Name</item>
                     <item name="resizeEnabled" xsi:type="boolean">true</item>
@@ -211,7 +211,7 @@
         </column>
         <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="60">
             <settings>
-                <options class="Lof\ProductReviews\Model\Reminders\Source\Status"/>
+                <options class="Hgati\ProductReviews\Model\Reminders\Source\Status"/>
                 <filter>select</filter>
                 <dataType>select</dataType>
                 <label translate="true">Status</label>

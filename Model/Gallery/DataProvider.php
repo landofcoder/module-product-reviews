@@ -1,32 +1,32 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
-namespace Lof\ProductReviews\Model\Gallery;
+namespace Hgati\ProductReviews\Model\Gallery;
 
-use Lof\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory;
+use Hgati\ProductReviews\Model\ResourceModel\Gallery\CollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
 
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
     /**
-     * @var \Lof\ProductReviews\Model\ResourceModel\Gallery\Collection
+     * @var \Hgati\ProductReviews\Model\ResourceModel\Gallery\Collection
      */
     protected $collection;
 
@@ -76,17 +76,17 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             return $this->loadedData;
         }
         $items = $this->collection->getItems();
-        /** @var \Lof\ProductReviews\Model\Gallery $gallery */
+        /** @var \Hgati\ProductReviews\Model\Gallery $gallery */
         foreach ($items as $gallery) {
             $this->loadedData[$gallery->getId()] = $gallery->getData();
         }
 
-        $data = $this->dataPersistor->get('lof_product_reviews_gallery');
+        $data = $this->dataPersistor->get('hgati_product_reviews_gallery');
         if (!empty($data)) {
             $gallery = $this->collection->getNewEmptyItem();
             $gallery->setData($data);
             $this->loadedData[$gallery->getId()] = $gallery->getData();
-            $this->dataPersistor->clear('lof_product_reviews_gallery');
+            $this->dataPersistor->clear('hgati_product_reviews_gallery');
         }
 
         return $this->loadedData;

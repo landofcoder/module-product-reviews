@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright © landofcoder All rights reserved.
+ * Copyright © hgati All rights reserved.
  * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Api\Data;
+namespace Hgati\ProductReviews\Api\Data;
 
 interface RemindersInterface
 {
@@ -30,7 +30,7 @@ interface RemindersInterface
     /**
      * Set reminders_id
      * @param int $id
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      */
     public function setId($id);
 
@@ -43,7 +43,7 @@ interface RemindersInterface
     /**
      * Set order_id
      * @param int $orderId
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      */
     public function setOrderId($orderId);
 
@@ -56,7 +56,7 @@ interface RemindersInterface
     /**
      * Set order_increment_id
      * @param string $orderIncrementId
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      */
     public function setOrderIncrementId($orderIncrementId);
 
@@ -69,7 +69,7 @@ interface RemindersInterface
     /**
      * Set product_id
      * @param int $productId
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      */
     public function setProductId($productId);
 
@@ -82,7 +82,7 @@ interface RemindersInterface
     /**
      * Set customer_id
      * @param int $customerId
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      */
     public function setCustomerId($customerId);
 
@@ -95,7 +95,7 @@ interface RemindersInterface
     /**
      * Set name
      * @param string $name
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      */
     public function setName($name);
 
@@ -108,7 +108,7 @@ interface RemindersInterface
     /**
      * Set email
      * @param string $email
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      */
     public function setEmail($email);
 
@@ -121,7 +121,7 @@ interface RemindersInterface
     /**
      * Set store_id
      * @param int $storeId
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      */
     public function setStoreId($storeId);
 
@@ -134,7 +134,7 @@ interface RemindersInterface
     /**
      * Set status
      * @param int $status
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      */
     public function setStatus($status);
 
@@ -147,7 +147,7 @@ interface RemindersInterface
     /**
      * Set created_at
      * @param string $createdAt
-     * @return \Lof\ProductReviews\Api\Data\RemindersInterface
+     * @return \Hgati\ProductReviews\Api\Data\RemindersInterface
      */
     public function setCreatedAt($createdAt);
 }

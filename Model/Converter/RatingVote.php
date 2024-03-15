@@ -1,29 +1,29 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model\Converter;
+namespace Hgati\ProductReviews\Model\Converter;
 
-use Lof\ProductReviews\Api\Data\RatingVoteInterface as RatingDataInterface;
-use Lof\ProductReviews\Api\Data\RatingVoteInterfaceFactory as RatingDataFactory;
+use Hgati\ProductReviews\Api\Data\RatingVoteInterface as RatingDataInterface;
+use Hgati\ProductReviews\Api\Data\RatingVoteInterfaceFactory as RatingDataFactory;
 use Magento\Framework\Api\DataObjectHelper;
 
 /**
@@ -60,7 +60,7 @@ class RatingVote
      *
      * @param array $data
      *
-     * @return \Lof\ProductReviews\Api\Data\RatingVoteInterface
+     * @return \Hgati\ProductReviews\Api\Data\RatingVoteInterface
      */
     public function arrayToDataModel(array $data): RatingDataInterface
     {

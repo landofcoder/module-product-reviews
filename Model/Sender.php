@@ -1,35 +1,35 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Model;
+namespace Hgati\ProductReviews\Model;
 
 use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
-use Lof\ProductReviews\Helper\Data;
+use Hgati\ProductReviews\Helper\Data;
 
 /**
  * Class Sender
- * @package Lof\ProductReviews\Model
+ * @package Hgati\ProductReviews\Model
  */
 class Sender
 {
@@ -106,7 +106,7 @@ class Sender
      * @param mixed $data
      * @param int|null $storeId
      */
-    public function sendCouponCodeEmail($data, $storeId = null, $emailTemplate = "lof_product_reviews_email_settings_review_product_templates")
+    public function sendCouponCodeEmail($data, $storeId = null, $emailTemplate = "hgati_product_reviews_email_settings_review_product_templates")
     {
         $sender ['email'] = $this->scopeConfig->getValue(
             self::SENDER_EMAIL,

@@ -1,26 +1,26 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2022 Landofcoder (https://landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2022 Hgati (https://hgati.com/)
+ * @license    https://hgati.com/terms
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Api\Data;
+namespace Hgati\ProductReviews\Api\Data;
 
 /**
  * Represents a Review object
@@ -115,35 +115,35 @@ interface ReviewInterface
     /**
      * Get review ratings.
      *
-     * @return \Lof\ProductReviews\Api\Data\RatingVoteInterface[]
+     * @return \Hgati\ProductReviews\Api\Data\RatingVoteInterface[]
      */
     public function getRatings();
 
     /**
      * Get review comments.
      *
-     * @return \Lof\ProductReviews\Api\Data\ReplyInterface[]
+     * @return \Hgati\ProductReviews\Api\Data\ReplyInterface[]
      */
     public function getComments();
 
     /**
      * Get review galleries.
      *
-     * @return \Lof\ProductReviews\Api\Data\GalleryInterface
+     * @return \Hgati\ProductReviews\Api\Data\GalleryInterface
      */
     public function getGalleries();
 
     /**
      * Get review images.
      *
-     * @return \Lof\ProductReviews\Api\Data\ImageInterface[]
+     * @return \Hgati\ProductReviews\Api\Data\ImageInterface[]
      */
     public function getImages();
 
     /**
      * Get review customize.
      *
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function getCustomize();
 
@@ -216,7 +216,7 @@ interface ReviewInterface
     /**
      * Set review ratings.
      *
-     * @param \Lof\ProductReviews\Api\Data\RatingVoteInterface[] $ratings
+     * @param \Hgati\ProductReviews\Api\Data\RatingVoteInterface[] $ratings
      *
      * @return void
      */
@@ -225,7 +225,7 @@ interface ReviewInterface
     /**
      * Set review comments.
      *
-     * @param \Lof\ProductReviews\Api\Data\ReplyInterface[] $comments
+     * @param \Hgati\ProductReviews\Api\Data\ReplyInterface[] $comments
      *
      * @return void
      */
@@ -234,7 +234,7 @@ interface ReviewInterface
     /**
      * Set review galleries.
      *
-     * @param \Lof\ProductReviews\Api\Data\GalleryInterface $galleries
+     * @param \Hgati\ProductReviews\Api\Data\GalleryInterface $galleries
      *
      * @return void
      */
@@ -243,7 +243,7 @@ interface ReviewInterface
     /**
      * Set review images.
      *
-     * @param \Lof\ProductReviews\Api\Data\ImageInterface[] $images
+     * @param \Hgati\ProductReviews\Api\Data\ImageInterface[] $images
      *
      * @return void
      */
@@ -252,7 +252,7 @@ interface ReviewInterface
     /**
      * Set review customize.
      *
-     * @param \Lof\ProductReviews\Api\Data\CustomizeInterface $customize
+     * @param \Hgati\ProductReviews\Api\Data\CustomizeInterface $customize
      *
      * @return void
      */

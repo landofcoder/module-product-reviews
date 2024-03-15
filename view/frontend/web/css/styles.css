@@ -1,64 +1,64 @@
 /*
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
- .lof-review-gallery {
+ .hgati-review-gallery {
 	/*height: 300px;*/
 	min-height: 200px;
 	position: relative;
 }
-.lof-review-gallery .owl-carousel ul,
-.lof-review-gallery .owl-carousel li
+.hgati-review-gallery .owl-carousel ul,
+.hgati-review-gallery .owl-carousel li
 {
 	list-style: none;
 }
-.lof-review-gallery .gallery-listing li {
+.hgati-review-gallery .gallery-listing li {
     display: inline-block;
 }
-.lof-review-gallery .owl-carousel {
+.hgati-review-gallery .owl-carousel {
 	width: auto !important;
 	/*height: 300px;*/
 	min-height: 200px;
 	margin-left: 0px;
 	margin-right: 0px;
 }
-.lofreview-gallery-fancybox img {
+.hgatireview-gallery-fancybox img {
     max-width: 100%;
     max-height: 100%;
 }
 
-.lof-review-gallery .owl-stage-outer {
+.hgati-review-gallery .owl-stage-outer {
 	/*height: 300px !important;*/
 	min-height: 200px;
 }
-.lof-review-gallery .owl-carousel .owl-item {
+.hgati-review-gallery .owl-carousel .owl-item {
 	float: left;
 	-webkit-transform: translate3d(0px, 0px, 0px);
 	transform: translate3d(0px, 0px, 0px);
 }
-.lof-review-gallery .owl-carousel .owl-wrapper {
+.hgati-review-gallery .owl-carousel .owl-wrapper {
 	-webkit-transform: translate3d(0px, 0px, 0px);
 	transform: translate3d(0px, 0px, 0px);
 	float: left;
 }
 
-.lof-review-gallery .carousel-controls .carousel-control {
+.hgati-review-gallery .carousel-controls .carousel-control {
 	background: #fff;
 	color: #8e8e8e;
 	font-size: 13px;
@@ -70,10 +70,10 @@
 	top: 50%;
 	margin-top: -12px;
 }
-.lof-review-gallery .carousel-controls .carousel-control{
+.hgati-review-gallery .carousel-controls .carousel-control{
 	color:#1979c3 !important;
 }
-.lof-review-gallery .carousel-controls .carousel-control.left {
+.hgati-review-gallery .carousel-controls .carousel-control.left {
 	left: -10px;
 	background-image: none;
 }
@@ -82,7 +82,7 @@
 	left: auto;
 	background-image: none;
 }
-.lof-review-gallery .carousel-controls .carousel-control.right {
+.hgati-review-gallery .carousel-controls .carousel-control.right {
 	right: -10px;
 	background-image: none;
 }
@@ -92,11 +92,11 @@
 	background-image: none;
 }
 
-.lof-review-gallery .carousel-controls a{
+.hgati-review-gallery .carousel-controls a{
 	display: none;
 }
 
-.lof-review-gallery:hover .carousel-controls a{
+.hgati-review-gallery:hover .carousel-controls a{
 	display: block;
 }
 
@@ -130,7 +130,7 @@
 	width: 30%;
 }
 
-.lof-verify-purchased .verify-error {
+.hgati-verify-purchased .verify-error {
 	font-size: 13px;
 	color: #cc1912;
 	font-weight: bold;
@@ -147,11 +147,11 @@
 /*
  * 	Default theme - Owl Carousel CSS File
  */
-.lof-review-gallery .owl-theme-default .owl-nav {
+.hgati-review-gallery .owl-theme-default .owl-nav {
   margin-top: 10px;
   text-align: center;
   -webkit-tap-highlight-color: transparent; }
-  .lof-review-gallery .owl-theme-default .owl-nav [class*='owl-'] {
+  .hgati-review-gallery .owl-theme-default .owl-nav [class*='owl-'] {
     color: #FFF;
     font-size: 14px;
     margin: 5px;
@@ -162,39 +162,39 @@
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px; }
-    .lof-review-gallery .owl-theme-default .owl-nav [class*='owl-']:hover {
+    .hgati-review-gallery .owl-theme-default .owl-nav [class*='owl-']:hover {
       background: #869791;
       color: #FFF;
       text-decoration: none; }
-  .lof-review-gallery .owl-theme-default .owl-nav .disabled {
+  .hgati-review-gallery .owl-theme-default .owl-nav .disabled {
     opacity: 0.5;
     cursor: default; }
-.lof-review-gallery .owl-theme-default .owl-nav.disabled + .owl-dots {
+.hgati-review-gallery .owl-theme-default .owl-nav.disabled + .owl-dots {
   margin-top: 10px; }
-.lof-review-gallery .owl-theme-default .owl-dots {
+.hgati-review-gallery .owl-theme-default .owl-dots {
   text-align: center;
   -webkit-tap-highlight-color: transparent; }
 .report-abuse {
     padding-left: 10px;
     font-size: 0.85em;
 }
-.lof-review-customize .good-exp span svg {
+.hgati-review-customize .good-exp span svg {
     position: absolute;
     top: 4px;
     left: 0;
     fill: #3e7505;
 }
-.lof-review-customize .bad-exp span svg {
+.hgati-review-customize .bad-exp span svg {
     position: absolute;
     top: 4px;
     left: 0;
     fill: #d0021b;
 }
-.lof-review-gallery .owl-theme-default .owl-dots .owl-dot {
+.hgati-review-gallery .owl-theme-default .owl-dots .owl-dot {
 display: inline-block;
 zoom: 1;
 *display: inline; }
-.lof-review-gallery .owl-theme-default .owl-dots .owl-dot span {
+.hgati-review-gallery .owl-theme-default .owl-dots .owl-dot span {
 	width: 10px;
 	height: 10px;
 	margin: 5px 7px;
@@ -209,7 +209,7 @@ zoom: 1;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
 	border-radius: 30px; }
-.lof-review-gallery .owl-theme-default .owl-dots .owl-dot.active span, .lof-review-gallery .owl-theme-default .owl-dots .owl-dot:hover span {
+.hgati-review-gallery .owl-theme-default .owl-dots .owl-dot.active span, .hgati-review-gallery .owl-theme-default .owl-dots .owl-dot:hover span {
 	background: #869791; }
 
 	.block.review-list .block-title .sort-order-reviews * {
@@ -240,7 +240,7 @@ zoom: 1;
 .review-title {
 	margin: 0 0 10px;
 }
-.lof-helpful {
+.hgati-helpful {
 	margin-bottom: 0px!important;
 }
 @media (min-width: 640px){
@@ -251,16 +251,16 @@ zoom: 1;
 	margin-left: 0px;
 }
 }
-.lof-review-gallery .owl-stage-outer {
+.hgati-review-gallery .owl-stage-outer {
 	min-height: 60px;
 }
-.lof-review-gallery .owl-carousel {
+.hgati-review-gallery .owl-carousel {
 	min-height: 50px;
 }
-.lof-review-gallery {
+.hgati-review-gallery {
 	min-height: 50px;
 }
-.lof-review-customize {
+.hgati-review-customize {
 	padding-top: 10px;
 }
 .review-author .review-details-value {
@@ -270,7 +270,7 @@ zoom: 1;
     width: 60px;
     height: 60px;
 }
-.lof-comment_content {
+.hgati-comment_content {
     padding-left: 10px;
     color:#777;
     font-size: 0.9em;
@@ -285,7 +285,7 @@ zoom: 1;
 .list-replies .list-reply-item p {
     margin-bottom: inherit;
 }
-.lof-review_answer {
+.hgati-review_answer {
     margin-top: 5px;
     border-radius: 5px;
     padding: 5px 5px 5px 10px;

@@ -1,18 +1,18 @@
 <?php
 /**
- * Copyright © landofcoder All rights reserved.
+ * Copyright © hgati All rights reserved.
  * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Model;
+namespace Hgati\ProductReviews\Model;
 
-use Lof\ProductReviews\Api\Data\ReportHistoryInterface;
-use Lof\ProductReviews\Api\Data\ReportHistoryInterfaceFactory;
-use Lof\ProductReviews\Api\Data\ReportHistorySearchResultsInterfaceFactory;
-use Lof\ProductReviews\Api\ReportHistoryRepositoryInterface;
-use Lof\ProductReviews\Model\ResourceModel\RateReport as ResourceReportHistory;
-use Lof\ProductReviews\Model\ResourceModel\RateReport\CollectionFactory as ReportHistoryCollectionFactory;
+use Hgati\ProductReviews\Api\Data\ReportHistoryInterface;
+use Hgati\ProductReviews\Api\Data\ReportHistoryInterfaceFactory;
+use Hgati\ProductReviews\Api\Data\ReportHistorySearchResultsInterfaceFactory;
+use Hgati\ProductReviews\Api\ReportHistoryRepositoryInterface;
+use Hgati\ProductReviews\Model\ResourceModel\RateReport as ResourceReportHistory;
+use Hgati\ProductReviews\Model\ResourceModel\RateReport\CollectionFactory as ReportHistoryCollectionFactory;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;

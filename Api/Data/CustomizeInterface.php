@@ -1,11 +1,11 @@
 <?php
 /**
- * Copyright © landofcoder All rights reserved.
+ * Copyright © hgati All rights reserved.
  * See COPYING.txt for license details.
  */
 declare(strict_types=1);
 
-namespace Lof\ProductReviews\Api\Data;
+namespace Hgati\ProductReviews\Api\Data;
 
 interface CustomizeInterface
 {
@@ -36,7 +36,7 @@ interface CustomizeInterface
     /**
      * Set review_customize_id
      * @param int $review_customize_id
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setReviewCustomizeId($review_customize_id);
 
@@ -49,7 +49,7 @@ interface CustomizeInterface
     /**
      * Set is_recommended
      * @param int $is_recommended
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setIsRecommended($is_recommended);
 
@@ -62,7 +62,7 @@ interface CustomizeInterface
     /**
      * Set verified_buyer
      * @param int $verified_buyer
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setVerifiedBuyer($verified_buyer);
 
@@ -75,7 +75,7 @@ interface CustomizeInterface
     /**
      * Set answer
      * @param string $answer
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setAnswer($answer);
 
@@ -89,7 +89,7 @@ interface CustomizeInterface
     /**
      * Set advantages
      * @param string $advantages
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setAdvantages($advantages);
 
@@ -102,7 +102,7 @@ interface CustomizeInterface
     /**
      * Set disadvantages
      * @param string $disadvantages
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setDisadvantages($disadvantages);
 
@@ -115,7 +115,7 @@ interface CustomizeInterface
     /**
      * Set average
      * @param string $average
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setAverage($average);
 
@@ -128,7 +128,7 @@ interface CustomizeInterface
     /**
      * Set count_helpful
      * @param int $countHelpful
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setCountHelpful($countHelpful);
 
@@ -141,7 +141,7 @@ interface CustomizeInterface
     /**
      * Set count_unhelpful
      * @param int $countUnhelpful
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setCountUnhelpful($countUnhelpful);
 
@@ -154,7 +154,7 @@ interface CustomizeInterface
     /**
      * Set total_helpful
      * @param int $totalHelpful
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setTotalHelpful($totalHelpful);
 
@@ -167,7 +167,7 @@ interface CustomizeInterface
     /**
      * Set report_abuse
      * @param int $reportAbuse
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setReportAbuse($reportAbuse);
 
@@ -180,7 +180,7 @@ interface CustomizeInterface
     /**
      * Set review_id
      * @param int $reviewId
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setReviewId($reviewId);
 
@@ -193,7 +193,7 @@ interface CustomizeInterface
     /**
      * Set email_address
      * @param string $emailAddress
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setEmailAddress($emailAddress);
 
@@ -206,7 +206,7 @@ interface CustomizeInterface
     /**
      * Set avatar_image
      * @param string $avatarImage
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setAvatarImage($avatarImage);
 
@@ -219,7 +219,7 @@ interface CustomizeInterface
     /**
      * Set avatar_url
      * @param string $avatarUrl
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setAvatarUrl($avatarUrl);
 
@@ -232,7 +232,7 @@ interface CustomizeInterface
     /**
      * Set country
      * @param string $country
-     * @return \Lof\ProductReviews\Api\Data\CustomizeInterface
+     * @return \Hgati\ProductReviews\Api\Data\CustomizeInterface
      */
     public function setCountry($country);
 }

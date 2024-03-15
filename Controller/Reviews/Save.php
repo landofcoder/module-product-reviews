@@ -1,41 +1,41 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Controller\Reviews;
+namespace Hgati\ProductReviews\Controller\Reviews;
 
-use Lof\ProductReviews\Helper\Data;
-use Lof\ProductReviews\Model\Sender;
+use Hgati\ProductReviews\Helper\Data;
+use Hgati\ProductReviews\Model\Sender;
 use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory;
 use Magento\Review\Controller\Product as ProductController;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Review\Model\Review;
-use Lof\ProductReviews\Model\CustomReview;
-use Lof\ProductReviews\Model\Gallery;
-use Lof\ProductReviews\Model\Review\Command\SummaryRateInterface;
+use Hgati\ProductReviews\Model\CustomReview;
+use Hgati\ProductReviews\Model\Gallery;
+use Hgati\ProductReviews\Model\Review\Command\SummaryRateInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Lof\ProductReviews\Model\Review\Command\VerifyBuyerInterface;
+use Hgati\ProductReviews\Model\Review\Command\VerifyBuyerInterface;
 
 /**
  * Class Save
- * @package Lof\ProductReviews\Controller\Reviews
+ * @package Hgati\ProductReviews\Controller\Reviews
  */
 class Save extends ProductController
 {
@@ -173,8 +173,8 @@ class Save extends ProductController
             $review = $this->reviewFactory->create()->setData($reviewData);
             $review->unsetData('review_id');
 
-            /** @var \Lof\ProductReviews\Model\CustomReview $customReview */
-            /** @var \Lof\ProductReviews\Model\Gallery $reviewGallery */
+            /** @var \Hgati\ProductReviews\Model\CustomReview $customReview */
+            /** @var \Hgati\ProductReviews\Model\Gallery $reviewGallery */
             $customReview = $this->_objectManager->create(CustomReview::class);
 
             $validate = $review->validate();
@@ -304,9 +304,9 @@ class Save extends ProductController
             $jsonEncode = $this->_objectManager->get(\Magento\Framework\Json\EncoderInterface::class);
             $reviewGallery = $this->_objectManager->create(Gallery::class);
             $moduleHelper = $this->helper;
-            $limit_images = $moduleHelper->getConfig("lof_review_settings/limit_upload_image", 1);
+            $limit_images = $moduleHelper->getConfig("hgati_review_settings/limit_upload_image", 1);
             $limit_images = $limit_images ? (int)$limit_images : 1;
-            $default_status = $moduleHelper->getConfig("lof_review_settings/default_status", 2);
+            $default_status = $moduleHelper->getConfig("hgati_review_settings/default_status", 2);
             $default_status = $default_status ? (int)$default_status : 2;
             $names = [];
             if (isset($_FILES)) {

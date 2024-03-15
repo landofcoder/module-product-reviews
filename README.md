@@ -1,5 +1,5 @@
 # magento-2-product-reviews
-## [ADVANCED MAGENTO 2 PRODUCT REVIEWS EXTENSION](https://landofcoder.com/advanced-magento-2-product-reviews.html/)
+## [ADVANCED MAGENTO 2 PRODUCT REVIEWS EXTENSION](https://hgati.com/advanced-magento-2-product-reviews.html/)
 
 OVERVIEW
 
@@ -23,7 +23,7 @@ Knowing the importance of boosting the customer’s trust to stores via reviews,
 - Fast Speed with Magento Block Caching
 - Attractive Custom Work service
 - Support REST API
-- Support Graph Ql [Product Review GraphQl Module](https://github.com/landofcoder/module-product-reviews-graph-ql)
+- Support Graph Ql [Product Review GraphQl Module](https://github.com/hgati/module-product-reviews-graph-ql)
 
 1. **Enjoy Amazing Customer Experience With Us**
 
@@ -33,8 +33,8 @@ What customer experiences you really want to get? happiness, sadness, joy, fear,
 
 ###### Install Extension
 ```
-composer require landofcoder/module-product-reviews
-php bin/magento module:enable Lof_ProductReviews
+composer require hgati/module-product-reviews
+php bin/magento module:enable Hgati_ProductReviews
 php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy -f
 
@@ -42,13 +42,13 @@ php bin/magento setup:static-content:deploy -f
 
 ###### Manage product reviews extension
 
-- Manage product reviews by navigation to ```Marketing > All Reviews ``` or ```Lof Product Reviews > All Reviews ```
-- Manage Reviews Reminder List ```Lof Product Reviews > Reviews Reminders List ```
-- Import Product Reviews from CSV file ```Lof Product Reviews > Import Reviews ```
+- Manage product reviews by navigation to ```Marketing > All Reviews ``` or ```Hgati Product Reviews > All Reviews ```
+- Manage Reviews Reminder List ```Hgati Product Reviews > Reviews Reminders List ```
+- Import Product Reviews from CSV file ```Hgati Product Reviews > Import Reviews ```
 
 ###### Module configuration
 
-Go to ```Lof Product Reviews > Reviews Configuration ```
+Go to ```Hgati Product Reviews > Reviews Configuration ```
 
 - Config Verify Purchase code before review:
 **Verify Purchased Code** = Yes
@@ -85,7 +85,7 @@ Go to ```Lof Product Reviews > Reviews Configuration ```
 - Support Frontend REST API submit reviews
 - Support REST API for reply
 - Allow process collect review ratings for product. 
-Use console command as this: ```php bin/magento lofreview:index-summary:process --sku=[product-sku]``` or collect for all products: ```php bin/magento lofreview:index-summary:process```
+Use console command as this: ```php bin/magento hgatireview:index-summary:process --sku=[product-sku]``` or collect for all products: ```php bin/magento hgatireview:index-summary:process```
 
 
 ## Todo
@@ -104,37 +104,37 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/paypalme/allorderdesk)
 
 **Our PWA Studio Solution**
-* [Magento MultiVendor PWA Studio Solution](https://landofcoder.com/magento-multivendor-marketplace-pwa-studio-solution.html)
+* [Magento MultiVendor PWA Studio Solution](https://hgati.com/magento-multivendor-marketplace-pwa-studio-solution.html)
 
 **Our Magento 2 Extensions List**
 
-* [Megamenu for Magento 2](https://landofcoder.com/magento-2-mega-menu-pro.html/)
+* [Megamenu for Magento 2](https://hgati.com/magento-2-mega-menu-pro.html/)
 
-* [Page Builder for Magento 2](https://landofcoder.com/magento-2-page-builder.html/)
+* [Page Builder for Magento 2](https://hgati.com/magento-2-page-builder.html/)
 
-* [Magento 2 Marketplace - Multi Vendor Extension](https://landofcoder.com/magento-2-marketplace-extension.html/)
+* [Magento 2 Marketplace - Multi Vendor Extension](https://hgati.com/magento-2-marketplace-extension.html/)
 
-* [Magento 2 Multi Vendor Mobile App Builder](https://landofcoder.com/magento-2-multi-vendor-mobile-app.html/)
+* [Magento 2 Multi Vendor Mobile App Builder](https://hgati.com/magento-2-multi-vendor-mobile-app.html/)
 
-* [Magento 2 Form Builder](https://landofcoder.com/magento-2-form-builder.html/)
+* [Magento 2 Form Builder](https://hgati.com/magento-2-form-builder.html/)
 
-* [Magento 2 Reward Points](https://landofcoder.com/magento-2-reward-points.html/)
+* [Magento 2 Reward Points](https://hgati.com/magento-2-reward-points.html/)
 
-* [Magento 2 Flash Sales - Private Sales](https://landofcoder.com/magento-2-flash-sale.html)
+* [Magento 2 Flash Sales - Private Sales](https://hgati.com/magento-2-flash-sale.html)
 
-* [Magento 2 B2B Packages](https://landofcoder.com/magento-2-b2b-extension-package.html)
+* [Magento 2 B2B Packages](https://hgati.com/magento-2-b2b-extension-package.html)
 
 
 **Featured Magento Services**
 
-* [Hire Magento 2 Development Team](https://landofcoder.com/magento-2-create-online-store/)
+* [Hire Magento 2 Development Team](https://hgati.com/magento-2-create-online-store/)
 
-* [Dedicated Magento 2 Developer](https://landofcoder.com/magento-support-ticket.html/)
+* [Dedicated Magento 2 Developer](https://hgati.com/magento-support-ticket.html/)
 
-* [Magento 2 Multi Vendor Development](https://landofcoder.com/magento-2-create-marketplace/)
+* [Magento 2 Multi Vendor Development](https://hgati.com/magento-2-create-marketplace/)
 
-* [Magento Website Maintenance Service](https://landofcoder.com/magento-2-customization-service/)
+* [Magento Website Maintenance Service](https://hgati.com/magento-2-customization-service/)
 
-* [Magento Professional Installation Service](https://landofcoder.com/magento-2-installation-service.html)
+* [Magento Professional Installation Service](https://hgati.com/magento-2-installation-service.html)
 
-* [Customization Service](https://landofcoder.com/magento-customization-service.html)
+* [Customization Service](https://hgati.com/magento-customization-service.html)

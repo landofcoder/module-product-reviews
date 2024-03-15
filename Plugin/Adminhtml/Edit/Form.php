@@ -1,28 +1,28 @@
 <?php
 /**
- * Landofcoder
+ * Hgati
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Landofcoder.com license that is
+ * This source file is subject to the Hgati.com license that is
  * available through the world-wide-web at this URL:
- * https://landofcoder.com/terms
+ * https://hgati.com/terms
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category   Landofcoder
- * @package    Lof_ProductReviews
- * @copyright  Copyright (c) 2021 Landofcoder (https://www.landofcoder.com/)
- * @license    https://landofcoder.com/terms
+ * @category   Hgati
+ * @package    Hgati_ProductReviews
+ * @copyright  Copyright (c) 2021 Hgati (https://www.hgati.com/)
+ * @license    https://hgati.com/terms
  */
 
-namespace Lof\ProductReviews\Plugin\Adminhtml\Edit;
+namespace Hgati\ProductReviews\Plugin\Adminhtml\Edit;
 
-use Lof\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as CustomReviewCollection;
-use Lof\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as ReviewReplyCollection;
+use Hgati\ProductReviews\Model\ResourceModel\CustomReview\CollectionFactory as CustomReviewCollection;
+use Hgati\ProductReviews\Model\ResourceModel\ReviewReply\CollectionFactory as ReviewReplyCollection;
 
 class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
 {
@@ -109,18 +109,18 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
         }
 
         $fieldset1 = $form->addFieldset(
-            'add_lof_custom_review',
-            ['legend' => __('Lof Custom Review')]
+            'add_hgati_custom_review',
+            ['legend' => __('Hgati Custom Review')]
         );
 
         $fieldset1->addType(
             'images',
-            '\Lof\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer\Image'
+            '\Hgati\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer\Image'
         );
 
         $fieldset1->addType(
             'notes',
-            '\Lof\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer\Notes'
+            '\Hgati\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer\Notes'
         );
 
 
@@ -254,7 +254,7 @@ class Form extends \Magento\Review\Block\Adminhtml\Edit\Form
 
             $fieldset2->addType(
                 'notelink',
-                '\Lof\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer\NoteLink'
+                '\Hgati\ProductReviews\Block\Adminhtml\Gallery\Form\Renderer\NoteLink'
             );
 
             $fieldset2->addField(
