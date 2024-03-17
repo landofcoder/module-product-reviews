@@ -77,6 +77,10 @@ class Save
      */
     protected $_dataObjectFactory;
 
+    protected $galleryFactory;
+
+    protected $customerRepository;
+
     /**
      * Save constructor.
      * @param CustomReviewFactory $customReviewFactory
