@@ -20,6 +20,9 @@
   -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
+        <tab id="landofcoder" translate="label" sortOrder="400">
+            <label>Landofcoder Extensions Setting</label>
+        </tab>
         <section id="lof_product_reviews" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Product Reviews And Ratings</label>
