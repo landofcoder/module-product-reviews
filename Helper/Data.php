@@ -50,7 +50,25 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     /**
      * @var \Magento\Framework\Module\ModuleListInterface
      */
-    protected $moduleList;
+    protected $_moduleList;
+
+    /**
+     * @var \Magento\Cms\Model\Template\FilterProvider
+     */
+    protected $_filterProvider;
+
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $_storeManager;
+
+    protected $_customerSession;
+
+    protected $_orderFactory;
+
+    protected $_orderCollectionFactory;
+
+    protected $_orderConfig;
 
     /**
      * Data constructor.

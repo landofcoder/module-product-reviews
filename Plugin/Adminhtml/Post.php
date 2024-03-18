@@ -42,6 +42,12 @@ class Post extends \Magento\Review\Controller\Adminhtml\Product\Post
      */
     protected $_productRepository;
 
+    protected $customReviewFactory;
+
+    protected $galleryFactory;
+
+    protected $productRepository;
+
     /**
      * Post constructor.
      * @param Context $context
